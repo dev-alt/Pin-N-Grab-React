@@ -1,32 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import AdminPage from './pages/AdminPage';
+import { BrowserRouter as Router, Route, Outlet, Link, Routes } from 'react-router-dom';
+import { SignIn } from './components/Member/SignIn'; // Update the import as mentioned earlier
+import { Nav, Navbar } from './components/Common/NavBar';
+import { HomePage } from './pages/HomePage'; // Import the HomePage component
 
 function App() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get('/data'); // Replace with your backend endpoint
-        setData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    fetchData();
-  }, []);
-
   return (
-    <div>
-      <h1>Data from Database</h1>
-      <ul>
-        {data.map(item => (
-          <li key={item.id}>{item.username}</li> // Replace with actual field name
-        ))}
-      </ul>
-    </div>
+
+    <Router>
+      <Navbar />        
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
+    </Router>
+
   );
 }
+
 
 export default App;
