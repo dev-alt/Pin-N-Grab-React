@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Outlet, Link, Routes } from 'react-rout
 import { SignIn } from './components/Member/SignIn'; // Update the import as mentioned earlier
 import { Nav, Navbar } from './components/Common/NavBar';
 import { HomePage } from './pages/HomePage'; // Import the HomePage component
+import { CreateUser } from './pages/CreateUser'; // Import the HomePage component
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path='/create' element={<CreateUser />} />
       </Routes>
     </Router>
 

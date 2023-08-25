@@ -70,6 +70,9 @@ export function Navbar() {
               <MenuItem component={Link} to="/signin" onClick={handleMenuClose}>
                 Sign In
                 </MenuItem>
+                <MenuItem component={Link} to="/create" onClick={handleMenuClose}>
+                Create User
+                </MenuItem>
             </Menu>
             <Typography variant="h6" style={styles.title}>
               My App
