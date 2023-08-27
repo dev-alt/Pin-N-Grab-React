@@ -2,11 +2,22 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, TextField, Container } from '@mui/material';
 
+/**
+ * Renders a user registration form and handles user registration by sending a POST request to the server with the user's credentials.
+ * @function
+ * @returns {JSX.Element} A JSX element representing the user registration form.
+ */
 export function CreateUser() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+/**
+ * Handles user registration by sending a POST request to the server with the user's credentials.
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
   const handleRegister = async () => {
     try {
       const response = await axios.post('/api/auth/register', {
