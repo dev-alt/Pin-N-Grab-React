@@ -14,11 +14,6 @@ export function CreateUser() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  // Log the value of REACT_APP_PROXY_URL
-  useEffect(() => {
-    console.log('REACT_APP_PROXY_URL:', process.env.REACT_APP_PROXY_URL);
-  }, []);
-
   /**
    * Handles user registration by sending a POST request to the server with the user's credentials.
    * @async
