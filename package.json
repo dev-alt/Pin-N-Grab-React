@@ -30,7 +30,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://localhost:5050", 
+  "proxy": "http://tradeapp-backend:5000", 
   "browserslist": {
     "production": [
       ">0.2%",
