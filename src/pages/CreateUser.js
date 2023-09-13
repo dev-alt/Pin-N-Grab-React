@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import { Button, TextField, Container } from '@mui/material';
 
@@ -6,7 +6,7 @@ import { Button, TextField, Container } from '@mui/material';
  * Renders a user registration form and handles user registration by sending a POST request to the server with the user's credentials.
  * @function
  * @returns {JSX.Element} A JSX element representing the user registration form.
- */
+ */ 
 export function CreateUser() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');

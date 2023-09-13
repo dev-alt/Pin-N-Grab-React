@@ -1,10 +1,5 @@
 import React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
