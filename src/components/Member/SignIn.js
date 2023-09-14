@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,6 +11,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -25,16 +27,47 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
+
 
 const defaultTheme = createTheme();
 
-export function SignIn() {
-  const handleSubmit = (event) => {
+export function SignIn({ handleLogin }) {
+  const navigate = useNavigate(); // Create a history object
+  const [error, setError] = useState(null); // Create a state variable for storing errors
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    try {
+      const response = await axios.post('/api/auth/login', {
+        username: data.get('username'),
+        password: data.get('password'),
+      });
+      const { token } = response.data;
+
+      // Fetch user profile data using the token
+      const profileResponse = await axios.get('/api/user/profile', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const userData = profileResponse.data;
+
+      // Call the handleLogin function with the token and profile data
+      handleLogin(token, userData);
+
+      // Store the user profile data in local storage
+      localStorage.setItem('profile', JSON.stringify(userData));
+
+      // Navigate to the home page or wherever you want
+      navigate('/');
+    } catch (error) {
+      setError('Login failed. Please check your credentials.');
+    }
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
     });
   };
@@ -61,10 +94,10 @@ export function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
