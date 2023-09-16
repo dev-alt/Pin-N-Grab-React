@@ -64,9 +64,6 @@ export function Navbar() {
               <MenuItem component={Link} to="/" onClick={handleMenuClose}>
                 Home
               </MenuItem>
-              <MenuItem component={Link} to="/admin" onClick={handleMenuClose}>
-                Admin
-              </MenuItem>
               <MenuItem component={Link} to="/signin" onClick={handleMenuClose}>
                 Sign In
                 </MenuItem>

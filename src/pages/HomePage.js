@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-// Update the HomePage component to accept the isLoggedIn prop
+
 export function HomePage({ isLoggedIn }) {
-  // Define a state variable to store the user's username
   const [username, setUsername] = useState('');
 
   useEffect(() => {

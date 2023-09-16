@@ -45,22 +45,24 @@ export function SignIn({ handleLogin }) {
         password: data.get('password'),
       });
       const { token } = response.data;
-
+      console.log(response.data)
       // Fetch user profile data using the token
-      const profileResponse = await axios.get('/api/user/profile', {
+      const profileResponse = await axios.get('/api/auth/profile', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: token,
         },
       });
 
       const userData = profileResponse.data;
+      const { username } = userData;
 
+      console.log(userData)
       // Call the handleLogin function with the token and profile data
       handleLogin(token, userData);
 
       // Store the user profile data in local storage
       localStorage.setItem('profile', JSON.stringify(userData));
-
+      localStorage.setItem('username', username);
       // Navigate to the home page or wherever you want
       navigate('/');
     } catch (error) {
@@ -122,6 +124,11 @@ export function SignIn({ handleLogin }) {
             >
               Sign In
             </Button>
+            {error && (
+      <div className="error-message">
+        {error}
+      </div>
+    )}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

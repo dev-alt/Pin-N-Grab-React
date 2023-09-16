@@ -1,7 +1,6 @@
-import AdminPage from './pages/AdminPage';
-import { BrowserRouter as Router, Route, Outlet, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { SignIn } from './components/Member/SignIn'; // Update the import as mentioned earlier
-import { Nav, Navbar } from './components/Common/NavBar';
+import { Navbar } from './components/Common/NavBar';
 import { HomePage } from './pages/HomePage'; // Import the HomePage component
 import { CreateUser } from './pages/CreateUser'; // Import the HomePage component
 import { CreateJob } from './pages/PostJob';
@@ -19,9 +18,9 @@ function App() {
     localStorage.setItem('token', token);
     
     // Fetch and store the user's profile data
-    axios.get('/api/user/profile', {
+    axios.get('/api/auth/profile', {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     })
     .then((response) => {
@@ -39,7 +38,6 @@ function App() {
       <Navbar profile={profile}/>        
       <Routes>
       <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
-        <Route path="/admin" element={<AdminPage />} />
         <Route path="/signin" element={<SignIn handleLogin={handleLogin} />} />
         <Route path='/create' element={<CreateUser />} />
         <Route path='/postjob' element={<CreateJob  />} />

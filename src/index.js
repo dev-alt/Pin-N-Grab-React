@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { UseAuth0 } from './components/MockAuth0';
-
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
