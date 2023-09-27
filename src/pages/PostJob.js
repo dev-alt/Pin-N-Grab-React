@@ -1,29 +1,27 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { MenuItem, FormControl, Select, InputLabel, Button, TextField, Container, Typography } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Container,
+  Typography,
+  FormControl,
+  Select,
+  InputLabel,
+  MenuItem,
+} from '@mui/material';
 
-/**
- * Renders a user registration form and handles user registration by sending a POST request to the server with the user's credentials.
- * @function
- * @returns {JSX.Element} A JSX element representing the user registration form.
- */
 export function CreateJob() {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [location, setLocation] = useState('');
-    const [deadline, setDeadline] = useState('');
-    const [paymentType, setPaymentType] = useState('');
-    const [skillLevel, setSkillLevel] = useState('');
-    const [experienceRequired, setExperienceRequired] = useState('');
-    const [jobStatus, setJobStatus] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState(''); // State for the selected category
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [paymentType, setPaymentType] = useState('');
+  const [skillLevel, setSkillLevel] = useState('');
+  const [experienceRequired, setExperienceRequired] = useState('');
+  const [jobStatus, setJobStatus] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-  /**
-   * Handles user registration by sending a POST request to the server with the user's credentials.
-   * @async
-   * @function
-   * @returns {Promise<void>}
-   */
   const handleCreateJob = async () => {
     try {
       const response = await axios.post('/api/jobs/create', {
@@ -46,11 +44,13 @@ export function CreateJob() {
 
   return (
     <Container>
-      <Typography variant='h2' >Post Job</Typography>
+      <Typography variant="h2">Post Job</Typography>
       <TextField
         label="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        fullWidth
+        margin="normal"
       />
       <TextField
         label="Description"
@@ -58,11 +58,15 @@ export function CreateJob() {
         rows={4}
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        fullWidth
+        margin="normal"
       />
       <TextField
         label="Location"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
+        fullWidth
+        margin="normal"
       />
       <TextField
         label="Deadline"
@@ -72,28 +76,38 @@ export function CreateJob() {
         InputLabelProps={{
           shrink: true,
         }}
+        fullWidth
+        margin="normal"
       />
       <TextField
         label="Payment Type"
         value={paymentType}
         onChange={(e) => setPaymentType(e.target.value)}
+        fullWidth
+        margin="normal"
       />
       <TextField
         label="Skill Level"
         value={skillLevel}
         onChange={(e) => setSkillLevel(e.target.value)}
+        fullWidth
+        margin="normal"
       />
       <TextField
         label="Experience Required"
         value={experienceRequired}
         onChange={(e) => setExperienceRequired(e.target.value)}
+        fullWidth
+        margin="normal"
       />
       <TextField
         label="Job Status"
         value={jobStatus}
         onChange={(e) => setJobStatus(e.target.value)}
+        fullWidth
+        margin="normal"
       />
-     <FormControl>
+      <FormControl fullWidth margin="normal">
         <InputLabel>Category</InputLabel>
         <Select
           value={selectedCategory}
@@ -105,10 +119,15 @@ export function CreateJob() {
           <MenuItem value="3">Finance</MenuItem>
         </Select>
       </FormControl>
-      <Button variant="contained" onClick={handleCreateJob}>
+      <Button
+        variant="contained"
+        onClick={handleCreateJob}
+        fullWidth
+        color="primary"
+        margin="normal"
+      >
         Create Job
       </Button>
-      
     </Container>
   );
 }

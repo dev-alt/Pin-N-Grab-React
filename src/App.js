@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { SignIn } from './components/Member/SignIn'; // Update the import as mentioned earlier
-import { Navbar } from './components/Common/NavBar';
 import { HomePage } from './pages/HomePage'; // Import the HomePage component
 import { CreateUser } from './pages/CreateUser'; // Import the HomePage component
 import { CreateJob } from './pages/PostJob';
 import React, {  useState } from 'react';
 import axios from 'axios';
+import { PrimarySearchAppBar } from './components/Common/NavMenu';
 
 
 function App() {
@@ -35,7 +35,8 @@ function App() {
   return (
 
     <Router>
-      <Navbar profile={profile}/>        
+      <PrimarySearchAppBar profile={profile}/>
+  
       <Routes>
       <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/signin" element={<SignIn handleLogin={handleLogin} />} />

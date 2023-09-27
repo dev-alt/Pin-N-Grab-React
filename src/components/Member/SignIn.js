@@ -125,10 +125,10 @@ export function SignIn({ handleLogin }) {
               Sign In
             </Button>
             {error && (
-      <div className="error-message">
-        {error}
-      </div>
-    )}
+              <div className="error-message">
+                {error}
+              </div>
+            )}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
