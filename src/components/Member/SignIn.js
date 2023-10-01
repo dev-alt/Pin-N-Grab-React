@@ -13,6 +13,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 
 function Copyright(props) {
   return (
@@ -44,28 +46,34 @@ export function SignIn({ handleLogin }) {
         username: data.get('username'),
         password: data.get('password'),
       });
-      const { token } = response.data;
-      console.log(response.data)
-      // Fetch user profile data using the token
-      const profileResponse = await axios.get('/api/auth/profile', {
+      
+      const { token, id } = response.data; // Destructure the 'id' from response.data
+      
+      console.log(response.data);
+    
+      const profileResponse = await axios.get(`/api/users/${id}/profile`, {
         headers: {
           Authorization: token,
         },
       });
-
+    
       const userData = profileResponse.data;
       const { username } = userData;
+    
+          // Set the authentication token as a secure HTTP cookie
+    Cookies.set('token', token, { secure: true, sameSite: 'strict' });
 
-      console.log(userData)
+      console.log(userData);
       // Call the handleLogin function with the token and profile data
       handleLogin(token, userData);
-
+    
       // Store the user profile data in local storage
       localStorage.setItem('profile', JSON.stringify(userData));
       localStorage.setItem('username', username);
       // Navigate to the home page or wherever you want
-      navigate('/');
+      navigate(`/profile/${id}`);
     } catch (error) {
+      console.error('Login error:', error); // Log the error for debugging
       setError('Login failed. Please check your credentials.');
     }
     console.log({
