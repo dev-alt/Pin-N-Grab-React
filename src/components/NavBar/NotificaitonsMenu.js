@@ -46,10 +46,8 @@ function NotificationsMenu() {
         open={open}
         onClose={handleNotificationsClose}
       >
-        {/* Add your notification items here */}
         <MenuItem onClick={handleNotificationsClose}>Notification 1</MenuItem>
         <MenuItem onClick={handleNotificationsClose}>Notification 2</MenuItem>
-        {/* Add more notifications as needed */}
       </Menu>
     </div>
   );

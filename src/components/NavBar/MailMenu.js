@@ -66,7 +66,7 @@ function MailMenu() {
   ];
 
   // Add a link for "See all Messages"
-  const seeAllLink = '/all-messages'; // Define the route for all messages
+  const seeAllLink = '/email'; // Define the route for all messages
 
   return (
     <div style={styles.mailMenu}>
