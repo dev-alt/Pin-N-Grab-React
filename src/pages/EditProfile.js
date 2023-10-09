@@ -10,18 +10,17 @@ const ProfilePage = () => {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <EditProfile /> {/* Render EditProfile component */}
+            <EditProfile /> 
           </Grid>
           <Grid item xs={12} md={6}>
-            <EditPassword /> {/* Render EditPassword component */}
+            <EditPassword /> 
           </Grid>
           <Grid item xs={12} md={6}>
             {/* Add content for lower left */}
           </Grid>
           <Grid item xs={12} md={6}>
-            <DeleteAccount /> {/* Render DeleteAccount component */}
+            <DeleteAccount /> 
           </Grid>
-          {/* ... Other grid items ... */}
         </Grid>
       </Container>
     );
