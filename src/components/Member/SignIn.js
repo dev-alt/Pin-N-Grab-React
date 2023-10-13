@@ -22,6 +22,7 @@ const defaultTheme = createTheme();
 export function SignIn({ handleLogin }) {
   const navigate = useNavigate(); // Create a history object
   const [error, setError] = useState(null); // Create a state variable for storing errors
+  const [loading, setLoading] = useState(false); // Add a loading state
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -56,8 +57,11 @@ export function SignIn({ handleLogin }) {
       // Store the user profile data in local storage
       localStorage.setItem('profile', JSON.stringify(userData));
       localStorage.setItem('username', username);
-      // Navigate to the home page or wherever you want
-      navigate(`/profile/${id}`);
+     
+      setLoading(true); 
+      setTimeout(() => {
+        navigate(`/profile/${id}`);
+      }, 1000); 
     } catch (error) {
       console.error('Login error:', error); // Log the error for debugging
       setError('Login failed. Please check your credentials.');
@@ -118,11 +122,11 @@ export function SignIn({ handleLogin }) {
             >
               Sign In
             </Button>
-            {error && (
-              <div className="error-message">
-                {error}
-              </div>
-            )}
+            {loading ? (
+              <div>Loading...</div> // Show a loading message while loading is true
+            ) : error ? (
+              <div className="error-message">{error}</div>
+            ) : null}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

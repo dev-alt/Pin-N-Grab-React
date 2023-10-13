@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../../App';
+import { useAuth } from '../../AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 
 function SignOutButton() {
   const navigate = useNavigate();
-  const { handleLogout } = useContext(AuthContext);
+  const { handleLogout } = useAuth();
 
   const signOut = () => {
     handleLogout();
+    console.log("signout");
     navigate('/signin');
   };
 
