@@ -1,37 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
-  Button,
-  Container,
-  CssBaseline,
   Grid,
-  IconButton,
-  Paper, // Import Paper component
+  Paper,
   TextField,
+  Grow
 } from '@mui/material';
-import {
-  Build,
-  Clear,
-  ElectricalServices,
-  LocalFlorist,
-  LocalShipping,
-  Palette,
-} from '@mui/icons-material';
-import CardGrid from './CardGrid';
+
+import CardGrid from '../components/CardGrid';
 import Dropdown from '../components/DropDown';
 import Dialog from '@mui/material/Dialog';
 import { CreateJob } from './PostJob';
-import Fab from '@mui/material/Fab'; // Import Fab component
-import AddIcon from '@mui/icons-material/Add'; // Import the add icon
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import JobDetails from '../components/JobDetails';
+import CategoryFilter from '../components/CategoryFilter';
 
 export function HomePage({ isLoggedIn }) {
   const [username, setUsername] = useState('');
   const [jobListings, setJobListings] = useState([]);
   const [filteredJobListings, setFilteredJobListings] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState('');
-  const [availableLocations, setAvailableLocations] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
+
 
   const openCreateJobDialog = () => {
     setIsCreateJobOpen(true);
@@ -39,6 +33,15 @@ export function HomePage({ isLoggedIn }) {
 
   const closeCreateJobDialog = () => {
     setIsCreateJobOpen(false);
+  };
+  const handleCardClick = (job) => {
+    setSelectedJob(job);
+    setIsJobDialogOpen(true);
+  };
+
+  const handleJobDialogClose = () => {
+    setSelectedJob(null);
+    setIsJobDialogOpen(false);
   };
 
   const toggleCategory = (categoryId) => {
@@ -68,18 +71,20 @@ export function HomePage({ isLoggedIn }) {
   };
 
   useEffect(() => {
+    // Retrieve the username from local storage, if available
     const storedUsername = localStorage.getItem('username');
-
+    // Set the username state if it exists in local storage
     if (storedUsername) {
       setUsername(storedUsername);
     }
-
+    // Fetch job listings from the server
     const fetchJobListings = async () => {
       try {
         const response = await fetch('/api/jobs/all');
         if (response.ok) {
           const data = await response.json();
           setJobListings(data);
+          setFilteredJobListings(data); // Initialize filtered job listings
         } else {
           console.error('Failed to fetch job listings.');
         }
@@ -97,51 +102,27 @@ export function HomePage({ isLoggedIn }) {
         <p>Welcome, {username}!</p>
       ) : (
         <Grid container justifyContent="center">
-  
-          <Grid item xs={6}>
-            <Paper style={{ padding: '1rem' }}>
-            <Grid container justifyContent="center" alignItems="center">
-              <Grid item>
-                <IconButton
-                  color={selectedCategories.includes(1) ? 'secondary' : 'primary'}
-                  onClick={() => toggleCategory(1)}
-                >
-                  <ElectricalServices />
-                </IconButton>
-                <IconButton
-                  color={selectedCategories.includes(2) ? 'secondary' : 'primary'}
-                  onClick={() => toggleCategory(2)}
-                >
-                  <LocalFlorist />
-                </IconButton>
-                <IconButton
-                  color={selectedCategories.includes(3) ? 'secondary' : 'primary'}
-                  onClick={() => toggleCategory(3)}
-                >
-                  <LocalShipping />
-                </IconButton>
-                <IconButton
-                  color={selectedCategories.includes(4) ? 'secondary' : 'primary'}
-                  onClick={() => toggleCategory(4)}
-                >
-                  <Palette />
-                </IconButton>
-                <IconButton
-                  color={selectedCategories.includes(5) ? 'secondary' : 'primary'}
-                  onClick={() => toggleCategory(5)}
-                >
-                  <Build />
-                </IconButton>
-                <IconButton color="primary" onClick={handleClearFilters}>
-                  <Clear />
-                </IconButton>
+          <Grid item xs={12} sm={10} md={8} lg={6}> 
+            <Paper
+              style={{
+                padding: '1rem',
+                boxShadow: '0px 0px 15px 5px rgba(0,0,0,0.2)',
+              }}
+            >
+              <Grid container justifyContent="center" alignItems="center">
+                <Grid item sx={{ mb: 2}}>
+                  <CategoryFilter
+                    selectedCategories={selectedCategories}
+                    toggleCategory={toggleCategory}
+                    handleClearFilters={handleClearFilters}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
               <Grid container justifyContent="center">
-                <Grid item xs={12} sm={4} md={3} style={{ marginRight: '1rem' }}>
+                <Grid item xs={12} sm={10} md={8} lg={6}> 
                   <TextField fullWidth variant="outlined" placeholder="Search..." />
                 </Grid>
-                <Grid item xs={12} sm={4} md={3}>
+                <Grid item xs={12} sm={10} md={8} lg={6}> 
                   <Dropdown
                     label="Location"
                     value={selectedLocation}
@@ -162,13 +143,18 @@ export function HomePage({ isLoggedIn }) {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <CardGrid jobListings={filteredJobListings} />
+            <CardGrid jobListings={filteredJobListings} onCardClick={handleCardClick} />
+            <JobDetails job={selectedJob} open={isJobDialogOpen} onClose={handleJobDialogClose} />
           </Grid>
-          <Dialog open={isCreateJobOpen} onClose={closeCreateJobDialog}>
-            <CreateJob />
-            <Button variant="contained" color="primary" onClick={closeCreateJobDialog}>
-              Close
-            </Button>
+          <Dialog
+            open={isCreateJobOpen}
+            onClose={closeCreateJobDialog}
+            TransitionComponent={Grow} 
+            transitionDuration={500} 
+            maxWidth="sm"
+            fullWidth
+          >
+            <CreateJob onClose={closeCreateJobDialog} />
           </Dialog>
         </Grid>
       )}

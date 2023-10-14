@@ -6,7 +6,6 @@ const DeleteAccount = () => {
     <Card>
       <CardHeader title="Delete Account" />
       <CardContent>
-        {/* Add content for deleting the account */}
       </CardContent>
       <CardActions>
         <Button variant="contained" color="error">

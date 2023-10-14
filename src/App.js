@@ -2,10 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { SignIn } from './components/Member/SignIn';
 import { HomePage } from './pages/HomePage';
 import { CreateUser } from './pages/CreateUser';
-import { CreateJob } from './pages/PostJob';
 import React, { useState } from 'react';
 import { PrimarySearchAppBar } from './components/NavBar/NavMenu';
-import { Post } from './components/Post';
 import Profile from './pages/UserProfile';
 import { Navigate } from 'react-router-dom';
 import Email from './pages/Email';
@@ -18,9 +16,8 @@ import { themeOptions } from './Theme';
 
 
 function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
-  const { isLoggedIn, handleLogin, handleLogout } = useAuth();
-  const [profile, setProfile] = useState(JSON.parse(localStorage.getItem('profile')));
+  const { isLoggedIn, handleLogin } = useAuth();
+  const [profile ] = useState(JSON.parse(localStorage.getItem('profile')));
   const theme=createTheme(themeOptions)
 
 
@@ -43,8 +40,6 @@ function App() {
         )) || null}
         {isLoggedIn && (
           <>
-            <Route path="/postjob" element={<CreateJob />} />
-            <Route path="/post" element={<Post />} />
             <Route path="/email" element={<Email />} />
             <Route path="/profile/:id" element={<Profile profile={profile} />} />
           </>
