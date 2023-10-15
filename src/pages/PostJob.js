@@ -24,7 +24,7 @@ export function CreateJob({ onClose }) {
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [paymentType, setPaymentType] = useState('');
+  const [paymentAmount, setPaymentAmount] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const jobStatus = 'Open';
 
@@ -33,7 +33,7 @@ export function CreateJob({ onClose }) {
     setDescription('');
     setLocation('');
     setDeadline('');
-    setPaymentType('');
+    setPaymentAmount('');
     setSelectedCategory('');
   };
 
@@ -44,7 +44,7 @@ export function CreateJob({ onClose }) {
         description,
         location_id: location,
         deadline,
-        paymentType,
+        paymentAmount,
         jobStatus,
         category_id: selectedCategory,
       });
@@ -142,8 +142,8 @@ export function CreateJob({ onClose }) {
             <Grid item xs={6}>
               <TextField
                 label="Payment Type"
-                value={paymentType}
-                onChange={(e) => setPaymentType(e.target.value)}
+                value={paymentAmount}
+                onChange={(e) => setPaymentAmount(e.target.value)}
                 fullWidth
                 margin="normal"
                 InputLabelProps={{ style: { color: '#7a7974' } }}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react'; // Import useState
 import {
   Card,
   CardContent,
@@ -7,7 +7,7 @@ import {
   Typography,
   Grid,
 } from '@mui/material';
-import { LocationOn } from '@mui/icons-material';
+import { LocationOn, Favorite } from '@mui/icons-material';
 import {
   CalendarMonth as CalendarMonthIcon,
   Paid as PaidIcon,
@@ -22,6 +22,8 @@ import {
   Build,
 } from '@mui/icons-material';
 import locationsData from './Locations';
+import { useAuth } from '../AuthContext';
+import useJobSave from './useJobSave';
 
 const getLocationName = (locationId) => {
   const location = locationsData.find((item) => item.id === locationId);
@@ -68,6 +70,10 @@ function getIconByCategoryId(categoryId) {
 
 const CardComponent = ({ job, onCardClick }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
+  const { profile } = useAuth();
+  const userId = profile.UserId;
+  const { isSaved, toggleSaved } = useJobSave(userId, job.id);
+
   console.log(job);
   return (
     <Card sx={cardStyle}>
@@ -92,12 +98,6 @@ const CardComponent = ({ job, onCardClick }) => {
                 </div>
               </Grid>
             </Grid>
-            <Grid item>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <LocationOn fontSize="small" />{' '}
-                {getLocationName(job.location_id)}
-              </div>
-            </Grid>
           </Grid>
         }
         sx={{
@@ -106,6 +106,16 @@ const CardComponent = ({ job, onCardClick }) => {
         }}
       />
       <CardContent>
+        <Grid item>
+          <Favorite
+            fontSize="small"
+            sx={{
+              cursor: 'pointer',
+              color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
+            }}
+            onClick={toggleSaved} // Toggle the save state on click
+          />
+        </Grid>
         <ul>
           <li style={listItemStyle}>
             <Tooltip title="Deadline">

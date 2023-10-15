@@ -11,11 +11,11 @@ const UserRatings = ({ text, value, rating }) => {
         isSmallScreen
           ? { marginBottom: '20px' }
           : {
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            marginBottom: '20px',
-          }
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              marginBottom: '20px',
+            }
       }
     >
       <Typography gutterBottom variant="body1">
@@ -25,18 +25,18 @@ const UserRatings = ({ text, value, rating }) => {
         sx={
           isSmallScreen
             ? {
-              display: 'flex',
-              alignItems: 'centre',
-              justifyContent: 'space-between',
-              gap: '10px',
-              marginBottom: '20px',
-            }
+                display: 'flex',
+                alignItems: 'centre',
+                justifyContent: 'space-between',
+                gap: '10px',
+                marginBottom: '20px',
+              }
             : {
-              marginBottom: '20px',
-              display: 'flex',
-              flexDirection: 'row',
-              gap: '5px',
-            }
+                marginBottom: '20px',
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '5px',
+              }
         }
       >
         <Rating

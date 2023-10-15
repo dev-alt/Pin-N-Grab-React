@@ -11,12 +11,14 @@ import {
   Divider,
   useMediaQuery,
 } from '@mui/material';
-import { Close, LocationOn } from '@mui/icons-material'; // Import the LocationOn icon
+import { Close, LocationOn, Favorite } from '@mui/icons-material'; // Import the LocationOn icon
 import locationsData from '../Locations';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import UserReview from './UserReviews';
 import ImageCarousel from './ImageCarousel';
+import { useAuth } from '../../AuthContext';
+import useJobSave from '../useJobSave';
 
 // Function to get the location name based on locationId
 const getLocationName = (locationId) => {
@@ -27,7 +29,6 @@ const getLocationName = (locationId) => {
     return 'Unknown Location';
   }
 };
-
 
 // Styling definitions
 const paperStyle = {
@@ -65,12 +66,13 @@ const images = [
 
 // React component for displaying job details
 const JobDetails = ({ job, open, onClose }) => {
+  const { profile } = useAuth();
+  const userId = profile.UserId;
+  const { isSaved, toggleSaved } = useJobSave(userId, job.id);
 
-  console.log("Current",job)
+  console.log('Current', job);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [reviews, setReviews] = useState([]);
-
-  
 
   useEffect(() => {
     if (job) {
@@ -83,12 +85,13 @@ const JobDetails = ({ job, open, onClose }) => {
     }
   }, [job]);
 
-
   if (!job) {
     return <div>No job details available.</div>;
   }
-  {console.log("Reviews",reviews)}
-  
+  {
+    console.log('Reviews', reviews);
+  }
+
   <li
     style={{
       listStyle: 'none',
@@ -96,20 +99,17 @@ const JobDetails = ({ job, open, onClose }) => {
       alignItems: 'center',
       marginTop: '0.4rem',
     }}
-    
   ></li>;
-
-
 
   const currentDateTime = new Date();
   const createdAtDate = new Date(job.createdAt);
   const updatedAtDate = new Date(job.updatedAt);
 
   const daysSincePosted = Math.floor(
-    (currentDateTime - createdAtDate) / (1000 * 60 * 60 * 24),
+    (currentDateTime - createdAtDate) / (1000 * 60 * 60 * 24)
   );
   const daysSinceUpdated = Math.floor(
-    (currentDateTime - updatedAtDate) / (1000 * 60 * 60 * 24),
+    (currentDateTime - updatedAtDate) / (1000 * 60 * 60 * 24)
   );
 
   if (!job) {
@@ -154,11 +154,11 @@ const JobDetails = ({ job, open, onClose }) => {
             justifyContent="flex-end"
             sx={{ marginRight: '30px' }}
           >
-
             {/* Location */}
             <Typography
               variant={isSmallScreen ? 'body2' : 'subtitle1'}
-              color="textSecondary"            >
+              color="textSecondary"
+            >
               <LocationOn /> {getLocationName(job.location_id)}
             </Typography>
 
@@ -167,6 +167,16 @@ const JobDetails = ({ job, open, onClose }) => {
               <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
               <span sx={labelStyle}>Deadline:</span> {job.deadline}
             </Typography>
+            <Grid item>
+              <Favorite
+                fontSize="medium"
+                sx={{
+                  cursor: 'pointer',
+                  color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
+                }}
+                onClick={toggleSaved} // Toggle the save state on click
+              />
+            </Grid>
           </Stack>
         </Grid>
       </Grid>
@@ -179,9 +189,23 @@ const JobDetails = ({ job, open, onClose }) => {
         <Grid item xs={12} md={8}>
           <Box>
             <Box>
-              <Typography variant={isSmallScreen ? 'body1' : 'h6'} sx={{ marginLeft: "20px", marginRight: "20px" }}>{job.description}
+              <Typography
+                variant={isSmallScreen ? 'body1' : 'h6'}
+                sx={{ marginLeft: '20px', marginRight: '20px' }}
+              >
+                {job.description}
               </Typography>
-              <Typography variant={isSmallScreen ? 'body1' : 'h6'} sx={{ marginLeft: "20px", marginRight: "20px", marginTop: "40px" }}><strong>Details </strong><br />{job.details}
+              <Typography
+                variant={isSmallScreen ? 'body1' : 'h6'}
+                sx={{
+                  marginLeft: '20px',
+                  marginRight: '20px',
+                  marginTop: '40px',
+                }}
+              >
+                <strong>Details </strong>
+                <br />
+                {job.details}
               </Typography>
             </Box>
           </Box>
@@ -189,7 +213,16 @@ const JobDetails = ({ job, open, onClose }) => {
 
         {/* User details and offer */}
         <Grid item xs={12} md={4}>
-          <Paper elevation={0} sx={{ display: "flex", padding: "1rem", border: "0.5px solid #d2d2d4 ", borderRadius: "8px", justifyContent: "center" }}>
+          <Paper
+            elevation={0}
+            sx={{
+              display: 'flex',
+              padding: '1rem',
+              border: '0.5px solid #d2d2d4 ',
+              borderRadius: '8px',
+              justifyContent: 'center',
+            }}
+          >
             <Box>
               <Box
                 sx={{
@@ -240,17 +273,22 @@ const JobDetails = ({ job, open, onClose }) => {
               <Typography variant={isSmallScreen ? 'h5' : 'h4'}>
                 $Amount NZD{' '}
               </Typography>
-              <Box sx={{display:"flex", flexDirection:"column"}}>
+              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Typography
+                  variant="overline"
+                  sx={{ marginTop: '20px' }}
+                  color="#BC4B51"
+                >
+                  number people applied for this job
+                </Typography>
 
-<Typography variant="overline" sx={{marginTop:"20px"}} color="#BC4B51">number people applied for this job</Typography>
-
-
-
-
-
-<Button variant='contained' sx={{width:"1rem",marginTop:"20px"}}>Apply</Button>
-
-</Box>
+                <Button
+                  variant="contained"
+                  sx={{ width: '1rem', marginTop: '20px' }}
+                >
+                  Apply
+                </Button>
+              </Box>
             </Box>
           </Paper>
         </Grid>
@@ -285,21 +323,18 @@ const JobDetails = ({ job, open, onClose }) => {
 
         {/* User reviews */}
         <Grid container sx={{ marginRight: '20px', marginTop: '40px' }}>
-       
           {reviews.map((review) => (
-                 <Grid item xs={12} sm={6}>
-         <UserReview
-         key={review.id}
-         reviewUserName={review.reviewer.username} 
-         date={review.createdAt}  
-         review={review.reviewText}
-         rating={review.rating}
-       />   
-          </Grid>
-      ))}
-     
-  </Grid>
- 
+            <Grid item xs={12} sm={6}>
+              <UserReview
+                key={review.id}
+                reviewUserName={review.reviewer.username}
+                date={review.createdAt}
+                review={review.reviewText}
+                rating={review.rating}
+              />
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </Paper>
   );

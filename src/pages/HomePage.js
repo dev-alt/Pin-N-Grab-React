@@ -48,7 +48,7 @@ export function HomePage({ isLoggedIn }) {
   const toggleCategory = (categoryId) => {
     if (selectedCategories.includes(categoryId)) {
       setSelectedCategories(
-        selectedCategories.filter((id) => id !== categoryId),
+        selectedCategories.filter((id) => id !== categoryId)
       );
     } else {
       setSelectedCategories([...selectedCategories, categoryId]);
