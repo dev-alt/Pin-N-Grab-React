@@ -12,19 +12,31 @@ const CardGrid = ({ jobListings, onCardClick }) => {
   };
 
   const columnSettings = {
-    xs: 12, // For extra small screens (phones)
-    sm: 6,  // For small screens (tablets)
-    md: 4,  // For medium screens (laptops)
-    lg: 3   // For large screens (desktops)
+    xs: 12,
   };
+  const cardMaxWidth = '600px';
 
   // Filter out job listings with "Closed" or "Deleted" jobStatus
-  const filteredJobListings = jobListings.filter((job) => job.jobStatus !== 'Closed' && job.jobStatus !== 'Deleted');
+  const filteredJobListings = jobListings.filter(
+    (job) => job.jobStatus !== 'Closed' && job.jobStatus !== 'Deleted',
+  );
 
   return (
-    <Grid container sx={cardGridStyle}>
+    <Grid
+      container
+      sx={{
+        ...cardGridStyle,
+        maxWidth: cardMaxWidth,
+        justifyContent: 'center',
+      }}
+    >
       {filteredJobListings.map((job, index) => (
-        <Grid item {...columnSettings} key={index} sx={{ ...cardItemStyle, height: 'auto' }}>
+        <Grid
+          item
+          {...columnSettings}
+          key={index}
+          sx={{ ...cardItemStyle, height: 'auto' }}
+        >
           <CardComponent job={job} onCardClick={onCardClick} />
         </Grid>
       ))}

@@ -250,7 +250,7 @@ const Email = () => {
       `,
     },
   ];
-  
+
   return (
     <Container component="main" maxWidth="lg">
       <CssBaseline />
@@ -261,35 +261,38 @@ const Email = () => {
         <Grid container spacing={3}>
           <Grid item xs={3}>
             {/* Navigation Menu */}
-            <EmailNavMenu onTabChange={handleTabChange} selectedTab={selectedTab} />
+            <EmailNavMenu
+              onTabChange={handleTabChange}
+              selectedTab={selectedTab}
+            />
           </Grid>
           <Grid item xs={9}>
             {/* Content Area */}
-<Paper elevation={3} sx={{ padding: '16px', height: '500px' }}>
-  {selectedTab === 'compose' ? (
-    <EmailCompose />
-  ) : (
-    <div>
-      {selectedEmail ? (
-        <EmailContent email={selectedEmail} />
-      ) : (
-        <Inbox
-        emails={
-          selectedTab === 'inbox'
-            ? fakeEmails
-            : selectedTab === 'trash'
-            ? fakeDeletedEmails
-            : selectedTab === 'starred'
-            ? starredEmails
-            : [] // Default to an empty array if the selectedTab doesn't match
-        }
-        onEmailClick={handleEmailClick}
-        maxHeight="400px" // Set the max height for the email list
-      />
-    )}
-  </div>
-)}
-</Paper>
+            <Paper elevation={3} sx={{ padding: '16px', height: '500px' }}>
+              {selectedTab === 'compose' ? (
+                <EmailCompose />
+              ) : (
+                <div>
+                  {selectedEmail ? (
+                    <EmailContent email={selectedEmail} />
+                  ) : (
+                    <Inbox
+                      emails={
+                        selectedTab === 'inbox'
+                          ? fakeEmails
+                          : selectedTab === 'trash'
+                          ? fakeDeletedEmails
+                          : selectedTab === 'starred'
+                          ? starredEmails
+                          : [] // Default to an empty array if the selectedTab doesn't match
+                      }
+                      onEmailClick={handleEmailClick}
+                      maxHeight="400px" // Set the max height for the email list
+                    />
+                  )}
+                </div>
+              )}
+            </Paper>
           </Grid>
         </Grid>
       </Paper>

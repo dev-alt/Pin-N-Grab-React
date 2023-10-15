@@ -1,5 +1,17 @@
 import React from 'react';
-import { Card, CardHeader, CardContent, CardActions, Button, TextField, FormControl, InputAdornment, IconButton, Input, InputLabel } from '@mui/material';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Button,
+  TextField,
+  FormControl,
+  InputAdornment,
+  IconButton,
+  Input,
+  InputLabel,
+} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -33,7 +45,11 @@ const EditPassword = () => {
         <div className="text-center chat-image mb-5">
           <div className="avatar avatar-xxl chat-profile mb-3 brround">
             <a href="profile.html">
-              <img alt="avatar" src="../assets/images/users/7.jpg" className="brround" />
+              <img
+                alt="avatar"
+                src="../assets/images/users/7.jpg"
+                className="brround"
+              />
             </a>
           </div>
           <div className="main-chat-msg-name">
@@ -58,7 +74,11 @@ const EditPassword = () => {
                   onClick={handleClickShowPassword('showCurrentPassword')}
                   onMouseDown={handleMouseDownPassword}
                 >
-                  {values.showCurrentPassword ? <Visibility /> : <VisibilityOff />}
+                  {values.showCurrentPassword ? (
+                    <Visibility />
+                  ) : (
+                    <VisibilityOff />
+                  )}
                 </IconButton>
               </InputAdornment>
             }
@@ -100,7 +120,11 @@ const EditPassword = () => {
                   onClick={handleClickShowPassword('showConfirmPassword')}
                   onMouseDown={handleMouseDownPassword}
                 >
-                  {values.showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                  {values.showConfirmPassword ? (
+                    <Visibility />
+                  ) : (
+                    <VisibilityOff />
+                  )}
                 </IconButton>
               </InputAdornment>
             }

@@ -16,7 +16,7 @@ function Notification() {
   return (
     <Box>
       <Button onClick={handleNewMessage}>Receive Message</Button>
-      <ToastContainer /> 
+      <ToastContainer />
     </Box>
   );
 }

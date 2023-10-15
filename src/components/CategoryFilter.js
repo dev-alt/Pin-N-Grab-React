@@ -1,9 +1,20 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { IconButton } from '@mui/material';
-import { ElectricalServices, LocalFlorist, LocalShipping, Palette, Build, Clear } from '@mui/icons-material';
+import {
+  ElectricalServices,
+  LocalFlorist,
+  LocalShipping,
+  Palette,
+  Build,
+  Clear,
+} from '@mui/icons-material';
 
-const CategoryFilter = ({ selectedCategories, toggleCategory, handleClearFilters }) => {
+const CategoryFilter = ({
+  selectedCategories,
+  toggleCategory,
+  handleClearFilters,
+}) => {
   return (
     <Box>
       <IconButton

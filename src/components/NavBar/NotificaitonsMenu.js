@@ -20,7 +20,6 @@ function NotificationsMenu() {
 
   return (
     <div>
-
       <IconButton
         size="large"
         aria-label="show new notifications"

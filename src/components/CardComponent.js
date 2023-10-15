@@ -1,8 +1,26 @@
 import React from 'react';
-import {  Card, CardContent, CardHeader, Tooltip, Typography, Grid } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Tooltip,
+  Typography,
+  Grid,
+} from '@mui/material';
 import { LocationOn } from '@mui/icons-material';
-import { CalendarMonth as CalendarMonthIcon, Paid as PaidIcon, AutoStories as AutoStoriesIcon, Handyman as HandymanIcon } from '@mui/icons-material';
-import { ElectricalServices, LocalFlorist, LocalShipping, Palette, Build } from '@mui/icons-material';
+import {
+  CalendarMonth as CalendarMonthIcon,
+  Paid as PaidIcon,
+  AutoStories as AutoStoriesIcon,
+  Handyman as HandymanIcon,
+} from '@mui/icons-material';
+import {
+  ElectricalServices,
+  LocalFlorist,
+  LocalShipping,
+  Palette,
+  Build,
+} from '@mui/icons-material';
 import locationsData from './Locations';
 
 const getLocationName = (locationId) => {
@@ -24,15 +42,14 @@ const cardStyle = {
 };
 
 const listItemStyle = {
-  listStyle: "none",
-  display: "flex",
-  alignItems: "center",
-  marginTop: "0.4rem", 
+  listStyle: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  marginTop: '0.4rem',
 };
 
-
 function getIconByCategoryId(categoryId) {
-  const iconSize = "large";
+  const iconSize = 'large';
   switch (categoryId) {
     case 1:
       return <ElectricalServices fontSize={iconSize} />;
@@ -51,17 +68,25 @@ function getIconByCategoryId(categoryId) {
 
 const CardComponent = ({ job, onCardClick }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
-
+  console.log(job);
   return (
     <Card sx={cardStyle}>
-      <CardHeader onClick={() => onCardClick(job)}
+      <CardHeader
+        onClick={() => onCardClick(job)}
         subheader={
           <Grid container direction="column">
             <Grid item container justifyContent="space-between">
               <Grid item xs={9}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   {iconComponent}
-                  <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' }, fontWeight: 600, color: 'rgba(20, 8, 14, 1)' }}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' },
+                      fontWeight: 600,
+                      color: 'rgba(20, 8, 14, 1)',
+                    }}
+                  >
                     {job.title}
                   </Typography>
                 </div>
@@ -69,7 +94,8 @@ const CardComponent = ({ job, onCardClick }) => {
             </Grid>
             <Grid item>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <LocationOn fontSize='small' /> {getLocationName(job.location_id)}
+                <LocationOn fontSize="small" />{' '}
+                {getLocationName(job.location_id)}
               </div>
             </Grid>
           </Grid>
@@ -81,21 +107,17 @@ const CardComponent = ({ job, onCardClick }) => {
       />
       <CardContent>
         <ul>
-        <li style={listItemStyle}>
-            <Tooltip title="Deadline"><CalendarMonthIcon style={{ marginRight: "0.5rem" }} /></Tooltip>
+          <li style={listItemStyle}>
+            <Tooltip title="Deadline">
+              <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
+            </Tooltip>
             <Typography variant="body2">{job.deadline}</Typography>
           </li>
           <li style={listItemStyle}>
-            <Tooltip title="Payment Type"><PaidIcon style={{ marginRight: "0.5rem" }} /></Tooltip>
+            <Tooltip title="Payment Type">
+              <PaidIcon style={{ marginRight: '0.5rem' }} />
+            </Tooltip>
             <Typography variant="body2">{job.paymentType}</Typography>
-          </li>
-          <li style={listItemStyle}>
-            <Tooltip title="Skill level"><AutoStoriesIcon style={{ marginRight: "0.5rem" }} /></Tooltip>
-            <Typography variant="body2">{job.skillLevel}</Typography>
-          </li>
-          <li style={listItemStyle}>
-            <Tooltip title="Experience Required"><HandymanIcon style={{ marginRight: "0.5rem" }} /></Tooltip>
-            <Typography variant="body2">{job.experienceRequired}</Typography>
           </li>
         </ul>
       </CardContent>

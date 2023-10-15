@@ -20,12 +20,28 @@ const EmailInbox = ({ selectedTab, onTabChange }) => {
 
   React.useEffect(() => {
     // Update the selected tab when the parent component passes a new selectedTab prop
-    setValue(selectedTab === 'inbox' ? 0 : selectedTab === 'drafts' ? 1 : selectedTab === 'starred' ? 2 : 3);
+    setValue(
+      selectedTab === 'inbox'
+        ? 0
+        : selectedTab === 'drafts'
+        ? 1
+        : selectedTab === 'starred'
+        ? 2
+        : 3,
+    );
   }, [selectedTab]);
 
   const handleChange = (event, newValue) => {
     // Notify the parent component (Email.js) of the tab change
-    onTabChange(newValue === 0 ? 'inbox' : newValue === 1 ? 'drafts' : newValue === 2 ? 'starred' : 'trash');
+    onTabChange(
+      newValue === 0
+        ? 'inbox'
+        : newValue === 1
+        ? 'drafts'
+        : newValue === 2
+        ? 'starred'
+        : 'trash',
+    );
   };
 
   const fakeEmails = [
@@ -50,7 +66,12 @@ const EmailInbox = ({ selectedTab, onTabChange }) => {
           <Typography variant="h5" gutterBottom>
             Inbox
           </Typography>
-          <Button variant="contained" color="primary" fullWidth onClick={() => onTabChange('compose')}>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={() => onTabChange('compose')}
+          >
             Compose
           </Button>
 

@@ -4,17 +4,19 @@ import {
   Grid,
   Paper,
   TextField,
-  Grow
+  Grow,
+  useMediaQuery,
 } from '@mui/material';
 
 import CardGrid from '../components/CardGrid';
-import Dropdown from '../components/DropDown';
 import Dialog from '@mui/material/Dialog';
 import { CreateJob } from './PostJob';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import JobDetails from '../components/JobDetails';
+import JobDetails from '../components/Job/JobDetails';
 import CategoryFilter from '../components/CategoryFilter';
+import LocationSelect from '../components/LocationSelect';
+import locationsData from '../components/Locations';
 
 export function HomePage({ isLoggedIn }) {
   const [username, setUsername] = useState('');
@@ -25,7 +27,6 @@ export function HomePage({ isLoggedIn }) {
   const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
-
 
   const openCreateJobDialog = () => {
     setIsCreateJobOpen(true);
@@ -46,7 +47,9 @@ export function HomePage({ isLoggedIn }) {
 
   const toggleCategory = (categoryId) => {
     if (selectedCategories.includes(categoryId)) {
-      setSelectedCategories(selectedCategories.filter((id) => id !== categoryId));
+      setSelectedCategories(
+        selectedCategories.filter((id) => id !== categoryId),
+      );
     } else {
       setSelectedCategories([...selectedCategories, categoryId]);
     }
@@ -56,9 +59,12 @@ export function HomePage({ isLoggedIn }) {
   const handleCategoryFilter = () => {
     const filteredJobs = jobListings.filter((job) => {
       const matchesCategory =
-        selectedCategories.length === 0 || selectedCategories.includes(job.category_id);
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(job.category_id);
+      const matchesLocation =
+        !selectedLocation || selectedLocation === job.location_id;
 
-      return matchesCategory;
+      return matchesCategory && matchesLocation;
     });
 
     setFilteredJobListings(filteredJobs);
@@ -95,6 +101,7 @@ export function HomePage({ isLoggedIn }) {
 
     fetchJobListings();
   }, []);
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   return (
     <Box sx={{ mt: 5 }}>
@@ -102,7 +109,7 @@ export function HomePage({ isLoggedIn }) {
         <p>Welcome, {username}!</p>
       ) : (
         <Grid container justifyContent="center">
-          <Grid item xs={12} sm={10} md={8} lg={6}> 
+          <Grid item xs={12} sm={10} md={8} lg={6}>
             <Paper
               style={{
                 padding: '1rem',
@@ -110,7 +117,7 @@ export function HomePage({ isLoggedIn }) {
               }}
             >
               <Grid container justifyContent="center" alignItems="center">
-                <Grid item sx={{ mb: 2}}>
+                <Grid item sx={{ mb: 2 }}>
                   <CategoryFilter
                     selectedCategories={selectedCategories}
                     toggleCategory={toggleCategory}
@@ -119,17 +126,29 @@ export function HomePage({ isLoggedIn }) {
                 </Grid>
               </Grid>
               <Grid container justifyContent="center">
-                <Grid item xs={12} sm={10} md={8} lg={6}> 
-                  <TextField fullWidth variant="outlined" placeholder="Search..." />
-                </Grid>
-                <Grid item xs={12} sm={10} md={8} lg={6}> 
-                  <Dropdown
-                    label="Location"
-                    value={selectedLocation}
-                    onChange={(e) => setSelectedLocation(e.target.value)}
+                <Grid item xs={12} sm={10} md={8} lg={6}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    placeholder="Search..."
                   />
                 </Grid>
-                <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+                <Grid item xs={12} sm={10} md={8} lg={6}>
+                  <LocationSelect
+                    location={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
+                    locationsData={locationsData}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '1rem',
+                  }}
+                >
                   <Fab
                     variant="extended"
                     color="primary"
@@ -143,14 +162,29 @@ export function HomePage({ isLoggedIn }) {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <CardGrid jobListings={filteredJobListings} onCardClick={handleCardClick} />
-            <JobDetails job={selectedJob} open={isJobDialogOpen} onClose={handleJobDialogClose} />
+            <CardGrid
+              jobListings={filteredJobListings}
+              onCardClick={handleCardClick}
+            />
+            {/* <JobDetails job={selectedJob} open={isJobDialogOpen} onClose={handleJobDialogClose} /> */}
+            <Dialog
+              open={isJobDialogOpen}
+              onClose={handleJobDialogClose}
+              maxWidth={isSmallScreen ? 'sm' : 'lg'}
+              fullWidth
+            >
+              <JobDetails
+                job={selectedJob}
+                open={isJobDialogOpen}
+                onClose={handleJobDialogClose}
+              />
+            </Dialog>
           </Grid>
           <Dialog
             open={isCreateJobOpen}
             onClose={closeCreateJobDialog}
-            TransitionComponent={Grow} 
-            transitionDuration={500} 
+            TransitionComponent={Grow}
+            transitionDuration={500}
             maxWidth="sm"
             fullWidth
           >

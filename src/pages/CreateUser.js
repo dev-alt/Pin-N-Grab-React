@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, TextField, Container, Box, Grid, Link, Avatar, Typography } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Container,
+  Box,
+  Grid,
+  Link,
+  Avatar,
+  Typography,
+} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -51,7 +60,12 @@ export function CreateUser() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleRegister} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleRegister}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField

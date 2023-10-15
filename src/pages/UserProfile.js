@@ -26,10 +26,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 const defaultTheme = createTheme();
 
-
 export default function ProfilePage({ profile }) {
   const { id } = useParams();
-  console.log("Profile prop in ProfilePage:", profile);
+  console.log('Profile prop in ProfilePage:', profile);
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfile, setEditedProfile] = useState({ ...profile });
   const [userProfile, setUserProfile] = useState(profile);
@@ -37,7 +36,7 @@ export default function ProfilePage({ profile }) {
   const handleEditClick = () => {
     setIsEditing(true);
   };
-  
+
   // State variables for all fields
   const [bio, setBio] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
@@ -48,7 +47,7 @@ export default function ProfilePage({ profile }) {
   const [website, setWebsite] = useState('');
   const [saveError, setSaveError] = useState(null);
 
-  const handleSaveClick =  async () => {
+  const handleSaveClick = async () => {
     try {
       // Send updated profile data to the server
       await axios.put(`/users/${id}/profile`, {
@@ -62,21 +61,20 @@ export default function ProfilePage({ profile }) {
       });
       // Disable editing mode after successful update
       setEditedProfile(false);
-          // Update the userProfile state with the new data
-    setUserProfile({
-      ...userProfile,
-      bio,
-      dateOfBirth,
-      gender,
-      socialMediaLinks,
-      address,
-      profilePicture,
-      website,
-    });
-
+      // Update the userProfile state with the new data
+      setUserProfile({
+        ...userProfile,
+        bio,
+        dateOfBirth,
+        gender,
+        socialMediaLinks,
+        address,
+        profilePicture,
+        website,
+      });
     } catch (error) {
       console.error(error);
-      setSaveError("Error updating profile.");
+      setSaveError('Error updating profile.');
     }
   };
 
@@ -119,12 +117,20 @@ export default function ProfilePage({ profile }) {
               <Grid container justifyContent="center">
                 <Avatar
                   alt="User Avatar"
-                  src={isEditing ? editedProfile.profilePicture : profile.profilePicture}
+                  src={
+                    isEditing
+                      ? editedProfile.profilePicture
+                      : profile.profilePicture
+                  }
                   sx={{ width: 150, height: 150 }}
                 />
               </Grid>
               <Grid>
-                <Typography variant="subtitle1" color="textSecondary" align="center">
+                <Typography
+                  variant="subtitle1"
+                  color="textSecondary"
+                  align="center"
+                >
                   {isEditing ? (
                     <TextField
                       name="jobTitle"
@@ -137,7 +143,11 @@ export default function ProfilePage({ profile }) {
                 </Typography>
               </Grid>
               <Grid>
-                <Typography variant="subtitle2" color="textSecondary" align="center">
+                <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  align="center"
+                >
                   {isEditing ? (
                     <TextField
                       name="location"
@@ -145,7 +155,7 @@ export default function ProfilePage({ profile }) {
                       onChange={handleInputChange}
                     />
                   ) : (
-                    profile.location|| 'empty'
+                    profile.location || 'empty'
                   )}
                 </Typography>
               </Grid>
@@ -161,7 +171,11 @@ export default function ProfilePage({ profile }) {
                   </>
                 ) : (
                   <>
-                    <Button variant="contained" color="primary" onClick={handleEditClick}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleEditClick}
+                    >
                       Edit
                     </Button>
                     <Button variant="outlined" color="primary" sx={{ ml: 1 }}>
@@ -175,7 +189,6 @@ export default function ProfilePage({ profile }) {
               <Typography variant="subtitle1" color="textSecondary">
                 Social Media Links
               </Typography>
-        
             </Paper>
           </Grid>
           <Grid item lg={8}>
@@ -184,21 +197,16 @@ export default function ProfilePage({ profile }) {
                 Personal Information
               </Typography>
               <Grid container spacing={2}>
-
                 <Grid item xs={12} sm={6}>
                   <Typography variant="body1">Username</Typography>
                   <Typography variant="body2" color="textSecondary">
-                   
-             {         profile.username|| 'empty'}
-
+                    {profile.username || 'empty'}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography variant="body1">Email</Typography>
                   <Typography variant="body2" color="textSecondary">
-                    {
-                      profile.email|| 'empty'
-                   }
+                    {profile.email || 'empty'}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -211,7 +219,7 @@ export default function ProfilePage({ profile }) {
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.firstName|| 'empty'
+                      profile.firstName || 'empty'
                     )}
                   </Typography>
                 </Grid>
@@ -239,7 +247,7 @@ export default function ProfilePage({ profile }) {
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.bio|| 'empty'
+                      profile.bio || 'empty'
                     )}
                   </Typography>
                 </Grid>
@@ -253,7 +261,7 @@ export default function ProfilePage({ profile }) {
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.dateOfBirth|| 'empty'
+                      profile.dateOfBirth || 'empty'
                     )}
                   </Typography>
                 </Grid>
@@ -268,7 +276,7 @@ export default function ProfilePage({ profile }) {
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.gender|| 'empty'
+                      profile.gender || 'empty'
                     )}
                   </Typography>
                 </Grid>
@@ -282,7 +290,7 @@ export default function ProfilePage({ profile }) {
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.address|| 'empty'
+                      profile.address || 'empty'
                     )}
                   </Typography>
                 </Grid>
@@ -296,7 +304,7 @@ export default function ProfilePage({ profile }) {
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.profilePicture|| 'empty'
+                      profile.profilePicture || 'empty'
                     )}
                   </Typography>
                 </Grid>
@@ -310,20 +318,16 @@ export default function ProfilePage({ profile }) {
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.website|| 'empty'
+                      profile.website || 'empty'
                     )}
                   </Typography>
                 </Grid>
-
-
-
               </Grid>
             </Paper>
             <Paper elevation={3} style={{ marginTop: '16px', padding: '16px' }}>
               <Typography variant="h6" gutterBottom>
                 Recent Job Postings
               </Typography>
-
             </Paper>
           </Grid>
         </Grid>

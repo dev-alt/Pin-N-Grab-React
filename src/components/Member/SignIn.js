@@ -15,8 +15,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-
-
 const defaultTheme = createTheme();
 
 export function SignIn({ handleLogin }) {
@@ -33,35 +31,35 @@ export function SignIn({ handleLogin }) {
         username: data.get('username'),
         password: data.get('password'),
       });
-      
+
       const { token, id } = response.data; // Destructure the 'id' from response.data
-      
+
       console.log(response.data);
-    
+
       const profileResponse = await axios.get(`/api/users/${id}/profile`, {
         headers: {
           Authorization: token,
         },
       });
-    
+
       const userData = profileResponse.data;
       const { username } = userData;
-    
-          // Set the authentication token as a secure HTTP cookie
-    Cookies.set('token', token, { secure: true, sameSite: 'strict' });
+
+      // Set the authentication token as a secure HTTP cookie
+      Cookies.set('token', token, { secure: true, sameSite: 'strict' });
 
       console.log(userData);
       // Call the handleLogin function with the token and profile data
       handleLogin(token, userData);
-    
+
       // Store the user profile data in local storage
       localStorage.setItem('profile', JSON.stringify(userData));
       localStorage.setItem('username', username);
-     
-      setLoading(true); 
+
+      setLoading(true);
       setTimeout(() => {
         navigate(`/profile/${id}`);
-      }, 1000); 
+      }, 1000);
     } catch (error) {
       console.error('Login error:', error); // Log the error for debugging
       setError('Login failed. Please check your credentials.');
@@ -84,12 +82,16 @@ export function SignIn({ handleLogin }) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required

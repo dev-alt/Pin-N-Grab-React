@@ -5,10 +5,7 @@ const Inbox = ({ emails, onEmailClick }) => {
   return (
     <div>
       {emails.map((email) => (
-        <ListItemButton
-          key={email.id}
-          onClick={() => onEmailClick(email)}
-        >
+        <ListItemButton key={email.id} onClick={() => onEmailClick(email)}>
           <ListItemText
             primary={email.subject}
             secondary={`${email.sender} - ${email.date}`}

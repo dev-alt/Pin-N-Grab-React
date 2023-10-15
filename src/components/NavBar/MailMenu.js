@@ -100,7 +100,12 @@ function MailMenu() {
           <strong>You have {messages.length} Messages</strong>
         </MenuItem>
         {messages.map((message, index) => (
-          <MenuItem key={index} sx={styles.messageItem} component={Link} to={message.link}>
+          <MenuItem
+            key={index}
+            sx={styles.messageItem}
+            component={Link}
+            to={message.link}
+          >
             <div>
               <strong>{message.name}</strong>
               <br />

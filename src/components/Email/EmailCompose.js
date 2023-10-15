@@ -136,11 +136,7 @@ const ComposeEmail = () => {
           Cancel
         </Button>
 
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSend}
-        >
+        <Button variant="contained" color="primary" onClick={handleSend}>
           Send message
         </Button>
       </Paper>
