@@ -4,7 +4,8 @@ import { Typography, Avatar, Box, useMediaQuery, Divider } from '@mui/material';
 const UserReview = ({ reviewUserName, date, review, rating }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
-    <>
+    
+    <div key={review.id}> 
       <Box
         sx={{
           display: 'flex',
@@ -35,7 +36,7 @@ const UserReview = ({ reviewUserName, date, review, rating }) => {
         {review}
       </Typography>
       <Divider variant="fullwidth" light />
-    </>
+    </div>
   );
 };
 

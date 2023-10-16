@@ -65,12 +65,11 @@ const images = [
 ];
 
 // React component for displaying job details
-const JobDetails = ({ job, open, onClose }) => {
+const JobDetails = ({ job, onClose }) => {
   const { profile } = useAuth();
   const userId = profile.UserId;
-  const { isSaved, toggleSaved } = useJobSave(userId, job.id);
+  const { isSaved, toggleSaved } = useJobSave(userId, job?.id); 
 
-  console.log('Current', job);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [reviews, setReviews] = useState([]);
 
@@ -86,35 +85,37 @@ const JobDetails = ({ job, open, onClose }) => {
   }, [job]);
 
   if (!job) {
-    return <div>No job details available.</div>;
-  }
-  {
-    console.log('Reviews', reviews);
+    return (
+      <Paper sx={paperStyle}>
+        <IconButton sx={closeButtonStyle} onClick={onClose}>
+          <Close />
+        </IconButton>
+        <Typography variant="h6" color="rgba(20, 8, 14, 1)" sx={{ marginLeft: '20px' }}>
+          No job details available.
+        </Typography>
+      </Paper>
+    );
   }
 
-  <li
-    style={{
-      listStyle: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      marginTop: '0.4rem',
-    }}
-  ></li>;
+  // <li
+  //   style={{
+  //     listStyle: 'none',
+  //     display: 'flex',
+  //     alignItems: 'center',
+  //     marginTop: '0.4rem',
+  //   }}
+  // ></li>;
 
   const currentDateTime = new Date();
-  const createdAtDate = new Date(job.createdAt);
-  const updatedAtDate = new Date(job.updatedAt);
-
-  const daysSincePosted = Math.floor(
-    (currentDateTime - createdAtDate) / (1000 * 60 * 60 * 24)
-  );
-  const daysSinceUpdated = Math.floor(
-    (currentDateTime - updatedAtDate) / (1000 * 60 * 60 * 24)
-  );
-
-  if (!job) {
-    return <div>No job details available.</div>;
-  }
+  const createdAtDate = job ? new Date(job.createdAt) : null;
+  const updatedAtDate = job ? new Date(job.updatedAt) : null;
+  
+  const daysSincePosted = createdAtDate
+    ? Math.floor((currentDateTime - createdAtDate) / (1000 * 60 * 60 * 24))
+    : 0;
+  const daysSinceUpdated = updatedAtDate
+    ? Math.floor((currentDateTime - updatedAtDate) / (1000 * 60 * 60 * 24))
+    : 0;
 
   // Render the job details and components
   return (
@@ -271,7 +272,7 @@ const JobDetails = ({ job, open, onClose }) => {
                 {job.User.username} is happy to pay:{' '}
               </Typography>
               <Typography variant={isSmallScreen ? 'h5' : 'h4'}>
-                $Amount NZD{' '}
+                ${job.paymentAmount}
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography
@@ -324,10 +325,11 @@ const JobDetails = ({ job, open, onClose }) => {
         {/* User reviews */}
         <Grid container sx={{ marginRight: '20px', marginTop: '40px' }}>
           {reviews.map((review) => (
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} key={review.id}
+            >
               <UserReview
                 key={review.id}
-                reviewUserName={review.reviewer.username}
+                reviewUserName={review.Job.User.username}
                 date={review.createdAt}
                 review={review.reviewText}
                 rating={review.rating}

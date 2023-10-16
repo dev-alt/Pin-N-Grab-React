@@ -74,7 +74,6 @@ const CardComponent = ({ job, onCardClick }) => {
   const userId = profile.UserId;
   const { isSaved, toggleSaved } = useJobSave(userId, job.id);
 
-  console.log(job);
   return (
     <Card sx={cardStyle}>
       <CardHeader

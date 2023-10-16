@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Avatar,
   Box,
@@ -22,6 +22,7 @@ import {
   Build,
 } from '@mui/icons-material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
+import UserReview from '../Job/UserReviews';
 
 const jobData = {
   JobName: 'Job Name',
@@ -58,49 +59,36 @@ const JobCard = ({ data, iconComponent }) => {
   );
 };
 
-const UserReview = ({ reviewUserName, date, review }) => {
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
-  return (
-    <>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          marginBottom: '2px',
-        }}
-      >
-        <Avatar />
-        <Box>
-          <Typography variant="h6">{reviewUserName}</Typography>
-          <Typography variant="body1" color="grey">
-            {date}{' '}
-          </Typography>
-        </Box>
-      </Box>
-      <Typography
-        variant={isSmallScreen ? 'body1' : 'h6'}
-        sx={
-          isSmallScreen
-            ? { marginRight: '10px', marginLeft: '10px', marginBottom: '40px' }
-            : { marginLeft: '20px', marginBottom: '40px', marginRight: '40px' }
-        }
-      >
-        {review}
-      </Typography>
-      <Divider fullwidth light sx={{ marginBottom: '20px' }} />
-    </>
-  );
-};
-
 const UserProfileView = () => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const [value, setValue] = useState('1');
+  const [reviews, setReviews] = useState([]);
+  const [user, setUser] = useState(null); // State to store user data
+
+
+
+
+  useEffect(() => {
+    // Fetch reviews for the user with ID 20
+    fetch(`/api/review/user/20`)
+      .then((response) => response.json())
+      .then((data) => setReviews(data));
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
+  useEffect(() => {
+    // Fetch user data
+    fetch('/api/users/20/profile')
+      .then((response) => response.json())
+      .then((data) => setUser(data));
+  }
+    , []);
+    console.log(user);
+
 
   return (
     <Container
@@ -108,10 +96,10 @@ const UserProfileView = () => {
       sx={
         isSmallScreen
           ? {
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column',
-            }
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+          }
           : { display: 'flex', justifyContent: 'center', padding: '2rem' }
       }
     >
@@ -120,22 +108,22 @@ const UserProfileView = () => {
           sx={
             isSmallScreen
               ? {
-                  borderRadius: '9px',
-                  padding: '1rem',
-                  maxWidth: '600px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }
+                borderRadius: '9px',
+                padding: '1rem',
+                maxWidth: '600px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }
               : {
-                  borderRadius: '9px',
-                  padding: '1rem',
-                  width: '300px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  position: 'fixed',
-                }
+                borderRadius: '9px',
+                padding: '1rem',
+                width: '300px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'fixed',
+              }
           }
         >
           <CardContent
@@ -154,54 +142,51 @@ const UserProfileView = () => {
               }
             />
             <Typography variant="h5">
-              <strong>UserName</strong>
+              <strong>{}</strong>
             </Typography>
             <Box sx={{ display: 'flex', marginTop: '20px' }}>
               <Typography
                 variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={isSmallScreen && { marginRight: '20px' }}
+                sx={isSmallScreen ? { marginRight: '20px' } : {}}
               >
-                number Reviews
+                  {reviews.length} Reviews
               </Typography>
+
+              <Typography
+  variant={isSmallScreen ? 'body2' : 'body1'}
+  sx={isSmallScreen ? { marginRight: '20px' } : {}}
+>
+  {reviews.reduce((total, review) => total + review.rating, 0) / reviews.length} Rating
+</Typography>
+
               <Typography
                 variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={isSmallScreen && { marginRight: '20px' }}
+                sx={isSmallScreen ? { marginRight: '20px', whiteSpace: 'nowrap' } : {}}
               >
-                value Ratings
+        Joined: {user?.profile?.createdAt && new Date(user.profile.createdAt).getFullYear()}
+
               </Typography>
-              <Typography
-                variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={
-                  isSmallScreen && { marginRight: '20px', whiteSpace: 'nowrap' }
-                }
-              >
-                Join since year
-              </Typography>
+
             </Box>
           </CardContent>
         </Card>
-        {isSmallScreen && (
-          <Divider fullwidth light sx={{ marginTop: '40px' }} />
-        )}
+        {isSmallScreen && <Divider sx={{ marginTop: '40px' }} />}
       </Container>
       <Container>
         <Typography variant={isSmallScreen ? 'h6' : 'h4'} gutterBottom>
-          <strong>Hi, I am UserName</strong>
+          <strong>Hi, I am {user?.username}</strong>
         </Typography>
         <Typography
           variant={isSmallScreen ? 'subtitle1' : 'h5'}
           fontFamily="roboto"
           gutterBottom
         >
-          This is my Bio: Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Aspernatur veritatis voluptas consequatur autem deleniti
-          recusandae, incidunt aliquid ipsum mollitia illo eligendi quasi
-          placeat quis ut commodi earum reprehenderit ducimus harum!
+          {user?.profile?.bio}
         </Typography>
-        <Divider fullwidth light />
+        <Divider light />
         <Box component="div" sx={{ marginTop: '30px' }}>
           <Typography variant="h5" gutterBottom>
-            <strong>UserName's Listings</strong>
+            <strong>{user?.username}'s Listings</strong>
           </Typography>
           {hasListedJob ? (
             <Box sx={{ overflow: 'auto', height: '300px' }}>
@@ -211,7 +196,7 @@ const UserProfileView = () => {
             </Box>
           ) : (
             <Typography variant="h6">
-              UserName hasn't listed any jobs
+              {user?.username} hasn't listed any jobs
             </Typography>
           )}
         </Box>
@@ -265,37 +250,36 @@ const UserProfileView = () => {
           <Box>
             <TabContext value={value}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <TabList
-                  onChange={handleChange}
-                  aria-label="lab API tabs example"
-                >
+                <TabList onChange={handleChange} aria-label="lab API tabs example">
                   <Tab label="From Clients" value="1" />
                   <Tab label="From Workerso" value="2" />
                 </TabList>
               </Box>
               <TabPanel value="1">
-                <UserReview
-                  reviewUserName="useName"
-                  date="date"
-                  review="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur veritatis voluptas consequatur autem deleniti recusandae, incidunt aliquid ipsum mollitia illo eligendi quasi placeat quis ut commodi earum reprehenderit ducimus harum!'"
-                />
-                <UserReview
-                  reviewUserName="useName"
-                  date="date"
-                  review="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur veritatis voluptas consequatur autem deleniti recusandae, incidunt aliquid ipsum mollitia illo eligendi quasi placeat quis ut commodi earum reprehenderit ducimus harum!'"
-                />
+                {reviews
+                  .filter((review) => review.type === 'Client')
+                  .map((review) => (
+                    <UserReview
+                      key={review.id}
+                      reviewUserName={review.Job.User.username}
+                      date={review.createdAt}
+                      review={review.reviewText}
+                      rating={review.rating}
+                    />
+                  ))}
               </TabPanel>
               <TabPanel value="2">
-                <UserReview
-                  reviewUserName="useName"
-                  date="date"
-                  review="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur veritatis voluptas consequatur autem deleniti recusandae, incidunt aliquid ipsum mollitia illo eligendi quasi placeat quis ut commodi earum reprehenderit ducimus harum!'"
-                />
-                <UserReview
-                  reviewUserName="useName"
-                  date="date"
-                  review="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur veritatis voluptas consequatur autem deleniti recusandae, incidunt aliquid ipsum mollitia illo eligendi quasi placeat quis ut commodi earum reprehenderit ducimus harum!'"
-                />
+                {reviews
+                  .filter((review) => review.type === 'Worker')
+                  .map((review) => (
+                    <UserReview
+                      key={review.id}
+                      reviewUserName={review.Job.User.username}
+                      date={review.createdAt}
+                      review={review.reviewText}
+                      rating={review.rating}
+                    />
+                  ))}
               </TabPanel>
             </TabContext>
           </Box>

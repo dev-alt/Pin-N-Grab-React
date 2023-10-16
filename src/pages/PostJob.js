@@ -22,6 +22,7 @@ import LocationSelect from '../components/LocationSelect';
 export function CreateJob({ onClose }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [details, setDetails] = useState('');
   const [location, setLocation] = useState('');
   const [deadline, setDeadline] = useState('');
   const [paymentAmount, setPaymentAmount] = useState('');
@@ -31,6 +32,7 @@ export function CreateJob({ onClose }) {
   const handleReset = () => {
     setTitle('');
     setDescription('');
+    setDetails('');
     setLocation('');
     setDeadline('');
     setPaymentAmount('');
@@ -42,6 +44,7 @@ export function CreateJob({ onClose }) {
       const response = await axios.post('/api/jobs/create', {
         title,
         description,
+        details,
         location_id: location,
         deadline,
         paymentAmount,
@@ -92,6 +95,16 @@ export function CreateJob({ onClose }) {
             rows={4}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            fullWidth
+            margin="normal"
+            InputLabelProps={{ style: { color: '#7a7974' } }}
+          />
+          <TextField
+            label="Details"
+            multiline
+            rows={4}
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
             fullWidth
             margin="normal"
             InputLabelProps={{ style: { color: '#7a7974' } }}

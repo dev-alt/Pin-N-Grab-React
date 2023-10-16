@@ -6,6 +6,7 @@ import {
   TextField,
   Grow,
   useMediaQuery,
+  Button,
 } from '@mui/material';
 
 import CardGrid from '../components/CardGrid';
@@ -17,6 +18,7 @@ import JobDetails from '../components/Job/JobDetails';
 import CategoryFilter from '../components/CategoryFilter';
 import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
+import UserProfileView from '../components/Profile/UserProfileView'; 
 
 export function HomePage({ isLoggedIn }) {
   const [username, setUsername] = useState('');
@@ -27,7 +29,15 @@ export function HomePage({ isLoggedIn }) {
   const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
+  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
 
+  const openUserProfile = () => {
+    setIsUserProfileOpen(true);
+  };
+
+  const closeUserProfile = () => {
+    setIsUserProfileOpen(false);
+  };
   const openCreateJobDialog = () => {
     setIsCreateJobOpen(true);
   };
@@ -36,14 +46,24 @@ export function HomePage({ isLoggedIn }) {
     setIsCreateJobOpen(false);
   };
   const handleCardClick = (job) => {
-    setSelectedJob(job);
-    setIsJobDialogOpen(true);
+    try {
+      console.log('Selected Job when clicking a card:', job);
+      setSelectedJob(job);
+      setIsJobDialogOpen(true);
+    } catch (error) {
+      console.error('Error when clicking a card:', error);
+    }
   };
+  
 
   const handleJobDialogClose = () => {
     setSelectedJob(null);
     setIsJobDialogOpen(false);
+    setTimeout(() => {
+      console.log('Selected Job when closing dialog:', selectedJob);
+    }, 100); // Add a small delay, e.g., 100 milliseconds
   };
+  
 
   const toggleCategory = (categoryId) => {
     if (selectedCategories.includes(categoryId)) {
@@ -162,6 +182,9 @@ export function HomePage({ isLoggedIn }) {
             </Paper>
           </Grid>
           <Grid item xs={12}>
+          <Button variant="outlined" onClick={openUserProfile}>
+  Open User Profile
+</Button>
             <CardGrid
               jobListings={filteredJobListings}
               onCardClick={handleCardClick}
@@ -175,7 +198,6 @@ export function HomePage({ isLoggedIn }) {
             >
               <JobDetails
                 job={selectedJob}
-                open={isJobDialogOpen}
                 onClose={handleJobDialogClose}
               />
             </Dialog>
@@ -190,6 +212,14 @@ export function HomePage({ isLoggedIn }) {
           >
             <CreateJob onClose={closeCreateJobDialog} />
           </Dialog>
+          <Dialog
+  open={isUserProfileOpen}
+  onClose={closeUserProfile}
+  maxWidth="lg"
+  fullWidth
+>
+  <UserProfileView />
+</Dialog>
         </Grid>
       )}
     </Box>
