@@ -45,8 +45,7 @@ export function PrimarySearchAppBar({ profile, isLoggedIn }) {
       key={item.key}
       component={Link}
       to={item.link}
-      onClick={handleMenuClose}
-    >
+      onClick={handleMenuClose}>
       {item.label}
     </MenuItem>
   ));
@@ -64,28 +63,30 @@ export function PrimarySearchAppBar({ profile, isLoggedIn }) {
         horizontal: 'right',
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
+      onClose={handleMenuClose}>
       {menuItemsJSX}
     </Menu>
   );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="fixed" sx={{ boxShadow: 'none' }}>
         <Toolbar>
           {/* Application title */}
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
+            sx={{
+              display: { sm: 'block' },
+              fontFamily: 'Tilt Neon',
+              fontSize: { xs: '1rem', md: '2rem' },
+            }}>
             MahiBoard
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           {/* Desktop menu (notifications, mail, user account) */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: 'flex' }}>
             {isLoggedIn && <NotificationsMenu />}
             {isLoggedIn && <MailMenu />}
             {isLoggedIn && (
@@ -95,8 +96,7 @@ export function PrimarySearchAppBar({ profile, isLoggedIn }) {
                 aria-controls={menuId}
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
+                color="inherit">
                 <AccountCircle />
               </IconButton>
             )}

@@ -44,8 +44,7 @@ const JobCard = ({ data, iconComponent }) => {
         </CardContent>
         <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
           <Box
-            sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}
-          >
+            sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}>
             <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
             <Typography>{data.Deadline}</Typography>
           </Box>
@@ -65,9 +64,6 @@ const UserProfileView = () => {
   const [reviews, setReviews] = useState([]);
   const [user, setUser] = useState(null); // State to store user data
 
-
-
-
   useEffect(() => {
     // Fetch reviews for the user with ID 20
     fetch(`/api/review/user/20`)
@@ -79,16 +75,13 @@ const UserProfileView = () => {
     setValue(newValue);
   };
 
-
   useEffect(() => {
     // Fetch user data
     fetch('/api/users/20/profile')
       .then((response) => response.json())
       .then((data) => setUser(data));
-  }
-    , []);
-    console.log(user);
-
+  }, []);
+  console.log(user);
 
   return (
     <Container
@@ -96,44 +89,41 @@ const UserProfileView = () => {
       sx={
         isSmallScreen
           ? {
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
-          }
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
+            }
           : { display: 'flex', justifyContent: 'center', padding: '2rem' }
-      }
-    >
+      }>
       <Container sx={{ margin: '20px' }}>
         <Card
           sx={
             isSmallScreen
               ? {
-                borderRadius: '9px',
-                padding: '1rem',
-                maxWidth: '600px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }
+                  borderRadius: '9px',
+                  padding: '1rem',
+                  maxWidth: '600px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }
               : {
-                borderRadius: '9px',
-                padding: '1rem',
-                width: '300px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                position: 'fixed',
-              }
-          }
-        >
+                  borderRadius: '9px',
+                  padding: '1rem',
+                  width: '300px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  position: 'fixed',
+                }
+          }>
           <CardContent
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               flexWrap: 'wrap',
-            }}
-          >
+            }}>
             <Avatar
               sx={
                 isSmallScreen
@@ -147,30 +137,33 @@ const UserProfileView = () => {
             <Box sx={{ display: 'flex', marginTop: '20px' }}>
               <Typography
                 variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={isSmallScreen ? { marginRight: '20px' } : {}}
-              >
-                  {reviews.length} Reviews
+                sx={isSmallScreen ? { marginRight: '20px' } : {}}>
+                {reviews.length} Reviews
               </Typography>
-
-              <Typography
-  variant={isSmallScreen ? 'body2' : 'body1'}
-  sx={isSmallScreen ? { marginRight: '20px' } : {}}
->
-  {reviews.reduce((total, review) => total + review.rating, 0) / reviews.length} Rating
-</Typography>
 
               <Typography
                 variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={isSmallScreen ? { marginRight: '20px', whiteSpace: 'nowrap' } : {}}
-              >
-        Joined: {user?.profile?.createdAt && new Date(user.profile.createdAt).getFullYear()}
-
+                sx={isSmallScreen ? { marginRight: '20px' } : {}}>
+                {reviews.reduce((total, review) => total + review.rating, 0) /
+                  reviews.length}{' '}
+                Rating
               </Typography>
 
+              <Typography
+                variant={isSmallScreen ? 'body2' : 'body1'}
+                sx={
+                  isSmallScreen
+                    ? { marginRight: '20px', whiteSpace: 'nowrap' }
+                    : {}
+                }>
+                Joined:{' '}
+                {user?.profile?.createdAt &&
+                  new Date(user.profile.createdAt).getFullYear()}
+              </Typography>
             </Box>
           </CardContent>
         </Card>
-        {isSmallScreen && <Divider sx={{ marginTop: '40px' }} />}
+        {isSmallScreen && <Divider light sx={{ marginTop: '40px' }} />}
       </Container>
       <Container>
         <Typography variant={isSmallScreen ? 'h6' : 'h4'} gutterBottom>
@@ -179,8 +172,7 @@ const UserProfileView = () => {
         <Typography
           variant={isSmallScreen ? 'subtitle1' : 'h5'}
           fontFamily="roboto"
-          gutterBottom
-        >
+          gutterBottom>
           {user?.profile?.bio}
         </Typography>
         <Divider light />
@@ -209,36 +201,31 @@ const UserProfileView = () => {
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <ElectricalServices fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <LocalFlorist fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <LocalShipping fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <Palette fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <Build fontSize="inherit" /> +1
             </Typography>
           </Box>
@@ -249,8 +236,10 @@ const UserProfileView = () => {
           </Typography>
           <Box>
             <TabContext value={value}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <TabList onChange={handleChange} aria-label="lab API tabs example">
+              <Box>
+                <TabList
+                  onChange={handleChange}
+                  aria-label="lab API tabs example">
                   <Tab label="From Clients" value="1" />
                   <Tab label="From Workerso" value="2" />
                 </TabList>

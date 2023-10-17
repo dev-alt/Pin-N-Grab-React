@@ -6,6 +6,7 @@ import {
   Tooltip,
   Typography,
   Grid,
+  Divider,
 } from '@mui/material';
 import { LocationOn, Favorite } from '@mui/icons-material';
 import {
@@ -24,6 +25,7 @@ import {
 import locationsData from './Locations';
 import { useAuth } from '../AuthContext';
 import useJobSave from './useJobSave';
+import { Box } from '@mui/system';
 
 const getLocationName = (locationId) => {
   const location = locationsData.find((item) => item.id === locationId);
@@ -36,18 +38,17 @@ const getLocationName = (locationId) => {
 
 const cardStyle = {
   mt: 2,
-  mx: 2,
+
   mb: 2,
-  border: '1px solid #e0e0e0',
+  border: '1px solid',
   borderRadius: '8px',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  width: { xs: '80vw', sm: '40vw', md: '28vw', lg: '18vw', xl: '280px' },
 };
 
-const listItemStyle = {
-  listStyle: 'none',
+const itemStyle = {
   display: 'flex',
-  alignItems: 'center',
-  marginTop: '0.4rem',
+  alignItems: 'centre',
 };
 
 function getIconByCategoryId(categoryId) {
@@ -68,67 +69,92 @@ function getIconByCategoryId(categoryId) {
   }
 }
 
-const CardComponent = ({ job, onCardClick }) => {
+const CardComponent = ({ job, onCardClick, borderColour }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
   const { profile } = useAuth();
   const userId = profile.UserId;
   const { isSaved, toggleSaved } = useJobSave(userId, job.id);
 
   return (
-    <Card sx={cardStyle}>
+    <Card sx={{ ...cardStyle, borderColor: borderColour }}>
       <CardHeader
         onClick={() => onCardClick(job)}
         subheader={
           <Grid container direction="column">
             <Grid item container justifyContent="space-between">
-              <Grid item xs={9}>
+              <Grid item xs={12}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   {iconComponent}
                   <Typography
                     variant="h6"
                     sx={{
-                      fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' },
+                      fontSize: { xs: '1rem', md: '1.2rem' },
                       fontWeight: 600,
                       color: 'rgba(20, 8, 14, 1)',
-                    }}
-                  >
+                      marginLeft: '5px',
+                    }}>
                     {job.title}
                   </Typography>
                 </div>
+                <Divider
+                  fullwidth
+                  light
+                  sx={{ marginTop: '20px', bgcolor: borderColour }}
+                />
               </Grid>
             </Grid>
           </Grid>
         }
         sx={{
-          color: 'gray',
-          backgroundColor: '#efca08',
+          color: 'textSecondary',
         }}
       />
-      <CardContent>
-        <Grid item>
+      <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
+        <Box sx={{ ...itemStyle, marginBottom: '20px' }}>
+          <Tooltip title="Deadline">
+            <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
+          </Tooltip>
+          <Typography variant="body2">{job.deadline}</Typography>
+        </Box>
+        <Typography variant="body1">{job.description}</Typography>
+        <Box
+          sx={{
+            marginTop: '20px',
+            display: 'flex',
+            alignItems: 'centre',
+            justifyContent: 'space-between',
+          }}>
+          {/* <Grid item xs={8}> */}
+          <Box sx={itemStyle}>
+            <Tooltip title="Will get paid">
+              <PaidIcon
+                style={{
+                  marginRight: '0.5rem',
+                  fontSize: '3rem',
+                  color: borderColour,
+                }}
+              />
+            </Tooltip>
+            <Typography variant="body2" sx={{ fontSize: '2rem' }}>
+              {Math.round(job.paymentAmount)}
+            </Typography>
+          </Box>
+          {/* </Grid>
+
+          <Grid item xs={4}> */}
+
           <Favorite
-            fontSize="small"
+            fontSize="medium"
             sx={{
               cursor: 'pointer',
               color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
+              marginTop: '20px',
             }}
             onClick={toggleSaved} // Toggle the save state on click
           />
-        </Grid>
-        <ul>
-          <li style={listItemStyle}>
-            <Tooltip title="Deadline">
-              <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
-            </Tooltip>
-            <Typography variant="body2">{job.deadline}</Typography>
-          </li>
-          <li style={listItemStyle}>
-            <Tooltip title="Payment Type">
-              <PaidIcon style={{ marginRight: '0.5rem' }} />
-            </Tooltip>
-            <Typography variant="body2">{job.paymentType}</Typography>
-          </li>
-        </ul>
+
+          {/* </Grid> */}
+        </Box>
       </CardContent>
     </Card>
   );

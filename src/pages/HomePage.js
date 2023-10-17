@@ -7,6 +7,8 @@ import {
   Grow,
   useMediaQuery,
   Button,
+  Tooltip,
+  Fade,
 } from '@mui/material';
 
 import CardGrid from '../components/CardGrid';
@@ -18,7 +20,9 @@ import JobDetails from '../components/Job/JobDetails';
 import CategoryFilter from '../components/CategoryFilter';
 import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
-import UserProfileView from '../components/Profile/UserProfileView'; 
+import UserProfileView from '../components/Profile/UserProfileView';
+import { Container } from '@mui/system';
+import CardComponent from '../components/CardComponent';
 
 export function HomePage({ isLoggedIn }) {
   const [username, setUsername] = useState('');
@@ -54,7 +58,6 @@ export function HomePage({ isLoggedIn }) {
       console.error('Error when clicking a card:', error);
     }
   };
-  
 
   const handleJobDialogClose = () => {
     setSelectedJob(null);
@@ -63,12 +66,11 @@ export function HomePage({ isLoggedIn }) {
       console.log('Selected Job when closing dialog:', selectedJob);
     }, 100); // Add a small delay, e.g., 100 milliseconds
   };
-  
 
   const toggleCategory = (categoryId) => {
     if (selectedCategories.includes(categoryId)) {
       setSelectedCategories(
-        selectedCategories.filter((id) => id !== categoryId)
+        selectedCategories.filter((id) => id !== categoryId),
       );
     } else {
       setSelectedCategories([...selectedCategories, categoryId]);
@@ -129,14 +131,17 @@ export function HomePage({ isLoggedIn }) {
         <p>Welcome, {username}!</p>
       ) : (
         <Grid container justifyContent="center">
+          {/* filter box */}
           <Grid item xs={12} sm={10} md={8} lg={6}>
             <Paper
               style={{
                 padding: '1rem',
-                boxShadow: '0px 0px 15px 5px rgba(0,0,0,0.2)',
-              }}
-            >
+                boxShadow: '0px 0px 10px 1px #a6a48b',
+                borderRadius: '50px',
+                marginTop: '50px',
+              }}>
               <Grid container justifyContent="center" alignItems="center">
+                {/* category filter */}
                 <Grid item sx={{ mb: 2 }}>
                   <CategoryFilter
                     selectedCategories={selectedCategories}
@@ -145,14 +150,9 @@ export function HomePage({ isLoggedIn }) {
                   />
                 </Grid>
               </Grid>
+
               <Grid container justifyContent="center">
-                <Grid item xs={12} sm={10} md={8} lg={6}>
-                  <TextField
-                    fullWidth
-                    variant="outlined"
-                    placeholder="Search..."
-                  />
-                </Grid>
+                {/* search */}
                 <Grid item xs={12} sm={10} md={8} lg={6}>
                   <LocationSelect
                     location={selectedLocation}
@@ -160,6 +160,16 @@ export function HomePage({ isLoggedIn }) {
                     locationsData={locationsData}
                   />
                 </Grid>
+                {/* location filter */}
+                <Grid item xs={12} sm={10} md={8} lg={6}>
+                  <TextField
+                    fullWidth
+                    variant="standard"
+                    placeholder="baby sitter, garderner, handyman,etc."
+                    label="Search a job"
+                  />
+                </Grid>
+                {/* Create button */}
                 <Grid
                   item
                   xs={12}
@@ -167,59 +177,72 @@ export function HomePage({ isLoggedIn }) {
                     display: 'flex',
                     justifyContent: 'center',
                     marginTop: '1rem',
-                  }}
-                >
+                  }}>
                   <Fab
                     variant="extended"
                     color="primary"
                     onClick={openCreateJobDialog}
-                    style={{ marginTop: '1rem' }}
-                  >
-                    <AddIcon />
+                    style={{ marginTop: '1rem' }}>
+                    <Tooltip title="Create a job">
+                      <AddIcon />
+                    </Tooltip>
                   </Fab>
                 </Grid>
               </Grid>
             </Paper>
           </Grid>
+          <Container
+            sx={{
+              width: '80vw',
+              height: '300px',
+              border: '1px,solid',
+              overflow: 'auto',
+              display: 'flex',
+            }}>
+            {filteredJobListings.map((job, index) => (
+              <Box key={index} sx={{ height: 'auto' }}>
+                <CardComponent job={job} onCardClick={handleCardClick} />
+              </Box>
+            ))}
+          </Container>
+          {/* Listing Masonry */}
           <Grid item xs={12}>
-          <Button variant="outlined" onClick={openUserProfile}>
-  Open User Profile
-</Button>
+            {/* testing button */}
+            <Button variant="outlined" onClick={openUserProfile}>
+              Open User Profile
+            </Button>
             <CardGrid
               jobListings={filteredJobListings}
               onCardClick={handleCardClick}
             />
-            {/* <JobDetails job={selectedJob} open={isJobDialogOpen} onClose={handleJobDialogClose} /> */}
+            {/* Job detail dialog */}
+
             <Dialog
               open={isJobDialogOpen}
               onClose={handleJobDialogClose}
               maxWidth={isSmallScreen ? 'sm' : 'lg'}
-              fullWidth
-            >
-              <JobDetails
-                job={selectedJob}
-                onClose={handleJobDialogClose}
-              />
+              fullWidth>
+              <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
             </Dialog>
           </Grid>
+          {/* create job dialog */}
           <Dialog
             open={isCreateJobOpen}
             onClose={closeCreateJobDialog}
             TransitionComponent={Grow}
             transitionDuration={500}
             maxWidth="sm"
-            fullWidth
-          >
+            fullWidth>
             <CreateJob onClose={closeCreateJobDialog} />
           </Dialog>
+          {/* testing button dialog */}
           <Dialog
-  open={isUserProfileOpen}
-  onClose={closeUserProfile}
-  maxWidth="lg"
-  fullWidth
->
-  <UserProfileView />
-</Dialog>
+            open={isUserProfileOpen}
+            onClose={closeUserProfile}
+            maxWidth="lg"
+            fullWidth>
+            <UserProfileView />
+          </Dialog>
         </Grid>
       )}
     </Box>
