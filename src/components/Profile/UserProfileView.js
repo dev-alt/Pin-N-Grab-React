@@ -83,6 +83,8 @@ const UserProfileView = () => {
   }, []);
   console.log(user);
 
+
+
   return (
     <Container
       maxWidth="lg"
@@ -124,6 +126,9 @@ const UserProfileView = () => {
               alignItems: 'center',
               flexWrap: 'wrap',
             }}>
+              <Typography variant="h4" sx={{ marginBottom: '20px' }}>
+              {user?.username}
+              </Typography>
             <Avatar
               sx={
                 isSmallScreen

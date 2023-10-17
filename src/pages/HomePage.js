@@ -23,6 +23,7 @@ import locationsData from '../components/Locations';
 import UserProfileView from '../components/Profile/UserProfileView';
 import { Container } from '@mui/system';
 import CardComponent from '../components/CardComponent';
+import SaveJobs from '../components/Job/SavedJobs';
 
 export function HomePage({ isLoggedIn }) {
   const [username, setUsername] = useState('');
@@ -34,6 +35,7 @@ export function HomePage({ isLoggedIn }) {
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
+  const [savedJobs, setSavedJobs] = useState([]);
 
   const openUserProfile = () => {
     setIsUserProfileOpen(true);
@@ -64,7 +66,7 @@ export function HomePage({ isLoggedIn }) {
     setIsJobDialogOpen(false);
     setTimeout(() => {
       console.log('Selected Job when closing dialog:', selectedJob);
-    }, 100); 
+    }, 100);
   };
 
   const toggleCategory = (categoryId) => {
@@ -123,6 +125,7 @@ export function HomePage({ isLoggedIn }) {
 
     fetchJobListings();
   }, []);
+
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   return (
@@ -199,11 +202,7 @@ export function HomePage({ isLoggedIn }) {
               overflow: 'auto',
               display: 'flex',
             }}>
-            {filteredJobListings.map((job, index) => (
-              <Box key={index} sx={{ height: 'auto' }}>
-                <CardComponent job={job} onCardClick={handleCardClick} />
-              </Box>
-            ))}
+            <SaveJobs onCardClick={handleCardClick} />
           </Container>
           {/* Listing Masonry */}
           <Grid item xs={12}>
@@ -211,10 +210,10 @@ export function HomePage({ isLoggedIn }) {
             <Button variant="outlined" onClick={openUserProfile}>
               Open User Profile
             </Button>
-           <CardGrid
+            <CardGrid
               jobListings={filteredJobListings}
               onCardClick={handleCardClick}
-            /> 
+            />
             {/* Job detail dialog */}
 
             <Dialog
