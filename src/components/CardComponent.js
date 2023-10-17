@@ -97,7 +97,7 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
                   </Typography>
                 </div>
                 <Divider
-                  fullwidth
+                  variant="fullwidth"
                   light
                   sx={{ marginTop: '20px', bgcolor: borderColour }}
                 />

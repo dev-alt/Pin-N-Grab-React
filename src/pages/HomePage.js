@@ -64,7 +64,7 @@ export function HomePage({ isLoggedIn }) {
     setIsJobDialogOpen(false);
     setTimeout(() => {
       console.log('Selected Job when closing dialog:', selectedJob);
-    }, 100); // Add a small delay, e.g., 100 milliseconds
+    }, 100); 
   };
 
   const toggleCategory = (categoryId) => {
@@ -211,10 +211,10 @@ export function HomePage({ isLoggedIn }) {
             <Button variant="outlined" onClick={openUserProfile}>
               Open User Profile
             </Button>
-            <CardGrid
+           <CardGrid
               jobListings={filteredJobListings}
               onCardClick={handleCardClick}
-            />
+            /> 
             {/* Job detail dialog */}
 
             <Dialog
