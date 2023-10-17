@@ -27,7 +27,7 @@ const EmailInbox = ({ selectedTab, onTabChange }) => {
         ? 1
         : selectedTab === 'starred'
         ? 2
-        : 3
+        : 3,
     );
   }, [selectedTab]);
 
@@ -40,7 +40,7 @@ const EmailInbox = ({ selectedTab, onTabChange }) => {
         ? 'drafts'
         : newValue === 2
         ? 'starred'
-        : 'trash'
+        : 'trash',
     );
   };
 

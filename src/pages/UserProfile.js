@@ -129,8 +129,7 @@ export default function ProfilePage({ profile }) {
                 <Typography
                   variant="subtitle1"
                   color="textSecondary"
-                  align="center"
-                >
+                  align="center">
                   {isEditing ? (
                     <TextField
                       name="jobTitle"
@@ -146,8 +145,7 @@ export default function ProfilePage({ profile }) {
                 <Typography
                   variant="subtitle2"
                   color="textSecondary"
-                  align="center"
-                >
+                  align="center">
                   {isEditing ? (
                     <TextField
                       name="location"
@@ -174,8 +172,7 @@ export default function ProfilePage({ profile }) {
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={handleEditClick}
-                    >
+                      onClick={handleEditClick}>
                       Edit
                     </Button>
                     <Button variant="outlined" color="primary" sx={{ ml: 1 }}>

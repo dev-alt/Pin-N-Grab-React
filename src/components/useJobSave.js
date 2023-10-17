@@ -17,7 +17,7 @@ function useJobSave(userId, jobId) {
         // Send the DELETE request to unsave
         const response = await fetch(
           `/api/users/${userId}/unsaveJob/${jobId}`,
-          requestData
+          requestData,
         );
         if (response.ok) {
           console.log(`Job ${jobId} unsaved`);
@@ -29,7 +29,7 @@ function useJobSave(userId, jobId) {
         // Send the POST request to save
         const response = await fetch(
           `/api/users/${userId}/saveJob/${jobId}`,
-          requestData
+          requestData,
         );
         if (response.ok) {
           console.log(`Job ${jobId} saved`);
@@ -41,7 +41,7 @@ function useJobSave(userId, jobId) {
     } catch (error) {
       console.error(
         `An error occurred while ${isSaved ? 'unsaving' : 'saving'} the job:`,
-        error
+        error,
       );
     }
   };
