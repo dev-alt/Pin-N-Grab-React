@@ -73,7 +73,7 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
   const { profile } = useAuth();
   const userId = profile.UserId;
-  const { isSaved, toggleSaved } = useJobSave(userId, job.id);
+  const { isSaved, toggleSaved } = useJobSave(job.id);
 
   return (
     <Card sx={{ ...cardStyle, borderColor: borderColour }}>

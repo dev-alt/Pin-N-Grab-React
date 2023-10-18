@@ -23,14 +23,13 @@ import UserProfileView from '../components/Profile/UserProfileView';
 import { Container } from '@mui/system';
 import { RecentJobCard } from '../components/CardComponent';
 import RecentJob from '../components/Job/RecentJob';
-import SaveJobs from '../components/Job/SaveJobs';
 
-import Tab from '@mui/material/Tab';
+ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-export function HomePage({ isLoggedIn }) {
+export function HomePage() {
   const [username, setUsername] = useState('');
   const [jobListings, setJobListings] = useState([]);
   const [filteredJobListings, setFilteredJobListings] = useState([]);
@@ -139,10 +138,7 @@ export function HomePage({ isLoggedIn }) {
   };
 
   return (
-    <Box sx={{ mt: 5 }}>
-      {isLoggedIn ? (
-        <p>Welcome, {username}!</p>
-      ) : (
+    <Box sx={{ mt: 5 }}>      
         <Grid container justifyContent="center">
           {/* filter box */}
           <Grid item xs={12} sm={10} md={8} lg={6}>
@@ -274,7 +270,6 @@ export function HomePage({ isLoggedIn }) {
             <UserProfileView />
           </Dialog>
         </Grid>
-      )}
     </Box>
   );
 }
