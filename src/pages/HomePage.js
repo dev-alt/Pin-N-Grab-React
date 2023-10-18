@@ -23,6 +23,8 @@ import locationsData from '../components/Locations';
 import UserProfileView from '../components/Profile/UserProfileView';
 import { Container } from '@mui/system';
 import CardComponent from '../components/CardComponent';
+import RecentJob from '../components/Job/RecentJob';
+import SaveJobs from '../components/Job/SaveJobs';
 
 export function HomePage({ isLoggedIn }) {
   const [username, setUsername] = useState('');
@@ -139,6 +141,7 @@ export function HomePage({ isLoggedIn }) {
                 boxShadow: '0px 0px 10px 1px #a6a48b',
                 borderRadius: '50px',
                 marginTop: '50px',
+                paddingBottom: '50px',
               }}>
               <Grid container justifyContent="center" alignItems="center">
                 {/* category filter */}
@@ -169,28 +172,10 @@ export function HomePage({ isLoggedIn }) {
                     label="Search a job"
                   />
                 </Grid>
-                {/* Create button */}
-                <Grid
-                  item
-                  xs={12}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    marginTop: '1rem',
-                  }}>
-                  <Fab
-                    variant="extended"
-                    color="primary"
-                    onClick={openCreateJobDialog}
-                    style={{ marginTop: '1rem' }}>
-                    <Tooltip title="Create a job">
-                      <AddIcon />
-                    </Tooltip>
-                  </Fab>
-                </Grid>
               </Grid>
             </Paper>
           </Grid>
+          {/* Saved jobs*/}
           <Container
             sx={{
               width: '80vw',
@@ -199,12 +184,25 @@ export function HomePage({ isLoggedIn }) {
               overflow: 'auto',
               display: 'flex',
             }}>
-            {filteredJobListings.map((job, index) => (
-              <Box key={index} sx={{ height: 'auto' }}>
-                <CardComponent job={job} onCardClick={handleCardClick} />
-              </Box>
-            ))}
+            <SaveJobs onCardClick={handleCardClick} />
           </Container>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {/* Create button */}
+            <Fab
+              color="primary"
+              onClick={openCreateJobDialog}
+              style={{ marginTop: '1rem' }}>
+              <Tooltip title="Pin a job">
+                <AddIcon />
+              </Tooltip>
+            </Fab>
+            {/* recent listed rob */}
+            <RecentJob
+              jobs={filteredJobListings}
+              onCardClick={handleCardClick}
+            />
+          </Box>
+
           {/* Listing Masonry */}
           <Grid item xs={12}>
             {/* testing button */}

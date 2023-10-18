@@ -19,7 +19,6 @@ const CardGrid = ({ jobListings, onCardClick }) => {
 
   return (
     <Container
-      container
       sx={{
         justifyContent: 'center',
         minHeight: 393,

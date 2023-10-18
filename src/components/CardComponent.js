@@ -97,7 +97,7 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
                   </Typography>
                 </div>
                 <Divider
-                  fullwidth
+                  variant="fullwidth"
                   light
                   sx={{ marginTop: '20px', bgcolor: borderColour }}
                 />
@@ -160,4 +160,84 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
   );
 };
 
+const RecentJobCard = ({ job, onCardClick }) => {
+  const cardStyle = {
+    mt: 2,
+
+    mb: 2,
+    border: '1px solid',
+    borderRadius: '8px',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    width: { xs: '80vw', sm: '40vw', md: '28vw', lg: '18vw', xl: '280px' },
+  };
+
+  const iconComponent = getIconByCategoryId(job.category_id);
+  const { profile } = useAuth();
+  const userId = profile.UserId;
+  const { isSaved, toggleSaved } = useJobSave(userId, job.id);
+
+  return (
+    <Card
+      sx={{
+        ...cardStyle,
+        margin: '2px',
+        boxShadow: 'none',
+        border: '2px,srgba(20, 8, 14, 1)',
+        bgcolor: '#f0d646',
+      }}>
+      <CardHeader
+        onClick={() => onCardClick(job)}
+        title={
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-end',
+            }}>
+            {iconComponent}
+            <Favorite
+              fontSize="medium"
+              sx={{
+                cursor: 'pointer',
+                color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
+              }}
+              onClick={toggleSaved} // Toggle the save state on click
+            />
+          </Box>
+        }></CardHeader>
+      <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'centre',
+            marginBottom: '20px',
+          }}>
+          <Tooltip title="Deadline">
+            <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
+          </Tooltip>
+          <Typography variant="body2">{job.deadline}</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'centre',
+          }}>
+          <Tooltip title="Will get paid">
+            <PaidIcon
+              style={{
+                marginRight: '0.5rem',
+                fontSize: '3rem',
+              }}
+            />
+          </Tooltip>
+          <Typography variant="body2" sx={{ fontSize: '2rem' }}>
+            {Math.round(job.paymentAmount)}
+          </Typography>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+};
+
 export default CardComponent;
+export { RecentJobCard };

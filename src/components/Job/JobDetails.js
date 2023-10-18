@@ -272,7 +272,7 @@ const JobDetails = ({ job, onClose }) => {
                   variant="overline"
                   sx={{ marginTop: '20px' }}
                   color="#BC4B51">
-                  number people applied for this job
+                  {job.Applications?.length} want to grab this job
                 </Typography>
 
                 <Button
