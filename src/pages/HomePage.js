@@ -8,7 +8,6 @@ import {
   useMediaQuery,
   Button,
   Tooltip,
-  Fade,
 } from '@mui/material';
 
 import CardGrid from '../components/CardGrid';
@@ -22,7 +21,6 @@ import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
 import UserProfileView from '../components/Profile/UserProfileView';
 import { Container } from '@mui/system';
-import CardComponent from '../components/CardComponent';
 import SaveJobs from '../components/Job/SavedJobs';
 
 export function HomePage({ isLoggedIn }) {
@@ -35,7 +33,6 @@ export function HomePage({ isLoggedIn }) {
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
-  const [savedJobs, setSavedJobs] = useState([]);
 
   const openUserProfile = () => {
     setIsUserProfileOpen(true);
