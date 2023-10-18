@@ -14,10 +14,12 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useAuth } from '../../AuthContext'; 
 
 const defaultTheme = createTheme();
 
-export function SignIn({ handleLogin }) {
+export function SignIn() {
+  const { handleLogin } = useAuth(); // Use the handleLogin function from useAuth
   const navigate = useNavigate(); // Create a history object
   const [error, setError] = useState(null); // Create a state variable for storing errors
   const [loading, setLoading] = useState(false); // Add a loading state
@@ -58,7 +60,7 @@ export function SignIn({ handleLogin }) {
 
       setLoading(true);
       setTimeout(() => {
-        navigate(`/profile/${id}`);
+        navigate(`/`);
       }, 1000);
     } catch (error) {
       console.error('Login error:', error); // Log the error for debugging

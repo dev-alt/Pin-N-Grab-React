@@ -13,8 +13,10 @@ import { Link } from 'react-router-dom';
 import SignOutButton from '../Member/SignOut';
 import NotificationsMenu from './NotificaitonsMenu.js';
 import MailMenu from './MailMenu';
+import { useAuth } from '../../AuthContext';
 
-export function PrimarySearchAppBar({ profile, isLoggedIn }) {
+export function PrimarySearchAppBar() {
+  const { profile, isLoggedIn } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   // Check if the user account menu is open
@@ -30,25 +32,25 @@ export function PrimarySearchAppBar({ profile, isLoggedIn }) {
     setAnchorEl(null);
   };
 
-  const { id: userId } = profile; // Extract the userId from profile
+  const userId = profile?.User?.id || "user";
   const menuId = 'primary-search-account-menu';
 
   const menuItems = [
     { key: 'home', label: 'Home', link: '/' },
     { key: 'profile', label: 'Profile', link: `/profile/${userId}` },
-    { key: 'signIn', label: 'Sign In', link: '/signin' },
-    { key: 'createUser', label: 'Create User', link: '/create' },
-    { key: 'signOut', label: 'Sign Out', component: <SignOutButton /> },
+    { key: 'signIn', label: 'Sign In', link: '/signin', show: !isLoggedIn }, // Add a 'show' property
+    { key: 'createUser', label: 'Create User', link: '/create', show: !isLoggedIn }, // Add a 'show' property
+    { key: 'signOut', label: 'Sign Out', component: isLoggedIn && <SignOutButton /> },
   ];
-  const menuItemsJSX = menuItems.map((item) => (
-    <MenuItem
-      key={item.key}
-      component={Link}
-      to={item.link}
-      onClick={handleMenuClose}>
-      {item.label}
-    </MenuItem>
-  ));
+  
+  const menuItemsJSX = menuItems
+    .filter((item) => !('show' in item) || item.show) // Filter items to remove those with 'show' set to false
+    .map((item) => (
+      <MenuItem key={item.key} component={Link} to={item.link} onClick={handleMenuClose}>
+        {item.label}
+      </MenuItem>
+    ));
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -96,7 +98,8 @@ export function PrimarySearchAppBar({ profile, isLoggedIn }) {
                 aria-controls={menuId}
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
-                color="inherit">
+                color="inherit"
+              >
                 <AccountCircle />
               </IconButton>
             )}

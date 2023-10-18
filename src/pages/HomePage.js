@@ -23,10 +23,9 @@ import UserProfileView from '../components/Profile/UserProfileView';
 import { Container } from '@mui/system';
 import CardComponent from '../components/CardComponent';
 import RecentJob from '../components/Job/RecentJob';
-import SaveJobs from '../components/Job/SaveJobs';
-import SaveJobs from '../components/Job/SavedJobs';
+ import SaveJobs from '../components/Job/SavedJobs';
 
-export function HomePage({ isLoggedIn }) {
+export function HomePage() {
   const [username, setUsername] = useState('');
   const [jobListings, setJobListings] = useState([]);
   const [filteredJobListings, setFilteredJobListings] = useState([]);
@@ -129,10 +128,7 @@ export function HomePage({ isLoggedIn }) {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   return (
-    <Box sx={{ mt: 5 }}>
-      {isLoggedIn ? (
-        <p>Welcome, {username}!</p>
-      ) : (
+    <Box sx={{ mt: 5 }}>      
         <Grid container justifyContent="center">
           {/* filter box */}
           <Grid item xs={12} sm={10} md={8} lg={6}>
@@ -243,7 +239,6 @@ export function HomePage({ isLoggedIn }) {
             <UserProfileView />
           </Dialog>
         </Grid>
-      )}
     </Box>
   );
 }

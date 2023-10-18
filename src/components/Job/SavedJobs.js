@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid } from '@mui/material';
+import { /* other imports */ } from '@mui/material';
 import { useAuth } from '../../AuthContext';
 import CardComponent from '../CardComponent'; 
 import { Container } from '@mui/system';
@@ -14,7 +14,7 @@ export function SaveJobs( {onCardClick} ) {
     // Fetch saved jobs from the server
     const fetchSavedJobs = async () => {
       try {
-        const response = await fetch(`/api/jobs/all`);
+        const response = await fetch(`/api/jobs/saved/${userId}`);
         if (response.ok) {
           const data = await response.json();
           setSavedJobs(data);
@@ -30,13 +30,10 @@ export function SaveJobs( {onCardClick} ) {
   }, [userId]); 
 
   return (
-
     <Container>
-    <Grid container spacing={2}>
-{savedJobs.slice(0, 6).map((data) => (
-  <CardComponent key={data.id} job={data} onCardClick={onCardClick} />
-))}
-</Grid>
+      {savedJobs.map((data) => (
+        <CardComponent key={data.id} job={data.Job} onCardClick={onCardClick} />
+      ))}
     </Container>
   );
 }
