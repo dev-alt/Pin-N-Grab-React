@@ -273,6 +273,7 @@ const JobDetails = ({ job, onClose }) => {
                   sx={{ marginTop: '20px' }}
                   color="#BC4B51">
                   {job.Applications?.length} want to grab this job
+                    Number of Applicants {job.Applications?.length}
                 </Typography>
 
                 <Button
