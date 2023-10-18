@@ -82,7 +82,7 @@ export function PrimarySearchAppBar({ profile, isLoggedIn }) {
               fontFamily: 'Tilt Neon',
               fontSize: { xs: '1rem', md: '2rem' },
             }}>
-            MahiBoard
+            Pin'n Grab
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           {/* Desktop menu (notifications, mail, user account) */}
