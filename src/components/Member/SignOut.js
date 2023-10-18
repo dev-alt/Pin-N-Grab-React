@@ -12,8 +12,6 @@ function SignOutButton() {
     console.log('Sign-out button clicked.');
     navigate('/signin');
   };
-  
-  
 
   return <Button onClick={signOut}>Sign Out</Button>;
 }

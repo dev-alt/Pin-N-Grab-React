@@ -40,7 +40,7 @@ function LoadingScreen() {
 }
 
 function App() {
-  const { isLoggedIn, handleLogin,  } = useAuth();
+  const { isLoggedIn, handleLogin } = useAuth();
   const theme = createTheme(themeOptions);
   const isUserAuthenticated = isLoggedIn;
   const [loading, setLoading] = useState(true);

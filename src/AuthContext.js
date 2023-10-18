@@ -32,7 +32,6 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('profile');
     setProfile(null);
   };
-  
 
   return (
     <AuthContext.Provider

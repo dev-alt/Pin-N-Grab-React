@@ -202,8 +202,16 @@ export function HomePage() {
                     onChange={handleChange}
                     aria-label="slider container"
                   >
-                    <Tab label="Most Recent Pinned" value="1" />
-                    <Tab label="Saved Jobs" value="2" />
+                    <Tab
+                      label="Most Recent Pinned"
+                      value="1"
+                      sx={{ color: '#c7a602', fontWeight: 'bolder' }}
+                    />
+                    <Tab
+                      label="Saved Jobs"
+                      value="2"
+                      sx={{ color: '#c7a602', fontWeight: 'bolder' }}
+                    />
                   </TabList>
                 </Box>
                 <TabPanel value="1">
