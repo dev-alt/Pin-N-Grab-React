@@ -1,53 +1,92 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 import { SignIn } from './components/Member/SignIn';
 import { HomePage } from './pages/HomePage';
 import { CreateUser } from './pages/CreateUser';
-import React, { useState } from 'react';
 import { PrimarySearchAppBar } from './components/NavBar/NavMenu';
 import Profile from './pages/UserProfile';
-import { Navigate } from 'react-router-dom';
 import Email from './pages/Email';
-import { useAuth } from './AuthContext'; // Import useAuth
+import { useAuth } from './AuthContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Container, CircularProgress, Typography } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import { themeOptions } from './Theme';
 
-function App() {
-  const { isLoggedIn, handleLogin } = useAuth();
-  const [profile] = useState(JSON.parse(localStorage.getItem('profile')));
+function LoadingScreen() {
   const theme = createTheme(themeOptions);
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <Container
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress color="primary" size={100} thickness={2} />
+        <Typography variant="h6" style={{ marginTop: 20 }}>
+          Loading...
+        </Typography>
+      </Container>
+    </ThemeProvider>
+  );
+}
+
+function App() {
+  const { isLoggedIn, handleLogin } = useAuth();
+  const theme = createTheme(themeOptions);
+  const isUserAuthenticated = isLoggedIn;
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log('isUserAuthenticated:', isUserAuthenticated);
+    console.log('isLoggedIn:', isLoggedIn);
+  }, [isUserAuthenticated, isLoggedIn]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 400);
+
+    // Clean up the timeout to prevent memory leaks
+    return () => clearTimeout();
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  return (
+    <ThemeProvider theme={theme}>
       <Router>
-        {profile && (
-          <PrimarySearchAppBar profile={profile} isLoggedIn={isLoggedIn} />
-        )}
+        <PrimarySearchAppBar />
         <Routes>
           <Route
             path="/"
-            element={isLoggedIn ? <HomePage /> : <Navigate to="/signin" />}
+            element={isUserAuthenticated ? <HomePage /> : <Navigate to="/signin" />}
           />
-          {(!isLoggedIn && (
-            <>
-              <Route
-                path="/signin"
-                element={<SignIn handleLogin={handleLogin} />}
-              />
-              <Route path="/create" element={<CreateUser />} />
-            </>
-          )) ||
-            null}
-          {isLoggedIn && (
-            <>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/email" element={<Email />} />
-              <Route
-                path="/profile/:id"
-                element={<Profile profile={profile} />}
-              />
-            </>
+          {!isUserAuthenticated && (
+            <Route path="/signin" element={<SignIn handleLogin={handleLogin} />} />
+          )}
+          {!isUserAuthenticated && (
+            <Route path="/create" element={<CreateUser />} />
+          )}
+          {isUserAuthenticated && (
+            <Route path="/email" element={<Email />} />
+          )}
+          {isUserAuthenticated && (
+            <Route
+              path="/profile/:id"
+              element={isUserAuthenticated ? <Profile /> : null}
+            />
           )}
         </Routes>
       </Router>

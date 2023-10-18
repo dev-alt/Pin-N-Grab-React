@@ -5,47 +5,34 @@ import {
   Typography,
   Button,
   TextField,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Paper,
   Avatar,
   IconButton,
-  Breadcrumbs,
-  Link,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../AuthContext';
+
 const defaultTheme = createTheme();
 
-export default function ProfilePage({ profile }) {
+export default function ProfilePage() {
+  const { profile } = useAuth();
   const { id } = useParams();
-  console.log('Profile prop in ProfilePage:', profile);
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfile, setEditedProfile] = useState({ ...profile });
-  const [userProfile, setUserProfile] = useState(profile);
+
+  const { bio, dateOfBirth, gender } = editedProfile;
+  const { user } = profile;
+  const { email, firstName, lastName } = user;
 
   const handleEditClick = () => {
     setIsEditing(true);
   };
-
-  // State variables for all fields
-  const [bio, setBio] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [gender, setGender] = useState('');
-  const [socialMediaLinks, setSocialMediaLinks] = useState({});
-  const [address, setAddress] = useState('');
-  const [profilePicture, setProfilePicture] = useState('');
-  const [website, setWebsite] = useState('');
-  const [saveError, setSaveError] = useState(null);
 
   const handleSaveClick = async () => {
     try {
@@ -54,27 +41,11 @@ export default function ProfilePage({ profile }) {
         bio,
         dateOfBirth,
         gender,
-        socialMediaLinks,
-        address,
-        profilePicture,
-        website,
       });
       // Disable editing mode after successful update
-      setEditedProfile(false);
-      // Update the userProfile state with the new data
-      setUserProfile({
-        ...userProfile,
-        bio,
-        dateOfBirth,
-        gender,
-        socialMediaLinks,
-        address,
-        profilePicture,
-        website,
-      });
+      setIsEditing(false);
     } catch (error) {
       console.error(error);
-      setSaveError('Error updating profile.');
     }
   };
 
@@ -95,22 +66,7 @@ export default function ProfilePage({ profile }) {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Container>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Typography variant="h5" gutterBottom>
-              <Breadcrumbs aria-label="breadcrumb">
-                <Link color="inherit" href="#">
-                  Home
-                </Link>
-                <Link color="inherit" href="#">
-                  User
-                </Link>
-                <Typography color="textPrimary">User Profile</Typography>
-              </Breadcrumbs>
-            </Typography>
-          </Grid>
-        </Grid>
+      <Container sx={{ mt: 10 }}>
         <Grid container spacing={3}>
           <Grid item lg={4}>
             <Paper elevation={3} style={{ padding: '16px' }}>
@@ -126,10 +82,7 @@ export default function ProfilePage({ profile }) {
                 />
               </Grid>
               <Grid>
-                <Typography
-                  variant="subtitle1"
-                  color="textSecondary"
-                  align="center">
+                <Typography variant="subtitle1" color="textSecondary" align="center">
                   {isEditing ? (
                     <TextField
                       name="jobTitle"
@@ -137,55 +90,10 @@ export default function ProfilePage({ profile }) {
                       onChange={handleInputChange}
                     />
                   ) : (
-                    profile.jobTitle || 'empty'
+                    profile.username || 'empty'
                   )}
                 </Typography>
               </Grid>
-              <Grid>
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  align="center">
-                  {isEditing ? (
-                    <TextField
-                      name="location"
-                      value={editedProfile.location}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    profile.location || 'empty'
-                  )}
-                </Typography>
-              </Grid>
-              <Grid container justifyContent="center" mt={2}>
-                {isEditing ? (
-                  <>
-                    <IconButton onClick={handleSaveClick} color="primary">
-                      <SaveIcon />
-                    </IconButton>
-                    <IconButton onClick={handleCancelClick} color="secondary">
-                      <CancelIcon />
-                    </IconButton>
-                  </>
-                ) : (
-                  <>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleEditClick}>
-                      Edit
-                    </Button>
-                    <Button variant="outlined" color="primary" sx={{ ml: 1 }}>
-                      Message
-                    </Button>
-                  </>
-                )}
-              </Grid>
-            </Paper>
-            <Paper elevation={3} style={{ marginTop: '16px', padding: '16px' }}>
-              <Typography variant="subtitle1" color="textSecondary">
-                Social Media Links
-              </Typography>
             </Paper>
           </Grid>
           <Grid item lg={8}>
@@ -203,7 +111,7 @@ export default function ProfilePage({ profile }) {
                 <Grid item xs={12} sm={6}>
                   <Typography variant="body1">Email</Typography>
                   <Typography variant="body2" color="textSecondary">
-                    {profile.email || 'empty'}
+                    {email || 'empty'}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -212,11 +120,11 @@ export default function ProfilePage({ profile }) {
                     {isEditing ? (
                       <TextField
                         name="firstName"
-                        value={editedProfile.firstName}
+                        value={firstName}
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.firstName || 'empty'
+                      firstName || 'empty'
                     )}
                   </Typography>
                 </Grid>
@@ -226,11 +134,11 @@ export default function ProfilePage({ profile }) {
                     {isEditing ? (
                       <TextField
                         name="lastName"
-                        value={editedProfile.lastName}
+                        value={lastName}
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.lastName
+                      lastName
                     )}
                   </Typography>
                 </Grid>
@@ -240,11 +148,11 @@ export default function ProfilePage({ profile }) {
                     {isEditing ? (
                       <TextField
                         name="bio"
-                        value={editedProfile.bio}
+                        value={bio}
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.bio || 'empty'
+                      profile.profile.bio
                     )}
                   </Typography>
                 </Grid>
@@ -254,68 +162,25 @@ export default function ProfilePage({ profile }) {
                     {isEditing ? (
                       <TextField
                         name="dateOfBirth"
-                        value={editedProfile.dateOfBirth}
+                        value={dateOfBirth}
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.dateOfBirth || 'empty'
+                      profile.profile.dateOfBirth || 'empty'
                     )}
                   </Typography>
                 </Grid>
-                {/* Add fields from UserProfile model */}
                 <Grid item xs={12} sm={6}>
                   <Typography variant="body1">Gender</Typography>
                   <Typography variant="body2" color="textSecondary">
                     {isEditing ? (
                       <TextField
                         name="gender"
-                        value={editedProfile.gender}
+                        value={gender}
                         onChange={handleInputChange}
                       />
                     ) : (
-                      profile.gender || 'empty'
-                    )}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">Address</Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {isEditing ? (
-                      <TextField
-                        name="address"
-                        value={editedProfile.address}
-                        onChange={handleInputChange}
-                      />
-                    ) : (
-                      profile.address || 'empty'
-                    )}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">Profile Picture</Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {isEditing ? (
-                      <TextField
-                        name="profilePicture"
-                        value={editedProfile.profilePicture}
-                        onChange={handleInputChange}
-                      />
-                    ) : (
-                      profile.profilePicture || 'empty'
-                    )}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">Website</Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {isEditing ? (
-                      <TextField
-                        name="website"
-                        value={editedProfile.website}
-                        onChange={handleInputChange}
-                      />
-                    ) : (
-                      profile.website || 'empty'
+                      profile.profile.gender || 'empty'
                     )}
                   </Typography>
                 </Grid>
@@ -326,6 +191,24 @@ export default function ProfilePage({ profile }) {
                 Recent Job Postings
               </Typography>
             </Paper>
+          </Grid>
+          <Grid container justifyContent="center" mt={2}>
+            {isEditing ? (
+              <>
+                <IconButton onClick={handleSaveClick} color="primary">
+                  <SaveIcon />
+                </IconButton>
+                <IconButton onClick={handleCancelClick} color="secondary">
+                  <CancelIcon />
+                </IconButton>
+              </>
+            ) : (
+              <>
+                <Button variant="contained" color="primary" onClick={handleEditClick}>
+                  Edit
+                </Button>
+              </>
+            )}
           </Grid>
         </Grid>
       </Container>
