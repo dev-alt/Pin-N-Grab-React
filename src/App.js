@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -13,13 +13,56 @@ import Profile from './pages/UserProfile';
 import Email from './pages/Email';
 import { useAuth } from './AuthContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Container, CircularProgress, Typography } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import { themeOptions } from './Theme';
+
+function LoadingScreen() {
+  const theme = createTheme(themeOptions);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Container
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress color="primary" size={100} thickness={2} />
+        <Typography variant="h6" style={{ marginTop: 20 }}>
+          Loading...
+        </Typography>
+      </Container>
+    </ThemeProvider>
+  );
+}
 
 function App() {
   const { isLoggedIn, handleLogin } = useAuth();
   const theme = createTheme(themeOptions);
   const isUserAuthenticated = isLoggedIn;
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log('isUserAuthenticated:', isUserAuthenticated);
+    console.log('isLoggedIn:', isLoggedIn);
+  }, [isUserAuthenticated, isLoggedIn]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 400);
+
+    // Clean up the timeout to prevent memory leaks
+    return () => clearTimeout();
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <ThemeProvider theme={theme}>

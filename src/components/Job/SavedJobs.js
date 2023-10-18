@@ -6,9 +6,8 @@ import { Container } from '@mui/system';
 
 export function SaveJobs( {onCardClick} ) {
   const { profile } = useAuth();
-  const userId = profile ? profile.UserId : null;
+  const userId = profile.profile.UserId;
   const [savedJobs, setSavedJobs] = useState([]);
-
 
   useEffect(() => {
     // Fetch saved jobs from the server
