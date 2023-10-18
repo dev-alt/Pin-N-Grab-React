@@ -22,9 +22,14 @@ import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
 import UserProfileView from '../components/Profile/UserProfileView';
 import { Container } from '@mui/system';
-import CardComponent from '../components/CardComponent';
+import { RecentJobCard } from '../components/CardComponent';
 import RecentJob from '../components/Job/RecentJob';
 import SaveJobs from '../components/Job/SaveJobs';
+
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 export function HomePage({ isLoggedIn }) {
   const [username, setUsername] = useState('');
@@ -127,6 +132,12 @@ export function HomePage({ isLoggedIn }) {
   }, []);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
+  const [value, setValue] = useState('1');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <Box sx={{ mt: 5 }}>
       {isLoggedIn ? (
@@ -175,33 +186,54 @@ export function HomePage({ isLoggedIn }) {
               </Grid>
             </Paper>
           </Grid>
-          {/* Saved jobs*/}
-          <Container
-            sx={{
-              width: '80vw',
-              height: '300px',
-              border: '1px,solid',
-              overflow: 'auto',
-              display: 'flex',
-            }}>
-            <SaveJobs onCardClick={handleCardClick} />
-          </Container>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            {/* Create button */}
-            <Fab
-              color="primary"
-              onClick={openCreateJobDialog}
-              style={{ marginTop: '1rem' }}>
-              <Tooltip title="Pin a job">
-                <AddIcon />
-              </Tooltip>
-            </Fab>
-            {/* recent listed rob */}
-            <RecentJob
-              jobs={filteredJobListings}
-              onCardClick={handleCardClick}
-            />
-          </Box>
+          <Grid item xs={12} sx={{ justifyItems: 'center' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+
+                // bgcolor: '#000000',
+              }}>
+              {/* Create button */}
+              <Fab
+                color="primary"
+                onClick={openCreateJobDialog}
+                style={{ marginTop: '1rem' }}>
+                <Tooltip title="Pin a job">
+                  <AddIcon />
+                </Tooltip>
+              </Fab>
+              
+              <Box
+                sx={{
+                  typography: 'subtitle1',
+                  // color: 'rgba(20, 8, 14, 1)',
+                }}>
+                <TabContext value={value}>
+                  <Box sx={{ marginBottom: '-20px' }}>
+                    <TabList
+                      onChange={handleChange}
+                      aria-label="slider container">
+                      <Tab label="Most Recent Pinned" text value="1" />
+                      <Tab label="Saved Jobs" value="2" />
+                    </TabList>
+                  </Box>
+                  <TabPanel value="1">
+                    {/* recent listed rob */}
+                    <RecentJob
+                      jobs={filteredJobListings}
+                      onCardClick={handleCardClick}
+                    />
+                  </TabPanel>
+                  <TabPanel value="2">
+                    {/* Saved jobs*/}
+                    <SaveJobs onCardClick={handleCardClick} />
+                  </TabPanel>
+                </TabContext>
+              </Box>
+            </Box>
+          </Grid>
 
           {/* Listing Masonry */}
           <Grid item xs={12}>

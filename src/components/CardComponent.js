@@ -160,7 +160,7 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
   );
 };
 
-const RecentJobCard = ({ job, onCardClick }) => {
+const PickJobCard = ({ job, onCardClick }) => {
   const cardStyle = {
     mt: 2,
 
@@ -168,7 +168,7 @@ const RecentJobCard = ({ job, onCardClick }) => {
     border: '1px solid',
     borderRadius: '8px',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    width: { xs: '80vw', sm: '40vw', md: '28vw', lg: '18vw', xl: '280px' },
+    width: { xs: '100px', md: '180px', lg: '200px' },
   };
 
   const iconComponent = getIconByCategoryId(job.category_id);
@@ -184,9 +184,9 @@ const RecentJobCard = ({ job, onCardClick }) => {
         boxShadow: 'none',
         border: '2px,srgba(20, 8, 14, 1)',
         bgcolor: '#f0d646',
+        height: { xs: '180px', md: 'auto' },
       }}>
       <CardHeader
-        onClick={() => onCardClick(job)}
         title={
           <Box
             sx={{
@@ -205,7 +205,9 @@ const RecentJobCard = ({ job, onCardClick }) => {
             />
           </Box>
         }></CardHeader>
-      <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
+      <CardContent
+        onClick={() => onCardClick(job)}
+        sx={{ marginLeft: '5px', marginRight: '5px' }}>
         <Box
           sx={{
             display: 'flex',
@@ -224,13 +226,25 @@ const RecentJobCard = ({ job, onCardClick }) => {
           }}>
           <Tooltip title="Will get paid">
             <PaidIcon
-              style={{
+              sx={{
                 marginRight: '0.5rem',
-                fontSize: '3rem',
+                fontSize: {
+                  sm: '1.4rem',
+                  md: '1.8rem',
+                  lg: '3rem',
+                },
               }}
             />
           </Tooltip>
-          <Typography variant="body2" sx={{ fontSize: '2rem' }}>
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: {
+                sm: '1rem',
+                md: '1.2rem',
+                lg: '2rem',
+              },
+            }}>
             {Math.round(job.paymentAmount)}
           </Typography>
         </Box>
@@ -240,4 +254,4 @@ const RecentJobCard = ({ job, onCardClick }) => {
 };
 
 export default CardComponent;
-export { RecentJobCard };
+export { PickJobCard };
