@@ -24,7 +24,6 @@ import { Container } from '@mui/system';
 import { RecentJobCard } from '../components/CardComponent';
 import RecentJob from '../components/Job/RecentJob';
 import SaveJobs from '../components/Job/SaveJobs';
-import SaveJobs from '../components/Job/SavedJobs';
 
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -205,7 +204,7 @@ export function HomePage({ isLoggedIn }) {
                   <AddIcon />
                 </Tooltip>
               </Fab>
-              
+
               <Box
                 sx={{
                   typography: 'subtitle1',
