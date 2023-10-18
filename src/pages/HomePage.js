@@ -186,7 +186,7 @@ export function HomePage({ isLoggedIn }) {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item xs={12} sx={{ justifyItems: 'center' }}>
+          <Grid item xs={12}>
             <Box
               sx={{
                 display: 'flex',
@@ -215,8 +215,16 @@ export function HomePage({ isLoggedIn }) {
                     <TabList
                       onChange={handleChange}
                       aria-label="slider container">
-                      <Tab label="Most Recent Pinned" text value="1" />
-                      <Tab label="Saved Jobs" value="2" />
+                      <Tab
+                        label="Most Recent Pinned"
+                        style={{ color: '#c7a602', fontWeight: 'bolder' }}
+                        value="1"
+                      />
+                      <Tab
+                        label="Saved Jobs"
+                        value="2"
+                        style={{ color: '#c7a602', fontWeight: 'bolder' }}
+                      />
                     </TabList>
                   </Box>
                   <TabPanel value="1">

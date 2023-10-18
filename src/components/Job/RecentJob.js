@@ -46,7 +46,6 @@ const RecentJob = ({ jobs, onCardClick }) => {
   return (
     <div
       style={{
-        width: '80vw',
         display: 'flex',
       }}>
       {/* Content */}

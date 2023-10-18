@@ -66,9 +66,7 @@ export function SaveJobs({ onCardClick, jobs }) {
   return (
     <div
       style={{
-        width: '80vw',
         display: 'flex',
-        border: '2px, solid,#fc0317 ',
       }}>
       {/* title */}
 
