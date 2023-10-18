@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  IconButton,
-  Typography,
-  Stack,
-} from '@mui/material';
+import { Box, IconButton, Typography, Stack } from '@mui/material';
 import { RecentJobCard } from '../CardComponent';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -30,7 +25,8 @@ const RecentJob = ({ jobs, onCardClick }) => {
         borderColor: 'rgba(20, 8, 14, 1)',
         borderWidth: '10px',
         borderStyle: 'solide',
-      }}>
+      }}
+    >
       <Stack>
         {/* title */}
         <Typography variant="h6">
@@ -45,7 +41,8 @@ const RecentJob = ({ jobs, onCardClick }) => {
               disabled={currentPage === 1}
               aria-label="Previous Page"
               aria-disabled={currentPage === 1}
-              sx={{ height: '20px' }}>
+              sx={{ height: '20px' }}
+            >
               <ChevronLeftIcon />
             </IconButton>
           </Box>
@@ -60,7 +57,8 @@ const RecentJob = ({ jobs, onCardClick }) => {
               disabled={indexOfLastItem >= jobs.length}
               aria-label="Next Page"
               aria-disabled={indexOfLastItem >= jobs.length}
-              sx={{ height: '20px' }}>
+              sx={{ height: '20px' }}
+            >
               <ChevronRightIcon />
             </IconButton>
           </Box>

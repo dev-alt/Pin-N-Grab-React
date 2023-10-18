@@ -40,7 +40,7 @@ function LoadingScreen() {
 }
 
 function App() {
-  const { isLoggedIn, handleLogin } = useAuth();
+  const { isLoggedIn, handleLogin,  } = useAuth();
   const theme = createTheme(themeOptions);
   const isUserAuthenticated = isLoggedIn;
   const [loading, setLoading] = useState(true);
@@ -70,17 +70,20 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={isUserAuthenticated ? <HomePage /> : <Navigate to="/signin" />}
+            element={
+              isUserAuthenticated ? <HomePage /> : <Navigate to="/signin" />
+            }
           />
           {!isUserAuthenticated && (
-            <Route path="/signin" element={<SignIn handleLogin={handleLogin} />} />
+            <Route
+              path="/signin"
+              element={<SignIn handleLogin={handleLogin} />}
+            />
           )}
           {!isUserAuthenticated && (
             <Route path="/create" element={<CreateUser />} />
           )}
-          {isUserAuthenticated && (
-            <Route path="/email" element={<Email />} />
-          )}
+          {isUserAuthenticated && <Route path="/email" element={<Email />} />}
           {isUserAuthenticated && (
             <Route
               path="/profile/:id"

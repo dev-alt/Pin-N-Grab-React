@@ -1,4 +1,4 @@
-import React, { } from 'react'; // Import useState
+import React from 'react'; // Import useState
 import {
   Card,
   CardContent,
@@ -9,10 +9,7 @@ import {
   Divider,
 } from '@mui/material';
 import { Favorite } from '@mui/icons-material';
-import {
-  CalendarMonth,
-  Paid,
-} from '@mui/icons-material';
+import { CalendarMonth, Paid } from '@mui/icons-material';
 import {
   ElectricalServices,
   LocalFlorist,
@@ -23,8 +20,6 @@ import {
 import { useAuth } from '../AuthContext';
 import useJobSave from './useJobSave';
 import { Box } from '@mui/system';
-
-
 
 const cardStyle = {
   mt: 2,
@@ -80,7 +75,8 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
                       fontWeight: 600,
                       color: 'rgba(20, 8, 14, 1)',
                       marginLeft: '5px',
-                    }}>
+                    }}
+                  >
                     {job.title}
                   </Typography>
                 </div>
@@ -111,7 +107,8 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
             display: 'flex',
             alignItems: 'centre',
             justifyContent: 'space-between',
-          }}>
+          }}
+        >
           {/* <Grid item xs={8}> */}
           <Box sx={itemStyle}>
             <Tooltip title="Will get paid">
@@ -162,7 +159,7 @@ const RecentJobCard = ({ job, onCardClick }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
   const { profile } = useAuth();
   const userId = profile.UserId;
-  const { isSaved, toggleSaved } = useJobSave(userId, job.id);
+  const { isSaved, toggleSaved } = useJobSave(job.id);
 
   return (
     <Card
@@ -172,7 +169,8 @@ const RecentJobCard = ({ job, onCardClick }) => {
         boxShadow: 'none',
         border: '2px,srgba(20, 8, 14, 1)',
         bgcolor: '#f0d646',
-      }}>
+      }}
+    >
       <CardHeader
         onClick={() => onCardClick(job)}
         title={
@@ -181,7 +179,8 @@ const RecentJobCard = ({ job, onCardClick }) => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'flex-end',
-            }}>
+            }}
+          >
             {iconComponent}
             <Favorite
               fontSize="medium"
@@ -192,14 +191,16 @@ const RecentJobCard = ({ job, onCardClick }) => {
               onClick={toggleSaved} // Toggle the save state on click
             />
           </Box>
-        }></CardHeader>
+        }
+      ></CardHeader>
       <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
         <Box
           sx={{
             display: 'flex',
             alignItems: 'centre',
             marginBottom: '20px',
-          }}>
+          }}
+        >
           <Tooltip title="Deadline">
             <CalendarMonth style={{ marginRight: '0.5rem' }} />
           </Tooltip>
@@ -209,7 +210,8 @@ const RecentJobCard = ({ job, onCardClick }) => {
           sx={{
             display: 'flex',
             alignItems: 'centre',
-          }}>
+          }}
+        >
           <Tooltip title="Will get paid">
             <Paid
               style={{

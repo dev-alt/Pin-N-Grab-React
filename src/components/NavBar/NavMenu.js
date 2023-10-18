@@ -32,21 +32,35 @@ export function PrimarySearchAppBar() {
     setAnchorEl(null);
   };
 
-  const userId = profile?.User?.id || "user";
+  const userId = profile?.User?.id || 'user';
   const menuId = 'primary-search-account-menu';
 
   const menuItems = [
     { key: 'home', label: 'Home', link: '/' },
     { key: 'profile', label: 'Profile', link: `/profile/${userId}` },
     { key: 'signIn', label: 'Sign In', link: '/signin', show: !isLoggedIn }, // Add a 'show' property
-    { key: 'createUser', label: 'Create User', link: '/create', show: !isLoggedIn }, // Add a 'show' property
-    { key: 'signOut', label: 'Sign Out', component: isLoggedIn && <SignOutButton /> },
+    {
+      key: 'createUser',
+      label: 'Create User',
+      link: '/create',
+      show: !isLoggedIn,
+    }, // Add a 'show' property
+    {
+      key: 'signOut',
+      label: 'Sign Out',
+      component: isLoggedIn && <SignOutButton />,
+    },
   ];
-  
+
   const menuItemsJSX = menuItems
     .filter((item) => !('show' in item) || item.show) // Filter items to remove those with 'show' set to false
     .map((item) => (
-      <MenuItem key={item.key} component={Link} to={item.link} onClick={handleMenuClose}>
+      <MenuItem
+        key={item.key}
+        component={Link}
+        to={item.link}
+        onClick={handleMenuClose}
+      >
         {item.label}
       </MenuItem>
     ));
@@ -65,7 +79,8 @@ export function PrimarySearchAppBar() {
         horizontal: 'right',
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}>
+      onClose={handleMenuClose}
+    >
       {menuItemsJSX}
     </Menu>
   );
@@ -83,7 +98,8 @@ export function PrimarySearchAppBar() {
               display: { sm: 'block' },
               fontFamily: 'Tilt Neon',
               fontSize: { xs: '1rem', md: '2rem' },
-            }}>
+            }}
+          >
             Pin'n Grab
           </Typography>
           <Box sx={{ flexGrow: 1 }} />

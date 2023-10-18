@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { /* other imports */ } from '@mui/material';
+import /* other imports */ '@mui/material';
 import { useAuth } from '../../AuthContext';
-import CardComponent from '../CardComponent'; 
+import CardComponent from '../CardComponent';
 import { Container } from '@mui/system';
 
-export function SaveJobs( {onCardClick} ) {
+export function SaveJobs({ onCardClick }) {
   const { profile } = useAuth();
   const userId = profile.profile.UserId;
   const [savedJobs, setSavedJobs] = useState([]);
@@ -26,7 +26,7 @@ export function SaveJobs( {onCardClick} ) {
       }
     };
     fetchSavedJobs();
-  }, [userId]); 
+  }, [userId]);
 
   return (
     <Container>

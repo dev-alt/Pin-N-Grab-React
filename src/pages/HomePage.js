@@ -22,7 +22,7 @@ import locationsData from '../components/Locations';
 import UserProfileView from '../components/Profile/UserProfileView';
 import RecentJob from '../components/Job/RecentJob';
 import SaveJobs from '../components/Job/SavedJobs';
- import Tab from '@mui/material/Tab';
+import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
@@ -101,7 +101,6 @@ export function HomePage() {
   };
 
   useEffect(() => {
-  
     // Fetch job listings from the server
     const fetchJobListings = async () => {
       try {
@@ -130,134 +129,141 @@ export function HomePage() {
   };
 
   return (
-    <Box sx={{ mt: 5 }}>      
-        <Grid container justifyContent="center">
-          {/* filter box */}
-          <Grid item xs={12} sm={10} md={8} lg={6}>
-            <Paper
-              style={{
-                padding: '1rem',
-                boxShadow: '0px 0px 10px 1px #a6a48b',
-                borderRadius: '50px',
-                marginTop: '50px',
-                paddingBottom: '50px',
-              }}>
-              <Grid container justifyContent="center" alignItems="center">
-                {/* category filter */}
-                <Grid item sx={{ mb: 2 }}>
-                  <CategoryFilter
-                    selectedCategories={selectedCategories}
-                    toggleCategory={toggleCategory}
-                    handleClearFilters={handleClearFilters}
-                  />
-                </Grid>
+    <Box sx={{ mt: 5 }}>
+      <Grid container justifyContent="center">
+        {/* filter box */}
+        <Grid item xs={12} sm={10} md={8} lg={6}>
+          <Paper
+            style={{
+              padding: '1rem',
+              boxShadow: '0px 0px 10px 1px #a6a48b',
+              borderRadius: '50px',
+              marginTop: '50px',
+              paddingBottom: '50px',
+            }}
+          >
+            <Grid container justifyContent="center" alignItems="center">
+              {/* category filter */}
+              <Grid item sx={{ mb: 2 }}>
+                <CategoryFilter
+                  selectedCategories={selectedCategories}
+                  toggleCategory={toggleCategory}
+                  handleClearFilters={handleClearFilters}
+                />
               </Grid>
+            </Grid>
 
-              <Grid container justifyContent="center">
-                {/* search */}
-                <Grid item xs={12} sm={10} md={8} lg={6}>
-                  <LocationSelect
-                    location={selectedLocation}
-                    onChange={(e) => setSelectedLocation(e.target.value)}
-                    locationsData={locationsData}
-                  />
-                </Grid>
-                {/* location filter */}
-                <Grid item xs={12} sm={10} md={8} lg={6}>
-                  <TextField
-                    fullWidth
-                    variant="standard"
-                    placeholder="baby sitter, garderner, handyman,etc."
-                    label="Search a job"
-                  />
-                </Grid>
+            <Grid container justifyContent="center">
+              {/* search */}
+              <Grid item xs={12} sm={10} md={8} lg={6}>
+                <LocationSelect
+                  location={selectedLocation}
+                  onChange={(e) => setSelectedLocation(e.target.value)}
+                  locationsData={locationsData}
+                />
               </Grid>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sx={{ justifyItems: 'center' }}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+              {/* location filter */}
+              <Grid item xs={12} sm={10} md={8} lg={6}>
+                <TextField
+                  fullWidth
+                  variant="standard"
+                  placeholder="baby sitter, garderner, handyman,etc."
+                  label="Search a job"
+                />
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sx={{ justifyItems: 'center' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
 
-                // bgcolor: '#000000',
-              }}>
-              {/* Create button */}
-              <Fab
-                color="primary"
-                onClick={openCreateJobDialog}
-                style={{ marginTop: '1rem' }}>
-                <Tooltip title="Pin a job">
-                  <AddIcon />
-                </Tooltip>
-              </Fab>
+              // bgcolor: '#000000',
+            }}
+          >
+            {/* Create button */}
+            <Fab
+              color="primary"
+              onClick={openCreateJobDialog}
+              style={{ marginTop: '1rem' }}
+            >
+              <Tooltip title="Pin a job">
+                <AddIcon />
+              </Tooltip>
+            </Fab>
 
-              <Box
-                sx={{
-                  typography: 'subtitle1',
-                  // color: 'rgba(20, 8, 14, 1)',
-                }}>
-<TabContext value={value}>
-  <Box sx={{ marginBottom: '-20px' }}>
-    <TabList onChange={handleChange} aria-label="slider container">
-      <Tab label="Most Recent Pinned" value="1" />
-      <Tab label="Saved Jobs" value="2" />
-    </TabList>
-  </Box>
-  <TabPanel value="1">
-    {/* recent listed rob */}
-    <RecentJob jobs={filteredJobListings} onCardClick={handleCardClick} />
-  </TabPanel>
-  <TabPanel value="2">
-    {/* Saved jobs*/}
-    <SaveJobs onCardClick={handleCardClick} />
-  </TabPanel>
-</TabContext>
-
-              </Box>
+            <Box>
+              <TabContext value={value}>
+                <Box sx={{ marginBottom: '-20px' }}>
+                  <TabList
+                    onChange={handleChange}
+                    aria-label="slider container"
+                  >
+                    <Tab label="Most Recent Pinned" value="1" />
+                    <Tab label="Saved Jobs" value="2" />
+                  </TabList>
+                </Box>
+                <TabPanel value="1">
+                  {/* recent listed rob */}
+                  <RecentJob
+                    jobs={filteredJobListings}
+                    onCardClick={handleCardClick}
+                  />
+                </TabPanel>
+                <TabPanel value="2">
+                  {/* Saved jobs*/}
+                  <SaveJobs onCardClick={handleCardClick} />
+                </TabPanel>
+              </TabContext>
             </Box>
-          </Grid>
+          </Box>
+        </Grid>
 
-          {/* Listing Masonry */}
-          <Grid item xs={12}>
-            {/* testing button */}
-            <Button variant="outlined" onClick={openUserProfile}>
-              Open User Profile
-            </Button>
-            <CardGrid
-              jobListings={filteredJobListings}
-              onCardClick={handleCardClick}
-            />
-            {/* Job detail dialog */}
+        {/* Listing Masonry */}
+        <Grid item xs={12}>
+          {/* testing button */}
+          <Button variant="outlined" onClick={openUserProfile}>
+            Open User Profile
+          </Button>
+          <CardGrid
+            jobListings={filteredJobListings}
+            onCardClick={handleCardClick}
+          />
+          {/* Job detail dialog */}
 
-            <Dialog
-              open={isJobDialogOpen}
-              onClose={handleJobDialogClose}
-              maxWidth={isSmallScreen ? 'sm' : 'lg'}
-              fullWidth>
-              <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
-            </Dialog>
-          </Grid>
-          {/* create job dialog */}
           <Dialog
-            open={isCreateJobOpen}
-            onClose={closeCreateJobDialog}
-            TransitionComponent={Grow}
-            transitionDuration={500}
-            maxWidth="sm"
-            fullWidth>
-            <CreateJob onClose={closeCreateJobDialog} />
-          </Dialog>
-          {/* testing button dialog */}
-          <Dialog
-            open={isUserProfileOpen}
-            onClose={closeUserProfile}
-            maxWidth="lg"
-            fullWidth>
-            <UserProfileView />
+            open={isJobDialogOpen}
+            onClose={handleJobDialogClose}
+            maxWidth={isSmallScreen ? 'sm' : 'lg'}
+            fullWidth
+          >
+            <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
           </Dialog>
         </Grid>
+        {/* create job dialog */}
+        <Dialog
+          open={isCreateJobOpen}
+          onClose={closeCreateJobDialog}
+          TransitionComponent={Grow}
+          transitionDuration={500}
+          maxWidth="sm"
+          fullWidth
+        >
+          <CreateJob onClose={closeCreateJobDialog} />
+        </Dialog>
+        {/* testing button dialog */}
+        <Dialog
+          open={isUserProfileOpen}
+          onClose={closeUserProfile}
+          maxWidth="lg"
+          fullWidth
+        >
+          <UserProfileView />
+        </Dialog>
+      </Grid>
     </Box>
   );
 }

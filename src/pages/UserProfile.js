@@ -81,7 +81,11 @@ export default function ProfilePage() {
                 />
               </Grid>
               <Grid>
-                <Typography variant="subtitle1" color="textSecondary" align="center">
+                <Typography
+                  variant="subtitle1"
+                  color="textSecondary"
+                  align="center"
+                >
                   {isEditing ? (
                     <TextField
                       name="jobTitle"
@@ -203,7 +207,11 @@ export default function ProfilePage() {
               </>
             ) : (
               <>
-                <Button variant="contained" color="primary" onClick={handleEditClick}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleEditClick}
+                >
                   Edit
                 </Button>
               </>

@@ -9,8 +9,6 @@ const Email = () => {
   const [selectedTab, setSelectedTab] = useState('inbox'); // Keep track of selected tab
   const [selectedEmail, setSelectedEmail] = useState(null); // Keep track of selected email
 
-
-
   const handleTabChange = (tabName) => {
     setSelectedTab(tabName);
     setSelectedEmail(null); // Reset selected email when changing tabs

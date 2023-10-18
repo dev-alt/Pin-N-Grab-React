@@ -26,15 +26,18 @@ export function AuthProvider({ children }) {
   };
 
   const handleLogout = () => {
+    console.log('Logging out...');
     setIsLoggedIn(false);
     localStorage.removeItem('token');
     localStorage.removeItem('profile');
     setProfile(null);
   };
+  
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, profile, handleLogin, handleLogout }}>
+      value={{ isLoggedIn, profile, handleLogin, handleLogout }}
+    >
       {children}
     </AuthContext.Provider>
   );

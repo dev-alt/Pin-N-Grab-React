@@ -11,7 +11,8 @@ const UserReview = ({ reviewUserName, date, review, rating }) => {
           alignItems: 'center',
           gap: '10px',
           marginBottom: '2px',
-        }}>
+        }}
+      >
         <Avatar />
         <Box>
           <Typography variant="h6">{reviewUserName}</Typography>
@@ -29,7 +30,8 @@ const UserReview = ({ reviewUserName, date, review, rating }) => {
           isSmallScreen
             ? { marginRight: '10px', marginLeft: '10px', marginBottom: '40px' }
             : { marginLeft: '20px', marginBottom: '40px', marginRight: '40px' }
-        }>
+        }
+      >
         {review}
       </Typography>
       <Divider variant="fullwidth" light />

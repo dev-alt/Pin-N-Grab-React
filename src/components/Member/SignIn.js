@@ -14,7 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useAuth } from '../../AuthContext'; 
+import { useAuth } from '../../AuthContext';
 
 const defaultTheme = createTheme();
 

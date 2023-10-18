@@ -44,7 +44,8 @@ const JobCard = ({ data, iconComponent }) => {
         </CardContent>
         <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
           <Box
-            sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}>
+            sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}
+          >
             <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
             <Typography>{data.Deadline}</Typography>
           </Box>
@@ -83,8 +84,6 @@ const UserProfileView = () => {
   }, []);
   console.log(user);
 
-
-
   return (
     <Container
       maxWidth="lg"
@@ -96,7 +95,8 @@ const UserProfileView = () => {
               flexDirection: 'column',
             }
           : { display: 'flex', justifyContent: 'center', padding: '2rem' }
-      }>
+      }
+    >
       <Container sx={{ margin: '20px' }}>
         <Card
           sx={
@@ -118,17 +118,19 @@ const UserProfileView = () => {
                   alignItems: 'center',
                   position: 'fixed',
                 }
-          }>
+          }
+        >
           <CardContent
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               flexWrap: 'wrap',
-            }}>
-              <Typography variant="h4" sx={{ marginBottom: '20px' }}>
+            }}
+          >
+            <Typography variant="h4" sx={{ marginBottom: '20px' }}>
               {user?.username}
-              </Typography>
+            </Typography>
             <Avatar
               sx={
                 isSmallScreen
@@ -142,13 +144,15 @@ const UserProfileView = () => {
             <Box sx={{ display: 'flex', marginTop: '20px' }}>
               <Typography
                 variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={isSmallScreen ? { marginRight: '20px' } : {}}>
+                sx={isSmallScreen ? { marginRight: '20px' } : {}}
+              >
                 {reviews.length} Reviews
               </Typography>
 
               <Typography
                 variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={isSmallScreen ? { marginRight: '20px' } : {}}>
+                sx={isSmallScreen ? { marginRight: '20px' } : {}}
+              >
                 {reviews.reduce((total, review) => total + review.rating, 0) /
                   reviews.length}{' '}
                 Rating
@@ -160,7 +164,8 @@ const UserProfileView = () => {
                   isSmallScreen
                     ? { marginRight: '20px', whiteSpace: 'nowrap' }
                     : {}
-                }>
+                }
+              >
                 Joined:{' '}
                 {user?.profile?.createdAt &&
                   new Date(user.profile.createdAt).getFullYear()}
@@ -174,10 +179,7 @@ const UserProfileView = () => {
         <Typography variant={isSmallScreen ? 'h6' : 'h4'} gutterBottom>
           <strong>Hi, I am {user?.username}</strong>
         </Typography>
-        <Typography
-          variant={isSmallScreen ? 'subtitle1' : 'h5'}
-          fontFamily="roboto"
-          gutterBottom>
+        <Typography variant="subtitle1" fontFamily="roboto" gutterBottom>
           {user?.profile?.bio}
         </Typography>
         <Divider light />
@@ -206,31 +208,36 @@ const UserProfileView = () => {
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <ElectricalServices fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <LocalFlorist fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <LocalShipping fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <Palette fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <Build fontSize="inherit" /> +1
             </Typography>
           </Box>
@@ -244,7 +251,8 @@ const UserProfileView = () => {
               <Box>
                 <TabList
                   onChange={handleChange}
-                  aria-label="lab API tabs example">
+                  aria-label="lab API tabs example"
+                >
                   <Tab label="From Clients" value="1" />
                   <Tab label="From Workerso" value="2" />
                 </TabList>
