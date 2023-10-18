@@ -14,7 +14,6 @@ import Email from './pages/Email';
 import { useAuth } from './AuthContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Container, CircularProgress, Typography } from '@mui/material';
-import { CssBaseline } from '@mui/material';
 import { themeOptions } from './Theme';
 
 function LoadingScreen() {

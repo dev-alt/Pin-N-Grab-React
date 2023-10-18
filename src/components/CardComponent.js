@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'; // Import useState
+import React, { } from 'react'; // Import useState
 import {
   Card,
   CardContent,
@@ -8,12 +8,10 @@ import {
   Grid,
   Divider,
 } from '@mui/material';
-import { LocationOn, Favorite } from '@mui/icons-material';
+import { Favorite } from '@mui/icons-material';
 import {
-  CalendarMonth as CalendarMonthIcon,
-  Paid as PaidIcon,
-  AutoStories as AutoStoriesIcon,
-  Handyman as HandymanIcon,
+  CalendarMonth,
+  Paid,
 } from '@mui/icons-material';
 import {
   ElectricalServices,
@@ -22,19 +20,11 @@ import {
   Palette,
   Build,
 } from '@mui/icons-material';
-import locationsData from './Locations';
 import { useAuth } from '../AuthContext';
 import useJobSave from './useJobSave';
 import { Box } from '@mui/system';
 
-const getLocationName = (locationId) => {
-  const location = locationsData.find((item) => item.id === locationId);
-  if (location) {
-    return `${location.cityName}, ${location.regionName}`;
-  } else {
-    return 'Unknown Location';
-  }
-};
+
 
 const cardStyle = {
   mt: 2,
@@ -71,8 +61,6 @@ function getIconByCategoryId(categoryId) {
 
 const CardComponent = ({ job, onCardClick, borderColour }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
-  const { profile } = useAuth();
-  const userId = profile.UserId;
   const { isSaved, toggleSaved } = useJobSave(job.id);
 
   return (
@@ -112,7 +100,7 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
       <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
         <Box sx={{ ...itemStyle, marginBottom: '20px' }}>
           <Tooltip title="Deadline">
-            <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
+            <CalendarMonth style={{ marginRight: '0.5rem' }} />
           </Tooltip>
           <Typography variant="body2">{job.deadline}</Typography>
         </Box>
@@ -127,7 +115,7 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
           {/* <Grid item xs={8}> */}
           <Box sx={itemStyle}>
             <Tooltip title="Will get paid">
-              <PaidIcon
+              <Paid
                 style={{
                   marginRight: '0.5rem',
                   fontSize: '3rem',
@@ -213,7 +201,7 @@ const RecentJobCard = ({ job, onCardClick }) => {
             marginBottom: '20px',
           }}>
           <Tooltip title="Deadline">
-            <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
+            <CalendarMonth style={{ marginRight: '0.5rem' }} />
           </Tooltip>
           <Typography variant="body2">{job.deadline}</Typography>
         </Box>
@@ -223,7 +211,7 @@ const RecentJobCard = ({ job, onCardClick }) => {
             alignItems: 'centre',
           }}>
           <Tooltip title="Will get paid">
-            <PaidIcon
+            <Paid
               style={{
                 marginRight: '0.5rem',
                 fontSize: '3rem',

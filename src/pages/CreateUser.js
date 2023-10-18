@@ -6,7 +6,6 @@ import {
   Container,
   Box,
   Grid,
-  Link,
   Avatar,
   Typography,
 } from '@mui/material';
@@ -76,6 +75,7 @@ export function CreateUser() {
                   id="username"
                   label="Username"
                   autoFocus
+                  value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </Grid>

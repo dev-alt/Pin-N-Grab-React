@@ -11,7 +11,7 @@ import {
   Divider,
   useMediaQuery,
 } from '@mui/material';
-import { Close, LocationOn, Favorite } from '@mui/icons-material'; // Import the LocationOn icon
+import { Close, LocationOn, Favorite } from '@mui/icons-material';
 import locationsData from '../Locations';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
@@ -112,13 +112,9 @@ const JobDetails = ({ job, onClose }) => {
 
   const currentDateTime = new Date();
   const createdAtDate = job ? new Date(job.createdAt) : null;
-  const updatedAtDate = job ? new Date(job.updatedAt) : null;
 
   const daysSincePosted = createdAtDate
     ? Math.floor((currentDateTime - createdAtDate) / (1000 * 60 * 60 * 24))
-    : 0;
-  const daysSinceUpdated = updatedAtDate
-    ? Math.floor((currentDateTime - updatedAtDate) / (1000 * 60 * 60 * 24))
     : 0;
 
   // Render the job details and components

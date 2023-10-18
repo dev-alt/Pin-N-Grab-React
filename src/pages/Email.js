@@ -8,14 +8,8 @@ import EmailNavMenu from '../components/Email/EmailNavMenu';
 const Email = () => {
   const [selectedTab, setSelectedTab] = useState('inbox'); // Keep track of selected tab
   const [selectedEmail, setSelectedEmail] = useState(null); // Keep track of selected email
-  const [deletedEmails, setDeletedEmails] = useState([]); // Keep track of deleted emails
-  const [starredEmails, setStarredEmails] = useState([]);
 
-  const handleStarEmail = (email) => {
-    // Move the selected email to the starred emails list
-    setStarredEmails((prevStarredEmails) => [...prevStarredEmails, email]);
-    setSelectedEmail(null); // Reset selected email
-  };
+
 
   const handleTabChange = (tabName) => {
     setSelectedTab(tabName);
@@ -27,11 +21,6 @@ const Email = () => {
     setSelectedTab('emailContent'); // Change the tab to display email content
   };
 
-  const handleDeleteEmail = (email) => {
-    // Move the selected email to the deleted emails list
-    setDeletedEmails((prevDeletedEmails) => [...prevDeletedEmails, email]);
-    setSelectedEmail(null); // Reset selected email
-  };
   const fakeDeletedEmails = [
     {
       id: 1,
@@ -282,8 +271,6 @@ const Email = () => {
                           ? fakeEmails
                           : selectedTab === 'trash'
                           ? fakeDeletedEmails
-                          : selectedTab === 'starred'
-                          ? starredEmails
                           : [] // Default to an empty array if the selectedTab doesn't match
                       }
                       onEmailClick={handleEmailClick}

@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
 import {
   Box,
-  Container,
   IconButton,
-  Card,
-  CardHeader,
-  CardContent,
-  Tooltip,
   Typography,
   Stack,
-  Grow,
 } from '@mui/material';
-import {
-  CalendarMonth as CalendarMonthIcon,
-  Paid as PaidIcon,
-} from '@mui/icons-material';
-import { RecentJobCard, getIconByCategoryId } from '../CardComponent';
+import { RecentJobCard } from '../CardComponent';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
