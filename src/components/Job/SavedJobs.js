@@ -7,14 +7,14 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 export function SaveJobs({ onCardClick, jobs }) {
   const { profile } = useAuth();
-  const userId = profile ? profile.UserId : null;
+  const userId = profile.profile.UserId;
   const [savedJobs, setSavedJobs] = useState([]);
 
   useEffect(() => {
     // Fetch saved jobs from the server
     const fetchSavedJobs = async () => {
       try {
-        const response = await fetch(`/api/jobs/all`);
+        const response = await fetch(`/api/jobs/saved/${userId}`);
         if (response.ok) {
           const data = await response.json();
           setSavedJobs(data);
@@ -53,8 +53,7 @@ export function SaveJobs({ onCardClick, jobs }) {
     <div
       style={{
         display: 'flex',
-      }}
-    >
+      }}>
       {/* title */}
 
       {/* Content */}
@@ -66,8 +65,7 @@ export function SaveJobs({ onCardClick, jobs }) {
             disabled={currentPage === 1}
             aria-label="Previous Page"
             aria-disabled={currentPage === 1}
-            sx={{ height: '20px' }}
-          >
+            sx={{ height: '20px' }}>
             <ChevronLeftIcon />
           </IconButton>
         </Box>
@@ -86,8 +84,7 @@ export function SaveJobs({ onCardClick, jobs }) {
             disabled={indexOfLastItem >= savedJobs.length}
             aria-label="Next Page"
             aria-disabled={indexOfLastItem >= savedJobs.length}
-            sx={{ height: '20px' }}
-          >
+            sx={{ height: '20px' }}>
             <ChevronRightIcon />
           </IconButton>
         </Box>
