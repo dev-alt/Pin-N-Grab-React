@@ -2,6 +2,10 @@ import React from 'react';
 import CardComponent from '../components/CardComponent';
 import Masonry from '@mui/lab/Masonry';
 import { Box, Container } from '@mui/system';
+
+
+
+
 const CardGrid = ({ jobListings, onCardClick }) => {
   const cardItemStyle = {
     padding: 1,

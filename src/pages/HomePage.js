@@ -8,7 +8,6 @@ import {
   useMediaQuery,
   Button,
   Tooltip,
-  Fade,
 } from '@mui/material';
 
 import CardGrid from '../components/CardGrid';
@@ -25,6 +24,7 @@ import { Container } from '@mui/system';
 import CardComponent from '../components/CardComponent';
 import RecentJob from '../components/Job/RecentJob';
 import SaveJobs from '../components/Job/SaveJobs';
+import SaveJobs from '../components/Job/SavedJobs';
 
 export function HomePage({ isLoggedIn }) {
   const [username, setUsername] = useState('');
@@ -66,7 +66,7 @@ export function HomePage({ isLoggedIn }) {
     setIsJobDialogOpen(false);
     setTimeout(() => {
       console.log('Selected Job when closing dialog:', selectedJob);
-    }, 100); // Add a small delay, e.g., 100 milliseconds
+    }, 100);
   };
 
   const toggleCategory = (categoryId) => {
@@ -125,6 +125,7 @@ export function HomePage({ isLoggedIn }) {
 
     fetchJobListings();
   }, []);
+
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   return (
