@@ -113,31 +113,31 @@ export default function ProfilePage() {
                   }}
                 />
               </Grid>
-              <Tooltip title="Edit Profile Photo">
+              <Tooltip title="Edit Profile">
                 <Grid>
                   <Grid container justifyContent="center" mt={2}>
                     {isEditing ? (
                       <>
-                        <IconButton onClick={handleSaveClick} color="primary">
-                          <SaveIcon sx={{ fontSize: '3rem' }} />
-                        </IconButton>
-                        <IconButton
-                          onClick={handleCancelClick}
-                          color="secondary">
-                          <CancelIcon sx={{ fontSize: '3rem' }} />
-                        </IconButton>
+                        <Tooltip title="Save" placement="top">
+                          <IconButton onClick={handleSaveClick} color="primary">
+                            <SaveIcon sx={{ fontSize: '3rem' }} />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Cancel" placement="top">
+                          <IconButton onClick={handleCancelClick} color="secondary">
+                            <CancelIcon sx={{ fontSize: '3rem' }} />
+                          </IconButton>
+                        </Tooltip>
                       </>
                     ) : (
-                      <>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={handleEditClick}>
+                      <Tooltip title="Edit" placement="top">
+                        <Button variant="contained" color="primary" onClick={handleEditClick}>
                           Edit
                         </Button>
-                      </>
+                      </Tooltip>
                     )}
                   </Grid>
+
                 </Grid>
               </Tooltip>
             </Box>
@@ -160,7 +160,7 @@ export default function ProfilePage() {
                 {/* Email */}
                 <TextBox
                   tag="Email"
-                  text={profile.username || 'empty'}></TextBox>
+                  text={profile.user.email || 'empty'}></TextBox>
 
                 {/* First Name */}
                 <TextBox
@@ -192,7 +192,7 @@ export default function ProfilePage() {
                         fullWidth
                       />
                     ) : (
-                      lastName
+                      profile.user.lastName
                     )
                   }></TextBox>
 
