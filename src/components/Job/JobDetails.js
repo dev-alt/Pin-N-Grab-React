@@ -17,7 +17,6 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import UserReview from './UserReviews';
 import ImageCarousel from './ImageCarousel';
-import { useAuth } from '../../AuthContext';
 import useJobSave from '../useJobSave';
 import { Container } from '@mui/system';
 
@@ -67,8 +66,6 @@ const images = [
 
 // React component for displaying job details
 const JobDetails = ({ job, onClose }) => {
-  const { profile } = useAuth();
-  const userId = profile.UserId;
   const { isSaved, toggleSaved } = useJobSave(job?.id);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [reviews, setReviews] = useState([]);

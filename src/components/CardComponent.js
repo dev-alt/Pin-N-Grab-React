@@ -17,7 +17,6 @@ import {
   Palette,
   Build,
 } from '@mui/icons-material';
-import { useAuth } from '../AuthContext';
 import useJobSave from './useJobSave';
 import { Box } from '@mui/system';
 
@@ -153,8 +152,6 @@ const PickJobCard = ({ job, onCardClick }) => {
   };
 
   const iconComponent = getIconByCategoryId(job.category_id);
-  const { profile } = useAuth();
-  const userId = profile.UserId;
   const { isSaved, toggleSaved } = useJobSave(job.id);
 
   return (

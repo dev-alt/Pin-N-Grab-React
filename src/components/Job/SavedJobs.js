@@ -5,7 +5,7 @@ import { Box, IconButton, useMediaQuery } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-export function SaveJobs({ onCardClick, jobs }) {
+export function SaveJobs({ onCardClick }) {
   const { profile } = useAuth();
   const userId = profile.profile.UserId;
   const [savedJobs, setSavedJobs] = useState([]);
@@ -28,6 +28,7 @@ export function SaveJobs({ onCardClick, jobs }) {
     };
     fetchSavedJobs();
   }, [userId]);
+  
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('lg'));
   const isXtraSmallScreen = useMediaQuery((theme) =>
     theme.breakpoints.down('md')

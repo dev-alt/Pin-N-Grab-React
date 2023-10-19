@@ -16,7 +16,7 @@ import MailMenu from './MailMenu';
 import { useAuth } from '../../AuthContext';
 
 export function PrimarySearchAppBar() {
-  const { profile, handleSignOut } = useAuth(); // Removed isLoggedIn
+  const { profile } = useAuth(); // Removed isLoggedIn
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   // Check if the user account menu is open
