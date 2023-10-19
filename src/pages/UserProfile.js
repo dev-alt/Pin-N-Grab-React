@@ -17,6 +17,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../AuthContext';
 
+
 const defaultTheme = createTheme();
 
 export default function ProfilePage() {
@@ -62,6 +63,7 @@ export default function ProfilePage() {
     }));
   };
 
+  console.log(profile)
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -72,11 +74,8 @@ export default function ProfilePage() {
               <Grid container justifyContent="center">
                 <Avatar
                   alt="User Avatar"
-                  src={
-                    isEditing
-                      ? editedProfile.profilePicture
-                      : profile.profilePicture
-                  }
+                  src={`/avatars/avatar_${profile.profile.avatar}.jpg`}
+
                   sx={{ width: 150, height: 150 }}
                 />
               </Grid>

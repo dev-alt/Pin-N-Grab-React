@@ -7,10 +7,12 @@ import {
   Typography,
   Grid,
   Divider,
+  Box,
 } from '@mui/material';
-import { Favorite } from '@mui/icons-material';
-import { CalendarMonth, Paid } from '@mui/icons-material';
 import {
+  Favorite, 
+  CalendarMonth, 
+  Paid,
   ElectricalServices,
   LocalFlorist,
   LocalShipping,
@@ -18,7 +20,6 @@ import {
   Build,
 } from '@mui/icons-material';
 import useJobSave from './useJobSave';
-import { Box } from '@mui/system';
 
 const cardStyle = {
   mt: 2,
