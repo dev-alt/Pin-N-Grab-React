@@ -1,121 +1,68 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Paper,
-  Tab,
-  Tabs,
-  Typography,
-  Container,
-  Avatar,
-  Divider,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-} from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Paper, Container, Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import { useAuth } from '../../AuthContext';
 
-const EmailInbox = ({ selectedTab, onTabChange }) => {
-  const [value, setValue] = React.useState(0);
-  const [selectedEmail, setSelectedEmail] = useState(null);
+const EmailInbox = ({ onEmailClick }) => {
+  const { profile } = useAuth();
+  const [emails, setEmails] = useState([]);
+  const userToken = localStorage.getItem('token');
 
-  React.useEffect(() => {
-    // Update the selected tab when the parent component passes a new selectedTab prop
-    setValue(
-      selectedTab === 'inbox'
-        ? 0
-        : selectedTab === 'drafts'
-        ? 1
-        : selectedTab === 'starred'
-        ? 2
-        : 3
-    );
-  }, [selectedTab]);
+  useEffect(() => {
+    const fetchEmails = async () => {
+      try {
+        const response = await fetch(`/api/message/get/inbox/${profile.profile.UserId}`, {
+          headers: {
+            Authorization: userToken,
+          },
+        });
 
-  const handleChange = (event, newValue) => {
-    // Notify the parent component (Email.js) of the tab change
-    onTabChange(
-      newValue === 0
-        ? 'inbox'
-        : newValue === 1
-        ? 'drafts'
-        : newValue === 2
-        ? 'starred'
-        : 'trash'
-    );
-  };
+        if (response.ok) {
+          const data = await response.json();
+          setEmails(data);
+        } else {
+          console.error('Error fetching emails:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching emails:', error);
+      }
+    };
 
-  const fakeEmails = [
-    {
-      id: 1,
-      subject: 'Sample Email 1',
-      sender: 'Cherry Blossom (cherryblosso@gmail.com)',
-      date: 'June 15, 2021 10:30 AM',
-      content: 'Hi Sir/Madam...\n...Thanking you Sir/Madam',
-    },
-    // Add more fake emails as needed
-  ];
+    fetchEmails();
+  }, [profile, userToken]);
 
   const handleEmailClick = (email) => {
-    setSelectedEmail(email);
+    onEmailClick(email);
   };
 
   return (
     <div>
       <Container maxWidth="lg">
         <Paper elevation={3} sx={{ padding: '16px' }}>
-          <Typography variant="h5" gutterBottom>
-            Inbox
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={() => onTabChange('compose')}
-          >
-            Compose
-          </Button>
-
-          <Paper square>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              textColor="primary"
-              orientation="vertical"
-              variant="scrollable"
-            >
-              <Tab label="Inbox" />
-              <Tab label="Drafts" />
-              <Tab label="Starred" />
-              <Tab label="Trash" />
-            </Tabs>
-          </Paper>
+          <List>
+            {emails.map((email) => (
+              <ListItem
+                key={email.id}
+                onClick={() => handleEmailClick(email)}
+                sx={{ cursor: 'pointer' }}
+              >
+                <ListItemAvatar>
+                  <Avatar alt="Avatar" src={email.sender.senderAvatar} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={email.subject}
+                  secondary={
+                    <>
+                      {email.sender.username}
+                      <br />
+                      {email.date}
+                    </>
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
         </Paper>
       </Container>
-
-      {/* Display the list of fake emails */}
-      <List>
-        {fakeEmails.map((email) => (
-          <ListItem
-            key={email.id}
-            onClick={() => handleEmailClick(email)} // Handle click event
-            sx={{ cursor: 'pointer' }}
-          >
-            <ListItemAvatar>
-              <Avatar alt="Avatar" src="../assets/images/users/6.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary={email.subject}
-              secondary={
-                <>
-                  {email.sender}
-                  <br />
-                  {email.date}
-                </>
-              }
-            />
-          </ListItem>
-        ))}
-      </List>
     </div>
   );
 };

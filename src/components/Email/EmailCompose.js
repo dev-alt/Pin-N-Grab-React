@@ -3,17 +3,19 @@ import { Button, Container, Paper, TextField, Typography } from '@mui/material';
 import axios from 'axios'; // Import axios for making API requests
 import Cookies from 'js-cookie';
 import Autocomplete from '@mui/material/Autocomplete';
+import { useAuth } from '../../AuthContext';
 
 const ComposeEmail = () => {
+  const { profile } = useAuth(); 
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [recipientOptions, setRecipientOptions] = useState([]);
+  const currentDate = new Date().toISOString();
+
   const [emailData, setEmailData] = useState({
     to: '',
-    cc: '',
-    bcc: '',
     subject: '',
     message: '',
-    recipientUserId: null, // Add this line to store the selected recipient's ID
+    recipientUserId: null,
   });
 
   const handleChange = (e) => {
@@ -27,23 +29,24 @@ const ComposeEmail = () => {
       const requestData = {
         ...emailData,
         recipientUserId: selectedRecipient ? selectedRecipient.id : null,
+        senderUserId: profile.profile.UserId, // Include the sender's user ID
+        date: currentDate, // Include the current date
+        content: emailData.message, // Use the message field for content
       };
 
       console.log('Sending email with data:', requestData); // Log the data being sent
 
-      const response = await axios.post('/api/email/send', requestData, {
+      const response = await axios.post('/api/message/send', requestData, {
         headers: {
           Authorization: authToken,
         },
       });
 
-      console.log('Email sent:', response.data);
+      console.log('message sent:', response.data);
 
       // Clear the form fields after sending the email
       setEmailData({
         to: '',
-        cc: '',
-        bcc: '',
         subject: '',
         message: '',
         recipientUserId: null,
@@ -86,25 +89,6 @@ const ComposeEmail = () => {
           renderInput={(params) => <TextField {...params} variant="outlined" />}
         />
 
-        <TextField
-          fullWidth
-          label="CC"
-          variant="outlined"
-          margin="normal"
-          name="cc"
-          value={emailData.cc}
-          onChange={handleChange}
-        />
-
-        <TextField
-          fullWidth
-          label="BCC"
-          variant="outlined"
-          margin="normal"
-          name="bcc"
-          value={emailData.bcc}
-          onChange={handleChange}
-        />
 
         <TextField
           fullWidth
