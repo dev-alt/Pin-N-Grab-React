@@ -15,6 +15,7 @@ import { useAuth } from './AuthContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Container, CircularProgress, Typography } from '@mui/material';
 import { themeOptions } from './Theme';
+import Footer from './components/Footer';
 
 function LoadingScreen() {
   const theme = createTheme(themeOptions);
@@ -28,8 +29,7 @@ function LoadingScreen() {
           alignItems: 'center',
           justifyContent: 'center',
           height: '100vh',
-        }}
-      >
+        }}>
         <CircularProgress color="primary" size={100} thickness={2} />
         <Typography variant="h6" style={{ marginTop: 20 }}>
           Loading...
@@ -66,7 +66,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-      {isUserAuthenticated && <PrimarySearchAppBar />}
+        {isUserAuthenticated && <PrimarySearchAppBar />}
         <Routes>
           <Route
             path="/"
@@ -92,6 +92,7 @@ function App() {
           )}
         </Routes>
       </Router>
+      <Footer />
     </ThemeProvider>
   );
 }

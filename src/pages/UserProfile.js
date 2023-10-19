@@ -8,6 +8,8 @@ import {
   Paper,
   Avatar,
   IconButton,
+  Tooltip,
+  Divider,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,6 +19,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../AuthContext';
 import { themeOptions } from '../Theme';
+import { Box } from '@mui/system';
 
 const defaultTheme = createTheme(themeOptions);
 
@@ -63,184 +66,203 @@ export default function ProfilePage() {
     }));
   };
 
+  const TextBox = ({ tag, text }) => {
+    return (
+      <Box sx={{ marginTop: '20px', marginBottom: '30px' }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ fontSize: { xs: 'medium', sm: '1.5rem' } }}>
+          {tag}
+        </Typography>
+        <Typography
+          variant="h6"
+          gutterBottom
+          color="#9c9c9c"
+          sx={{ fontSize: { xs: 'small', sm: '1.2rem' } }}>
+          {text}
+        </Typography>
+        <Divider variant="fullwidth" light></Divider>
+      </Box>
+    );
+  };
+
   console.log(profile);
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Container sx={{ mt: 10 }}>
-        <Grid container spacing={3}>
-          <Grid item lg={4} justifyContent="end">
-            <Paper
-              elevation={3}
-              style={{ padding: '16px', width: '200px', height: '200px' }}>
+        <Paper elevation={3} sx={{ marginTop: '100px', borderRadius: '20px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'centre',
+              flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+              padding: '2rem',
+              justifyContent: 'space-between',
+              justifyItems: 'center',
+            }}>
+            <Box sx={{ padding: '16px', textAlign: 'center' }}>
               <Grid container justifyContent="center">
                 <Avatar
                   alt="User Avatar"
                   src={`/avatars/avatar_${profile.profile.avatar}.jpg`}
-                  sx={{ width: 150, height: 150 }}
+                  sx={{
+                    width: { xs: 200, sm: 250 },
+                    height: { xs: 200, sm: 250 },
+                  }}
                 />
               </Grid>
-              <Grid>
-                <Typography
-                  variant="h6"
-                  color="textSecondary"
-                  align="center"
-                  sx={{ fontWeight: 'bolder' }}>
-                  {isEditing ? (
-                    <TextField
-                      name="jobTitle"
-                      value={editedProfile.jobTitle}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    profile.username || 'empty'
-                  )}
-                </Typography>
-              </Grid>
-            </Paper>
-          </Grid>
-          <Grid item lg={8}>
-            <Paper elevation={3} style={{ padding: '16px' }}>
-              <Typography variant="h4" gutterBottom>
+              <Tooltip title="Edit Profile Photo">
+                <Grid>
+                  <Grid container justifyContent="center" mt={2}>
+                    {isEditing ? (
+                      <>
+                        <IconButton onClick={handleSaveClick} color="primary">
+                          <SaveIcon sx={{ fontSize: '3rem' }} />
+                        </IconButton>
+                        <IconButton
+                          onClick={handleCancelClick}
+                          color="secondary">
+                          <CancelIcon sx={{ fontSize: '3rem' }} />
+                        </IconButton>
+                      </>
+                    ) : (
+                      <>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleEditClick}>
+                          Edit
+                        </Button>
+                      </>
+                    )}
+                  </Grid>
+                </Grid>
+              </Tooltip>
+            </Box>
+
+            <Container>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: 'bold',
+                  fontSize: { xs: 'large', sm: '2rem' },
+                }}>
                 Personal Information
               </Typography>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">Username</Typography>
-                  <Typography
-                    variant="h6"
-                    color="textSecondary"
-                    sx={{ fontWeight: 'bolder' }}>
-                    {profile.username || 'empty'}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">Email</Typography>
-                  <Typography
-                    variant="h6"
-                    color="textSecondary"
-                    sx={{ fontWeight: 'bolder' }}>
-                    {email || 'empty'}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">First Name</Typography>
-                  <Typography
-                    variant="h6"
-                    sx={{ fontWeight: 'bolder' }}
-                    color="textSecondary">
-                    {isEditing ? (
+              <Box style={{ padding: '16px' }}>
+                {/* Usersname */}
+                <TextBox
+                  tag="User Name"
+                  text={profile.username || 'empty'}></TextBox>
+
+                {/* Email */}
+                <TextBox
+                  tag="Email"
+                  text={profile.username || 'empty'}></TextBox>
+
+                {/* First Name */}
+                <TextBox
+                  tag="First Name"
+                  text={
+                    isEditing ? (
                       <TextField
                         name="firstName"
                         value={firstName}
+                        variant="standard"
+                        fullWidth
                         onChange={handleInputChange}
                       />
                     ) : (
                       firstName || 'empty'
-                    )}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">Last Name</Typography>
-                  <Typography
-                    variant="h6"
-                    sx={{ fontWeight: 'bolder' }}
-                    color="textSecondary">
-                    {isEditing ? (
+                    )
+                  }></TextBox>
+
+                {/* Last Name */}
+                <TextBox
+                  tag="Last Name"
+                  text={
+                    isEditing ? (
                       <TextField
                         name="lastName"
                         value={lastName}
                         onChange={handleInputChange}
+                        variant="standard"
+                        fullWidth
                       />
                     ) : (
                       lastName
-                    )}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">Bio</Typography>
-                  <Typography variant="body1" color="textSecondary">
-                    {isEditing ? (
+                    )
+                  }></TextBox>
+
+                {/* Bio */}
+                <TextBox
+                  tag="Biography"
+                  text={
+                    isEditing ? (
                       <TextField
                         name="bio"
-                        value={bio}
+                        value={profile.profile.bio}
                         onChange={handleInputChange}
+                        variant="standard"
+                        fullWidth
                       />
                     ) : (
                       profile.profile.bio
-                    )}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">Date of Birth</Typography>
-                  <Typography
-                    variant="h6"
-                    color="textSecondary"
-                    sx={{ fontWeight: 'bolder' }}>
-                    {isEditing ? (
+                    )
+                  }></TextBox>
+
+                {/* DOB */}
+                <TextBox
+                  tag="Date of Birth"
+                  text={
+                    isEditing ? (
                       <TextField
                         name="dateOfBirth"
-                        value={dateOfBirth}
+                        value={profile.profile.dateOfBirth}
                         onChange={handleInputChange}
+                        variant="standard"
+                        fullWidth
                       />
                     ) : (
                       profile.profile.dateOfBirth || 'empty'
-                    )}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="subtitle1">Gender</Typography>
-                  <Typography
-                    variant="h6"
-                    sx={{ fontWeight: 'bolder' }}
-                    color="textSecondary">
-                    {isEditing ? (
+                    )
+                  }></TextBox>
+
+                {/* Gender */}
+                <TextBox
+                  tag="Gender"
+                  text={
+                    isEditing ? (
                       <TextField
                         name="gender"
-                        value={gender}
+                        value={profile.profile.gender}
                         onChange={handleInputChange}
+                        variant="standard"
+                        fullWidth
                       />
                     ) : (
                       profile.profile.gender || 'empty'
-                    )}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-            <Paper elevation={3} style={{ marginTop: '16px', padding: '16px' }}>
-              <Typography
-                variant="h5"
-                gutterBottom
-                sx={{ fontWeight: 'bolder' }}>
-                Recent Job Postings
-              </Typography>
-            </Paper>
-
-            <Grid item>
-              <Grid container justifyContent="center" mt={2}>
-                {isEditing ? (
-                  <>
-                    <IconButton onClick={handleSaveClick} color="primary">
-                      <SaveIcon sx={{ fontSize: '3rem' }} />
-                    </IconButton>
-                    <IconButton onClick={handleCancelClick} color="secondary">
-                      <CancelIcon sx={{ fontSize: '3rem' }} />
-                    </IconButton>
-                  </>
-                ) : (
-                  <>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleEditClick}>
-                      Edit
-                    </Button>
-                  </>
-                )}
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+                    )
+                  }></TextBox>
+              </Box>
+              <Paper
+                elevation={1}
+                style={{ marginTop: '16px', padding: '16px' }}>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{
+                    fontWeight: 'bolder',
+                    fontSize: { xs: 'medium', sm: 'large' },
+                  }}>
+                  Recent Job Postings
+                </Typography>
+              </Paper>
+            </Container>
+          </Box>
+        </Paper>
       </Container>
     </ThemeProvider>
   );

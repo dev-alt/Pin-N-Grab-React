@@ -16,7 +16,6 @@ import {
   ElectricalServices,
   LocalFlorist,
   LocalShipping,
-  Palette,
   LocationOn,
   Build,
 } from '@mui/icons-material';
@@ -197,50 +196,112 @@ const PickJobCard = ({ job, onCardClick }) => {
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              alignItems: 'flex-end',
+              alignItems: 'flex-start',
+              height: { sm: '30px', md: '20px' },
+              flexDirection: { xs: 'column', sm: 'column', md: 'row' },
             }}>
+            {' '}
             {iconComponent}
-            <Favorite
-              fontSize="medium"
+            <Box
               sx={{
-                cursor: 'pointer',
-                color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
-              }}
-              onClick={toggleSaved} // Toggle the save state on click
-            />
+                display: 'flex',
+                alignItems: 'centre',
+              }}>
+              <Tooltip title="Will get paid">
+                <Paid
+                  sx={{
+                    marginRight: '0.5rem',
+                    fontSize: {
+                      xs: '0.8rem',
+                      sm: '1rem',
+                      md: '1.2rem',
+                      lg: '2rem',
+                    },
+                  }}
+                />
+              </Tooltip>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: {
+                    xs: '0.8rem',
+                    sm: '0.8rem',
+                    md: '0.8rem',
+                    lg: '1.2rem',
+                  },
+                }}>
+                {Math.round(job.paymentAmount)}
+              </Typography>
+            </Box>
           </Box>
         }></CardHeader>
       <CardContent
-        sx={{ marginLeft: '5px', marginRight: '5px' }}
+        sx={{
+          marginLeft: '5px',
+          marginRight: '5px',
+          height: '80px',
+        }}
         onClick={() => onCardClick(job)}>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'centre',
-          }}>
-          <Tooltip title="Will get paid">
-            <Paid
-              sx={{
-                marginRight: '0.5rem',
-                fontSize: {
-                  sm: '1.4rem',
-                  md: '1.8rem',
-                  lg: '3rem',
-                },
-              }}
-            />
-          </Tooltip>
+        <Box sx={{ height: '40px', marginBottom: '30px', overflow: 'clip' }}>
           <Typography
             variant="body2"
             sx={{
-              fontSize: {
-                sm: '1rem',
-                md: '1.2rem',
-                lg: '2rem',
-              },
+              fontSize: { xs: '0.6rem', md: '0.8rem' },
+              fontWeight: 600,
+              color: 'rgba(20, 8, 14, 1)',
+              marginLeft: '5px',
             }}>
-            {Math.round(job.paymentAmount)}
+            {job.title}
           </Typography>
+        </Box>
+        <Box
+          sx={{
+            ...itemStyle,
+            marginTop: '20px',
+            justifyContent: 'space-between',
+          }}>
+          <Box
+            sx={{ ...itemStyle, flexDirection: { xs: 'column', sm: 'row' } }}>
+            <Tooltip title="Deadline">
+              <CalendarMonth
+                sx={{
+                  marginRight: '0.5rem',
+                  fontSize: {
+                    xs: '0',
+                    sm: '0.8rem',
+                    md: '0.8rem',
+                    lg: '1rem',
+                  },
+                }}
+              />
+            </Tooltip>
+            <Typography
+              variant="body2"
+              sx={{
+                fontSize: {
+                  xs: '0',
+                  sm: '0.5rem',
+                  md: '0.8rem',
+                  lg: '1rem',
+                },
+              }}>
+              {job.deadline}
+            </Typography>
+          </Box>
+          <Favorite
+            fontSize="medium"
+            sx={{
+              cursor: 'pointer',
+              color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
+              fontSize: {
+                xs: '0.8rem',
+
+                md: '1rem',
+                lg: '1.2rem',
+              },
+            }}
+            onClick={toggleSaved} // Toggle the save state on click
+          />
         </Box>
       </CardContent>
     </Card>
