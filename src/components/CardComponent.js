@@ -10,8 +10,8 @@ import {
   Box,
 } from '@mui/material';
 import {
-  Favorite, 
-  CalendarMonth, 
+  Favorite,
+  CalendarMonth,
   Paid,
   ElectricalServices,
   LocalFlorist,
@@ -37,6 +37,7 @@ const itemStyle = {
 
 function getIconByCategoryId(categoryId) {
   const iconSize = 'large';
+
   switch (categoryId) {
     case 1:
       return <ElectricalServices fontSize={iconSize} />;
@@ -53,8 +54,18 @@ function getIconByCategoryId(categoryId) {
   }
 }
 
-const CardComponent = ({ job, onCardClick, borderColour }) => {
+function getColourByAmount(amount) {
+  if (amount < 500) {
+    return '#f0df46';
+  } else if (amount >= 500 && amount < 1000) return '#f5a65d';
+  else if (amount >= 1000 && amount < 1500) return '#09bab7';
+  else if (amount >= 1500 && amount < 2000) return '#9379a8';
+  else return '#ab5546';
+}
+
+const CardComponent = ({ job, onCardClick }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
+  const borderColour = getColourByAmount(job.paymentAmount);
   const { isSaved, toggleSaved } = useJobSave(job.id);
 
   return (

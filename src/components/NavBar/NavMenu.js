@@ -51,22 +51,20 @@ export function PrimarySearchAppBar() {
     },
   ];
 
-  const menuItemsJSX = menuItems
-    .map((item) => (
-      <MenuItem
-        key={item.key}
-        onClick={() => {
-          if (item.key === 'signOut') {
-            // Close the menu and handle sign-out action in the SignOutButton component
-            handleMenuClose();
-          }
-        }}
-        component={item.key !== 'signOut' ? Link : undefined}
-        to={item.key !== 'signOut' ? item.link : undefined}
-      >
-        {item.component || item.label}
-      </MenuItem>
-    ));
+  const menuItemsJSX = menuItems.map((item) => (
+    <MenuItem
+      key={item.key}
+      onClick={() => {
+        if (item.key === 'signOut') {
+          // Close the menu and handle sign-out action in the SignOutButton component
+          handleMenuClose();
+        }
+      }}
+      component={item.key !== 'signOut' ? Link : undefined}
+      to={item.key !== 'signOut' ? item.link : undefined}>
+      {item.component || item.label}
+    </MenuItem>
+  ));
 
   const renderMenu = (
     <Menu
@@ -82,8 +80,7 @@ export function PrimarySearchAppBar() {
         horizontal: 'right',
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
+      onClose={handleMenuClose}>
       {menuItemsJSX}
     </Menu>
   );
@@ -101,9 +98,15 @@ export function PrimarySearchAppBar() {
               display: { sm: 'block' },
               fontFamily: 'Tilt Neon',
               fontSize: { xs: '1rem', md: '2rem' },
-            }}
-          >
-            Pin'n Grab
+              '& a': {
+                textDecoration: 'none', // Remove text decoration
+                color: 'inherit', // Inherit the color from the parent (normal color)
+              },
+              '& a:active': {
+                color: 'rgba(20, 8, 14, 1)', // Define color for the active state
+              },
+            }}>
+            <Link to="/">Pin'n Grab</Link>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           {/* Desktop menu (notifications, mail, user account) */}
@@ -116,8 +119,7 @@ export function PrimarySearchAppBar() {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
+              color="inherit">
               <AccountCircle />
             </IconButton>
           </Box>
