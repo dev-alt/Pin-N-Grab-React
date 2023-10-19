@@ -53,7 +53,8 @@ export function SaveJobs({ onCardClick, jobs }) {
     <div
       style={{
         display: 'flex',
-      }}>
+      }}
+    >
       {/* title */}
 
       {/* Content */}
@@ -65,7 +66,8 @@ export function SaveJobs({ onCardClick, jobs }) {
             disabled={currentPage === 1}
             aria-label="Previous Page"
             aria-disabled={currentPage === 1}
-            sx={{ height: '20px' }}>
+            sx={{ height: '20px' }}
+          >
             <ChevronLeftIcon />
           </IconButton>
         </Box>
@@ -73,7 +75,7 @@ export function SaveJobs({ onCardClick, jobs }) {
           {/* Recent jobs */}
           {currentItems.slice(0, 6).map((job) => (
             <Box key={job.id}>
-              <PickJobCard job={job} onCardClick={onCardClick} />
+              <PickJobCard job={job.job} onCardClick={onCardClick} />
             </Box>
           ))}
         </Box>
@@ -84,7 +86,8 @@ export function SaveJobs({ onCardClick, jobs }) {
             disabled={indexOfLastItem >= savedJobs.length}
             aria-label="Next Page"
             aria-disabled={indexOfLastItem >= savedJobs.length}
-            sx={{ height: '20px' }}>
+            sx={{ height: '20px' }}
+          >
             <ChevronRightIcon />
           </IconButton>
         </Box>
