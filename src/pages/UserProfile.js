@@ -113,33 +113,36 @@ export default function ProfilePage() {
                   }}
                 />
               </Grid>
-              <Tooltip title="Edit Profile">
-                <Grid>
-                  <Grid container justifyContent="center" mt={2}>
-                    {isEditing ? (
-                      <>
-                        <Tooltip title="Save" placement="top">
-                          <IconButton onClick={handleSaveClick} color="primary">
-                            <SaveIcon sx={{ fontSize: '3rem' }} />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Cancel" placement="top">
-                          <IconButton onClick={handleCancelClick} color="secondary">
-                            <CancelIcon sx={{ fontSize: '3rem' }} />
-                          </IconButton>
-                        </Tooltip>
-                      </>
-                    ) : (
-                      <Tooltip title="Edit" placement="top">
-                        <Button variant="contained" color="primary" onClick={handleEditClick}>
-                          Edit
-                        </Button>
-                      </Tooltip>
-                    )}
-                  </Grid>
 
+              <Grid>
+                <Grid container justifyContent="center" mt={2}>
+                  {isEditing ? (
+                    <>
+                      <Tooltip title="Save" placement="top">
+                        <IconButton onClick={handleSaveClick} color="primary">
+                          <SaveIcon sx={{ fontSize: '3rem' }} />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="Cancel" placement="top">
+                        <IconButton
+                          onClick={handleCancelClick}
+                          color="secondary">
+                          <CancelIcon sx={{ fontSize: '3rem' }} />
+                        </IconButton>
+                      </Tooltip>
+                    </>
+                  ) : (
+                    <Tooltip title="Edit" placement="top">
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleEditClick}>
+                        Edit
+                      </Button>
+                    </Tooltip>
+                  )}
                 </Grid>
-              </Tooltip>
+              </Grid>
             </Box>
 
             <Container>

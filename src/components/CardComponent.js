@@ -102,6 +102,7 @@ const CardComponent = ({ job, onCardClick }) => {
         }
         sx={{
           color: 'textSecondary',
+          cursor: 'pointer',
         }}
       />
       <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
@@ -241,9 +242,15 @@ const PickJobCard = ({ job, onCardClick }) => {
           marginLeft: '5px',
           marginRight: '5px',
           height: '80px',
-        }}
-        onClick={() => onCardClick(job)}>
-        <Box sx={{ height: '40px', marginBottom: '30px', overflow: 'clip' }}>
+        }}>
+        <Box
+          sx={{
+            height: '40px',
+            marginBottom: '30px',
+            overflow: 'clip',
+            cursor: 'pointer', // Default cursor
+          }}
+          onClick={() => onCardClick(job)}>
           <Typography
             variant="body2"
             sx={{

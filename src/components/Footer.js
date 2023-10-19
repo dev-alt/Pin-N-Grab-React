@@ -1,24 +1,17 @@
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Tooltip,
-  Typography,
-  Grid,
-  Divider,
-  Box,
-} from '@mui/material';
+import { Typography, Box } from '@mui/material';
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <Box sx={{ textAlign: 'center' }}>
-      <Divider
-        variant="fullwidth"
-        light
-        sx={{ marginBottom: '20px', bottom: '0px' }}
-      />
-      <Typography gutterBottom variant="subtitle1">
+    <Box
+      sx={{
+        textAlign: 'center',
+        position: 'fixed',
+        left: '0',
+        bottom: '0',
+        width: '100%',
+      }}>
+      <Typography gutterBottom variant="h6">
         CopyRight © {year}
       </Typography>
     </Box>
