@@ -165,6 +165,7 @@ const UserProfileView = () => {
               {user?.username}
             </Typography>
             <Avatar
+              src={`/avatars/avatar_${user?.profile.avatar}.jpg`}
               sx={
                 isSmallScreen
                   ? { width: '100px', height: '100px', marginBottom: '20px' }
