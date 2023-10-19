@@ -14,6 +14,8 @@ import {
 import HelpIcon from '@mui/icons-material/Help';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PaidIcon from '@mui/icons-material/Paid';
+import StarIcon from '@mui/icons-material/Star';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import {
   ElectricalServices,
   LocalFlorist,
@@ -58,6 +60,37 @@ const JobCard = ({ data, iconComponent }) => {
     </>
   );
 };
+
+const getDaySuffix = (day) => {
+  if (day >= 11 && day <= 13) {
+    return 'th';
+  }
+  switch (day % 10) {
+    case 1:
+      return 'st';
+    case 2:
+      return 'nd';
+    case 3:
+      return 'rd';
+    default:
+      return 'th';
+  }
+};
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 const UserProfileView = () => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -138,39 +171,54 @@ const UserProfileView = () => {
                   : { width: '200px', height: '200px', marginBottom: '20px' }
               }
             />
-            <Typography variant="h5">
-              <strong>{}</strong>
-            </Typography>
             <Box sx={{ display: 'flex', marginTop: '20px' }}>
               <Typography
                 variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={isSmallScreen ? { marginRight: '20px' } : {}}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginRight: isSmallScreen ? '20px' : '0',
+                }}
               >
+                <StickyNote2Icon
+                  sx={{ fontSize: 'medium', marginRight: '5px' }}
+                />
                 {reviews.length} Reviews
               </Typography>
 
               <Typography
                 variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={isSmallScreen ? { marginRight: '20px' } : {}}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center', // Align icons and text vertically
+                  marginLeft: '5px',
+                }}
               >
+                <StarIcon sx={{ fontSize: 'medium', marginRight: '5px' }} />
                 {reviews.reduce((total, review) => total + review.rating, 0) /
                   reviews.length}{' '}
                 Rating
               </Typography>
-
-              <Typography
-                variant={isSmallScreen ? 'body2' : 'body1'}
-                sx={
-                  isSmallScreen
-                    ? { marginRight: '20px', whiteSpace: 'nowrap' }
-                    : {}
-                }
-              >
-                Joined:{' '}
-                {user?.profile?.createdAt &&
-                  new Date(user.profile.createdAt).getFullYear()}
-              </Typography>
             </Box>
+
+            <Typography
+              variant={isSmallScreen ? 'body2' : 'body1'}
+              sx={
+                isSmallScreen
+                  ? { marginRight: '20px', whiteSpace: 'nowrap' }
+                  : {}
+              }
+            >
+              {user?.profile?.createdAt
+                ? `Joined ${new Date(
+                    user.profile.createdAt
+                  ).getDate()}${getDaySuffix(
+                    new Date(user.profile.createdAt).getDate()
+                  )} ${
+                    months[new Date(user.profile.createdAt).getMonth()]
+                  } ${new Date(user.profile.createdAt).getFullYear()}`
+                : ''}
+            </Typography>
           </CardContent>
         </Card>
         {isSmallScreen && <Divider light sx={{ marginTop: '40px' }} />}

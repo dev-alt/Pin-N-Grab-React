@@ -213,7 +213,7 @@ export default function ProfilePage() {
                   onClick={handleEditClick}
                 >
                   Edit
-                </Button>
+                </Button>  
               </>
             )}
           </Grid>

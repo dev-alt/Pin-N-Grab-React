@@ -16,7 +16,7 @@ import MailMenu from './MailMenu';
 import { useAuth } from '../../AuthContext';
 
 export function PrimarySearchAppBar() {
-  const { profile, isLoggedIn } = useAuth();
+  const { profile, handleSignOut } = useAuth(); // Removed isLoggedIn
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   // Check if the user account menu is open
@@ -38,30 +38,33 @@ export function PrimarySearchAppBar() {
   const menuItems = [
     { key: 'home', label: 'Home', link: '/' },
     { key: 'profile', label: 'Profile', link: `/profile/${userId}` },
-    { key: 'signIn', label: 'Sign In', link: '/signin', show: !isLoggedIn }, // Add a 'show' property
-    {
-      key: 'createUser',
-      label: 'Create User',
-      link: '/create',
-      show: !isLoggedIn,
-    }, // Add a 'show' property
+    // { key: 'signIn', label: 'Sign In', link: '/signin' },
+    // {
+    //   key: 'createUser',
+    //   label: 'Create User',
+    //   link: '/create',
+    // },
     {
       key: 'signOut',
       label: 'Sign Out',
-      component: isLoggedIn && <SignOutButton />,
+      component: <SignOutButton />,
     },
   ];
 
   const menuItemsJSX = menuItems
-    .filter((item) => !('show' in item) || item.show) // Filter items to remove those with 'show' set to false
     .map((item) => (
       <MenuItem
         key={item.key}
-        component={Link}
-        to={item.link}
-        onClick={handleMenuClose}
+        onClick={() => {
+          if (item.key === 'signOut') {
+            // Close the menu and handle sign-out action in the SignOutButton component
+            handleMenuClose();
+          }
+        }}
+        component={item.key !== 'signOut' ? Link : undefined}
+        to={item.key !== 'signOut' ? item.link : undefined}
       >
-        {item.label}
+        {item.component || item.label}
       </MenuItem>
     ));
 
@@ -105,20 +108,18 @@ export function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           {/* Desktop menu (notifications, mail, user account) */}
           <Box sx={{ display: 'flex' }}>
-            {isLoggedIn && <NotificationsMenu />}
-            {isLoggedIn && <MailMenu />}
-            {isLoggedIn && (
-              <IconButton
-                size="large"
-                aria-label="account of the current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            )}
+            <NotificationsMenu />
+            <MailMenu />
+            <IconButton
+              size="large"
+              aria-label="account of the current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>

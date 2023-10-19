@@ -66,7 +66,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <PrimarySearchAppBar />
+      {isUserAuthenticated && <PrimarySearchAppBar />}
         <Routes>
           <Route
             path="/"

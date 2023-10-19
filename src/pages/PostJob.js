@@ -12,6 +12,11 @@ import {
   Tooltip,
   IconButton,
   Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
@@ -27,7 +32,19 @@ export function CreateJob({ onClose }) {
   const [deadline, setDeadline] = useState('');
   const [paymentAmount, setPaymentAmount] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const jobStatus = 'Open';
+  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
+  const [paymentAmountError, setPaymentAmountError] = useState('');
+
+  const openErrorDialog = () => {
+    setErrorDialogOpen(true);
+  };
+
+  const validatePaymentAmount = (value) => {
+    const regex = /^[0-9]*\.?[0-9]*$/;
+    return regex.test(value);
+  };
 
   const handleReset = () => {
     setTitle('');
@@ -53,13 +70,36 @@ export function CreateJob({ onClose }) {
       });
       console.log(response.data);
       console.log('Selected Category ID:', selectedCategory);
+
+      if (response.data && response.data.message === 'Job listing created') {
+        onClose();
+      } else {
+        setErrorMessage('Job creation failed. Please try again.');
+        openErrorDialog(); // Open the error dialog
+        console.error('Job creation failed');
+      }
     } catch (error) {
+      setErrorMessage(
+        'An error occurred while creating the job. Please try again later.'
+      );
+      openErrorDialog(); // Open the error dialog
       console.error(error);
     }
   };
 
   return (
     <Box style={{ position: 'relative', borderRadius: '8px' }}>
+      <Dialog open={errorDialogOpen} onClose={() => setErrorDialogOpen(false)}>
+        <DialogTitle>Error</DialogTitle>
+        <DialogContent>
+          <Typography>{errorMessage}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setErrorDialogOpen(false)} color="primary">
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
       <IconButton
         edge="end"
         color="primary"
@@ -88,7 +128,9 @@ export function CreateJob({ onClose }) {
             fullWidth
             margin="normal"
             InputLabelProps={{ style: { color: '#7a7974' } }}
+            inputProps={{ maxLength: 100 }}
           />
+
           <TextField
             label="Description"
             multiline
@@ -98,6 +140,8 @@ export function CreateJob({ onClose }) {
             fullWidth
             margin="normal"
             InputLabelProps={{ style: { color: '#7a7974' } }}
+            inputProps={{ maxLength: 200 }}
+
           />
           <TextField
             label="Details"
@@ -154,12 +198,25 @@ export function CreateJob({ onClose }) {
             </Grid>
             <Grid item xs={6}>
               <TextField
-                label="Payment Type"
+                label="Payment Amount"
                 value={paymentAmount}
-                onChange={(e) => setPaymentAmount(e.target.value)}
+                onChange={(e) => {
+                  const inputValue = e.target.value;
+                  // Check if the input matches the required format
+                  if (validatePaymentAmount(inputValue)) {
+                    setPaymentAmount(inputValue);
+                    setPaymentAmountError('');
+                  } else {
+                    setPaymentAmountError(
+                      'Invalid payment amount format. Use the format: 100.00'
+                    );
+                  }
+                }}
                 fullWidth
                 margin="normal"
                 InputLabelProps={{ style: { color: '#7a7974' } }}
+                error={paymentAmountError !== ''}
+                helperText={paymentAmountError}
               />
             </Grid>
           </Grid>
