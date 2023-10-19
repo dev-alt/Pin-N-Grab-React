@@ -20,7 +20,7 @@ import {
   Build,
 } from '@mui/icons-material';
 import useJobSave from './useJobSave';
-
+import FormatPaintIcon from '@mui/icons-material/FormatPaint';
 const cardStyle = {
   mt: 2,
   mb: 2,
@@ -46,7 +46,7 @@ function getIconByCategoryId(categoryId) {
     case 3:
       return <LocalShipping fontSize={iconSize} />;
     case 4:
-      return <Palette fontSize={iconSize} />;
+      return <FormatPaintIcon fontSize={iconSize} />;
     case 5:
       return <Build fontSize={iconSize} />;
     default:

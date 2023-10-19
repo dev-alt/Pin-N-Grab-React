@@ -5,10 +5,13 @@ import {
   ElectricalServices,
   LocalFlorist,
   LocalShipping,
-  Palette,
   Build,
   Clear,
 } from '@mui/icons-material';
+import FormatPaintIcon from '@mui/icons-material/FormatPaint';
+const iconStyle = {
+  fontSize: '2.5rem',
+};
 
 const CategoryFilter = ({
   selectedCategories,
@@ -19,33 +22,28 @@ const CategoryFilter = ({
     <Box>
       <IconButton
         color={selectedCategories.includes(1) ? 'secondary' : 'primary'}
-        onClick={() => toggleCategory(1)}
-      >
-        <ElectricalServices />
+        onClick={() => toggleCategory(1)}>
+        <ElectricalServices sx={iconStyle} />
       </IconButton>
       <IconButton
         color={selectedCategories.includes(2) ? 'secondary' : 'primary'}
-        onClick={() => toggleCategory(2)}
-      >
-        <LocalFlorist />
+        onClick={() => toggleCategory(2)}>
+        <LocalFlorist sx={iconStyle} />
       </IconButton>
       <IconButton
         color={selectedCategories.includes(3) ? 'secondary' : 'primary'}
-        onClick={() => toggleCategory(3)}
-      >
-        <LocalShipping />
+        onClick={() => toggleCategory(3)}>
+        <LocalShipping sx={iconStyle} />
       </IconButton>
       <IconButton
         color={selectedCategories.includes(4) ? 'secondary' : 'primary'}
-        onClick={() => toggleCategory(4)}
-      >
-        <Palette />
+        onClick={() => toggleCategory(4)}>
+        <FormatPaintIcon sx={iconStyle} />
       </IconButton>
       <IconButton
         color={selectedCategories.includes(5) ? 'secondary' : 'primary'}
-        onClick={() => toggleCategory(5)}
-      >
-        <Build />
+        onClick={() => toggleCategory(5)}>
+        <Build sx={iconStyle} />
       </IconButton>
       <IconButton color="primary" onClick={handleClearFilters}>
         <Clear />
