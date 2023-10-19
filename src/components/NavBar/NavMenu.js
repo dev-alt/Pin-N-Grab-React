@@ -97,7 +97,7 @@ export function PrimarySearchAppBar() {
             sx={{
               display: { sm: 'block' },
               fontFamily: 'Tilt Neon',
-              fontSize: { xs: '1rem', md: '2rem' },
+              fontSize: { xs: '1rem', sm: '1.5rem', md: '2rem' },
               '& a': {
                 textDecoration: 'none', // Remove text decoration
                 color: 'inherit', // Inherit the color from the parent (normal color)
