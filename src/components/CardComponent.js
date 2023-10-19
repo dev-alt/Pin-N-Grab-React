@@ -192,7 +192,6 @@ const PickJobCard = ({ job, onCardClick }) => {
         bgcolor: '#f0d646',
       }}>
       <CardHeader
-        onClick={() => onCardClick(job)}
         title={
           <Box
             sx={{
@@ -211,7 +210,9 @@ const PickJobCard = ({ job, onCardClick }) => {
             />
           </Box>
         }></CardHeader>
-      <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
+      <CardContent
+        sx={{ marginLeft: '5px', marginRight: '5px' }}
+        onClick={() => onCardClick(job)}>
         <Box
           sx={{
             display: 'flex',
