@@ -209,7 +209,7 @@ export default function ProfilePage() {
                         fullWidth
                       />
                     ) : (
-                      profile.profile.bio
+                      profile.profile.bio || 'empty'
                     )
                   }></TextBox>
 
