@@ -10,7 +10,7 @@ import {
 } from '@mui/icons-material';
 import FormatPaintIcon from '@mui/icons-material/FormatPaint';
 const iconStyle = {
-  fontSize: '2.5rem',
+  fontSize: { xs: '1.8rem', lg: '2.5rem' },
 };
 
 const CategoryFilter = ({

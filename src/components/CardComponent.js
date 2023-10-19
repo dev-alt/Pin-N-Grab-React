@@ -17,10 +17,12 @@ import {
   LocalFlorist,
   LocalShipping,
   Palette,
+  LocationOn,
   Build,
 } from '@mui/icons-material';
 import useJobSave from './useJobSave';
 import FormatPaintIcon from '@mui/icons-material/FormatPaint';
+import { getLocationName } from '../components/Job/JobDetails';
 const cardStyle = {
   mt: 2,
   mb: 2,
@@ -103,6 +105,20 @@ const CardComponent = ({ job, onCardClick }) => {
         }}
       />
       <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'centre',
+            marginBottom: '5px',
+          }}>
+          <Tooltip title="Deadline">
+            <LocationOn style={{ marginRight: '0.5rem' }} />
+          </Tooltip>
+          <Typography variant="body2">
+            {' '}
+            {getLocationName(job.location_id)}
+          </Typography>
+        </Box>
         <Box sx={{ ...itemStyle, marginBottom: '20px' }}>
           <Tooltip title="Deadline">
             <CalendarMonth style={{ marginRight: '0.5rem' }} />

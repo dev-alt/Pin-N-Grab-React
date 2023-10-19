@@ -69,7 +69,7 @@ export default function ProfilePage() {
       <CssBaseline />
       <Container sx={{ mt: 10 }}>
         <Grid container spacing={3}>
-          <Grid item lg={4}>
+          <Grid item lg={4} justifyContent="end">
             <Paper
               elevation={3}
               style={{ padding: '16px', width: '200px', height: '200px' }}>
@@ -82,9 +82,10 @@ export default function ProfilePage() {
               </Grid>
               <Grid>
                 <Typography
-                  variant="subtitle1"
+                  variant="h6"
                   color="textSecondary"
-                  align="center">
+                  align="center"
+                  sx={{ fontWeight: 'bolder' }}>
                   {isEditing ? (
                     <TextField
                       name="jobTitle"
@@ -100,25 +101,34 @@ export default function ProfilePage() {
           </Grid>
           <Grid item lg={8}>
             <Paper elevation={3} style={{ padding: '16px' }}>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h4" gutterBottom>
                 Personal Information
               </Typography>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">Username</Typography>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="subtitle1">Username</Typography>
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    sx={{ fontWeight: 'bolder' }}>
                     {profile.username || 'empty'}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">Email</Typography>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="subtitle1">Email</Typography>
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    sx={{ fontWeight: 'bolder' }}>
                     {email || 'empty'}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">First Name</Typography>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="subtitle1">First Name</Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 'bolder' }}
+                    color="textSecondary">
                     {isEditing ? (
                       <TextField
                         name="firstName"
@@ -131,8 +141,11 @@ export default function ProfilePage() {
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">Last Name</Typography>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="subtitle1">Last Name</Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 'bolder' }}
+                    color="textSecondary">
                     {isEditing ? (
                       <TextField
                         name="lastName"
@@ -145,8 +158,8 @@ export default function ProfilePage() {
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">Bio</Typography>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="subtitle1">Bio</Typography>
+                  <Typography variant="body1" color="textSecondary">
                     {isEditing ? (
                       <TextField
                         name="bio"
@@ -159,8 +172,11 @@ export default function ProfilePage() {
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">Date of Birth</Typography>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="subtitle1">Date of Birth</Typography>
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    sx={{ fontWeight: 'bolder' }}>
                     {isEditing ? (
                       <TextField
                         name="dateOfBirth"
@@ -173,8 +189,11 @@ export default function ProfilePage() {
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography variant="body1">Gender</Typography>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="subtitle1">Gender</Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 'bolder' }}
+                    color="textSecondary">
                     {isEditing ? (
                       <TextField
                         name="gender"
@@ -189,31 +208,37 @@ export default function ProfilePage() {
               </Grid>
             </Paper>
             <Paper elevation={3} style={{ marginTop: '16px', padding: '16px' }}>
-              <Typography variant="h6" gutterBottom>
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{ fontWeight: 'bolder' }}>
                 Recent Job Postings
               </Typography>
             </Paper>
-          </Grid>
-          <Grid container justifyContent="center" mt={2}>
-            {isEditing ? (
-              <>
-                <IconButton onClick={handleSaveClick} color="primary">
-                  <SaveIcon />
-                </IconButton>
-                <IconButton onClick={handleCancelClick} color="secondary">
-                  <CancelIcon />
-                </IconButton>
-              </>
-            ) : (
-              <>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleEditClick}>
-                  Edit
-                </Button>
-              </>
-            )}
+
+            <Grid item>
+              <Grid container justifyContent="center" mt={2}>
+                {isEditing ? (
+                  <>
+                    <IconButton onClick={handleSaveClick} color="primary">
+                      <SaveIcon />
+                    </IconButton>
+                    <IconButton onClick={handleCancelClick} color="secondary">
+                      <CancelIcon />
+                    </IconButton>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleEditClick}>
+                      Edit
+                    </Button>
+                  </>
+                )}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>
