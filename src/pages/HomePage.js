@@ -72,7 +72,7 @@ export function HomePage() {
   const toggleCategory = (categoryId) => {
     if (selectedCategories.includes(categoryId)) {
       setSelectedCategories(
-        selectedCategories.filter((id) => id !== categoryId)
+        selectedCategories.filter((id) => id !== categoryId),
       );
     } else {
       setSelectedCategories([...selectedCategories, categoryId]);
@@ -135,13 +135,11 @@ export function HomePage() {
         <Grid item xs={12} sm={10} md={8} lg={6}>
           <Paper
             style={{
-              padding: '1rem',
               boxShadow: '0px 0px 10px 1px #a6a48b',
               borderRadius: '50px',
               marginTop: '50px',
               paddingBottom: '50px',
-            }}
-          >
+            }}>
             <Grid container justifyContent="center" alignItems="center">
               {/* category filter */}
               <Grid item sx={{ mb: 2 }}>
@@ -180,14 +178,12 @@ export function HomePage() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-            }}
-          >
+            }}>
             {/* Create button */}
             <Fab
               color="primary"
               onClick={openCreateJobDialog}
-              style={{ marginTop: '1rem' }}
-            >
+              style={{ marginTop: '1rem' }}>
               <Tooltip title="Pin a job">
                 <AddIcon />
               </Tooltip>
@@ -198,8 +194,7 @@ export function HomePage() {
                 <Box sx={{ marginBottom: '-20px' }}>
                   <TabList
                     onChange={handleChange}
-                    aria-label="slider container"
-                  >
+                    aria-label="slider container">
                     <Tab
                       label="Most Recent Pinned"
                       value="1"
@@ -244,8 +239,7 @@ export function HomePage() {
             open={isJobDialogOpen}
             onClose={handleJobDialogClose}
             maxWidth={isSmallScreen ? 'sm' : 'lg'}
-            fullWidth
-          >
+            fullWidth>
             <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
           </Dialog>
         </Grid>
@@ -256,8 +250,7 @@ export function HomePage() {
           TransitionComponent={Grow}
           transitionDuration={500}
           maxWidth="sm"
-          fullWidth
-        >
+          fullWidth>
           <CreateJob onClose={closeCreateJobDialog} />
         </Dialog>
         {/* testing button dialog */}
@@ -265,8 +258,7 @@ export function HomePage() {
           open={isUserProfileOpen}
           onClose={closeUserProfile}
           maxWidth="lg"
-          fullWidth
-        >
+          fullWidth>
           <UserProfileView />
         </Dialog>
       </Grid>
