@@ -217,17 +217,6 @@ const PickJobCard = ({ job, onCardClick }) => {
           sx={{
             display: 'flex',
             alignItems: 'centre',
-            marginBottom: '20px',
-          }}>
-          <Tooltip title="Deadline">
-            <CalendarMonth style={{ marginRight: '0.5rem' }} />
-          </Tooltip>
-          <Typography variant="body2">{job.deadline}</Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'centre',
           }}>
           <Tooltip title="Will get paid">
             <Paid
