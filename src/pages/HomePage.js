@@ -135,6 +135,7 @@ export function HomePage() {
         <Grid item xs={12} sm={10} md={8} lg={6}>
           <Paper
             style={{
+              padding: '30px',
               boxShadow: '0px 0px 10px 1px #a6a48b',
               borderRadius: '50px',
               marginTop: '50px',
@@ -178,6 +179,7 @@ export function HomePage() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              width: { sm: '100vw', md: 'auto' },
             }}>
             {/* Create button */}
             <Fab
