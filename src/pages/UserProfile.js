@@ -16,9 +16,9 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../AuthContext';
+import { themeOptions } from '../Theme';
 
-
-const defaultTheme = createTheme();
+const defaultTheme = createTheme(themeOptions);
 
 export default function ProfilePage() {
   const { profile } = useAuth();
@@ -63,19 +63,20 @@ export default function ProfilePage() {
     }));
   };
 
-  console.log(profile)
+  console.log(profile);
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Container sx={{ mt: 10 }}>
         <Grid container spacing={3}>
           <Grid item lg={4}>
-            <Paper elevation={3} style={{ padding: '16px' }}>
+            <Paper
+              elevation={3}
+              style={{ padding: '16px', width: '200px', height: '200px' }}>
               <Grid container justifyContent="center">
                 <Avatar
                   alt="User Avatar"
                   src={`/avatars/avatar_${profile.profile.avatar}.jpg`}
-
                   sx={{ width: 150, height: 150 }}
                 />
               </Grid>
@@ -83,8 +84,7 @@ export default function ProfilePage() {
                 <Typography
                   variant="subtitle1"
                   color="textSecondary"
-                  align="center"
-                >
+                  align="center">
                   {isEditing ? (
                     <TextField
                       name="jobTitle"
@@ -209,10 +209,9 @@ export default function ProfilePage() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={handleEditClick}
-                >
+                  onClick={handleEditClick}>
                   Edit
-                </Button>  
+                </Button>
               </>
             )}
           </Grid>
