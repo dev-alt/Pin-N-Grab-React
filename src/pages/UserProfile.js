@@ -221,10 +221,10 @@ export default function ProfilePage() {
                 {isEditing ? (
                   <>
                     <IconButton onClick={handleSaveClick} color="primary">
-                      <SaveIcon />
+                      <SaveIcon sx={{ fontSize: '3rem' }} />
                     </IconButton>
                     <IconButton onClick={handleCancelClick} color="secondary">
-                      <CancelIcon />
+                      <CancelIcon sx={{ fontSize: '3rem' }} />
                     </IconButton>
                   </>
                 ) : (
