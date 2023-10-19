@@ -131,12 +131,12 @@ export function SignIn() {
             ) : null}
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body1" color="secondary">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="create" variant="body2">
+                <Link href="create" variant="body1" color="secondary">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
