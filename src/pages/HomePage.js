@@ -72,7 +72,7 @@ export function HomePage() {
   const toggleCategory = (categoryId) => {
     if (selectedCategories.includes(categoryId)) {
       setSelectedCategories(
-        selectedCategories.filter((id) => id !== categoryId),
+        selectedCategories.filter((id) => id !== categoryId)
       );
     } else {
       setSelectedCategories([...selectedCategories, categoryId]);
@@ -180,8 +180,6 @@ export function HomePage() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-
-              // bgcolor: '#000000',
             }}
           >
             {/* Create button */}
