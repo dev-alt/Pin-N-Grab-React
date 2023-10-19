@@ -120,6 +120,11 @@ export function HomePage() {
     fetchJobListings();
   }, []);
 
+  useEffect(() => {
+    // Handle filter when selectedCategories  change
+    handleCategoryFilter();
+  }, [selectedCategories, selectedLocation]);
+
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   const [value, setValue] = useState('1');
@@ -132,7 +137,7 @@ export function HomePage() {
     <Box sx={{ mt: 5 }}>
       <Grid container justifyContent="center">
         {/* filter box */}
-        <Grid item xs={12} sm={10} md={8} lg={6}>
+        <Grid item sm={10} md={8} lg={6} xl={4}>
           <Paper
             style={{
               padding: '30px',
@@ -180,6 +185,7 @@ export function HomePage() {
               alignItems: 'center',
               justifyContent: 'center',
               width: { sm: '100vw', md: 'auto' },
+              flexDirection: { xs: 'column', sm: 'row' },
             }}>
             {/* Create button */}
             <Fab
@@ -200,12 +206,12 @@ export function HomePage() {
                     <Tab
                       label="Most Recent Pinned"
                       value="1"
-                      sx={{ color: '#c7a602', fontWeight: 'bolder' }}
+                      style={{ color: '#c7a602', fontWeight: 'bolder' }}
                     />
                     <Tab
                       label="Saved Jobs"
                       value="2"
-                      sx={{ color: '#c7a602', fontWeight: 'bolder' }}
+                      style={{ color: '#c7a602', fontWeight: 'bolder' }}
                     />
                   </TabList>
                 </Box>

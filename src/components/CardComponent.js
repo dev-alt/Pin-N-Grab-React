@@ -10,17 +10,19 @@ import {
   Box,
 } from '@mui/material';
 import {
-  Favorite, 
-  CalendarMonth, 
+  Favorite,
+  CalendarMonth,
   Paid,
   ElectricalServices,
   LocalFlorist,
   LocalShipping,
   Palette,
+  LocationOn,
   Build,
 } from '@mui/icons-material';
 import useJobSave from './useJobSave';
-
+import FormatPaintIcon from '@mui/icons-material/FormatPaint';
+import { getLocationName } from '../components/Job/JobDetails';
 const cardStyle = {
   mt: 2,
   mb: 2,
@@ -37,6 +39,7 @@ const itemStyle = {
 
 function getIconByCategoryId(categoryId) {
   const iconSize = 'large';
+
   switch (categoryId) {
     case 1:
       return <ElectricalServices fontSize={iconSize} />;
@@ -45,7 +48,7 @@ function getIconByCategoryId(categoryId) {
     case 3:
       return <LocalShipping fontSize={iconSize} />;
     case 4:
-      return <Palette fontSize={iconSize} />;
+      return <FormatPaintIcon fontSize={iconSize} />;
     case 5:
       return <Build fontSize={iconSize} />;
     default:
@@ -53,8 +56,18 @@ function getIconByCategoryId(categoryId) {
   }
 }
 
-const CardComponent = ({ job, onCardClick, borderColour }) => {
+function getColourByAmount(amount) {
+  if (amount < 500) {
+    return '#f0df46';
+  } else if (amount >= 500 && amount < 1000) return '#f5a65d';
+  else if (amount >= 1000 && amount < 1500) return '#09bab7';
+  else if (amount >= 1500 && amount < 2000) return '#9379a8';
+  else return '#ab5546';
+}
+
+const CardComponent = ({ job, onCardClick }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
+  const borderColour = getColourByAmount(job.paymentAmount);
   const { isSaved, toggleSaved } = useJobSave(job.id);
 
   return (
@@ -92,6 +105,20 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
         }}
       />
       <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'centre',
+            marginBottom: '5px',
+          }}>
+          <Tooltip title="Deadline">
+            <LocationOn style={{ marginRight: '0.5rem' }} />
+          </Tooltip>
+          <Typography variant="body2">
+            {' '}
+            {getLocationName(job.location_id)}
+          </Typography>
+        </Box>
         <Box sx={{ ...itemStyle, marginBottom: '20px' }}>
           <Tooltip title="Deadline">
             <CalendarMonth style={{ marginRight: '0.5rem' }} />

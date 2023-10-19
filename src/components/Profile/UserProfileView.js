@@ -46,8 +46,7 @@ const JobCard = ({ data, iconComponent }) => {
         </CardContent>
         <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
           <Box
-            sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}
-          >
+            sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}>
             <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
             <Typography>{data.Deadline}</Typography>
           </Box>
@@ -128,8 +127,7 @@ const UserProfileView = () => {
               flexDirection: 'column',
             }
           : { display: 'flex', justifyContent: 'center', padding: '2rem' }
-      }
-    >
+      }>
       <Container sx={{ margin: '20px' }}>
         <Card
           sx={
@@ -151,16 +149,14 @@ const UserProfileView = () => {
                   alignItems: 'center',
                   position: 'fixed',
                 }
-          }
-        >
+          }>
           <CardContent
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               flexWrap: 'wrap',
-            }}
-          >
+            }}>
             <Typography variant="h4" sx={{ marginBottom: '20px' }}>
               {user?.username}
             </Typography>
@@ -179,8 +175,7 @@ const UserProfileView = () => {
                   display: 'flex',
                   alignItems: 'center',
                   marginRight: isSmallScreen ? '20px' : '0',
-                }}
-              >
+                }}>
                 <StickyNote2Icon
                   sx={{ fontSize: 'medium', marginRight: '5px' }}
                 />
@@ -193,8 +188,7 @@ const UserProfileView = () => {
                   display: 'flex',
                   alignItems: 'center', // Align icons and text vertically
                   marginLeft: '5px',
-                }}
-              >
+                }}>
                 <StarIcon sx={{ fontSize: 'medium', marginRight: '5px' }} />
                 {reviews.reduce((total, review) => total + review.rating, 0) /
                   reviews.length}{' '}
@@ -208,13 +202,12 @@ const UserProfileView = () => {
                 isSmallScreen
                   ? { marginRight: '20px', whiteSpace: 'nowrap' }
                   : {}
-              }
-            >
+              }>
               {user?.profile?.createdAt
                 ? `Joined ${new Date(
-                    user.profile.createdAt
+                    user.profile.createdAt,
                   ).getDate()}${getDaySuffix(
-                    new Date(user.profile.createdAt).getDate()
+                    new Date(user.profile.createdAt).getDate(),
                   )} ${
                     months[new Date(user.profile.createdAt).getMonth()]
                   } ${new Date(user.profile.createdAt).getFullYear()}`
@@ -257,36 +250,31 @@ const UserProfileView = () => {
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <ElectricalServices fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <LocalFlorist fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <LocalShipping fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <Palette fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <Build fontSize="inherit" /> +1
             </Typography>
           </Box>
@@ -300,8 +288,7 @@ const UserProfileView = () => {
               <Box>
                 <TabList
                   onChange={handleChange}
-                  aria-label="lab API tabs example"
-                >
+                  aria-label="lab API tabs example">
                   <Tab label="From Clients" value="1" />
                   <Tab label="From Workerso" value="2" />
                 </TabList>
