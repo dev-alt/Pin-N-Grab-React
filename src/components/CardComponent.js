@@ -74,7 +74,8 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
                       fontWeight: 600,
                       color: 'rgba(20, 8, 14, 1)',
                       marginLeft: '5px',
-                    }}>
+                    }}
+                  >
                     {job.title}
                   </Typography>
                 </div>
@@ -105,7 +106,8 @@ const CardComponent = ({ job, onCardClick, borderColour }) => {
             display: 'flex',
             alignItems: 'centre',
             justifyContent: 'space-between',
-          }}>
+          }}
+        >
           {/* <Grid item xs={8}> */}
           <Box sx={itemStyle}>
             <Tooltip title="Will get paid">
@@ -165,7 +167,8 @@ const PickJobCard = ({ job, onCardClick }) => {
         boxShadow: 'none',
         border: '2px,srgba(20, 8, 14, 1)',
         bgcolor: '#f0d646',
-      }}>
+      }}
+    >
       <CardHeader
         onClick={() => onCardClick(job)}
         title={
@@ -174,7 +177,8 @@ const PickJobCard = ({ job, onCardClick }) => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'flex-end',
-            }}>
+            }}
+          >
             {iconComponent}
             <Favorite
               fontSize="medium"
@@ -185,14 +189,16 @@ const PickJobCard = ({ job, onCardClick }) => {
               onClick={toggleSaved} // Toggle the save state on click
             />
           </Box>
-        }></CardHeader>
+        }
+      ></CardHeader>
       <CardContent sx={{ marginLeft: '5px', marginRight: '5px' }}>
         <Box
           sx={{
             display: 'flex',
             alignItems: 'centre',
             marginBottom: '20px',
-          }}>
+          }}
+        >
           <Tooltip title="Deadline">
             <CalendarMonth style={{ marginRight: '0.5rem' }} />
           </Tooltip>
@@ -202,7 +208,8 @@ const PickJobCard = ({ job, onCardClick }) => {
           sx={{
             display: 'flex',
             alignItems: 'centre',
-          }}>
+          }}
+        >
           <Tooltip title="Will get paid">
             <Paid
               style={{
