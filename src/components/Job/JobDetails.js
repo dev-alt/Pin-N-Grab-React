@@ -9,6 +9,10 @@ import {
   Avatar,
   Divider,
   useMediaQuery,
+  Tooltip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from '@mui/material';
 import { Close, LocationOn, Favorite } from '@mui/icons-material';
 import locationsData from '../Locations';
