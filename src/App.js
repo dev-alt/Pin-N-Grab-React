@@ -16,6 +16,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Container, CircularProgress, Typography } from '@mui/material';
 import { themeOptions } from './Theme';
 import Footer from './components/Footer';
+import jwt_decode from 'jwt-decode';
 
 function LoadingScreen() {
   const theme = createTheme(themeOptions);
@@ -40,29 +41,56 @@ function LoadingScreen() {
 }
 
 function App() {
-  const { isLoggedIn, handleLogin } = useAuth();
+  const { isLoggedIn, handleLogin, handleLogout } = useAuth();
   const theme = createTheme(themeOptions);
   const isUserAuthenticated = isLoggedIn;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('isUserAuthenticated:', isUserAuthenticated);
-    console.log('isLoggedIn:', isLoggedIn);
-  }, [isUserAuthenticated, isLoggedIn]);
+    // Check if the user is authenticated (with a valid token)
+    if (isUserAuthenticated) {
+      const token = localStorage.getItem('token'); // Retrieve the token from local storage
+      if (!isTokenValid(token)) {
+        // Token is not valid, so log the user out
+        handleLogout();
+      }
+    }
 
-  useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 400);
 
-    // Clean up the timeout to prevent memory leaks
     return () => clearTimeout();
-  }, []);
+  }, [isUserAuthenticated, handleLogout]);
 
   if (loading) {
     return <LoadingScreen />;
   }
 
+  function isTokenValid(token) {
+    if (!token) {
+      return false;
+    }
+  
+    try {
+      const decodedToken = jwt_decode(token); // Decode the JWT
+      const currentTime = Date.now() / 1000; // Convert current time to seconds
+  
+      // Check if the token has expired
+      if (decodedToken.exp && decodedToken.exp < currentTime) {
+        return false;
+      }
+  
+      // Additional checks can be performed here (e.g., token revocation)
+  
+      return true; // Token is valid
+    } catch (error) {
+      console.error('Error while verifying token:', error);
+      return false; // An error occurred; token is invalid
+    }
+  }
+
+  
   return (
     <ThemeProvider theme={theme}>
       <Router>
