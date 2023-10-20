@@ -20,7 +20,6 @@ import CategoryFilter from '../components/CategoryFilter';
 import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
 import UserProfileView from '../components/Profile/UserProfileView';
-import RecentJob from '../components/Job/RecentJob';
 import SaveJobs from '../components/Job/SavedJobs';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -108,8 +107,12 @@ export function HomePage() {
         const response = await fetch('/api/jobs/all');
         if (response.ok) {
           const data = await response.json();
-          setJobListings(data);
-          setFilteredJobListings(data); // Initialize filtered job listings
+  
+          // Sort the data by createdAt before setting it
+          const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  
+          setJobListings(sortedData);
+          setFilteredJobListings(sortedData); // Initialize filtered job listings with sorted data
         } else {
           console.error('Failed to fetch job listings.');
         }
@@ -117,13 +120,15 @@ export function HomePage() {
         console.error('Error:', error);
       }
     };
-
+  
     fetchJobListings();
   }, []);
+  
 
   useEffect(() => {
     // Handle filter when selectedCategories  change
     handleCategoryFilter();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategories, selectedLocation]);
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
@@ -205,25 +210,13 @@ export function HomePage() {
                     onChange={handleChange}
                     aria-label="slider container">
                     <Tab
-                      label="Most Recent Pinned"
-                      value="1"
-                      style={{ color: '#c7a602', fontWeight: 'bolder' }}
-                    />
-                    <Tab
                       label="Saved Jobs"
-                      value="2"
+                      value="1"
                       style={{ color: '#c7a602', fontWeight: 'bolder' }}
                     />
                   </TabList>
                 </Box>
                 <TabPanel value="1">
-                  {/* recent listed rob */}
-                  <RecentJob
-                    jobs={filteredJobListings}
-                    onCardClick={handleCardClick}
-                  />
-                </TabPanel>
-                <TabPanel value="2">
                   {/* Saved jobs*/}
                   <SaveJobs onCardClick={handleCardClick} />
                 </TabPanel>

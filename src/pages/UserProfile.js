@@ -31,7 +31,7 @@ export default function ProfilePage() {
 
   const { bio, dateOfBirth, gender } = editedProfile;
   const { user } = profile;
-  const { email, firstName, lastName } = user;
+  const { firstName, lastName } = user;
 
   const handleEditClick = () => {
     setIsEditing(true);

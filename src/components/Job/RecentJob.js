@@ -21,12 +21,14 @@ const RecentJob = ({ jobs, onCardClick }) => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = jobs.slice(indexOfFirstItem, indexOfLastItem);
+  const sortedJobs = jobs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const currentItems = sortedJobs.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
+  console.log('currentItems', currentItems)
   return (
     <div
       style={{
@@ -48,10 +50,10 @@ const RecentJob = ({ jobs, onCardClick }) => {
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           {/* Recent jobs */}
           {currentItems.map((job, index) => (
-            <Box key={index}>
-              <PickJobCard job={job} onCardClick={onCardClick} />
-            </Box>
-          ))}
+  <Box key={index}>
+    <PickJobCard job={job} onCardClick={onCardClick} />
+  </Box>
+))}
         </Box>
         {/* Right arrow */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
