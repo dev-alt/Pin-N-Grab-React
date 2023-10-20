@@ -10,6 +10,8 @@ import {
   Avatar,
   Divider,
   useMediaQuery,
+  Tooltip,
+  Dialog,
 } from '@mui/material';
 import { Close, LocationOn, Favorite } from '@mui/icons-material';
 import locationsData from '../Locations';
@@ -19,6 +21,8 @@ import UserReview from './UserReviews';
 import ImageCarousel from './ImageCarousel';
 import useJobSave from '../useJobSave';
 import { Container } from '@mui/system';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import UserProfileView from '../Profile/UserProfileView';
 
 // Function to get the location name based on locationId
 const getLocationName = (locationId) => {
@@ -69,6 +73,14 @@ const JobDetails = ({ job, onClose }) => {
   const { isSaved, toggleSaved } = useJobSave(job?.id);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [reviews, setReviews] = useState([]);
+  // For user profile dialog
+  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
+  const openUserProfile = () => {
+    setIsUserProfileOpen(true);
+  };
+  const closeUserProfile = () => {
+    setIsUserProfileOpen(false);
+  };
 
   useEffect(() => {
     if (job) {
@@ -110,14 +122,25 @@ const JobDetails = ({ job, onClose }) => {
       <IconButton sx={closeButtonStyle} onClick={onClose}>
         <Close />
       </IconButton>
-
-      {/* Job title */}
-      <Typography
-        variant={isSmallScreen ? 'h6' : 'h4'}
-        color="rgba(20, 8, 14, 1)"
-        sx={{ marginLeft: '20px' }}>
-        {job.title}
-      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        {/* Job title */}
+        <Typography
+          variant={isSmallScreen ? 'h6' : 'h4'}
+          color="rgba(20, 8, 14, 1)"
+          sx={{ marginLeft: '20px' }}>
+          {job.title}
+        </Typography>
+        <IconButton>
+          <Tooltip title="Delete Job">
+            <DeleteForeverOutlinedIcon
+              sx={{
+                fontSize: { xs: '1rem', sm: '1.5rem' },
+                color: 'error.main',
+              }}
+            />
+          </Tooltip>
+        </IconButton>
+      </Box>
 
       {/* Job details */}
       <Grid container spacing={2} justifyContent="flex-start">
@@ -203,6 +226,7 @@ const JobDetails = ({ job, onClose }) => {
               borderRadius: '8px',
               justifyContent: 'center',
             }}>
+            {/* User profile Box */}
             <Box>
               <Box
                 sx={{
@@ -211,7 +235,7 @@ const JobDetails = ({ job, onClose }) => {
                   gap: '10px',
                   marginBottom: '2px',
                 }}>
-                <Avatar />
+                <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
                 <Box>
                   <Typography variant="overline" textAlign="center">
                     This Job is offered by:
@@ -256,12 +280,23 @@ const JobDetails = ({ job, onClose }) => {
                   color="#BC4B51">
                   Number of Applicants {job.Applications?.length}
                 </Typography>
-
-                <Button
-                  variant="contained"
-                  sx={{ width: '1rem', marginTop: '20px' }}>
-                  Apply
-                </Button>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Button
+                    variant="contained"
+                    sx={{ width: '1rem', marginTop: '20px' }}>
+                    Apply
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={{ width: '100px', marginTop: '20px', ml: '20px' }}>
+                    Enquiry
+                  </Button>
+                  {/* <Button
+                    variant="contained"
+                    sx={{ width: '200px', marginTop: '20px' }}>
+                    View Applicants
+                  </Button> */}
+                </Box>
               </Box>
             </Box>
           </Paper>
@@ -309,6 +344,14 @@ const JobDetails = ({ job, onClose }) => {
           ))}
         </Grid>
       </Box>
+
+      <Dialog
+        open={isUserProfileOpen}
+        onClose={closeUserProfile}
+        maxWidth="lg"
+        fullWidth>
+        <UserProfileView job={job} />
+      </Dialog>
     </Container>
   );
 };

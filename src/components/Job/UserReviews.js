@@ -1,7 +1,25 @@
-import React from 'react';
-import { Typography, Avatar, Box, useMediaQuery, Divider } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Typography,
+  Avatar,
+  Box,
+  useMediaQuery,
+  Divider,
+  Dialog,
+} from '@mui/material';
+import UserProfileView from '../Profile/UserProfileView';
 
-const UserReview = ({ reviewUserName, date, review, rating }) => {
+const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
+  // For user profile dialog
+  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
+  const openUserProfile = () => {
+    setIsUserProfileOpen(true);
+  };
+  const closeUserProfile = () => {
+    setIsUserProfileOpen(false);
+  };
+  console.log(review);
+
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
     <div key={review.id}>
@@ -11,9 +29,8 @@ const UserReview = ({ reviewUserName, date, review, rating }) => {
           alignItems: 'center',
           gap: '10px',
           marginBottom: '2px',
-        }}
-      >
-        <Avatar />
+        }}>
+        <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
         <Box>
           <Typography variant="h6">{reviewUserName}</Typography>
           <Typography variant="body1" color="textSecondary">
@@ -30,11 +47,17 @@ const UserReview = ({ reviewUserName, date, review, rating }) => {
           isSmallScreen
             ? { marginRight: '10px', marginLeft: '10px', marginBottom: '40px' }
             : { marginLeft: '20px', marginBottom: '40px', marginRight: '40px' }
-        }
-      >
+        }>
         {review}
       </Typography>
       <Divider variant="fullwidth" light />
+      <Dialog
+        open={isUserProfileOpen}
+        onClose={closeUserProfile}
+        maxWidth="lg"
+        fullWidth>
+        {/* <UserProfileView job={review.Job} /> */}
+      </Dialog>
     </div>
   );
 };
