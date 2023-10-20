@@ -1,4 +1,5 @@
-import React from 'react'; // Import useState
+import React, { useState } from 'react'; // Import useState
+
 import {
   Card,
   CardContent,
@@ -22,6 +23,8 @@ import {
 import useJobSave from './useJobSave';
 import FormatPaintIcon from '@mui/icons-material/FormatPaint';
 import { getLocationName } from '../components/Job/JobDetails';
+import SaveButton from '../components/Job/SaveButton';
+
 
 const cardStyle = {
   mt: 2,
@@ -170,7 +173,9 @@ const CardComponent = ({ job, onCardClick }) => {
   );
 };
 
-const PickJobCard = ({ job, onCardClick }) => {
+
+const PickJobCard = ({ job, onCardClick, isSaved, toggleSaved }) => {
+
   const cardStyle = {
     mt: 2,
     mb: 2,
@@ -181,7 +186,6 @@ const PickJobCard = ({ job, onCardClick }) => {
   };
 
   const iconComponent = getIconByCategoryId(job.category_id);
-  const { isSaved, toggleSaved } = useJobSave(job.id);
 
   return (
     <Card
@@ -296,20 +300,7 @@ const PickJobCard = ({ job, onCardClick }) => {
               {job.deadline}
             </Typography>
           </Box>
-          <Favorite
-            fontSize="medium"
-            sx={{
-              cursor: 'pointer',
-              color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
-              fontSize: {
-                xs: '0.8rem',
-
-                md: '1rem',
-                lg: '1.2rem',
-              },
-            }}
-            onClick={toggleSaved} // Toggle the save state on click
-          />
+          <SaveButton jobId={job.id} isSaved={isSaved} toggleSaved={toggleSaved} />
         </Box>
       </CardContent>
     </Card>

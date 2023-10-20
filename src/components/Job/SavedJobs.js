@@ -4,11 +4,14 @@ import { PickJobCard } from '../CardComponent';
 import { Box, IconButton, useMediaQuery } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import  useJobSave  from '../useJobSave';
 
 export function SaveJobs({ onCardClick }) {
   const { profile } = useAuth();
   const userId = profile.profile.UserId;
   const [savedJobs, setSavedJobs] = useState([]);
+
+  const handleJobSave = useJobSave();
 
   useEffect(() => {
     // Fetch saved jobs from the server
@@ -50,6 +53,7 @@ export function SaveJobs({ onCardClick }) {
     setCurrentPage(newPage);
   };
 
+
   return (
     <div
       style={{
@@ -75,9 +79,14 @@ export function SaveJobs({ onCardClick }) {
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           {/* Recent jobs */}
           {currentItems.slice(0, 6).map((job) => (
-            <Box key={job.id}>
-              <PickJobCard job={job.Job} onCardClick={onCardClick} />
-            </Box>
+               <Box key={job.id}>
+               <PickJobCard
+                 job={job.Job}
+                 onCardClick={onCardClick}
+                 isSaved={savedJobs.some((savedJob) => savedJob.id === job.id)}
+                 toggleSaved={() => handleJobSave.toggleSaved(job.id)}
+               />
+             </Box>
           ))}
         </Box>
         {/* Right arrow */}
