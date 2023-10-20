@@ -328,7 +328,6 @@ const UserProfileView = (job) => {
                       date={review.createdAt}
                       review={review.reviewText}
                       rating={review.rating}
-                      job
                     />
                   ))}
               </TabPanel>
