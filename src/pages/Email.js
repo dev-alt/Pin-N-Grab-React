@@ -4,6 +4,7 @@ import EmailCompose from '../components/Email/EmailCompose';
 import EmailInbox from '../components/Email/EmailInbox';
 import EmailContent from '../components/Email/EmailContent';
 import EmailNavMenu from '../components/Email/EmailNavMenu';
+import { MarginTwoTone } from '@mui/icons-material';
 
 const Email = () => {
   const [selectedTab, setSelectedTab] = useState('inbox'); // Keep track of selected tab
@@ -20,11 +21,13 @@ const Email = () => {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component="main" maxWidth="lg" sx={{ marginTop: '100px' }}>
       <CssBaseline />
-      <Paper elevation={6} sx={{ padding: '16px', mt: '16px' }}>
+      <Paper
+        elevation={6}
+        sx={{ borderRadius: '20px', padding: '16px', mt: '16px' }}>
         <Typography variant="h5" gutterBottom>
-          Your Email
+          Messages
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={3}>

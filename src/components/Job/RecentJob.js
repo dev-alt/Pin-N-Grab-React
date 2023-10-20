@@ -19,9 +19,13 @@ const RecentJob = ({ jobs, onCardClick }) => {
     itemsPerPage = 5;
   }
 
+  const sortedJobs = jobs.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+  );
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = jobs.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = sortedJobs.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);

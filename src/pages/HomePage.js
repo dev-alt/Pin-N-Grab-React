@@ -13,20 +13,16 @@ import {
 import CardGrid from '../components/CardGrid';
 import Dialog from '@mui/material/Dialog';
 import { CreateJob } from './PostJob';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import JobDetails from '../components/Job/JobDetails';
 import CategoryFilter from '../components/CategoryFilter';
 import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
 import UserProfileView from '../components/Profile/UserProfileView';
-import RecentJob from '../components/Job/RecentJob';
 import SaveJobs from '../components/Job/SavedJobs';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Footer from '../components/Footer';
 
 export function HomePage() {
   const [jobListings, setJobListings] = useState([]);
@@ -134,6 +130,10 @@ export function HomePage() {
     setValue(newValue);
   };
 
+  const sortedJobs = jobListings.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+  );
+
   return (
     <Box sx={{ mt: 5 }}>
       <Grid container justifyContent="center">
@@ -179,58 +179,6 @@ export function HomePage() {
             </Grid>
           </Paper>
         </Grid>
-        <Grid item xs={12} sx={{ justifyItems: 'center' }}>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: { sm: '100vw', md: 'auto' },
-              flexDirection: { xs: 'column', sm: 'row' },
-            }}>
-            {/* Create button */}
-            <Fab
-              color="primary"
-              onClick={openCreateJobDialog}
-              style={{ marginTop: '1rem' }}>
-              <Tooltip title="Pin a job">
-                <AddIcon />
-              </Tooltip>
-            </Fab>
-
-            <Box>
-              <TabContext value={value}>
-                <Box sx={{ marginBottom: '-20px' }}>
-                  <TabList
-                    onChange={handleChange}
-                    aria-label="slider container">
-                    <Tab
-                      label="Most Recent Pinned"
-                      value="1"
-                      style={{ color: '#c7a602', fontWeight: 'bolder' }}
-                    />
-                    <Tab
-                      label="Saved Jobs"
-                      value="2"
-                      style={{ color: '#c7a602', fontWeight: 'bolder' }}
-                    />
-                  </TabList>
-                </Box>
-                <TabPanel value="1">
-                  {/* recent listed rob */}
-                  <RecentJob
-                    jobs={filteredJobListings}
-                    onCardClick={handleCardClick}
-                  />
-                </TabPanel>
-                <TabPanel value="2">
-                  {/* Saved jobs*/}
-                  <SaveJobs onCardClick={handleCardClick} />
-                </TabPanel>
-              </TabContext>
-            </Box>
-          </Box>
-        </Grid>
 
         {/* Listing Masonry */}
         <Grid item xs={12}>
@@ -238,10 +186,70 @@ export function HomePage() {
           <Button variant="outlined" onClick={openUserProfile}>
             Open User Profile
           </Button>
-          <CardGrid
-            jobListings={filteredJobListings}
-            onCardClick={handleCardClick}
-          />
+          {/* <Fab
+            color="primary"
+            onClick={openCreateJobDialog}
+            style={{ marginTop: '1rem' }}>
+            <Tooltip title="Pin a job">
+              <AddIcon />
+            </Tooltip>
+          </Fab> */}
+          <Box>
+            <TabContext value={value}>
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <TabList onChange={handleChange} aria-label="tabs">
+                  <Tab
+                    label="All Jobs"
+                    value="1"
+                    style={{
+                      color: '#000',
+                      fontWeight: 'bolder',
+                    }}
+                    sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
+                  />
+                  <Tab
+                    label="Most Recent Jobs"
+                    value="2"
+                    style={{ color: '#000', fontWeight: 'bolder' }}
+                    sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
+                  />
+                  <Tab
+                    label="Saved Jobs"
+                    value="3"
+                    style={{ color: '#000', fontWeight: 'bolder' }}
+                    sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
+                  />
+                  <Tab
+                    label="Pin a Job"
+                    value="4"
+                    style={{ color: '#000', fontWeight: 'bolder' }}
+                    sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
+                  />
+                </TabList>
+              </Box>
+              <TabPanel value="1">
+                {' '}
+                <CardGrid
+                  jobListings={filteredJobListings}
+                  onCardClick={handleCardClick}
+                />
+              </TabPanel>
+              <TabPanel value="2">
+                <CardGrid
+                  jobListings={sortedJobs}
+                  onCardClick={handleCardClick}
+                />
+              </TabPanel>
+              <TabPanel value="3">
+                <SaveJobs onCardClick={handleCardClick} />
+              </TabPanel>
+              <TabPanel
+                value="4"
+                sx={{ display: 'flex', justifyContent: 'center' }}>
+                <CreateJob />
+              </TabPanel>
+            </TabContext>
+          </Box>
           {/* Job detail dialog */}
 
           <Dialog

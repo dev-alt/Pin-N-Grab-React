@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../AuthContext';
-import { PickJobCard } from '../CardComponent';
-import { Box, IconButton, useMediaQuery } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import  useJobSave  from '../useJobSave';
+import CardComponent from '../CardComponent';
+import { Box, IconButton, useMediaQuery, Container } from '@mui/material';
 
+import useJobSave from '../useJobSave';
+
+import Masonry from '@mui/lab/Masonry';
 export function SaveJobs({ onCardClick }) {
   const { profile } = useAuth();
   const userId = profile.profile.UserId;
@@ -31,10 +31,10 @@ export function SaveJobs({ onCardClick }) {
     };
     fetchSavedJobs();
   }, [userId]);
-  
+  console.log(savedJobs);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('lg'));
   const isXtraSmallScreen = useMediaQuery((theme) =>
-    theme.breakpoints.down('md')
+    theme.breakpoints.down('md'),
   );
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,54 +61,20 @@ export function SaveJobs({ onCardClick }) {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-      }}
-    >
-      {/* title */}
-
-      {/* Content */}
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        {/* Left arrow */}
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            aria-label="Previous Page"
-            aria-disabled={currentPage === 1}
-            sx={{ height: '20px' }}
-          >
-            <ChevronLeftIcon />
-          </IconButton>
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {/* Recent jobs */}
-          {currentItems.slice(0, 6).map((job) => (
-               <Box key={job.id}>
-                       <PickJobCard
-                job={job.Job}
-                onCardClick={onCardClick}
-                isSaved={savedJobs.some((savedJob) => savedJob.id === job.id)}
-                toggleSaved={() => handleUnsaveJob(job.id)}
-              />
-            </Box>
-          ))}
-        </Box>
-        {/* Right arrow */}
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={indexOfLastItem >= savedJobs.length}
-            aria-label="Next Page"
-            aria-disabled={indexOfLastItem >= savedJobs.length}
-            sx={{ height: '20px' }}
-          >
-            <ChevronRightIcon />
-          </IconButton>
-        </Box>
-      </Box>
-    </div>
+    <Container
+      sx={{
+        justifyContent: 'center',
+        minHeight: 393,
+      }}>
+      <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={0}>
+        {/* Recent jobs */}
+        {savedJobs.slice(0, 6).map((job) => (
+          <Box key={job.id}>
+            <CardComponent job={job.Job} onCardClick={onCardClick} />
+          </Box>
+        ))}
+      </Masonry>
+    </Container>
   );
 }
 
