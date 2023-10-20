@@ -4,12 +4,14 @@ import {
   Typography,
   Paper,
   Stack,
-  Button,
   Grid,
   Box,
   Avatar,
   Divider,
   useMediaQuery,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from '@mui/material';
 import { Close, LocationOn, Favorite } from '@mui/icons-material';
 import locationsData from '../Locations';
@@ -19,6 +21,8 @@ import UserReview from './UserReviews';
 import ImageCarousel from './ImageCarousel';
 import useJobSave from '../useJobSave';
 import { Container } from '@mui/system';
+import ApplyButton from './ApplyButton';
+import { useAuth } from '../../AuthContext';
 
 // Function to get the location name based on locationId
 const getLocationName = (locationId) => {
@@ -69,6 +73,10 @@ const JobDetails = ({ job, onClose }) => {
   const { isSaved, toggleSaved } = useJobSave(job?.id);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [reviews, setReviews] = useState([]);
+  const { profile } = useAuth(); 
+  const [applicationResult, setApplicationResult] = useState({ success: true, message: "" });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
 
   useEffect(() => {
     if (job) {
@@ -103,6 +111,11 @@ const JobDetails = ({ job, onClose }) => {
     ? Math.floor((currentDateTime - createdAtDate) / (1000 * 60 * 60 * 24))
     : 0;
 
+    const handleApplicationSubmitted = (message) => {
+      setApplicationResult(message);
+      setIsDialogOpen(true);
+    };
+    
   // Render the job details and components
   return (
     <Container sx={paperStyle}>
@@ -155,9 +168,9 @@ const JobDetails = ({ job, onClose }) => {
                 fontSize="medium"
                 sx={{
                   cursor: 'pointer',
-                  color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
+                  color: isSaved ? 'red' : 'gray', 
                 }}
-                onClick={toggleSaved} // Toggle the save state on click
+                onClick={toggleSaved} 
               />
             </Grid>
           </Stack>
@@ -257,11 +270,13 @@ const JobDetails = ({ job, onClose }) => {
                   Number of Applicants {job.Applications?.length}
                 </Typography>
 
-                <Button
-                  variant="contained"
-                  sx={{ width: '1rem', marginTop: '20px' }}>
-                  Apply
-                </Button>
+                <ApplyButton job={job} onApplicationSubmitted={handleApplicationSubmitted} />
+                <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+        <DialogTitle>Application Result</DialogTitle>
+        <DialogContent>
+        <Typography variant="body1">{applicationResult.message}</Typography>
+        </DialogContent>
+      </Dialog>
               </Box>
             </Box>
           </Paper>
