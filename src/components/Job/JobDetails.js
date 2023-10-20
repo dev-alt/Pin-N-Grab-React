@@ -76,7 +76,7 @@ const JobDetails = ({ job, onClose }) => {
   const { isSaved, toggleSaved } = useJobSave(job?.id);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [reviews, setReviews] = useState([]);
-  const { profile } = useAuth(); 
+  const { profile } = useAuth();
   const [applicationResult, setApplicationResult] = useState({ success: true, message: "" });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -122,14 +122,18 @@ const JobDetails = ({ job, onClose }) => {
     ? Math.floor((currentDateTime - createdAtDate) / (1000 * 60 * 60 * 24))
     : 0;
 
-    const handleApplicationSubmitted = (message) => {
-      setApplicationResult(message);
-      setIsDialogOpen(true);
-    };
-    
+  const handleApplicationSubmitted = (message) => {
+    setApplicationResult(message);
+    setIsDialogOpen(true);
+  };
+
   // Render the job details and components
   return (
-    <Container sx={paperStyle}>
+    <Container sx={{
+      ...paperStyle,
+      padding: 0,
+      margin: 0,
+    }}>
       {/* Close button */}
       <IconButton sx={closeButtonStyle} onClick={onClose}>
         <Close />
@@ -190,9 +194,9 @@ const JobDetails = ({ job, onClose }) => {
                 fontSize="medium"
                 sx={{
                   cursor: 'pointer',
-                  color: isSaved ? 'red' : 'gray', 
+                  color: isSaved ? 'red' : 'gray',
                 }}
-                onClick={toggleSaved} 
+                onClick={toggleSaved}
               />
             </Grid>
           </Stack>
@@ -295,11 +299,11 @@ const JobDetails = ({ job, onClose }) => {
 
                 <ApplyButton job={job} onApplicationSubmitted={handleApplicationSubmitted} />
                 <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-        <DialogTitle>Application Result</DialogTitle>
-        <DialogContent>
-        <Typography variant="body1">{applicationResult.message}</Typography>
-        </DialogContent>
-      </Dialog>
+                  <DialogTitle>Application Result</DialogTitle>
+                  <DialogContent>
+                    <Typography variant="body1">{applicationResult.message}</Typography>
+                  </DialogContent>
+                </Dialog>
               </Box>
             </Box>
           </Paper>
