@@ -104,8 +104,14 @@ export function HomePage() {
         const response = await fetch('/api/jobs/all');
         if (response.ok) {
           const data = await response.json();
-          setJobListings(data);
-          setFilteredJobListings(data); // Initialize filtered job listings
+
+          // Sort the data by createdAt before setting it
+          const sortedData = data.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+          );
+
+          setJobListings(sortedData);
+          setFilteredJobListings(sortedData); // Initialize filtered job listings with sorted data
         } else {
           console.error('Failed to fetch job listings.');
         }
@@ -120,6 +126,7 @@ export function HomePage() {
   useEffect(() => {
     // Handle filter when selectedCategories  change
     handleCategoryFilter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategories, selectedLocation]);
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
