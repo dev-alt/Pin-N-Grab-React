@@ -23,6 +23,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import locationsData from '../components/Locations';
 import LocationSelect from '../components/LocationSelect';
+import { useAuth } from '../AuthContext';
 
 export function CreateJob({ onClose }) {
   const [title, setTitle] = useState('');
@@ -36,6 +37,7 @@ export function CreateJob({ onClose }) {
   const jobStatus = 'Open';
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [paymentAmountError, setPaymentAmountError] = useState('');
+  const { profile } = useAuth(); 
 
   const openErrorDialog = () => {
     setErrorDialogOpen(true);
@@ -67,6 +69,7 @@ export function CreateJob({ onClose }) {
         paymentAmount,
         jobStatus,
         category_id: selectedCategory,
+        user_id: profile.profile.UserId,
       });
       console.log(response.data);
       console.log('Selected Category ID:', selectedCategory);
