@@ -91,7 +91,7 @@ const months = [
   'December',
 ];
 
-const UserProfileView = () => {
+const UserProfileView = (job) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const [value, setValue] = useState('1');
   const [reviews, setReviews] = useState([]);
@@ -99,10 +99,23 @@ const UserProfileView = () => {
 
   useEffect(() => {
     // Fetch reviews for the user with ID 20
-    fetch(`/api/review/user/20`)
-      .then((response) => response.json())
-      .then((data) => setReviews(data));
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/review/user/${job.job.user_id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setReviews(data);
+        } else {
+          console.error('Failed to fetch job reviews.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    // Call the async function to fetch data
+    fetchData();
+  }, [job.job.user_id]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -110,11 +123,10 @@ const UserProfileView = () => {
 
   useEffect(() => {
     // Fetch user data
-    fetch('/api/users/20/profile')
+    fetch(`/api/users/${job.job.user_id}/profile`)
       .then((response) => response.json())
       .then((data) => setUser(data));
   }, []);
-  console.log(user);
 
   return (
     <Container

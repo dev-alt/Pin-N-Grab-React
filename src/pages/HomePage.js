@@ -96,7 +96,7 @@ export function HomePage() {
     setSelectedLocation('');
     setFilteredJobListings(jobListings);
   };
-
+  // Fetch job listings from the server
   useEffect(() => {
     // Fetch job listings from the server
     const fetchJobListings = async () => {
@@ -130,13 +130,13 @@ export function HomePage() {
   }, [selectedCategories, selectedLocation]);
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
+  //handle tab value
   const [value, setValue] = useState('1');
-
+  //handle tab change
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  //sort data to chronological order
   const sortedJobs = jobListings.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
   );
