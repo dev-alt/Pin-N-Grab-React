@@ -193,14 +193,6 @@ export function HomePage() {
           <Button variant="outlined" onClick={openUserProfile}>
             Open User Profile
           </Button>
-          {/* <Fab
-            color="primary"
-            onClick={openCreateJobDialog}
-            style={{ marginTop: '1rem' }}>
-            <Tooltip title="Pin a job">
-              <AddIcon />
-            </Tooltip>
-          </Fab> */}
           <Box>
             <TabContext value={value}>
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>

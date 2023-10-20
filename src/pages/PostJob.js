@@ -76,7 +76,8 @@ export function CreateJob({ onClose }) {
       console.log('Selected Category ID:', selectedCategory);
 
       if (response.data && response.data.message === 'Job listing created') {
-        onClose();
+        setErrorMessage('Job pinned.');
+        openErrorDialog(); // Open the error dialog;
       } else {
         setErrorMessage('Job creation failed. Please try again.');
         openErrorDialog(); // Open the error dialog
