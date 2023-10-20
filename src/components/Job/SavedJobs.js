@@ -53,6 +53,12 @@ export function SaveJobs({ onCardClick }) {
     setCurrentPage(newPage);
   };
 
+  const handleUnsaveJob = (jobId) => {
+    // Update the state by filtering out the unsaved job
+    setSavedJobs(savedJobs.filter((job) => job.id !== jobId));
+    // Call the unsave function from the useJobSave hook
+    handleJobSave.toggleSaved(jobId);
+  };
 
   return (
     <div
@@ -80,13 +86,13 @@ export function SaveJobs({ onCardClick }) {
           {/* Recent jobs */}
           {currentItems.slice(0, 6).map((job) => (
                <Box key={job.id}>
-               <PickJobCard
-                 job={job.Job}
-                 onCardClick={onCardClick}
-                 isSaved={savedJobs.some((savedJob) => savedJob.id === job.id)}
-                 toggleSaved={() => handleJobSave.toggleSaved(job.id)}
-               />
-             </Box>
+                       <PickJobCard
+                job={job.Job}
+                onCardClick={onCardClick}
+                isSaved={savedJobs.some((savedJob) => savedJob.id === job.id)}
+                toggleSaved={() => handleUnsaveJob(job.id)}
+              />
+            </Box>
           ))}
         </Box>
         {/* Right arrow */}

@@ -5,10 +5,6 @@ import useJobSave from '../useJobSave';
 function SaveButton({ jobId, isSaved }) {
   const { toggleSaved } = useJobSave(jobId); 
 
-  const handleToggleSaved = () => {
-    toggleSaved(jobId); // Pass the jobId to the toggleSaved function
-  };
-
   return (
     <Favorite
     fontSize="medium"
