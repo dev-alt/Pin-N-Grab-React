@@ -1,9 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext'; // Import useAuth to get the user ID
 
 function useJobSave(jobId) {
   const { profile } = useAuth(); // Get the user's profile from the AuthContext
   const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    // Make an initial request to the server to check if the job is saved
+    const checkSavedStatus = async () => {
+      try {
+        const response = await fetch(`/api/users/${profile.profile.UserId}/checkSavedJob/${jobId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setIsSaved(data.isSaved);
+        } else {
+          console.error(`Failed to check saved status for job ${jobId}`);
+        }
+      } catch (error) {
+        console.error(`An error occurred while checking saved status for job ${jobId}:`, error);
+      }
+    };
+
+    checkSavedStatus();
+  }, [profile.profile.UserId, jobId]);
 
   const toggleSaved = async () => {
     // Prepare the request data
