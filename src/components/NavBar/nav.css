@@ -11,7 +11,7 @@
   }
   
   .blinking {
-    animation: blink 0.8s infinite;
+    animation: blink 2s infinite;
   }
 
   .blinking:hover{
