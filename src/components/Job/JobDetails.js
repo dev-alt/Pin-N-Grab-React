@@ -117,7 +117,7 @@ const JobDetails = ({ job, onClose }) => {
 
   // Render the job details and components
   return (
-    <Container sx={paperStyle}>
+    <Container sx={{ ...paperStyle, margin: 0 }}>
       {/* Close button */}
       <IconButton sx={closeButtonStyle} onClick={onClose}>
         <Close />
