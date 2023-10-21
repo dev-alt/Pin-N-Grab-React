@@ -117,6 +117,8 @@ const UserProfileView = (job) => {
     fetchData();
   }, [job.job.user_id]);
 
+  console.log(job.job.user_id);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

@@ -101,11 +101,7 @@ const JobDetails = ({ job, onClose }) => {
 
   // Render the job details and components
   return (
-    <Container sx={{
-      ...paperStyle,
-      padding: 0,
-      margin: 0,
-    }}>
+    <Container sx={{ ...paperStyle, margin: 0 }}>
       {/* Close button */}
       <IconButton sx={closeButtonStyle} onClick={onClose}>
         <Close />
@@ -295,7 +291,9 @@ const JobDetails = ({ job, onClose }) => {
                 <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
                   <DialogTitle>Application Result</DialogTitle>
                   <DialogContent>
-                    <Typography variant="body1">{applicationResult.message}</Typography>
+                    <Typography variant="body1">
+                      {applicationResult.message}
+                    </Typography>
                   </DialogContent>
                 </Dialog>
               </Box>

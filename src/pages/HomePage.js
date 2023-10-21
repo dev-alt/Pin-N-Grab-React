@@ -202,32 +202,31 @@ export function HomePage() {
                     value="1"
                     style={{
                       color: '#000',
-                      fontWeight: 'bolder',
                     }}
                     sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
                   />
                   <Tab
                     label="Most Recent Jobs"
                     value="2"
-                    style={{ color: '#000', fontWeight: 'bolder' }}
+                    style={{ color: '#000' }}
                     sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
                   />
                   <Tab
                     label="Saved Jobs"
                     value="3"
-                    style={{ color: '#000', fontWeight: 'bolder' }}
+                    style={{ color: '#000' }}
                     sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
                   />
-                                    <Tab
+                  <Tab
                     label="Applied Jobs"
                     value="4"
-                    style={{ color: '#000', fontWeight: 'bolder' }}
+                    style={{ color: '#000' }}
                     sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
                   />
                   <Tab
                     label="Pin a Job"
-                    value="5"
-                    style={{ color: '#000', fontWeight: 'bolder' }}
+                    value="4"
+                    style={{ color: '#000' }}
                     sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
                   />
                 </TabList>

@@ -71,18 +71,18 @@ function App() {
     if (!token) {
       return false;
     }
-  
+
     try {
       const decodedToken = jwt_decode(token); // Decode the JWT
       const currentTime = Date.now() / 1000; // Convert current time to seconds
-  
+
       // Check if the token has expired
       if (decodedToken.exp && decodedToken.exp < currentTime) {
         return false;
       }
-  
+
       // Additional checks can be performed here (e.g., token revocation)
-  
+
       return true; // Token is valid
     } catch (error) {
       console.error('Error while verifying token:', error);
@@ -90,7 +90,6 @@ function App() {
     }
   }
 
-  
   return (
     <ThemeProvider theme={theme}>
       <Router>

@@ -7,7 +7,7 @@ import {
   Divider,
   Dialog,
 } from '@mui/material';
-import UserProfileView from '../Profile/UserProfileView';
+// import UserProfileView from '../Profile/UserProfileView';
 
 const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
   // For user profile dialog
