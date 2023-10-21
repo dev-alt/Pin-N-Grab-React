@@ -6,6 +6,7 @@ import {
   TextField,
   Grow,
   useMediaQuery,
+  Button,
 } from '@mui/material';
 
 import CardGrid from '../components/CardGrid';
@@ -20,6 +21,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import Email from '../pages/Email';
 
 export function HomePage() {
   const [jobListings, setJobListings] = useState([]);
@@ -29,6 +31,7 @@ export function HomePage() {
   const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
+  const [isMessageOpen, setMessageOpen] = useState(false);
 
   const openCreateJobDialog = () => {
     setIsCreateJobOpen(true);
@@ -37,6 +40,15 @@ export function HomePage() {
   const closeCreateJobDialog = () => {
     setIsCreateJobOpen(false);
   };
+
+  const closeMessageDialog = () => {
+    setMessageOpen(false);
+  };
+
+  const openMessageDialog = () => {
+    setMessageOpen(true);
+  };
+
   const handleCardClick = (job) => {
     try {
       console.log('Selected Job when clicking a card:', job);
@@ -175,7 +187,7 @@ export function HomePage() {
             </Grid>
           </Paper>
         </Grid>
-
+<Button onClick={openMessageDialog}>Message</Button>
         {/* Listing Masonry */}
         <Grid item xs={12}>
           <Box>
@@ -239,6 +251,17 @@ export function HomePage() {
           </Dialog>
         </Grid>
         {/* create job dialog */}
+        <Dialog
+          open={isMessageOpen}
+          onClose={closeMessageDialog}
+          TransitionComponent={Grow}
+          transitionDuration={500}
+          maxWidth="md"
+          fullWidth
+          sx={{ height: '100vh' }}
+        >
+          <Email onClose={closeMessageDialog} />
+        </Dialog>
         <Dialog
           open={isCreateJobOpen}
           onClose={closeCreateJobDialog}
