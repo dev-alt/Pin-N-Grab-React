@@ -14,7 +14,6 @@ const UserReview = ({
   date,
   review,
   rating,
-  jobReviewed,
   userId,
 }) => {
   // For user profile dialog
@@ -66,7 +65,7 @@ const UserReview = ({
         maxWidth="md"
         fullWidth
         sx={{
-          height: '80vh', // Customize the height as needed (80% of the viewport height in this example)
+          height: '80vh',
           mt: 5,
         }}
       >
