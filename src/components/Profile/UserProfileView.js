@@ -26,6 +26,20 @@ import {
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import UserReview from '../Job/UserReviews';
 
+const UserProfileView = ({ userId }) => {
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const [value, setValue] = useState('1');
+  const [reviews, setReviews] = useState([]);
+  const [user, setUser] = useState(null); // State to store user data
+  const hasListedJob = true; // You can change this value as needed
+
+const UserProfileView = ({ userId }) => {
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const [value, setValue] = useState('1');
+  const [reviews, setReviews] = useState([]);
+  const [user, setUser] = useState(null); // State to store user data
+  const hasListedJob = true; // You can change this value as needed
+
 const jobData = {
   JobName: 'Job Name',
   Deadline: 'dealine date',
@@ -46,7 +60,8 @@ const JobCard = ({ data, iconComponent }) => {
         </CardContent>
         <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
           <Box
-            sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}>
+            sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}
+          >
             <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
             <Typography>{data.Deadline}</Typography>
           </Box>
@@ -60,21 +75,21 @@ const JobCard = ({ data, iconComponent }) => {
   );
 };
 
-const getDaySuffix = (day) => {
-  if (day >= 11 && day <= 13) {
-    return 'th';
-  }
-  switch (day % 10) {
-    case 1:
-      return 'st';
-    case 2:
-      return 'nd';
-    case 3:
-      return 'rd';
-    default:
+  const getDaySuffix = (day) => {
+    if (day >= 11 && day <= 13) {
       return 'th';
-  }
-};
+    }
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  };
 
 const months = [
   'January',
@@ -91,15 +106,12 @@ const months = [
   'December',
 ];
 
-const UserProfileView = (userId, job) => {
+const UserProfileView = (job) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const [value, setValue] = useState('1');
   const [reviews, setReviews] = useState([]);
   const [user, setUser] = useState(null); // State to store user data
-  const [openedUserProfile, setOpenedUserProfile] = useState(null);
-  const openUserProfile = (userId) => {
-    setOpenedUserProfile(userId);
-  };
+
   useEffect(() => {
     // Fetch reviews for the user with ID 20
     const fetchData = async () => {
@@ -307,7 +319,7 @@ const UserProfileView = (userId, job) => {
                   onChange={handleChange}
                   aria-label="lab API tabs example">
                   <Tab label="From Clients" value="1" />
-                  <Tab label="From Workerso" value="2" />
+                  <Tab label="From Workers" value="2" />
                 </TabList>
               </Box>
               <TabPanel value="1">
@@ -333,6 +345,7 @@ const UserProfileView = (userId, job) => {
                       date={review.createdAt}
                       review={review.reviewText}
                       rating={review.rating}
+                      userId={review.Job.User.id}
                     />
                   ))}
               </TabPanel>

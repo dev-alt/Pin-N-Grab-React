@@ -6,8 +6,6 @@ import {
   TextField,
   Grow,
   useMediaQuery,
-  Button,
-  Tooltip,
 } from '@mui/material';
 
 import CardGrid from '../components/CardGrid';
@@ -17,7 +15,6 @@ import JobDetails from '../components/Job/JobDetails';
 import CategoryFilter from '../components/CategoryFilter';
 import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
-import UserProfileView from '../components/Profile/UserProfileView';
 import SaveJobs from '../components/Job/SavedJobs';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -32,15 +29,7 @@ export function HomePage() {
   const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
-  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
 
-  const openUserProfile = () => {
-    setIsUserProfileOpen(true);
-  };
-
-  const closeUserProfile = () => {
-    setIsUserProfileOpen(false);
-  };
   const openCreateJobDialog = () => {
     setIsCreateJobOpen(true);
   };
@@ -190,10 +179,6 @@ export function HomePage() {
 
         {/* Listing Masonry */}
         <Grid item xs={12}>
-          {/* testing button */}
-          <Button variant="outlined" onClick={openUserProfile}>
-            Open User Profile
-          </Button>
           <Box>
             <TabContext value={value}>
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -226,7 +211,7 @@ export function HomePage() {
                   />
                   <Tab
                     label="Pin a Job"
-                    value="4"
+                    value="5"
                     style={{ color: '#000' }}
                     sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
                   />
@@ -277,15 +262,6 @@ export function HomePage() {
           fullWidth
         >
           <CreateJob onClose={closeCreateJobDialog} />
-        </Dialog>
-        {/* testing button dialog */}
-        <Dialog
-          open={isUserProfileOpen}
-          onClose={closeUserProfile}
-          maxWidth="lg"
-          fullWidth
-        >
-          <UserProfileView />
         </Dialog>
       </Grid>
     </Box>

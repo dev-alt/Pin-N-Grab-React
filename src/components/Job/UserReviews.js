@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import UserProfileView from '../Profile/UserProfileView';
 
-const UserReview = ({ reviewUserName, date, review, rating }) => {
+const UserReview = ({ reviewUserName, date, review, rating, userId }) => {
   // For user profile dialog
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   const openUserProfile = () => {
@@ -20,6 +20,9 @@ const UserReview = ({ reviewUserName, date, review, rating }) => {
   };
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
+  const reviewerId = userId;
+
   return (
     <div key={review.id}>
       <Box
@@ -46,16 +49,18 @@ const UserReview = ({ reviewUserName, date, review, rating }) => {
           isSmallScreen
             ? { marginRight: '10px', marginLeft: '10px', marginBottom: '40px' }
             : { marginLeft: '20px', marginBottom: '40px', marginRight: '40px' }
-        }>
-        {review}
-      </Typography>
+        }></Typography>
       <Divider variant="fullwidth" light />
       <Dialog
         open={isUserProfileOpen}
         onClose={closeUserProfile}
-        maxWidth="lg"
-        fullWidth>
-        <UserProfileView />
+        maxWidth="md"
+        fullWidth
+        sx={{
+          height: '80vh',
+          mt: 5,
+        }}>
+        <UserProfileView userId={reviewerId} />
       </Dialog>
     </div>
   );

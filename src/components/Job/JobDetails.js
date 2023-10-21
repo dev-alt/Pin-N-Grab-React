@@ -369,6 +369,8 @@ const JobDetails = ({ job, onClose }) => {
                 date={review.createdAt}
                 review={review.reviewText}
                 rating={review.rating}
+                jobReviewed={review}
+                userId={review.Job.User.id}
               />
             </Grid>
           ))}
@@ -378,10 +380,14 @@ const JobDetails = ({ job, onClose }) => {
       <Dialog
         open={isUserProfileOpen}
         onClose={closeUserProfile}
-        maxWidth="lg"
+        maxWidth="md"
         fullWidth
+        sx={{
+          height: '80vh',
+          mt: 5,
+        }}
       >
-        <UserProfileView job={job} />
+        <UserProfileView userId={job.user_id} />
       </Dialog>
     </Container>
   );

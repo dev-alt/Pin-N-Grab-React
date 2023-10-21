@@ -89,7 +89,6 @@ export default function ProfilePage() {
     );
   };
 
-  console.log(profile);
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
