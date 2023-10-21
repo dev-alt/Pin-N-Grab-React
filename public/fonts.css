@@ -1,8 +1,15 @@
 @font-face {
   font-family: 'Lato';
   font-style: normal;
-  font-weight: 100;
+  font-weight: 300;
   src: local('Lato'), local('Lato'), url('./fonts/Lato.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Black';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato-Black'), local('Lato Black'), url('./fonts/Lato-Black.ttf') format('truetype');
 }
 
 @font-face {
