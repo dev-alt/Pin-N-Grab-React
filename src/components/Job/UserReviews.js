@@ -7,9 +7,9 @@ import {
   Divider,
   Dialog,
 } from '@mui/material';
-// import UserProfileView from '../Profile/UserProfileView';
+import UserProfileView from '../Profile/UserProfileView';
 
-const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
+const UserReview = ({ reviewUserName, date, review, rating }) => {
   // For user profile dialog
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   const openUserProfile = () => {
@@ -28,8 +28,7 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
           alignItems: 'center',
           gap: '10px',
           marginBottom: '2px',
-        }}
-      >
+        }}>
         <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
         <Box>
           <Typography variant="h6">{reviewUserName}</Typography>
@@ -47,8 +46,7 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
           isSmallScreen
             ? { marginRight: '10px', marginLeft: '10px', marginBottom: '40px' }
             : { marginLeft: '20px', marginBottom: '40px', marginRight: '40px' }
-        }
-      >
+        }>
         {review}
       </Typography>
       <Divider variant="fullwidth" light />
@@ -56,9 +54,8 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
         open={isUserProfileOpen}
         onClose={closeUserProfile}
         maxWidth="lg"
-        fullWidth
-      >
-        {/* <UserProfileView job={review.Job} /> */}
+        fullWidth>
+        <UserProfileView />
       </Dialog>
     </div>
   );
