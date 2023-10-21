@@ -10,6 +10,7 @@ import {
   Dialog,
   Grow,
   Tooltip,
+  Button,
 } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
@@ -19,6 +20,8 @@ import MailMenu from './MailMenu';
 import { useAuth } from '../../AuthContext';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import CreateJob from '../../pages/PostJob';
+import './nav.css';
+import PushPinIcon from '@mui/icons-material/PushPin';
 
 export function PrimarySearchAppBar() {
   const { profile } = useAuth(); // Removed isLoggedIn
@@ -126,17 +129,25 @@ export function PrimarySearchAppBar() {
             {/* Desktop menu (notifications, mail, user account) */}
             <Box sx={{ display: 'flex' }}>
               <Tooltip title="Pin a job">
-                <IconButton>
-                  <NoteAddIcon
-                    size="large"
-                    aria-label="Pinned a job"
-                    aria-controls={menuId}
-                    aria-haspopup="true"
-                    onClick={openCreateJobDialog}
-                    sx={{ color: 'rgba(20, 8, 14, 1)' }}
-                  />
-                </IconButton>
+                <Button
+                  startIcon={<PushPinIcon />}
+                  sx={{ color: '#15abab', fontSize: '20px' }}
+                  variant="outlined"
+                  className="blinking"
+                  // startIcon={
+                  //   <NoteAddIcon
+                  //     aria-label="Pinned a job"
+                  //     aria-controls={menuId}
+                  //     aria-haspopup="true"
+                  //     onClick={openCreateJobDialog}
+                  //     sx={{ fontSize: '36px' }}
+                  //   />
+                  // }
+                >
+                  Pin a Job
+                </Button>
               </Tooltip>
+
               <NotificationsMenu />
               <MailMenu />
               <IconButton
