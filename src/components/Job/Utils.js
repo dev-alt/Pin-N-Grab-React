@@ -44,15 +44,15 @@ export const labelStyle = {
 
 export const images = [
     {
-        imgUrl: 'https://picsum.photos/id/0/5000/3333',
+        imgUrl: '0-5000x3333.jpg',
         alt: 'Image 1 Alt Text',
     },
     {
-        imgUrl: 'https://picsum.photos/id/4/5000/3333',
+        imgUrl: '4-5000x3333.jpg',
         alt: 'Image 2 Alt Text',
     },
     {
-        imgUrl: 'https://picsum.photos/id/8/5000/3333',
+        imgUrl: '8-5000x3333.jpg',
         alt: 'Image 3 Alt Text',
     },
     // Add more objects as needed
