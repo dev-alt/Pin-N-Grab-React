@@ -218,6 +218,12 @@ export function HomePage() {
                     sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
                   />
                   <Tab
+                    label="Applied Jobs"
+                    value="4"
+                    style={{ color: '#000' }}
+                    sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
+                  />
+                  <Tab
                     label="Pin a Job"
                     value="4"
                     style={{ color: '#000' }}
@@ -242,7 +248,7 @@ export function HomePage() {
                 <SaveJobs onCardClick={handleCardClick} />
               </TabPanel>
               <TabPanel
-                value="4"
+                value="5"
                 sx={{ display: 'flex', justifyContent: 'center' }}>
                 <CreateJob />
               </TabPanel>
