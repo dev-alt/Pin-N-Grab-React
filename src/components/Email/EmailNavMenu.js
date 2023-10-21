@@ -12,14 +12,11 @@ const EmailNavMenu = ({ onTabChange }) => {
       <IconButton
         variant="contained"
         color="primary"
-        fullWidth
         onClick={() => handleTabChange('compose')}>
         <MapsUgcIcon />
       </IconButton>
       <IconButton
         color="primary"
-        orientation="vertical"
-        variant="scrollable"
         value={false}
         onClick={() => handleTabChange('inbox')}>
         <MarkAsUnreadIcon />
