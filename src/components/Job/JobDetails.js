@@ -383,8 +383,12 @@ const JobDetails = ({ job, onClose }) => {
       <Dialog
         open={isUserProfileOpen}
         onClose={closeUserProfile}
-        maxWidth="lg"
+        maxWidth="md"
         fullWidth
+        sx={{
+          height: '80vh', // Customize the height as needed (80% of the viewport height in this example)
+          mt: 5
+        }}
       >
         <UserProfileView userId={job.user_id} />
       </Dialog>

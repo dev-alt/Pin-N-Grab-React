@@ -69,8 +69,12 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed, userId 
       <Dialog
         open={isUserProfileOpen}
         onClose={closeUserProfile}
-        maxWidth="lg"
+        maxWidth="md"
         fullWidth
+        sx={{
+          height: '80vh', // Customize the height as needed (80% of the viewport height in this example)
+          mt: 5
+        }}
       >
        
        <UserProfileView userId={reviewerId} />
