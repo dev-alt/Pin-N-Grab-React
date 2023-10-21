@@ -17,6 +17,7 @@ import CategoryFilter from '../components/CategoryFilter';
 import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
 import SaveJobs from '../components/Job/SavedJobs';
+import AppliedJobs from '../components/Job/AppliedJobs';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -236,6 +237,9 @@ export function HomePage() {
               </TabPanel>
               <TabPanel value="3">
                 <SaveJobs onCardClick={handleCardClick} />
+              </TabPanel>
+              <TabPanel value="4">
+                <AppliedJobs onCardClick={handleCardClick} />
               </TabPanel>
             </TabContext>
           </Box>
