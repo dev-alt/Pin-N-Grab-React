@@ -18,7 +18,6 @@ import SignOutButton from '../Member/SignOut';
 import NotificationsMenu from './NotificaitonsMenu.js';
 import MailMenu from './MailMenu';
 import { useAuth } from '../../AuthContext';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import CreateJob from '../../pages/PostJob';
 import './nav.css';
 import PushPinIcon from '@mui/icons-material/PushPin';
@@ -134,15 +133,7 @@ export function PrimarySearchAppBar() {
                   sx={{ color: '#15abab', fontSize: '20px' }}
                   variant="outlined"
                   className="blinking"
-                  // startIcon={
-                  //   <NoteAddIcon
-                  //     aria-label="Pinned a job"
-                  //     aria-controls={menuId}
-                  //     aria-haspopup="true"
-                  //     onClick={openCreateJobDialog}
-                  //     sx={{ fontSize: '36px' }}
-                  //   />
-                  // }
+                  onClick={openCreateJobDialog}
                 >
                   Pin a Job
                 </Button>
