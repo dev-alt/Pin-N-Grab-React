@@ -13,63 +13,34 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Container
 } from '@mui/material';
 import { Close, LocationOn, Favorite } from '@mui/icons-material';
-import locationsData from '../Locations';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import UserReview from './UserReviews';
 import ImageCarousel from './ImageCarousel';
 import useJobSave from '../useJobSave';
-import { Container } from '@mui/system';
 import ApplyButton from './ApplyButton';
 import { useAuth } from '../../AuthContext';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import UserProfileView from '../Profile/UserProfileView';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { getLocationName, renderApplicantsList, paperStyle, closeButtonStyle, labelStyle, images } from './Utils';
 
-// Function to get the location name based on locationId
-const getLocationName = (locationId) => {
-  const location = locationsData.find((item) => item.id === locationId);
-  if (location) {
-    return `${location.cityName}, ${location.regionName}`;
-  } else {
-    return 'Unknown Location';
+
+async function fetchReviewsForUser(userId, setReviews) {
+  try {
+    const response = await fetch(`/api/review/user/${userId}`);
+    const data = await response.json();
+    setReviews(data);
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
   }
-};
-
-// Styling definitions
-const paperStyle = {
-  padding: '1rem',
-  margin: '1rem',
-  boxShadow: '0px 0px 15px 5px rgba(0, 0, 0, 0.2)',
-};
-
-const closeButtonStyle = {
-  position: 'absolute',
-  top: '10px',
-  right: '10px',
-};
-
-const labelStyle = {
-  fontWeight: 'bold',
-};
-
-// Static image data
-const images = [
-  {
-    imgUrl: 'https://picsum.photos/id/0/5000/3333',
-    alt: 'Image 1 Alt Text',
-  },
-  {
-    imgUrl: 'https://picsum.photos/id/4/5000/3333',
-    alt: 'Image 2 Alt Text',
-  },
-  {
-    imgUrl: 'https://picsum.photos/id/8/5000/3333',
-    alt: 'Image 3 Alt Text',
-  },
-  // Add more objects as needed
-];
+}
 
 // React component for displaying job details
 const JobDetails = ({ job, onClose }) => {
@@ -77,11 +48,15 @@ const JobDetails = ({ job, onClose }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [reviews, setReviews] = useState([]);
   const { profile } = useAuth();
-  const [applicationResult, setApplicationResult] = useState({ success: true, message: "" });
+  const [applicationResult, setApplicationResult] = useState({ success: true, message: '' });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  // For user profile dialog
+  const isOwner = job && profile && job.user_id === profile.profile.UserId;
+  const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
+  const currentDateTime = new Date();
+  const createdAtDate = job ? new Date(job.createdAt) : null;
+  const daysSincePosted = createdAtDate ? Math.floor((currentDateTime - createdAtDate) / (1000 * 60 * 60 * 24)) : 0;
+
   const openUserProfile = () => {
     setIsUserProfileOpen(true);
   };
@@ -91,14 +66,21 @@ const JobDetails = ({ job, onClose }) => {
 
   useEffect(() => {
     if (job) {
-      // Fetch reviews for the user associated with the selected job
-      fetch(`/api/review/user/${job.user_id}`)
-        .then((response) => response.json())
-        .then((data) => setReviews(data));
+      fetchReviewsForUser(job.user_id, setReviews);
     } else {
-      setReviews([]); // Clear the reviews if job is null
+      setReviews([]);
     }
   }, [job]);
+
+  const handleApplicationSubmitted = (message) => {
+    setApplicationResult(message);
+    setIsDialogOpen(true);
+  };
+
+  const handleShowApplicants = () => {
+    setIsAccordionExpanded(!isAccordionExpanded);
+  };
+
 
   if (!job) {
     return (
@@ -116,16 +98,6 @@ const JobDetails = ({ job, onClose }) => {
     );
   }
 
-  const currentDateTime = new Date();
-  const createdAtDate = job ? new Date(job.createdAt) : null;
-  const daysSincePosted = createdAtDate
-    ? Math.floor((currentDateTime - createdAtDate) / (1000 * 60 * 60 * 24))
-    : 0;
-
-  const handleApplicationSubmitted = (message) => {
-    setApplicationResult(message);
-    setIsDialogOpen(true);
-  };
 
   // Render the job details and components
   return (
@@ -297,7 +269,29 @@ const JobDetails = ({ job, onClose }) => {
                   Number of Applicants {job.Applications?.length}
                 </Typography>
 
-                <ApplyButton job={job} onApplicationSubmitted={handleApplicationSubmitted} />
+                {job ? (
+                  isOwner ? (
+                    <Container>
+                    <Accordion expanded={isAccordionExpanded} onChange={() => { }}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        onClick={handleShowApplicants}
+                      >
+                        <Typography>Applicants</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        {renderApplicantsList(job)}
+                      </AccordionDetails>
+                    </Accordion>
+                  </Container>
+                  ) : (
+                    <ApplyButton job={job} onApplicationSubmitted={handleApplicationSubmitted} />
+                  )
+                ) : (
+                  <p>Loading...</p>
+                )
+                }
+
                 <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
                   <DialogTitle>Application Result</DialogTitle>
                   <DialogContent>

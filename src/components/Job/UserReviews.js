@@ -18,7 +18,6 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
   const closeUserProfile = () => {
     setIsUserProfileOpen(false);
   };
-  console.log(review);
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
