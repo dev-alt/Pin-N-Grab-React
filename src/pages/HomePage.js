@@ -187,7 +187,7 @@ export function HomePage() {
             </Grid>
           </Paper>
         </Grid>
-<Button onClick={openMessageDialog}>Message</Button>
+        <Button onClick={openMessageDialog}>Message</Button>
         {/* Listing Masonry */}
         <Grid item xs={12}>
           <Box>
@@ -256,10 +256,9 @@ export function HomePage() {
           onClose={closeMessageDialog}
           TransitionComponent={Grow}
           transitionDuration={500}
-          maxWidth="md"
+          maxWidth="sm"
           fullWidth
-          sx={{ height: '100vh' }}
-        >
+          sx={{ height: '100vh' }}>
           <Email onClose={closeMessageDialog} />
         </Dialog>
         <Dialog

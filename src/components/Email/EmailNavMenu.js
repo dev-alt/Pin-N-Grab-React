@@ -1,30 +1,30 @@
 import React from 'react';
-import { Button, Paper, Tab, Tabs } from '@mui/material';
-
+import { Button, IconButton, Paper, Tab, Tabs, Box } from '@mui/material';
+import MapsUgcIcon from '@mui/icons-material/MapsUgc';
+import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
 const EmailNavMenu = ({ onTabChange }) => {
   const handleTabChange = (tabName) => {
     onTabChange(tabName);
   };
 
   return (
-    <Paper elevation={3} sx={{ padding: '16px' }}>
-      <Button
+    <Box sx={{ display: 'flex', alignItems: 'centre', marginLeft: '20px' }}>
+      <IconButton
         variant="contained"
         color="primary"
         fullWidth
-        onClick={() => handleTabChange('compose')}
-      >
-        Compose
-      </Button>
-      <Tabs
-        textColor="primary"
+        onClick={() => handleTabChange('compose')}>
+        <MapsUgcIcon />
+      </IconButton>
+      <IconButton
+        color="primary"
         orientation="vertical"
         variant="scrollable"
         value={false}
-      >
-        <Tab label="Inbox" onClick={() => handleTabChange('inbox')} />
-      </Tabs>
-    </Paper>
+        onClick={() => handleTabChange('inbox')}>
+        <MarkAsUnreadIcon />
+      </IconButton>
+    </Box>
   );
 };
 

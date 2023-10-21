@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Container, CssBaseline, Grid, Paper, Typography } from '@mui/material';
+import {
+  Container,
+  CssBaseline,
+  Grid,
+  Paper,
+  Typography,
+  Box,
+} from '@mui/material';
 import EmailCompose from '../components/Email/EmailCompose';
 import EmailInbox from '../components/Email/EmailInbox';
 import EmailContent from '../components/Email/EmailContent';
@@ -23,41 +30,30 @@ const Email = () => {
   return (
     <Container sx={{ margin: 0 }}>
       <CssBaseline />
-      <Paper
-        elevation={6}
-        sx={{ borderRadius: '20px', padding: '16px', mt: '16px' }}
-      >
-        <Typography variant="h5" gutterBottom>
+      <Box sx={{ display: 'flex', alignItems: 'centre' }}>
+        <Typography variant="h5" gutterBottom sx={{ paddingTop: '20px' }}>
           Messages
         </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={3}>
-            {/* Navigation Menu */}
-            <EmailNavMenu
-              onTabChange={handleTabChange}
-              selectedTab={selectedTab}
-            />
-          </Grid>
-          <Grid item xs={9}>
-            {/* Content Area */}
-            <Paper elevation={3} sx={{ padding: '16px', height: '500px' }}>
-              {selectedTab === 'compose' ? (
-                <EmailCompose />
-              ) : (
-                <div>
-                  {selectedEmail ? (
-                    <EmailContent email={selectedEmail} />
-                  ) : (
-                    <EmailInbox
-                      onEmailClick={handleEmailClick}
-                      maxHeight="400px" // Set the max height for the email list
-                    />
-                  )}
-                </div>
-              )}
-            </Paper>
-          </Grid>
-        </Grid>
+
+        {/* Navigation Menu */}
+        <EmailNavMenu onTabChange={handleTabChange} selectedTab={selectedTab} />
+      </Box>
+      {/* Content Area */}
+      <Paper elevation={0} sx={{ padding: '16px', height: '500px' }}>
+        {selectedTab === 'compose' ? (
+          <EmailCompose />
+        ) : (
+          <div>
+            {selectedEmail ? (
+              <EmailContent email={selectedEmail} />
+            ) : (
+              <EmailInbox
+                onEmailClick={handleEmailClick}
+                maxHeight="400px" // Set the max height for the email list
+              />
+            )}
+          </div>
+        )}
       </Paper>
     </Container>
   );

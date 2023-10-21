@@ -74,9 +74,9 @@ const ComposeEmail = () => {
 
   return (
     <Container maxWidth="lg">
-      <Paper elevation={3} sx={{ padding: '16px' }}>
-        <Typography variant="h5" gutterBottom>
-          Compose new message
+      <Paper elevation={0} sx={{ padding: '1px' }}>
+        <Typography variant="h6" gutterBottom>
+          New message
         </Typography>
 
         <Autocomplete
@@ -114,8 +114,7 @@ const ComposeEmail = () => {
         <Button
           variant="contained"
           color="secondary"
-          sx={{ marginRight: '8px' }}
-        >
+          sx={{ marginRight: '8px' }}>
           Cancel
         </Button>
 

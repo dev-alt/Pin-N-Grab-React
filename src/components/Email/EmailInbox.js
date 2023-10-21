@@ -7,6 +7,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Divider,
 } from '@mui/material';
 import { useAuth } from '../../AuthContext';
 
@@ -24,7 +25,7 @@ const EmailInbox = ({ onEmailClick }) => {
             headers: {
               Authorization: userToken,
             },
-          }
+          },
         );
 
         if (response.ok) {
@@ -47,33 +48,28 @@ const EmailInbox = ({ onEmailClick }) => {
 
   return (
     <div>
-      <Container maxWidth="lg">
-        <Paper elevation={3} sx={{ padding: '16px' }}>
-          <List>
-            {emails.map((email) => (
-              <ListItem
-                key={email.id}
-                onClick={() => handleEmailClick(email)}
-                sx={{ cursor: 'pointer' }}
-              >
-                <ListItemAvatar>
-                  <Avatar alt="Avatar" src={email.sender.senderAvatar} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={email.subject}
-                  secondary={
-                    <>
-                      {email.sender.username}
-                      <br />
-                      {email.date}
-                    </>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Paper>
-      </Container>
+      <List>
+        {emails.map((email) => (
+          <ListItem
+            key={email.id}
+            onClick={() => handleEmailClick(email)}
+            sx={{ cursor: 'pointer' }}>
+            <ListItemAvatar>
+              <Avatar alt="Avatar" src={email.sender.senderAvatar} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={email.subject}
+              secondary={
+                <>
+                  {email.sender.username}
+                  <br />
+                  {email.date}
+                </>
+              }
+            />
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 };
