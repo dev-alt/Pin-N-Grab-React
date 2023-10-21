@@ -226,7 +226,7 @@ export function HomePage() {
                   />
                   <Tab
                     label="Pin a Job"
-                    value="4"
+                    value="5"
                     style={{ color: '#000' }}
                     sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
                   />
