@@ -30,7 +30,6 @@ export function HomePage() {
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
 
-
   const openCreateJobDialog = () => {
     setIsCreateJobOpen(true);
   };

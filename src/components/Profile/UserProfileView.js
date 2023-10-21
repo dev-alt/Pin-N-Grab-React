@@ -50,7 +50,11 @@ const UserProfileView = ({ userId }) => {
           </CardContent>
           <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
             <Box
-              sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                marginRight: '30px',
+              }}
             >
               <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
               <Typography>{data.Deadline}</Typography>

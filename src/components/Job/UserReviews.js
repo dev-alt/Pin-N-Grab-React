@@ -9,7 +9,14 @@ import {
 } from '@mui/material';
 import UserProfileView from '../Profile/UserProfileView';
 
-const UserReview = ({ reviewUserName, date, review, rating, jobReviewed, userId }) => {
+const UserReview = ({
+  reviewUserName,
+  date,
+  review,
+  rating,
+  jobReviewed,
+  userId,
+}) => {
   // For user profile dialog
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   const openUserProfile = () => {
@@ -19,21 +26,10 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed, userId 
     setIsUserProfileOpen(false);
   };
 
-  console.log(`UserReview Props:
-  reviewUserName: ${reviewUserName},
-  date: ${date},
-  review: ${review},
-  rating: ${rating},
-  jobReviewed: ${JSON.stringify(jobReviewed)},
-  userId: ${userId}
-`);
-
-
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   const reviewerId = userId;
 
-  console.log("reviewerId",reviewerId)
   return (
     <div key={review.id}>
       <Box
@@ -62,9 +58,7 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed, userId 
             ? { marginRight: '10px', marginLeft: '10px', marginBottom: '40px' }
             : { marginLeft: '20px', marginBottom: '40px', marginRight: '40px' }
         }
-      >
-        
-      </Typography>
+      ></Typography>
       <Divider variant="fullwidth" light />
       <Dialog
         open={isUserProfileOpen}
@@ -73,11 +67,10 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed, userId 
         fullWidth
         sx={{
           height: '80vh', // Customize the height as needed (80% of the viewport height in this example)
-          mt: 5
+          mt: 5,
         }}
       >
-       
-       <UserProfileView userId={reviewerId} />
+        <UserProfileView userId={reviewerId} />
       </Dialog>
     </div>
   );

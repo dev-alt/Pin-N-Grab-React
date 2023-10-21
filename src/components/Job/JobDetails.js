@@ -360,9 +360,6 @@ const JobDetails = ({ job, onClose }) => {
         </Box>
 
         {/* User reviews */}
-
-        {console.log("find review ids job?",job)}
-        {console.log("find review ids reviewsjob?",reviews)}
         <Grid container sx={{ marginRight: '20px', marginTop: '40px' }}>
           {reviews.map((review) => (
             <Grid item xs={12} sm={6} key={review.id}>
@@ -386,8 +383,8 @@ const JobDetails = ({ job, onClose }) => {
         maxWidth="md"
         fullWidth
         sx={{
-          height: '80vh', // Customize the height as needed (80% of the viewport height in this example)
-          mt: 5
+          height: '80vh',
+          mt: 5,
         }}
       >
         <UserProfileView userId={job.user_id} />
