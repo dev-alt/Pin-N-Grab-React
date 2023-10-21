@@ -9,13 +9,7 @@ import {
 } from '@mui/material';
 import UserProfileView from '../Profile/UserProfileView';
 
-const UserReview = ({
-  reviewUserName,
-  date,
-  review,
-  rating,
-  userId,
-}) => {
+const UserReview = ({ reviewUserName, date, review, rating, userId }) => {
   // For user profile dialog
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   const openUserProfile = () => {
@@ -37,8 +31,7 @@ const UserReview = ({
           alignItems: 'center',
           gap: '10px',
           marginBottom: '2px',
-        }}
-      >
+        }}>
         <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
         <Box>
           <Typography variant="h6">{reviewUserName}</Typography>
@@ -56,8 +49,7 @@ const UserReview = ({
           isSmallScreen
             ? { marginRight: '10px', marginLeft: '10px', marginBottom: '40px' }
             : { marginLeft: '20px', marginBottom: '40px', marginRight: '40px' }
-        }
-      ></Typography>
+        }></Typography>
       <Divider variant="fullwidth" light />
       <Dialog
         open={isUserProfileOpen}
@@ -67,8 +59,7 @@ const UserReview = ({
         sx={{
           height: '80vh',
           mt: 5,
-        }}
-      >
+        }}>
         <UserProfileView userId={reviewerId} />
       </Dialog>
     </div>
