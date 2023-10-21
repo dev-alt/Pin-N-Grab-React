@@ -11,9 +11,10 @@ import {
   Grow,
   Tooltip,
   Button,
+  Link,
 } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import SignOutButton from '../Member/SignOut';
 import NotificationsMenu from './NotificaitonsMenu.js';
 import MailMenu from './MailMenu';
@@ -21,6 +22,7 @@ import { useAuth } from '../../AuthContext';
 import CreateJob from '../../pages/PostJob';
 import './nav.css';
 import PushPinIcon from '@mui/icons-material/PushPin';
+import Logo from './Logo';
 
 export function PrimarySearchAppBar() {
   const { profile } = useAuth(); // Removed isLoggedIn
@@ -106,34 +108,49 @@ export function PrimarySearchAppBar() {
         <AppBar position="fixed" sx={{ boxShadow: 'none' }}>
           <Toolbar>
             {/* Application title */}
-            <Typography
-              variant="h4"
-              noWrap
-              component="div"
-              sx={{
-                display: { sm: 'block' },
-                fontFamily: 'Tilt Neon',
-                fontSize: { xs: '1rem', sm: '1.5rem', md: '2rem' },
-                '& a': {
-                  textDecoration: 'none', // Remove text decoration
-                  color: 'inherit', // Inherit the color from the parent (normal color)
-                },
-                '& a:active': {
-                  color: 'rgba(20, 8, 14, 1)', // Define color for the active state
-                },
-              }}>
-              <Link to="/">Pin'n Grab</Link>
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Link href="/" color="inherit">
+                <Logo width="2rem" />
+                <Typography
+                  variant="h4"
+                  noWrap
+                  component="div"
+                  sx={{
+                    display: { sm: 'block' },
+                    fontFamily: 'Tilt Neon',
+                    fontSize: { xs: '0', sm: '1.5rem', md: '2rem' },
+                    '& a': {
+                      textDecoration: 'none', // Remove text decoration
+                      color: 'inherit', // Inherit the color from the parent (normal color)
+                    },
+                    '& a:active': {
+                      color: 'rgba(20, 8, 14, 1)', // Define color for the active state
+                    },
+                    paddingLeft: '20px',
+                  }}>
+                  Pin'n Grab
+                </Typography>
+              </Link>
+            </Box>
             <Box sx={{ flexGrow: 1 }} />
             {/* Desktop menu (notifications, mail, user account) */}
-            <Box sx={{ display: 'flex' }}>
+            <Box
+              sx={{
+                display: 'flex',
+              }}>
               <Tooltip title="Pin a job">
                 <Button
-                  startIcon={<PushPinIcon />}
+                  startIcon={
+                    <PushPinIcon
+                      sx={{ fontSize: { xs: '12px', sm: '20px' } }}
+                    />
+                  }
                   sx={{
                     color: '#15abab',
-                    fontSize: '20px',
+                    fontSize: { xs: '0px', sm: '20px' },
                     fontFamily: 'Lato Black',
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
                   }}
                   variant="outlined"
                   className="blinking"
