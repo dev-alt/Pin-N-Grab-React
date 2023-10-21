@@ -69,7 +69,7 @@ export function HomePage() {
   const toggleCategory = (categoryId) => {
     if (selectedCategories.includes(categoryId)) {
       setSelectedCategories(
-        selectedCategories.filter((id) => id !== categoryId),
+        selectedCategories.filter((id) => id !== categoryId)
       );
     } else {
       setSelectedCategories([...selectedCategories, categoryId]);
@@ -107,7 +107,7 @@ export function HomePage() {
 
           // Sort the data by createdAt before setting it
           const sortedData = data.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );
 
           setJobListings(sortedData);
@@ -138,7 +138,7 @@ export function HomePage() {
   };
   //sort data to chronological order
   const sortedJobs = jobListings.sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
 
   return (
@@ -153,7 +153,8 @@ export function HomePage() {
               borderRadius: '50px',
               marginTop: '50px',
               paddingBottom: '50px',
-            }}>
+            }}
+          >
             <Grid container justifyContent="center" alignItems="center">
               {/* category filter */}
               <Grid item sx={{ mb: 2 }}>
@@ -249,7 +250,8 @@ export function HomePage() {
               </TabPanel>
               <TabPanel
                 value="5"
-                sx={{ display: 'flex', justifyContent: 'center' }}>
+                sx={{ display: 'flex', justifyContent: 'center' }}
+              >
                 <CreateJob />
               </TabPanel>
             </TabContext>
@@ -260,7 +262,8 @@ export function HomePage() {
             open={isJobDialogOpen}
             onClose={handleJobDialogClose}
             maxWidth={isSmallScreen ? 'sm' : 'lg'}
-            fullWidth>
+            fullWidth
+          >
             <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
           </Dialog>
         </Grid>
@@ -271,7 +274,8 @@ export function HomePage() {
           TransitionComponent={Grow}
           transitionDuration={500}
           maxWidth="sm"
-          fullWidth>
+          fullWidth
+        >
           <CreateJob onClose={closeCreateJobDialog} />
         </Dialog>
         {/* testing button dialog */}
@@ -279,7 +283,8 @@ export function HomePage() {
           open={isUserProfileOpen}
           onClose={closeUserProfile}
           maxWidth="lg"
-          fullWidth>
+          fullWidth
+        >
           <UserProfileView />
         </Dialog>
       </Grid>

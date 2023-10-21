@@ -89,7 +89,8 @@ const CardComponent = ({ job, onCardClick }) => {
                       fontWeight: 600,
                       color: 'rgba(20, 8, 14, 1)',
                       marginLeft: '5px',
-                    }}>
+                    }}
+                  >
                     {job.title}
                   </Typography>
                 </div>
@@ -113,7 +114,8 @@ const CardComponent = ({ job, onCardClick }) => {
             display: 'flex',
             alignItems: 'centre',
             marginBottom: '5px',
-          }}>
+          }}
+        >
           <Tooltip title="Deadline">
             <LocationOn style={{ marginRight: '0.5rem' }} />
           </Tooltip>
@@ -135,7 +137,8 @@ const CardComponent = ({ job, onCardClick }) => {
             display: 'flex',
             alignItems: 'centre',
             justifyContent: 'space-between',
-          }}>
+          }}
+        >
           {/* <Grid item xs={8}> */}
           <Box sx={itemStyle}>
             <Tooltip title="Will get paid">

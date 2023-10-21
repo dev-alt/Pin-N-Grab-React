@@ -61,7 +61,8 @@ export function PrimarySearchAppBar() {
         }
       }}
       component={item.key !== 'signOut' ? Link : undefined}
-      to={item.key !== 'signOut' ? item.link : undefined}>
+      to={item.key !== 'signOut' ? item.link : undefined}
+    >
       {item.component || item.label}
     </MenuItem>
   ));
@@ -80,7 +81,8 @@ export function PrimarySearchAppBar() {
         horizontal: 'right',
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}>
+      onClose={handleMenuClose}
+    >
       {menuItemsJSX}
     </Menu>
   );
@@ -105,7 +107,8 @@ export function PrimarySearchAppBar() {
               '& a:active': {
                 color: 'rgba(20, 8, 14, 1)', // Define color for the active state
               },
-            }}>
+            }}
+          >
             <Link to="/">Pin'n Grab</Link>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
@@ -119,7 +122,8 @@ export function PrimarySearchAppBar() {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit">
+              color="inherit"
+            >
               <AccountCircle />
             </IconButton>
           </Box>

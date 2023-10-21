@@ -25,7 +25,8 @@ const Email = () => {
       <CssBaseline />
       <Paper
         elevation={6}
-        sx={{ borderRadius: '20px', padding: '16px', mt: '16px' }}>
+        sx={{ borderRadius: '20px', padding: '16px', mt: '16px' }}
+      >
         <Typography variant="h5" gutterBottom>
           Messages
         </Typography>

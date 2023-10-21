@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Paper, Container, Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import {
+  Paper,
+  Container,
+  Avatar,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from '@mui/material';
 import { useAuth } from '../../AuthContext';
 
 const EmailInbox = ({ onEmailClick }) => {
@@ -10,11 +18,14 @@ const EmailInbox = ({ onEmailClick }) => {
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await fetch(`/api/message/get/inbox/${profile.profile.UserId}`, {
-          headers: {
-            Authorization: userToken,
-          },
-        });
+        const response = await fetch(
+          `/api/message/get/inbox/${profile.profile.UserId}`,
+          {
+            headers: {
+              Authorization: userToken,
+            },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();

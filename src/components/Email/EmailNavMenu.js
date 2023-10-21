@@ -20,7 +20,7 @@ const EmailNavMenu = ({ onTabChange }) => {
         textColor="primary"
         orientation="vertical"
         variant="scrollable"
-        value={false} 
+        value={false}
       >
         <Tab label="Inbox" onClick={() => handleTabChange('inbox')} />
       </Tabs>

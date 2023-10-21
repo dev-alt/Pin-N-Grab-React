@@ -28,7 +28,8 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
           alignItems: 'center',
           gap: '10px',
           marginBottom: '2px',
-        }}>
+        }}
+      >
         <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
         <Box>
           <Typography variant="h6">{reviewUserName}</Typography>
@@ -46,7 +47,8 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
           isSmallScreen
             ? { marginRight: '10px', marginLeft: '10px', marginBottom: '40px' }
             : { marginLeft: '20px', marginBottom: '40px', marginRight: '40px' }
-        }>
+        }
+      >
         {review}
       </Typography>
       <Divider variant="fullwidth" light />
@@ -54,7 +56,8 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
         open={isUserProfileOpen}
         onClose={closeUserProfile}
         maxWidth="lg"
-        fullWidth>
+        fullWidth
+      >
         {/* <UserProfileView job={review.Job} /> */}
       </Dialog>
     </div>

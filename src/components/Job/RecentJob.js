@@ -7,7 +7,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const RecentJob = ({ jobs, onCardClick }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('lg'));
   const isXtraSmallScreen = useMediaQuery((theme) =>
-    theme.breakpoints.down('md'),
+    theme.breakpoints.down('md')
   );
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +20,7 @@ const RecentJob = ({ jobs, onCardClick }) => {
   }
 
   const sortedJobs = jobs.sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -36,7 +36,8 @@ const RecentJob = ({ jobs, onCardClick }) => {
     <div
       style={{
         display: 'flex',
-      }}>
+      }}
+    >
       {/* Content */}
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         {/* Left arrow */}
@@ -46,7 +47,8 @@ const RecentJob = ({ jobs, onCardClick }) => {
             disabled={currentPage === 1}
             aria-label="Previous Page"
             aria-disabled={currentPage === 1}
-            sx={{ height: '20px' }}>
+            sx={{ height: '20px' }}
+          >
             <ChevronLeftIcon />
           </IconButton>
         </Box>
@@ -65,7 +67,8 @@ const RecentJob = ({ jobs, onCardClick }) => {
             disabled={indexOfLastItem >= jobs.length}
             aria-label="Next Page"
             aria-disabled={indexOfLastItem >= jobs.length}
-            sx={{ height: '20px' }}>
+            sx={{ height: '20px' }}
+          >
             <ChevronRightIcon />
           </IconButton>
         </Box>

@@ -10,7 +10,7 @@ const CardGrid = ({ jobListings, onCardClick }) => {
 
   // Filter out job listings with "Closed" or "Deleted" jobStatus
   const filteredJobListings = jobListings.filter(
-    (job) => job.jobStatus !== 'Closed' && job.jobStatus !== 'Deleted',
+    (job) => job.jobStatus !== 'Closed' && job.jobStatus !== 'Deleted'
   );
 
   return (
@@ -18,7 +18,8 @@ const CardGrid = ({ jobListings, onCardClick }) => {
       sx={{
         justifyContent: 'center',
         minHeight: 393,
-      }}>
+      }}
+    >
       <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={0}>
         {filteredJobListings.map((job, index) => (
           <Box key={index} sx={{ ...cardItemStyle, height: 'auto' }}>

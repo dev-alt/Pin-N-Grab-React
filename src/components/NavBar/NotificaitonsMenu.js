@@ -23,7 +23,8 @@ function NotificationsMenu() {
         size="large"
         aria-label="show new notifications"
         color="inherit"
-        onClick={handleNotificationsOpen}>
+        onClick={handleNotificationsOpen}
+      >
         <Badge badgeContent={0} color="error">
           <NotificationsIcon />
         </Badge>
@@ -41,7 +42,8 @@ function NotificationsMenu() {
           horizontal: 'right',
         }}
         open={open}
-        onClose={handleNotificationsClose}>
+        onClose={handleNotificationsClose}
+      >
         <MenuItem onClick={handleNotificationsClose}>
           You have read all Notifications
         </MenuItem>

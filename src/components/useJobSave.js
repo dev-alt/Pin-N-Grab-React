@@ -9,7 +9,9 @@ function useJobSave(jobId) {
     // Make an initial request to the server to check if the job is saved
     const checkSavedStatus = async () => {
       try {
-        const response = await fetch(`/api/users/${profile.profile.UserId}/checkSavedJob/${jobId}`);
+        const response = await fetch(
+          `/api/users/${profile.profile.UserId}/checkSavedJob/${jobId}`
+        );
         if (response.ok) {
           const data = await response.json();
           setIsSaved(data.isSaved);
@@ -17,7 +19,10 @@ function useJobSave(jobId) {
           console.error(`Failed to check saved status for job ${jobId}`);
         }
       } catch (error) {
-        console.error(`An error occurred while checking saved status for job ${jobId}:`, error);
+        console.error(
+          `An error occurred while checking saved status for job ${jobId}:`,
+          error
+        );
       }
     };
 

@@ -6,7 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useAuth } from '../../AuthContext';
 
 const ComposeEmail = () => {
-  const { profile } = useAuth(); 
+  const { profile } = useAuth();
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [recipientOptions, setRecipientOptions] = useState([]);
   const currentDate = new Date().toISOString();
@@ -88,7 +88,6 @@ const ComposeEmail = () => {
           onChange={(event, newValue) => setSelectedRecipient(newValue)}
           renderInput={(params) => <TextField {...params} variant="outlined" />}
         />
-
 
         <TextField
           fullWidth

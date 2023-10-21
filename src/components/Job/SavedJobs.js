@@ -34,7 +34,7 @@ export function SaveJobs({ onCardClick }) {
   console.log(savedJobs);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('lg'));
   const isXtraSmallScreen = useMediaQuery((theme) =>
-    theme.breakpoints.down('md'),
+    theme.breakpoints.down('md')
   );
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -65,7 +65,8 @@ export function SaveJobs({ onCardClick }) {
       sx={{
         justifyContent: 'center',
         minHeight: 393,
-      }}>
+      }}
+    >
       <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={0}>
         {/* Recent jobs */}
         {savedJobs.slice(0, 6).map((job) => (

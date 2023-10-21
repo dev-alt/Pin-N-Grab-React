@@ -72,14 +72,16 @@ export default function ProfilePage() {
         <Typography
           variant="h5"
           gutterBottom
-          sx={{ fontSize: { xs: 'medium', sm: '1.5rem' } }}>
+          sx={{ fontSize: { xs: 'medium', sm: '1.5rem' } }}
+        >
           {tag}
         </Typography>
         <Typography
           variant="h6"
           gutterBottom
           color="#9c9c9c"
-          sx={{ fontSize: { xs: 'small', sm: '1.2rem' } }}>
+          sx={{ fontSize: { xs: 'small', sm: '1.2rem' } }}
+        >
           {text}
         </Typography>
         <Divider variant="fullwidth" light></Divider>
@@ -101,7 +103,8 @@ export default function ProfilePage() {
               padding: '2rem',
               justifyContent: 'space-between',
               justifyItems: 'center',
-            }}>
+            }}
+          >
             <Box sx={{ padding: '16px', textAlign: 'center' }}>
               <Grid container justifyContent="center">
                 <Avatar
@@ -126,7 +129,8 @@ export default function ProfilePage() {
                       <Tooltip title="Cancel" placement="top">
                         <IconButton
                           onClick={handleCancelClick}
-                          color="secondary">
+                          color="secondary"
+                        >
                           <CancelIcon sx={{ fontSize: '3rem' }} />
                         </IconButton>
                       </Tooltip>
@@ -136,7 +140,8 @@ export default function ProfilePage() {
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleEditClick}>
+                        onClick={handleEditClick}
+                      >
                         Edit
                       </Button>
                     </Tooltip>
@@ -151,19 +156,22 @@ export default function ProfilePage() {
                 sx={{
                   fontWeight: 'bold',
                   fontSize: { xs: 'large', sm: '2rem' },
-                }}>
+                }}
+              >
                 Personal Information
               </Typography>
               <Box style={{ padding: '16px' }}>
                 {/* Usersname */}
                 <TextBox
                   tag="User Name"
-                  text={profile.username || 'empty'}></TextBox>
+                  text={profile.username || 'empty'}
+                ></TextBox>
 
                 {/* Email */}
                 <TextBox
                   tag="Email"
-                  text={profile.user.email || 'empty'}></TextBox>
+                  text={profile.user.email || 'empty'}
+                ></TextBox>
 
                 {/* First Name */}
                 <TextBox
@@ -180,7 +188,8 @@ export default function ProfilePage() {
                     ) : (
                       firstName || 'empty'
                     )
-                  }></TextBox>
+                  }
+                ></TextBox>
 
                 {/* Last Name */}
                 <TextBox
@@ -197,7 +206,8 @@ export default function ProfilePage() {
                     ) : (
                       profile.user.lastName
                     )
-                  }></TextBox>
+                  }
+                ></TextBox>
 
                 {/* Bio */}
                 <TextBox
@@ -214,7 +224,8 @@ export default function ProfilePage() {
                     ) : (
                       profile.profile.bio || 'empty'
                     )
-                  }></TextBox>
+                  }
+                ></TextBox>
 
                 {/* DOB */}
                 <TextBox
@@ -231,7 +242,8 @@ export default function ProfilePage() {
                     ) : (
                       profile.profile.dateOfBirth || 'empty'
                     )
-                  }></TextBox>
+                  }
+                ></TextBox>
 
                 {/* Gender */}
                 <TextBox
@@ -248,18 +260,21 @@ export default function ProfilePage() {
                     ) : (
                       profile.profile.gender || 'empty'
                     )
-                  }></TextBox>
+                  }
+                ></TextBox>
               </Box>
               <Paper
                 elevation={1}
-                style={{ marginTop: '16px', padding: '16px' }}>
+                style={{ marginTop: '16px', padding: '16px' }}
+              >
                 <Typography
                   variant="h5"
                   gutterBottom
                   sx={{
                     fontWeight: 'bolder',
                     fontSize: { xs: 'medium', sm: 'large' },
-                  }}>
+                  }}
+                >
                   Recent Job Postings
                 </Typography>
               </Paper>

@@ -30,7 +30,8 @@ function LoadingScreen() {
           alignItems: 'center',
           justifyContent: 'center',
           height: '100vh',
-        }}>
+        }}
+      >
         <CircularProgress color="primary" size={100} thickness={2} />
         <Typography variant="h6" style={{ marginTop: 20 }}>
           Loading...

@@ -1,33 +1,37 @@
 @font-face {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 300;
-    src: local('Lato'), local('Lato'), url('./fonts/Lato.ttf') format('truetype');
-  }
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato'), local('Lato'), url('./fonts/Lato.ttf') format('truetype');
+}
 
-  @font-face {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 300;
-    src: local('Montserrat'), local('Montserrat'), url('./fonts/Montserrat.ttf') format('truetype');
-  }
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Montserrat'), local('Montserrat'),
+    url('./fonts/Montserrat.ttf') format('truetype');
+}
 
-  @font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 300;
-    src: local('Roboto'), local('Roboto'), url('./fonts/Roboto.ttf') format('truetype');
-  }
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto'), local('Roboto'),
+    url('./fonts/Roboto.ttf') format('truetype');
+}
 
-  @font-face {
-    font-family: 'Share Tech Mono';
-    font-style: normal;
-    font-weight: 300;
-    src: local('Share Tech Mono'), local('ShareTechMono'), url('./fonts/ShareTechMono.ttf') format('truetype');
-  }
-  @font-face {
-    font-family: 'Tilt Neon';
-    font-style: normal;
-    font-weight: 300;
-    src: local('Tilt Neon'), local('TiltNeon'), url('./fonts/TiltNeon.ttf') format('truetype');
-  }
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Share Tech Mono'), local('ShareTechMono'),
+    url('./fonts/ShareTechMono.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Tilt Neon';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Tilt Neon'), local('TiltNeon'),
+    url('./fonts/TiltNeon.ttf') format('truetype');
+}
