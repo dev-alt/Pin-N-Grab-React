@@ -18,6 +18,7 @@ import {
   AccordionDetails,
   Container,
 } from '@mui/material';
+import SmsIcon from '@mui/icons-material/Sms';
 import { Close, LocationOn, Favorite } from '@mui/icons-material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
@@ -101,8 +102,7 @@ const JobDetails = ({ job, onClose }) => {
         <Typography
           variant="h6"
           color="rgba(20, 8, 14, 1)"
-          sx={{ marginLeft: '20px' }}
-        >
+          sx={{ marginLeft: '20px' }}>
           No job details available.
         </Typography>
       </Paper>
@@ -121,8 +121,7 @@ const JobDetails = ({ job, onClose }) => {
         <Typography
           variant={isSmallScreen ? 'h6' : 'h4'}
           color="rgba(20, 8, 14, 1)"
-          sx={{ marginLeft: '20px' }}
-        >
+          sx={{ marginLeft: '20px' }}>
           {job.title}
         </Typography>
         <IconButton>
@@ -143,8 +142,7 @@ const JobDetails = ({ job, onClose }) => {
           <Typography
             variant="caption"
             color="textSecondary"
-            sx={{ marginLeft: '30px' }}
-          >
+            sx={{ marginLeft: '30px' }}>
             {daysSincePosted > 0
               ? `Posted ${daysSincePosted} days ago`
               : 'Posted today'}
@@ -156,13 +154,11 @@ const JobDetails = ({ job, onClose }) => {
             spacing={2}
             direction={isSmallScreen ? 'column' : 'row'}
             justifyContent="flex-end"
-            sx={{ marginRight: '30px' }}
-          >
+            sx={{ marginRight: '30px' }}>
             {/* Location */}
             <Typography
               variant={isSmallScreen ? 'body2' : 'subtitle1'}
-              color="textSecondary"
-            >
+              color="textSecondary">
               <LocationOn /> {getLocationName(job.location_id)}
             </Typography>
 
@@ -195,8 +191,7 @@ const JobDetails = ({ job, onClose }) => {
             <Box>
               <Typography
                 variant={isSmallScreen ? 'body1' : 'h6'}
-                sx={{ marginLeft: '20px', marginRight: '20px' }}
-              >
+                sx={{ marginLeft: '20px', marginRight: '20px' }}>
                 {job.description}
               </Typography>
               <Typography
@@ -205,8 +200,7 @@ const JobDetails = ({ job, onClose }) => {
                   marginLeft: '20px',
                   marginRight: '20px',
                   marginTop: '40px',
-                }}
-              >
+                }}>
                 <strong>Details </strong>
                 <br />
                 {job.details}
@@ -225,8 +219,7 @@ const JobDetails = ({ job, onClose }) => {
               border: '0.5px solid #d2d2d4 ',
               borderRadius: '8px',
               justifyContent: 'center',
-            }}
-          >
+            }}>
             {/* User profile Box */}
             <Box>
               <Box
@@ -235,19 +228,24 @@ const JobDetails = ({ job, onClose }) => {
                   alignItems: 'center',
                   gap: '10px',
                   marginBottom: '2px',
-                }}
-              >
+                }}>
                 <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
                 <Box>
                   <Typography variant="overline" textAlign="center">
                     This Job is offered by:
                   </Typography>
-                  <Typography
-                    variant={isSmallScreen ? 'subtitle1' : 'h5'}
-                    textAlign="center"
-                  >
-                    {job.User.username}
-                  </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Typography
+                      variant={isSmallScreen ? 'subtitle1' : 'h5'}
+                      textAlign="center">
+                      {job.User.username}
+                    </Typography>
+                    <SmsIcon
+                      fontSize="small"
+                      color="primary.main"
+                      sx={{ margin: '10px' }}
+                    />
+                  </Box>
                 </Box>
               </Box>
               <Box
@@ -256,8 +254,7 @@ const JobDetails = ({ job, onClose }) => {
                   alignItems: 'center',
                   gap: '10px',
                   marginBottom: '20px',
-                }}
-              >
+                }}>
                 <Typography>
                   <StarRoundedIcon fontSize="small" />
                   5.0
@@ -271,8 +268,7 @@ const JobDetails = ({ job, onClose }) => {
 
               <Typography
                 variant={isSmallScreen ? 'subtitle1' : 'h6'}
-                sx={{ marginTop: '20px' }}
-              >
+                sx={{ marginTop: '20px' }}>
                 {job.User.username} is happy to pay:{' '}
               </Typography>
               <Typography variant={isSmallScreen ? 'h5' : 'h4'}>
@@ -282,8 +278,7 @@ const JobDetails = ({ job, onClose }) => {
                 <Typography
                   variant="overline"
                   sx={{ marginTop: '20px' }}
-                  color="#BC4B51"
-                >
+                  color="#BC4B51">
                   Number of Applicants {job.Applications?.length}
                 </Typography>
 
@@ -292,12 +287,10 @@ const JobDetails = ({ job, onClose }) => {
                     <Container>
                       <Accordion
                         expanded={isAccordionExpanded}
-                        onChange={() => {}}
-                      >
+                        onChange={() => {}}>
                         <AccordionSummary
                           expandIcon={<ExpandMoreIcon />}
-                          onClick={handleShowApplicants}
-                        >
+                          onClick={handleShowApplicants}>
                           <Typography>Applicants</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -317,8 +310,7 @@ const JobDetails = ({ job, onClose }) => {
 
                 <Dialog
                   open={isDialogOpen}
-                  onClose={() => setIsDialogOpen(false)}
-                >
+                  onClose={() => setIsDialogOpen(false)}>
                   <DialogTitle>Application Result</DialogTitle>
                   <DialogContent>
                     <Typography variant="body1">
@@ -347,8 +339,7 @@ const JobDetails = ({ job, onClose }) => {
             gap: '10px',
             marginBottom: '20px',
             marginTop: '30px',
-          }}
-        >
+          }}>
           <Typography gutterBottom variant={isSmallScreen ? 'h6' : 'h5'}>
             <StarRoundedIcon fontSize="inherit" />
             5.0
@@ -385,8 +376,7 @@ const JobDetails = ({ job, onClose }) => {
         sx={{
           height: '80vh',
           mt: 5,
-        }}
-      >
+        }}>
         <UserProfileView userId={job.user_id} />
       </Dialog>
     </Container>
