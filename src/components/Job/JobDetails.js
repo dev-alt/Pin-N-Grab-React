@@ -38,6 +38,7 @@ import {
   labelStyle,
   images,
 } from './Utils';
+import EmailCompose from '../Email/EmailCompose';
 
 async function fetchReviewsForUser(userId, setReviews) {
   try {
@@ -60,6 +61,7 @@ const JobDetails = ({ job, onClose }) => {
     message: '',
   });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isMessageDialogOpen, setIsMessageDialogOpen] = useState(false);
   const isOwner = job && profile && job.user_id === profile.profile.UserId;
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
@@ -92,6 +94,16 @@ const JobDetails = ({ job, onClose }) => {
   const handleShowApplicants = () => {
     setIsAccordionExpanded(!isAccordionExpanded);
   };
+
+  const closeMessageDialog = () => {
+    setIsMessageDialogOpen(false);
+  };
+
+  const openMessageDialog = () => {
+    setIsMessageDialogOpen(true);
+  };
+
+
 
   if (!job) {
     return (
@@ -244,6 +256,7 @@ const JobDetails = ({ job, onClose }) => {
                       fontSize="small"
                       color="primary.main"
                       sx={{ margin: '10px' }}
+                      onClick={openMessageDialog}
                     />
                   </Box>
                 </Box>
@@ -379,6 +392,20 @@ const JobDetails = ({ job, onClose }) => {
         }}>
         <UserProfileView userId={job.user_id} />
       </Dialog>
+      <Dialog
+  open={isMessageDialogOpen}
+  onClose={closeMessageDialog}
+  maxWidth="md"
+  fullWidth
+  sx={{
+    height: '80vh',
+    margin: '0 auto',
+    marginTop: '5vh', 
+    padding: '20px', 
+  }}
+>
+  <EmailCompose />
+</Dialog>
     </Container>
   );
 };
