@@ -39,6 +39,7 @@ import {
   images,
 } from './Utils';
 import EmailCompose from '../Email/EmailCompose';
+import { color } from '@mui/system';
 
 async function fetchReviewsForUser(userId, setReviews) {
   try {
@@ -102,8 +103,6 @@ const JobDetails = ({ job, onClose }) => {
   const openMessageDialog = () => {
     setIsMessageDialogOpen(true);
   };
-
-
 
   if (!job) {
     return (
@@ -252,12 +251,14 @@ const JobDetails = ({ job, onClose }) => {
                       textAlign="center">
                       {job.User.username}
                     </Typography>
-                    <SmsIcon
-                      fontSize="small"
-                      color="primary.main"
-                      sx={{ margin: '10px' }}
-                      onClick={openMessageDialog}
-                    />
+                    <Tooltip title="Send message">
+                      <SmsIcon
+                        fontSize="small"
+                        color="primary.main"
+                        sx={{ margin: '10px', cursor: 'pointer' }}
+                        onClick={openMessageDialog}
+                      />
+                    </Tooltip>
                   </Box>
                 </Box>
               </Box>
@@ -303,10 +304,17 @@ const JobDetails = ({ job, onClose }) => {
                         onChange={() => {}}>
                         <AccordionSummary
                           expandIcon={<ExpandMoreIcon />}
-                          onClick={handleShowApplicants}>
+                          onClick={handleShowApplicants}
+                          sx={{
+                            bgcolor: 'primary.main',
+                          }}>
                           <Typography>Applicants</Typography>
                         </AccordionSummary>
-                        <AccordionDetails>
+                        <AccordionDetails
+                          sx={{
+                            bgcolor: 'primary.main',
+                            fontFamily: 'Roboto',
+                          }}>
                           {renderApplicantsList(job)}
                         </AccordionDetails>
                       </Accordion>
@@ -393,19 +401,18 @@ const JobDetails = ({ job, onClose }) => {
         <UserProfileView userId={job.user_id} />
       </Dialog>
       <Dialog
-  open={isMessageDialogOpen}
-  onClose={closeMessageDialog}
-  maxWidth="md"
-  fullWidth
-  sx={{
-    height: '80vh',
-    margin: '0 auto',
-    marginTop: '5vh', 
-    padding: '20px', 
-  }}
->
-  <EmailCompose />
-</Dialog>
+        open={isMessageDialogOpen}
+        onClose={closeMessageDialog}
+        maxWidth="md"
+        fullWidth
+        sx={{
+          height: '80vh',
+          margin: '0 auto',
+          marginTop: '5vh',
+          padding: '20px',
+        }}>
+        <EmailCompose />
+      </Dialog>
     </Container>
   );
 };

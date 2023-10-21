@@ -17,8 +17,6 @@ const EmailNavMenu = ({ onTabChange }) => {
       </IconButton>
       <IconButton
         color="primary"
-        orientation="vertical"
-        variant="scrollable"
         value={false}
         onClick={() => handleTabChange('inbox')}>
         <MarkAsUnreadIcon />

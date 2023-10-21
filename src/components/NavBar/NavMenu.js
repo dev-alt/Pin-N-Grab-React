@@ -130,11 +130,14 @@ export function PrimarySearchAppBar() {
               <Tooltip title="Pin a job">
                 <Button
                   startIcon={<PushPinIcon />}
-                  sx={{ color: '#15abab', fontSize: '20px' }}
+                  sx={{
+                    color: '#15abab',
+                    fontSize: '20px',
+                    fontFamily: 'Lato Black',
+                  }}
                   variant="outlined"
                   className="blinking"
-                  onClick={openCreateJobDialog}
-                >
+                  onClick={openCreateJobDialog}>
                   Pin a Job
                 </Button>
               </Tooltip>
