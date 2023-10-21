@@ -12,7 +12,6 @@ const EmailNavMenu = ({ onTabChange }) => {
       <IconButton
         variant="contained"
         color="primary"
-        fullWidth
         onClick={() => handleTabChange('compose')}>
         <MapsUgcIcon />
       </IconButton>
