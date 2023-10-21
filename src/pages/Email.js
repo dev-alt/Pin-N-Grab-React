@@ -21,7 +21,7 @@ const Email = () => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" sx={{ marginTop: '100px' }}>
+    <Container sx={{ margin: 0 }}>
       <CssBaseline />
       <Paper
         elevation={6}
