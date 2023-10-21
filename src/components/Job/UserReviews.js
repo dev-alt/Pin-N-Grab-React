@@ -7,9 +7,9 @@ import {
   Divider,
   Dialog,
 } from '@mui/material';
-// import UserProfileView from '../Profile/UserProfileView';
+import UserProfileView from '../Profile/UserProfileView';
 
-const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
+const UserReview = ({ reviewUserName, date, review, rating, jobReviewed, userId }) => {
   // For user profile dialog
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   const openUserProfile = () => {
@@ -19,7 +19,21 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
     setIsUserProfileOpen(false);
   };
 
+  console.log(`UserReview Props:
+  reviewUserName: ${reviewUserName},
+  date: ${date},
+  review: ${review},
+  rating: ${rating},
+  jobReviewed: ${JSON.stringify(jobReviewed)},
+  userId: ${userId}
+`);
+
+
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
+  const reviewerId = userId;
+
+  console.log("reviewerId",reviewerId)
   return (
     <div key={review.id}>
       <Box
@@ -49,7 +63,7 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
             : { marginLeft: '20px', marginBottom: '40px', marginRight: '40px' }
         }
       >
-        {review}
+        
       </Typography>
       <Divider variant="fullwidth" light />
       <Dialog
@@ -58,7 +72,8 @@ const UserReview = ({ reviewUserName, date, review, rating, jobReviewed }) => {
         maxWidth="lg"
         fullWidth
       >
-        {/* <UserProfileView job={review.Job} /> */}
+       
+       <UserProfileView userId={reviewerId} />
       </Dialog>
     </div>
   );

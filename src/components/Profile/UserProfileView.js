@@ -26,110 +26,115 @@ import {
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import UserReview from '../Job/UserReviews';
 
-const jobData = {
-  JobName: 'Job Name',
-  Deadline: 'dealine date',
-  Amount: '$Amount',
-};
-
-const hasListedJob = true;
-
-const JobCard = ({ data, iconComponent }) => {
-  return (
-    <>
-      <Card sx={{ margin: '10px' }}>
-        <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
-          {iconComponent}
-          <Typography variant="h6" sx={{ marginLeft: '20px' }}>
-            {data.JobName}
-          </Typography>
-        </CardContent>
-        <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box
-            sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}
-          >
-            <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
-            <Typography>{data.Deadline}</Typography>
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <PaidIcon style={{ marginRight: '0.5rem' }} />
-            <Typography>{data.Amount}</Typography>
-          </Box>
-        </CardContent>
-      </Card>
-    </>
-  );
-};
-
-const getDaySuffix = (day) => {
-  if (day >= 11 && day <= 13) {
-    return 'th';
-  }
-  switch (day % 10) {
-    case 1:
-      return 'st';
-    case 2:
-      return 'nd';
-    case 3:
-      return 'rd';
-    default:
-      return 'th';
-  }
-};
-
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-const UserProfileView = (job) => {
+const UserProfileView = ({ userId }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const [value, setValue] = useState('1');
   const [reviews, setReviews] = useState([]);
   const [user, setUser] = useState(null); // State to store user data
+  const hasListedJob = true; // You can change this value as needed
+
+  const jobData = {
+    JobName: 'Job Name',
+    Deadline: 'deadline date',
+    Amount: '$Amount',
+  };
+  const JobCard = ({ data, iconComponent }) => {
+    return (
+      <>
+        <Card sx={{ margin: '10px' }}>
+          <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+            {iconComponent}
+            <Typography variant="h6" sx={{ marginLeft: '20px' }}>
+              {data.JobName}
+            </Typography>
+          </CardContent>
+          <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              sx={{ display: 'flex', alignItems: 'center', marginRight: '30px' }}
+            >
+              <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
+              <Typography>{data.Deadline}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <PaidIcon style={{ marginRight: '0.5rem' }} />
+              <Typography>{data.Amount}</Typography>
+            </Box>
+          </CardContent>
+        </Card>
+      </>
+    );
+  };
 
   useEffect(() => {
-    // Fetch reviews for the user with ID 20
-    const fetchData = async () => {
+    // Fetch user profile
+    const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`/api/review/user/${job.job.user_id}`);
+        const response = await fetch(`/api/users/${userId}/profile`);
         if (response.ok) {
-          const data = await response.json();
-          setReviews(data);
+          const userData = await response.json();
+          setUser(userData);
         } else {
-          console.error('Failed to fetch job reviews.');
+          console.error('Failed to fetch user profile.');
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching user profile:', error);
       }
     };
 
-    // Call the async function to fetch data
-    fetchData();
-  }, [job.job.user_id]);
+    // Fetch reviews for the user
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(`/api/review/user/${userId}`);
+        if (response.ok) {
+          const reviewData = await response.json();
+          setReviews(reviewData);
+        } else {
+          console.error('Failed to fetch user reviews.');
+        }
+      } catch (error) {
+        console.error('Error fetching user reviews:', error);
+      }
+    };
 
-  console.log(job.job.user_id);
+    // Call the async functions to fetch data
+    fetchUserProfile();
+    fetchReviews();
+  }, [userId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    // Fetch user data
-    fetch(`/api/users/${job.job.user_id}/profile`)
-      .then((response) => response.json())
-      .then((data) => setUser(data));
-  }, []);
+  const getDaySuffix = (day) => {
+    if (day >= 11 && day <= 13) {
+      return 'th';
+    }
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  };
+
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
 
   return (
     <Container
@@ -317,7 +322,7 @@ const UserProfileView = (job) => {
                   aria-label="lab API tabs example"
                 >
                   <Tab label="From Clients" value="1" />
-                  <Tab label="From Workerso" value="2" />
+                  <Tab label="From Workers" value="2" />
                 </TabList>
               </Box>
               <TabPanel value="1">
@@ -343,6 +348,7 @@ const UserProfileView = (job) => {
                       date={review.createdAt}
                       review={review.reviewText}
                       rating={review.rating}
+                      userId={review.Job.User.id}
                     />
                   ))}
               </TabPanel>

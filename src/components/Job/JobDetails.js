@@ -360,6 +360,9 @@ const JobDetails = ({ job, onClose }) => {
         </Box>
 
         {/* User reviews */}
+
+        {console.log("find review ids job?",job)}
+        {console.log("find review ids reviewsjob?",reviews)}
         <Grid container sx={{ marginRight: '20px', marginTop: '40px' }}>
           {reviews.map((review) => (
             <Grid item xs={12} sm={6} key={review.id}>
@@ -369,6 +372,8 @@ const JobDetails = ({ job, onClose }) => {
                 date={review.createdAt}
                 review={review.reviewText}
                 rating={review.rating}
+                jobReviewed={review}
+                userId={review.Job.User.id}
               />
             </Grid>
           ))}
@@ -381,7 +386,7 @@ const JobDetails = ({ job, onClose }) => {
         maxWidth="lg"
         fullWidth
       >
-        <UserProfileView job={job} />
+        <UserProfileView userId={job.user_id} />
       </Dialog>
     </Container>
   );
