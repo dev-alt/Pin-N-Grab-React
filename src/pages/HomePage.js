@@ -85,7 +85,6 @@ export function HomePage() {
         selectedCategories.includes(job.category_id);
       const matchesLocation =
         !selectedLocation || selectedLocation === job.location_id;
-
       return matchesCategory && matchesLocation;
     });
 
@@ -256,8 +255,6 @@ export function HomePage() {
           onClose={closeMessageDialog}
           TransitionComponent={Grow}
           transitionDuration={500}
-          maxWidth="sm"
-          fullWidth
           sx={{ height: '100vh' }}>
           <Email onClose={closeMessageDialog} />
         </Dialog>

@@ -11,7 +11,6 @@ import EmailCompose from '../components/Email/EmailCompose';
 import EmailInbox from '../components/Email/EmailInbox';
 import EmailContent from '../components/Email/EmailContent';
 import EmailNavMenu from '../components/Email/EmailNavMenu';
-import { MarginTwoTone } from '@mui/icons-material';
 
 const Email = () => {
   const [selectedTab, setSelectedTab] = useState('inbox'); // Keep track of selected tab
