@@ -108,8 +108,9 @@ export function PrimarySearchAppBar() {
         <AppBar position="fixed" sx={{ boxShadow: 'none' }}>
           <Toolbar>
             {/* Application title */}
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Link href="/" color="inherit">
+
+            <Link href="/" color="inherit" underline="none">
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Logo width="2rem" />
                 <Typography
                   variant="h4"
@@ -126,12 +127,13 @@ export function PrimarySearchAppBar() {
                     '& a:active': {
                       color: 'rgba(20, 8, 14, 1)', // Define color for the active state
                     },
-                    paddingLeft: '20px',
+                    paddingLeft: '5px',
                   }}>
                   Pin'n Grab
                 </Typography>
-              </Link>
-            </Box>
+              </Box>
+            </Link>
+
             <Box sx={{ flexGrow: 1 }} />
             {/* Desktop menu (notifications, mail, user account) */}
             <Box
