@@ -18,7 +18,7 @@ import {
   itemStyle,
   getIconByCategoryId,
   getColourByAmount,
-} from '../CardComponentStyles';
+} from './CardComponentStyles';
 
 const CardComponent = ({ job, onCardClick }) => {
   const iconComponent = getIconByCategoryId(job.category_id);

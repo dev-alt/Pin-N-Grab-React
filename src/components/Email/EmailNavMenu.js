@@ -3,7 +3,6 @@ import { IconButton, Box, Tooltip } from '@mui/material';
 import MapsUgcIcon from '@mui/icons-material/MapsUgc';
 import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
 
-
 const EmailNavMenu = ({ onTabChange }) => {
   const handleTabChange = (tabName) => {
     onTabChange(tabName);

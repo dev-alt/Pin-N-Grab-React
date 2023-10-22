@@ -37,7 +37,7 @@ const Email = () => {
       {/* Content Area */}
       <Paper elevation={0} sx={{ padding: '16px', height: '500px' }}>
         {selectedTab === 'compose' ? (
-          <EmailCompose onClose={handleComposeClose}/>
+          <EmailCompose onClose={handleComposeClose} />
         ) : (
           <div>
             {selectedEmail ? (

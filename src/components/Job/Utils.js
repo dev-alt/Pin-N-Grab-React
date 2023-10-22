@@ -55,5 +55,4 @@ export const images = [
     imgUrl: '8-5000x3333.jpg',
     alt: 'Image 3 Alt Text',
   },
-  // Add more objects as needed
 ];

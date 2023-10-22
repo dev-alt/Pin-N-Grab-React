@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Paper, TextField, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Grid,
+  Paper,
+  TextField,
+  useMediaQuery,
+} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import JobDetails from '../components/Job/JobDetails';
 import CategoryFilter from '../components/HomePage/CategoryFilter';
 import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
 import { JobTabs } from '../components/HomePage/Tabs';
+import { sortJobListingsByDate, filterJobListings, fetchJobListings } from '../components/HomePage/SearchAndFilters';
 
 export function HomePage() {
   const [jobListings, setJobListings] = useState([]);
@@ -14,6 +21,7 @@ export function HomePage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleCardClick = (job) => {
     try {
@@ -45,13 +53,11 @@ export function HomePage() {
   };
 
   const handleCategoryFilter = () => {
-    const filteredJobs = jobListings.filter((job) => {
-      const matchesCategory =
-        selectedCategories.length === 0 ||
-        selectedCategories.includes(job.category_id);
-      const matchesLocation =
-        !selectedLocation || selectedLocation === job.location_id;
-      return matchesCategory && matchesLocation;
+    const filteredJobs = filterJobListings({
+      jobListings,
+      selectedCategories,
+      selectedLocation,
+      searchQuery,
     });
 
     setFilteredJobListings(filteredJobs);
@@ -61,51 +67,34 @@ export function HomePage() {
     setSelectedCategories([]);
     setSelectedLocation('');
     setFilteredJobListings(jobListings);
+    setSearchQuery('');
   };
 
   // Fetch job listings from the server
   useEffect(() => {
-    // Fetch job listings from the server
-    const fetchJobListings = async () => {
-      try {
-        const response = await fetch('/api/jobs/all');
-        if (response.ok) {
-          const data = await response.json();
-
-          // Sort the data by createdAt before setting it
-          const sortedData = data.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-
-          setJobListings(sortedData);
-          setFilteredJobListings(sortedData); // Initialize filtered job listings with sorted data
-        } else {
-          console.error('Failed to fetch job listings.');
-        }
-      } catch (error) {
+    fetchJobListings()
+      .then((data) => {
+        const sortedData = sortJobListingsByDate(data);
+        setJobListings(sortedData);
+        setFilteredJobListings(sortedData);
+      })
+      .catch((error) => {
         console.error('Error:', error);
-      }
-    };
-
-    fetchJobListings();
+      });
   }, []);
 
+
   useEffect(() => {
-    // Handle filter when selectedCategories  change
     handleCategoryFilter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCategories, selectedLocation]);
+  }, [selectedCategories, selectedLocation, searchQuery]);
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  
   const [value, setValue] = useState('1');
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  //sort data to chronological order
-  const sortedJobs = jobListings.sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  );
 
   return (
     <Box sx={{ mt: 5 }}>
@@ -146,8 +135,10 @@ export function HomePage() {
                 <TextField
                   fullWidth
                   variant="standard"
-                  placeholder="baby sitter, garderner, handyman,etc."
+                  placeholder="Search by job title"
                   label="Search a job"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -160,7 +151,7 @@ export function HomePage() {
               value={value}
               handleChange={handleChange}
               filteredJobListings={filteredJobListings}
-              sortedJobs={sortedJobs}
+              sortedJobs={sortJobListingsByDate(jobListings)} // Use the utility function
               handleCardClick={handleCardClick}
             />
             {/* Job detail dialog */}
