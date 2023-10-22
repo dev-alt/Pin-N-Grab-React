@@ -102,7 +102,7 @@ export function HomePage() {
   };
 
   return (
-    <Box sx={{ mt: 5 }}>
+    <Box sx={{ mt: 2 }}>
       {/* filter box */}
       <Box
         sx={{
@@ -112,6 +112,7 @@ export function HomePage() {
           backgroundPosition: 'center center',
           display: 'flex',
           justifyContent: 'center',
+          marginBottom: 4,
         }}>
         <Box
           sx={{

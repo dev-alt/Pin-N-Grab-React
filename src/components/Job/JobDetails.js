@@ -93,7 +93,7 @@ const JobDetails = ({ job, onClose }) => {
         <Close />
       </IconButton>
 
-      <JobHeader job={job} isOwner={isOwner} isOwner={isOwner} />
+      <JobHeader job={job} isOwner={isOwner} />
 
       {/* Job details */}
       <JobDetailsSection
