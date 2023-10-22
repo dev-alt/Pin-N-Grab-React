@@ -1,4 +1,8 @@
+import { Button } from '@mui/material';
 import locationsData from '../Locations';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 export function getLocationName(locationId) {
   const location = locationsData.find((item) => item.id === locationId);
@@ -22,14 +26,14 @@ export async function fetchReviewsForUser(userId, setReviews) {
 export function renderApplicantsList(job) {
   if (job.Applications && job.Applications.length > 0) {
     return (
-      <ul>
+      <List>
         {job.Applications.map((application) => (
-          <div key={application.id}>
-            <li>{application.User.username}</li>
-            <li>test</li>
-          </div>
+          <ListItem key={application.id}>
+            <ListItemText>{application.User.username}</ListItemText>
+            <Button>Accept</Button>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     );
   } else {
     return <p>No applicants yet.</p>;

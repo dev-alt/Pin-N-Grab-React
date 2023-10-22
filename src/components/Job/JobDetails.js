@@ -78,8 +78,7 @@ const JobDetails = ({ job, onClose }) => {
         <Typography
           variant="h6"
           color="rgba(20, 8, 14, 1)"
-          sx={{ marginLeft: '20px' }}
-        >
+          sx={{ marginLeft: '20px' }}>
           No job details available.
         </Typography>
       </Paper>
@@ -94,26 +93,27 @@ const JobDetails = ({ job, onClose }) => {
         <Close />
       </IconButton>
 
-      <JobHeader job={job} />
+      <JobHeader job={job} isOwner={isOwner} />
+
+      {/* Job details */}
+      <JobDetailsSection
+        daysSincePosted={daysSincePosted}
+        isSmallScreen={isSmallScreen}
+        job={job}
+        toggleSaved={toggleSaved}
+        labelStyle={labelStyle}
+      />
+
+      {/* Divider */}
+      <Divider variant="middle" light sx={{ marginBottom: '20px' }} />
       <Grid container spacing={2} justifyContent="flex-start">
         <Grid item xs={12} md={8}>
-          {/* Job details */}
-          <JobDetailsSection
-            daysSincePosted={daysSincePosted}
-            isSmallScreen={isSmallScreen}
-            job={job}
-            toggleSaved={toggleSaved}
-            labelStyle={labelStyle}
-          />
+          {/* Job description */}
+          <JobDescription job={job} isSmallScreen={isSmallScreen} />
         </Grid>
-        {/* Divider */}
-        <Divider variant="middle" light />
-
-        {/* Job description */}
-        <JobDescription job={job} isSmallScreen={isSmallScreen} />
-
         {/* User details and offer */}
         <Grid item xs={12} md={4}>
+          {/* User profile Box */}
           <Paper
             elevation={0}
             sx={{
@@ -122,10 +122,7 @@ const JobDetails = ({ job, onClose }) => {
               border: '0.5px solid #d2d2d4 ',
               borderRadius: '8px',
               justifyContent: 'center',
-            }}
-          >
-            {/* User profile Box */}
-
+            }}>
             <Box>
               <Box
                 sx={{
@@ -133,8 +130,7 @@ const JobDetails = ({ job, onClose }) => {
                   alignItems: 'center',
                   gap: '10px',
                   marginBottom: '2px',
-                }}
-              >
+                }}>
                 <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
                 <UserProfile
                   job={job}
@@ -149,8 +145,7 @@ const JobDetails = ({ job, onClose }) => {
 
               <Typography
                 variant={isSmallScreen ? 'subtitle1' : 'h6'}
-                sx={{ marginTop: '20px' }}
-              >
+                sx={{ marginTop: '20px' }}>
                 {job.User.username} is happy to pay:{' '}
               </Typography>
               <Typography variant={isSmallScreen ? 'h5' : 'h4'}>
@@ -180,9 +175,8 @@ const JobDetails = ({ job, onClose }) => {
         fullWidth
         sx={{
           height: '80vh',
-          mt: 5,
-        }}
-      >
+          mt: 12,
+        }}>
         <UserProfileView userId={job.user_id} />
       </Dialog>
       <Dialog
@@ -195,8 +189,7 @@ const JobDetails = ({ job, onClose }) => {
           margin: '0 auto',
           marginTop: '5vh',
           padding: '20px',
-        }}
-      >
+        }}>
         <EmailCompose onClose={closeMessageDialog} />
       </Dialog>
     </Container>
