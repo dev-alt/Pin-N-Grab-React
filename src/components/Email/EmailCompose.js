@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useAuth } from '../../AuthContext';
 
-const ComposeEmail = () => {
+const ComposeEmail = ({ onClose }) => {
   const { profile } = useAuth();
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [recipientOptions, setRecipientOptions] = useState([]);
@@ -21,6 +21,10 @@ const ComposeEmail = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmailData({ ...emailData, [name]: value });
+  };
+
+  const handleCancel = () => {
+    onClose();
   };
 
   const handleSend = async () => {
@@ -52,6 +56,7 @@ const ComposeEmail = () => {
         recipientUserId: null,
       });
       setSelectedRecipient(null); // Clear the selected recipient
+      onClose();
     } catch (error) {
       console.error('Error sending email:', error);
     }
@@ -114,7 +119,9 @@ const ComposeEmail = () => {
         <Button
           variant="contained"
           color="secondary"
-          sx={{ marginRight: '8px' }}>
+          sx={{ marginRight: '8px' }}
+          onClick={handleCancel}
+        >
           Cancel
         </Button>
 

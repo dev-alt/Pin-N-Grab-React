@@ -10,7 +10,8 @@ const Logo = ({ width }) => {
       y="0px"
       width={width}
       viewBox="0 0 192 192"
-      enableBackground="new 0 0 192 192">
+      enableBackground="new 0 0 192 192"
+    >
       <path
         fill="#EFD546"
         opacity="1.000000"

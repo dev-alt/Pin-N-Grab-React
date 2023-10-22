@@ -22,7 +22,7 @@ const EmailInbox = ({ onEmailClick }) => {
             headers: {
               Authorization: userToken,
             },
-          },
+          }
         );
 
         if (response.ok) {
@@ -50,7 +50,8 @@ const EmailInbox = ({ onEmailClick }) => {
           <ListItem
             key={email.id}
             onClick={() => handleEmailClick(email)}
-            sx={{ cursor: 'pointer' }}>
+            sx={{ cursor: 'pointer' }}
+          >
             <ListItemAvatar>
               <Avatar alt="Avatar" src={email.sender.senderAvatar} />
             </ListItemAvatar>

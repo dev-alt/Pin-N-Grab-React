@@ -1,5 +1,4 @@
 import React from 'react'; // Import useState
-
 import {
   Card,
   CardContent,
@@ -10,61 +9,16 @@ import {
   Divider,
   Box,
 } from '@mui/material';
-import {
-  Favorite,
-  CalendarMonth,
-  Paid,
-  ElectricalServices,
-  LocalFlorist,
-  LocalShipping,
-  LocationOn,
-  Build,
-} from '@mui/icons-material';
+import { CalendarMonth, Paid, LocationOn } from '@mui/icons-material';
 import useJobSave from './useJobSave';
-import FormatPaintIcon from '@mui/icons-material/FormatPaint';
 import { getLocationName } from '../components/Job/JobDetails';
-
-const cardStyle = {
-  mt: 2,
-  mb: 2,
-  border: '1px solid',
-  borderRadius: '8px',
-  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  width: { xs: '80vw', sm: '40vw', md: '28vw', lg: '18vw', xl: '280px' },
-};
-
-const itemStyle = {
-  display: 'flex',
-  alignItems: 'centre',
-};
-
-function getIconByCategoryId(categoryId) {
-  const iconSize = 'large';
-
-  switch (categoryId) {
-    case 1:
-      return <ElectricalServices fontSize={iconSize} />;
-    case 2:
-      return <LocalFlorist fontSize={iconSize} />;
-    case 3:
-      return <LocalShipping fontSize={iconSize} />;
-    case 4:
-      return <FormatPaintIcon fontSize={iconSize} />;
-    case 5:
-      return <Build fontSize={iconSize} />;
-    default:
-      return null;
-  }
-}
-
-function getColourByAmount(amount) {
-  if (amount < 500) {
-    return '#f0df46';
-  } else if (amount >= 500 && amount < 1000) return '#f5a65d';
-  else if (amount >= 1000 && amount < 1500) return '#09bab7';
-  else if (amount >= 1500 && amount < 2000) return '#9379a8';
-  else return '#ab5546';
-}
+import SaveButton from '../components/Job/SaveButton';
+import {
+  cardStyle,
+  itemStyle,
+  getIconByCategoryId,
+  getColourByAmount,
+} from './CardComponentStyles';
 
 const CardComponent = ({ job, onCardClick }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
@@ -155,14 +109,10 @@ const CardComponent = ({ job, onCardClick }) => {
 
           <Grid item xs={4}> */}
 
-          <Favorite
-            fontSize="medium"
-            sx={{
-              cursor: 'pointer',
-              color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
-              marginTop: '20px',
-            }}
-            onClick={toggleSaved} // Toggle the save state on click
+          <SaveButton
+            isSaved={isSaved}
+            jobId={job.id}
+            toggleSaved={toggleSaved}
           />
 
           {/* </Grid> */}
