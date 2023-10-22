@@ -114,7 +114,8 @@ const ComposeEmail = () => {
         <Button
           variant="contained"
           color="secondary"
-          sx={{ marginRight: '8px' }}>
+          sx={{ marginRight: '8px' }}
+        >
           Cancel
         </Button>
 

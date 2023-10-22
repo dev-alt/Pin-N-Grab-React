@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Container,
-  CssBaseline,
-  Paper,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Container, CssBaseline, Paper, Typography, Box } from '@mui/material';
 import EmailCompose from '../components/Email/EmailCompose';
 import EmailInbox from '../components/Email/EmailInbox';
 import EmailContent from '../components/Email/EmailContent';

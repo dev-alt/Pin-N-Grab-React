@@ -4,15 +4,13 @@ import CardComponent from '../CardComponent';
 import { Box, Container } from '@mui/material';
 import Masonry from '@mui/lab/Masonry';
 
-
 export function SaveJobs({ onCardClick }) {
   const { profile } = useAuth();
   const userId = profile.profile.UserId;
   const [savedJobs, setSavedJobs] = useState([]);
 
-
-  console.log('Profile:', profile)
-  console.log('Profile ID:', userId)
+  console.log('Profile:', profile);
+  console.log('Profile ID:', userId);
 
   useEffect(() => {
     // Fetch saved jobs from the server

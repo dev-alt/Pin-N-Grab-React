@@ -28,8 +28,7 @@ export function AppliedJobs({ onCardClick }) {
     fetchAppliedJobs();
   }, [userId]);
 
-  console.log("Applied jobs",appliedJobs);
-
+  console.log('Applied jobs', appliedJobs);
 
   return (
     <Container
