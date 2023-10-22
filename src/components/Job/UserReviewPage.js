@@ -4,7 +4,6 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import UserReview from './UserReviews';
 
 const UserReviewsPage = ({ reviews, isSmallScreen }) => {
-  console.log(reviews);
   return (
     <Box sx={{ margin: '30px' }}>
       <Box

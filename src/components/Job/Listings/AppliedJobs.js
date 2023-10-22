@@ -3,17 +3,23 @@ import { useAuth } from '../../../AuthContext';
 import CardComponent from '../../HomePage/CardComponent';
 import { Box, Container } from '@mui/material';
 import Masonry from '@mui/lab/Masonry';
+import Cookies from 'js-cookie';
 
 export function AppliedJobs({ onCardClick }) {
   const { profile } = useAuth();
   const userId = profile.profile.UserId;
   const [appliedJobs, setAppliedJobs] = useState([]);
+  const token = Cookies.get('token');
 
   useEffect(() => {
     // Fetch applied jobs from the server
     const fetchAppliedJobs = async () => {
       try {
-        const response = await fetch(`/api/jobs/applied/${userId}`);
+        const response = await fetch(`/api/jobs/applied/${userId}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
         if (response.ok) {
           const data = await response.json();
           setAppliedJobs(data);

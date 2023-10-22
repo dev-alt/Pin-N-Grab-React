@@ -25,6 +25,7 @@ import locationsData from '../components/Locations';
 import LocationSelect from '../components/LocationSelect';
 import { useAuth } from '../AuthContext';
 import PushPinIcon from '@mui/icons-material/PushPin';
+import Cookies from 'js-cookie';
 
 export function CreateJob({ onClose }) {
   const [title, setTitle] = useState('');
@@ -39,6 +40,7 @@ export function CreateJob({ onClose }) {
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [paymentAmountError, setPaymentAmountError] = useState('');
   const { profile } = useAuth();
+  const token = Cookies.get('token');
 
   const openErrorDialog = () => {
     setErrorDialogOpen(true);
@@ -71,6 +73,10 @@ export function CreateJob({ onClose }) {
         jobStatus,
         category_id: selectedCategory,
         user_id: profile.profile.UserId,
+      },{
+        headers: {
+          Authorization: token,
+        },
       });
       console.log(response.data);
       console.log('Selected Category ID:', selectedCategory);
