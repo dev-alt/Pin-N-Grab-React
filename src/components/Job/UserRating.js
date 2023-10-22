@@ -1,7 +1,7 @@
 import React from 'react';
-import { Typography, Avatar, Box, useMediaQuery } from '@mui/material';
+import { Typography, Box, useMediaQuery } from '@mui/material';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
-import Rating from '@mui/material/Rating'; // Import the Rating component from Material-UI
+import Rating from '@mui/material/Rating';
 
 const UserRatings = ({ text, value, rating }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));

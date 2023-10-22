@@ -1,16 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext'; // Import useAuth to get the user ID
+import Cookies from 'js-cookie';
 
 function useJobSave(jobId) {
   const { profile } = useAuth(); // Get the user's profile from the AuthContext
   const [isSaved, setIsSaved] = useState(false);
-
+  const token = Cookies.get('token');
+  
   useEffect(() => {
     // Make an initial request to the server to check if the job is saved
     const checkSavedStatus = async () => {
       try {
+
         const response = await fetch(
-          `/api/users/${profile.profile.UserId}/checkSavedJob/${jobId}`
+          `/api/users/${profile.profile.UserId}/checkSavedJob/${jobId}`,
+          {
+          headers: {
+            Authorization: token,
+          },
+        }
         );
         if (response.ok) {
           const data = await response.json();
@@ -35,6 +43,7 @@ function useJobSave(jobId) {
       method: isSaved ? 'DELETE' : 'POST', // Use DELETE to unsave and POST to save
       headers: {
         'Content-Type': 'application/json',
+         Authorization: token,
       },
     };
 
