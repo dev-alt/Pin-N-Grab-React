@@ -39,7 +39,6 @@ import {
   images,
 } from './Utils';
 import EmailCompose from '../Email/EmailCompose';
-import { color } from '@mui/system';
 
 async function fetchReviewsForUser(userId, setReviews) {
   try {

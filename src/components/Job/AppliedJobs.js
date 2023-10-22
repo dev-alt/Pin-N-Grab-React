@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../AuthContext';
 import CardComponent from '../CardComponent';
-import { Box, useMediaQuery, Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Masonry from '@mui/lab/Masonry';
 
 export function AppliedJobs({ onCardClick }) {

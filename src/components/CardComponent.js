@@ -156,15 +156,7 @@ const CardComponent = ({ job, onCardClick }) => {
 
           <Grid item xs={4}> */}
 
-          <Favorite
-            fontSize="medium"
-            sx={{
-              cursor: 'pointer',
-              color: isSaved ? 'red' : 'gray', // Toggle the color based on the save state
-              marginTop: '20px',
-            }}
-            onClick={toggleSaved} // Toggle the save state on click
-          />
+          <SaveButton isSaved={isSaved} jobId={job.id} toggleSaved={toggleSaved} />
 
           {/* </Grid> */}
         </Box>

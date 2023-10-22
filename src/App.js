@@ -82,8 +82,6 @@ function App() {
         return false;
       }
 
-      // Additional checks can be performed here (e.g., token revocation)
-
       return true; // Token is valid
     } catch (error) {
       console.error('Error while verifying token:', error);

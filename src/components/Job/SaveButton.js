@@ -1,9 +1,7 @@
 import React from 'react';
 import Favorite from '@mui/icons-material/Favorite';
-import useJobSave from '../useJobSave';
 
-function SaveButton({ jobId, isSaved }) {
-  const { toggleSaved } = useJobSave(jobId);
+function SaveButton({ jobId, isSaved, toggleSaved }) {
 
   return (
     <Favorite

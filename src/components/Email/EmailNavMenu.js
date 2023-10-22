@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, IconButton, Paper, Tab, Tabs, Box } from '@mui/material';
+import { IconButton, Box } from '@mui/material';
 import MapsUgcIcon from '@mui/icons-material/MapsUgc';
 import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
 const EmailNavMenu = ({ onTabChange }) => {
