@@ -8,12 +8,7 @@ function SaveButton({ jobId, isSaved, toggleSaved }) {
       sx={{
         cursor: 'pointer',
         color: isSaved ? 'red' : 'gray',
-        fontSize: {
-          xs: '0.8rem',
-
-          md: '1rem',
-          lg: '1.2rem',
-        },
+        marginTop: '20px',
       }}
       onClick={toggleSaved}
     />
