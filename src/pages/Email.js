@@ -19,6 +19,10 @@ const Email = () => {
     setSelectedTab('emailContent'); // Change the tab to display email content
   };
 
+  const handleComposeClose = () => {
+    setSelectedTab('inbox'); // Set the tab to 'inbox' when the compose component is closed
+  };
+
   return (
     <Container sx={{ margin: 0 }}>
       <CssBaseline />
@@ -33,7 +37,7 @@ const Email = () => {
       {/* Content Area */}
       <Paper elevation={0} sx={{ padding: '16px', height: '500px' }}>
         {selectedTab === 'compose' ? (
-          <EmailCompose />
+          <EmailCompose onClose={handleComposeClose}/>
         ) : (
           <div>
             {selectedEmail ? (
