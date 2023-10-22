@@ -10,11 +10,10 @@ const Footer = () => {
         left: '0',
         bottom: '0',
         width: '100%',
-        bgcolor: 'primary.main',
+        bgcolor: 'secondary.main',
         paddingTop: '10px',
-      }}
-    >
-      <Typography gutterBottom variant="subtitle2" color="#808080">
+      }}>
+      <Typography gutterBottom variant="subtitle2" color="#fff">
         CopyRight © {year}
       </Typography>
     </Box>
