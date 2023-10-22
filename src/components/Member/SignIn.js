@@ -15,14 +15,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useAuth } from '../../AuthContext';
-import { themeOptions } from '../../Theme';
+import { themeOptions } from '../Common/Theme';
+import LoadingScreen from '../Common/LoadingScreen'; // Import the LoadingScreen component
 
 const defaultTheme = createTheme(themeOptions);
 
 export function SignIn() {
-  const { handleLogin } = useAuth(); // Use the handleLogin function from useAuth
-  const navigate = useNavigate(); // Create a history object
-  const [error, setError] = useState(null); // Create a state variable for storing errors
+  const { handleLogin } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false); // Add a loading state
 
   const handleSubmit = async (event) => {
@@ -30,14 +31,14 @@ export function SignIn() {
     const data = new FormData(event.currentTarget);
 
     try {
+      setLoading(true); // Set loading to true when the sign-in process starts
+
       const response = await axios.post('/api/auth/login', {
         username: data.get('username'),
         password: data.get('password'),
       });
 
-      const { token, id } = response.data; // Destructure the 'id' from response.data
-
-      console.log(response.data);
+      const { token, id } = response.data;
 
       const profileResponse = await axios.get(`/api/users/${id}/profile`, {
         headers: {
@@ -48,29 +49,22 @@ export function SignIn() {
       const userData = profileResponse.data;
       const { username } = userData;
 
-      // Set the authentication token as a secure HTTP cookie
       Cookies.set('token', token, { secure: true, sameSite: 'strict' });
 
-      console.log(userData);
-      // Call the handleLogin function with the token and profile data
       handleLogin(token, userData);
 
-      // Store the user profile data in local storage
       localStorage.setItem('profile', JSON.stringify(userData));
       localStorage.setItem('username', username);
 
-      setLoading(true);
       setTimeout(() => {
+        setLoading(false); // Set loading to false when the sign-in process completes
         navigate(`/`);
       }, 1000);
     } catch (error) {
-      console.error('Login error:', error); // Log the error for debugging
+      console.error('Login error:', error);
       setError('Login failed. Please check your credentials.');
+      setLoading(false); // Set loading to false in case of an error
     }
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-    });
   };
 
   return (
@@ -128,7 +122,7 @@ export function SignIn() {
               Sign In
             </Button>
             {loading ? (
-              <div>Loading...</div> // Show a loading message while loading is true
+              <LoadingScreen /> // Show the loading screen while loading is true
             ) : error ? (
               <div className="error-message">{error}</div>
             ) : null}

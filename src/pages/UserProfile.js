@@ -18,7 +18,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../AuthContext';
-import { themeOptions } from '../Theme';
+import { themeOptions } from '../components/Common/Theme';
 import { Box } from '@mui/system';
 
 const defaultTheme = createTheme(themeOptions);

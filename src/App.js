@@ -13,33 +13,11 @@ import Profile from './pages/UserProfile';
 import Email from './pages/Email';
 import { useAuth } from './AuthContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Container, CircularProgress, Typography } from '@mui/material';
-import { themeOptions } from './Theme';
+import { themeOptions } from './components/Common/Theme';
 import Footer from './components/Common/Footer';
 import jwt_decode from 'jwt-decode';
+import LoadingScreen from '../src/components/Common/LoadingScreen';
 
-function LoadingScreen() {
-  const theme = createTheme(themeOptions);
-
-  return (
-    <ThemeProvider theme={theme}>
-      <Container
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100vh',
-        }}
-      >
-        <CircularProgress color="primary" size={100} thickness={2} />
-        <Typography variant="h6" style={{ marginTop: 20 }}>
-          Loading...
-        </Typography>
-      </Container>
-    </ThemeProvider>
-  );
-}
 
 function App() {
   const { isLoggedIn, handleLogin, handleLogout } = useAuth();

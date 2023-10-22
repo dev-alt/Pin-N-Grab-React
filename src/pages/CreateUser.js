@@ -13,8 +13,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
+import LoadingScreen from '../components/Common/LoadingScreen';
+import { themeOptions } from '../components/Common/Theme';
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme(themeOptions);
 
 export function CreateUser() {
   const [username, setUsername] = useState('');
@@ -23,11 +25,15 @@ export function CreateUser() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Add a loading state
+  const [registrationMessage, setRegistrationMessage] = useState('');
 
   const handleRegister = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+  
     try {
+      setLoading(true);   
       const response = await axios.post('/api/auth/register', {
         username: data.get('username'),
         email: data.get('email'),
@@ -35,11 +41,19 @@ export function CreateUser() {
         firstName: data.get('firstName'),
         lastName: data.get('lastName'),
       });
-      console.log(response.data);
+  
+      const message = response.data.message;
+      setRegistrationMessage(message);
+  
+      // Navigate immediately after the response is received
+      navigate('/signin');
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false); // Set loading to false after either success or failure
     }
   };
+  
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -116,6 +130,7 @@ export function CreateUser() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -141,7 +156,7 @@ export function CreateUser() {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Button
-                  onClick={() => navigate('/signin')} // Use navigate here
+                  onClick={() => navigate('/signin')}
                   variant="text"
                   color="primary"
                 >
@@ -149,6 +164,11 @@ export function CreateUser() {
                 </Button>
               </Grid>
             </Grid>
+            {loading ? (
+              <LoadingScreen /> // Show the loading screen while loading is true
+            ) : registrationMessage ? (
+              <div className="success-message">{registrationMessage}</div>
+            ) : null}
           </Box>
         </Box>
       </Container>
