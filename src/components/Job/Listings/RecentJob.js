@@ -31,7 +31,6 @@ const RecentJob = ({ jobs, onCardClick }) => {
     setCurrentPage(newPage);
   };
 
-  console.log('currentItems', currentItems);
   return (
     <div
       style={{

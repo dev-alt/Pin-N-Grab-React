@@ -3,20 +3,23 @@ import { useAuth } from '../../../AuthContext';
 import CardComponent from '../../HomePage/CardComponent';
 import { Box, Container } from '@mui/material';
 import Masonry from '@mui/lab/Masonry';
+import Cookies from 'js-cookie';
 
 export function SaveJobs({ onCardClick }) {
   const { profile } = useAuth();
   const userId = profile.profile.UserId;
   const [savedJobs, setSavedJobs] = useState([]);
-
-  console.log('Profile:', profile);
-  console.log('Profile ID:', userId);
+  const token = Cookies.get('token');
 
   useEffect(() => {
     // Fetch saved jobs from the server
     const fetchSavedJobs = async () => {
       try {
-        const response = await fetch(`/api/jobs/saved/${userId}`);
+        const response = await fetch(`/api/jobs/saved/${userId}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
         if (response.ok) {
           const data = await response.json();
           setSavedJobs(data);
@@ -30,6 +33,7 @@ export function SaveJobs({ onCardClick }) {
     };
     fetchSavedJobs();
   }, [userId]);
+  
 
   return (
     <Container

@@ -22,7 +22,6 @@ const UserReview = ({ reviewUserName, date, review, rating, userId }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   const reviewerId = userId;
-  console.log('Reviewt', review);
 
   return (
     <div key={review.id}>

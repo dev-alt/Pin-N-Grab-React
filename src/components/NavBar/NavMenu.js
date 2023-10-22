@@ -25,7 +25,7 @@ import PushPinIcon from '@mui/icons-material/PushPin';
 import Logo from './Logo';
 
 export function PrimarySearchAppBar() {
-  const { profile } = useAuth(); // Removed isLoggedIn
+  const { profile } = useAuth(); 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -129,11 +129,11 @@ export function PrimarySearchAppBar() {
                     fontFamily: 'Tilt Neon',
                     fontSize: { xs: '0', sm: '1.5rem', md: '2rem' },
                     '& a': {
-                      textDecoration: 'none', // Remove text decoration
-                      color: 'inherit', // Inherit the color from the parent (normal color)
+                      textDecoration: 'none',
+                      color: 'inherit', 
                     },
                     '& a:active': {
-                      color: 'rgba(20, 8, 14, 1)', // Define color for the active state
+                      color: 'rgba(20, 8, 14, 1)',
                     },
                     paddingLeft: '5px',
                   }}>
