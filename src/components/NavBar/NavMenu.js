@@ -11,10 +11,10 @@ import {
   Grow,
   Tooltip,
   Button,
-  Link,
+  Link as MuiLink,
 } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SignOutButton from '../Member/SignOut';
 import NotificationsMenu from './NotificaitonsMenu.js';
 import MailMenu from './MailMenu';
@@ -27,8 +27,6 @@ import Logo from './Logo';
 export function PrimarySearchAppBar() {
   const { profile } = useAuth(); // Removed isLoggedIn
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  // Check if the user account menu is open
   const isMenuOpen = Boolean(anchorEl);
 
   // Function to open the user account menu
@@ -47,12 +45,6 @@ export function PrimarySearchAppBar() {
   const menuItems = [
     { key: 'home', label: 'Home', link: '/' },
     { key: 'profile', label: 'Profile', link: `/profile/${userId}` },
-    // { key: 'signIn', label: 'Sign In', link: '/signin' },
-    // {
-    //   key: 'createUser',
-    //   label: 'Create User',
-    //   link: '/create',
-    // },
     {
       key: 'signOut',
       label: 'Sign Out',
@@ -111,7 +103,7 @@ export function PrimarySearchAppBar() {
           <Toolbar>
             {/* Application title */}
 
-            <Link href="/" color="inherit" underline="none">
+            <MuiLink href="/" color="inherit" underline="none">
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Logo width="2rem" />
                 <Typography
@@ -135,7 +127,7 @@ export function PrimarySearchAppBar() {
                   Pin'n Grab
                 </Typography>
               </Box>
-            </Link>
+            </MuiLink>
 
             <Box sx={{ flexGrow: 1 }} />
             {/* Desktop menu (notifications, mail, user account) */}

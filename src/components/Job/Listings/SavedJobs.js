@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../AuthContext';
-import CardComponent from '../CardComponent';
+import { useAuth } from '../../../AuthContext';
+import CardComponent from '../../HomePage/CardComponent';
 import { Box, Container } from '@mui/material';
 import Masonry from '@mui/lab/Masonry';
 

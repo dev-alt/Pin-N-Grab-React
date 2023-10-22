@@ -1,5 +1,5 @@
 import React from 'react';
-import CardComponent from '../components/CardComponent';
+import CardComponent from './CardComponent';
 import Masonry from '@mui/lab/Masonry';
 import { Box, Container } from '@mui/system';
 

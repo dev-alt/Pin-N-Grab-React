@@ -15,7 +15,7 @@ import { useAuth } from './AuthContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Container, CircularProgress, Typography } from '@mui/material';
 import { themeOptions } from './Theme';
-import Footer from './components/Footer';
+import Footer from './components/Common/Footer';
 import jwt_decode from 'jwt-decode';
 
 function LoadingScreen() {

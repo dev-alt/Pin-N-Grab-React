@@ -1,54 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Box,
-  Grid,
-  Paper,
-  TextField,
-  Grow,
-  useMediaQuery,
-  Button,
-} from '@mui/material';
-
-import CardGrid from '../components/CardGrid';
+import { Box, Grid, Paper, TextField, useMediaQuery } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
-import { CreateJob } from './PostJob';
 import JobDetails from '../components/Job/JobDetails';
-import CategoryFilter from '../components/CategoryFilter';
+import CategoryFilter from '../components/HomePage/CategoryFilter';
 import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
-import SaveJobs from '../components/Job/SavedJobs';
-import AppliedJobs from '../components/Job/AppliedJobs';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import Email from '../pages/Email';
+import { JobTabs } from '../components/HomePage/Tabs';
 
 export function HomePage() {
   const [jobListings, setJobListings] = useState([]);
   const [filteredJobListings, setFilteredJobListings] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
-  const [isMessageOpen, setMessageOpen] = useState(false);
-
-  const openCreateJobDialog = () => {
-    setIsCreateJobOpen(true);
-  };
-
-  const closeCreateJobDialog = () => {
-    setIsCreateJobOpen(false);
-  };
-
-  const closeMessageDialog = () => {
-    setMessageOpen(false);
-  };
-
-  const openMessageDialog = () => {
-    setMessageOpen(true);
-  };
 
   const handleCardClick = (job) => {
     try {
@@ -97,6 +62,7 @@ export function HomePage() {
     setSelectedLocation('');
     setFilteredJobListings(jobListings);
   };
+
   // Fetch job listings from the server
   useEffect(() => {
     // Fetch job listings from the server
@@ -131,12 +97,11 @@ export function HomePage() {
   }, [selectedCategories, selectedLocation]);
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  //handle tab value
   const [value, setValue] = useState('1');
-  //handle tab change
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   //sort data to chronological order
   const sortedJobs = jobListings.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -188,64 +153,18 @@ export function HomePage() {
             </Grid>
           </Paper>
         </Grid>
-        <Button onClick={openMessageDialog}>Message</Button>
         {/* Listing Masonry */}
         <Grid item xs={12}>
           <Box>
-            <TabContext value={value}>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <TabList onChange={handleChange} aria-label="tabs">
-                  <Tab
-                    label="All Jobs"
-                    value="1"
-                    style={{
-                      color: '#000',
-                    }}
-                    sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
-                  />
-                  <Tab
-                    label="Most Recent Jobs"
-                    value="2"
-                    style={{ color: '#000' }}
-                    sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
-                  />
-                  <Tab
-                    label="Saved Jobs"
-                    value="3"
-                    style={{ color: '#000' }}
-                    sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
-                  />
-                  <Tab
-                    label="Applied Jobs"
-                    value="4"
-                    style={{ color: '#000' }}
-                    sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
-                  />
-                </TabList>
-              </Box>
-              <TabPanel value="1">
-                {' '}
-                <CardGrid
-                  jobListings={filteredJobListings}
-                  onCardClick={handleCardClick}
-                />
-              </TabPanel>
-              <TabPanel value="2">
-                <CardGrid
-                  jobListings={sortedJobs}
-                  onCardClick={handleCardClick}
-                />
-              </TabPanel>
-              <TabPanel value="3">
-                <SaveJobs onCardClick={handleCardClick} />
-              </TabPanel>
-              <TabPanel value="4">
-                <AppliedJobs onCardClick={handleCardClick} />
-              </TabPanel>
-            </TabContext>
+            <JobTabs
+              value={value}
+              handleChange={handleChange}
+              filteredJobListings={filteredJobListings}
+              sortedJobs={sortedJobs}
+              handleCardClick={handleCardClick}
+            />
+            {/* Job detail dialog */}
           </Box>
-          {/* Job detail dialog */}
-
           <Dialog
             open={isJobDialogOpen}
             onClose={handleJobDialogClose}
@@ -255,26 +174,6 @@ export function HomePage() {
             <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
           </Dialog>
         </Grid>
-        {/* create job dialog */}
-        <Dialog
-          open={isMessageOpen}
-          onClose={closeMessageDialog}
-          TransitionComponent={Grow}
-          transitionDuration={500}
-          sx={{ height: '100vh' }}
-        >
-          <Email onClose={closeMessageDialog} />
-        </Dialog>
-        <Dialog
-          open={isCreateJobOpen}
-          onClose={closeCreateJobDialog}
-          TransitionComponent={Grow}
-          transitionDuration={500}
-          maxWidth="sm"
-          fullWidth
-        >
-          <CreateJob onClose={closeCreateJobDialog} />
-        </Dialog>
       </Grid>
     </Box>
   );

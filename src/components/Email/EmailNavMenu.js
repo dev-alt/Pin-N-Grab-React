@@ -13,7 +13,8 @@ const EmailNavMenu = ({ onTabChange }) => {
         <IconButton
           variant="contained"
           color="primary"
-          onClick={() => handleTabChange('compose')}>
+          onClick={() => handleTabChange('compose')}
+        >
           <MapsUgcIcon />
         </IconButton>
       </Tooltip>
@@ -21,7 +22,8 @@ const EmailNavMenu = ({ onTabChange }) => {
         <IconButton
           color="primary"
           value={false}
-          onClick={() => handleTabChange('inbox')}>
+          onClick={() => handleTabChange('inbox')}
+        >
           <MarkAsUnreadIcon />
         </IconButton>
       </Tooltip>
