@@ -95,73 +95,74 @@ const JobDetails = ({ job, onClose }) => {
       </IconButton>
 
       <JobHeader job={job} />
+      <Grid container spacing={2} justifyContent="flex-start">
+        <Grid item xs={12} md={8}>
+          {/* Job details */}
+          <JobDetailsSection
+            daysSincePosted={daysSincePosted}
+            isSmallScreen={isSmallScreen}
+            job={job}
+            toggleSaved={toggleSaved}
+            labelStyle={labelStyle}
+          />
+        </Grid>
+        {/* Divider */}
+        <Divider variant="middle" light />
 
-      {/* Job details */}
-      <JobDetailsSection
-        daysSincePosted={daysSincePosted}
-        isSmallScreen={isSmallScreen}
-        job={job}
-        toggleSaved={toggleSaved}
-        labelStyle={labelStyle}
-      />
+        {/* Job description */}
+        <JobDescription job={job} isSmallScreen={isSmallScreen} />
 
-      {/* Divider */}
-      <Divider variant="middle" light />
+        {/* User details and offer */}
+        <Grid item xs={12} md={4}>
+          <Paper
+            elevation={0}
+            sx={{
+              display: 'flex',
+              padding: '1rem',
+              border: '0.5px solid #d2d2d4 ',
+              borderRadius: '8px',
+              justifyContent: 'center',
+            }}
+          >
+            {/* User profile Box */}
 
-      {/* Job description */}
-      <JobDescription job={job} isSmallScreen={isSmallScreen} />
+            <Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  marginBottom: '2px',
+                }}
+              >
+                <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
+                <UserProfile
+                  job={job}
+                  openUserProfile={openUserProfile}
+                  openMessageDialog={openMessageDialog}
+                  isSmallScreen={isSmallScreen}
+                />
+              </Box>
 
-      {/* User details and offer */}
-      <Grid item xs={12} md={4}>
-        <Paper
-          elevation={0}
-          sx={{
-            display: 'flex',
-            padding: '1rem',
-            border: '0.5px solid #d2d2d4 ',
-            borderRadius: '8px',
-            justifyContent: 'center',
-          }}
-        >
-          {/* User profile Box */}
+              {/* Divider */}
+              <Divider variant="fullwidth" light />
 
-          <Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                marginBottom: '2px',
-              }}
-            >
-              <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
-              <UserProfile
-                job={job}
-                openUserProfile={openUserProfile}
-                openMessageDialog={openMessageDialog}
-                isSmallScreen={isSmallScreen}
-              />
+              <Typography
+                variant={isSmallScreen ? 'subtitle1' : 'h6'}
+                sx={{ marginTop: '20px' }}
+              >
+                {job.User.username} is happy to pay:{' '}
+              </Typography>
+              <Typography variant={isSmallScreen ? 'h5' : 'h4'}>
+                ${job.paymentAmount}
+              </Typography>
+
+              {/* Applications */}
+              <ApplicationSection job={job} isOwner={isOwner} />
             </Box>
-
-            {/* Divider */}
-            <Divider variant="fullwidth" light />
-
-            <Typography
-              variant={isSmallScreen ? 'subtitle1' : 'h6'}
-              sx={{ marginTop: '20px' }}
-            >
-              {job.User.username} is happy to pay:{' '}
-            </Typography>
-            <Typography variant={isSmallScreen ? 'h5' : 'h4'}>
-              ${job.paymentAmount}
-            </Typography>
-
-            {/* Applications */}
-            <ApplicationSection job={job} isOwner={isOwner} />
-          </Box>
-        </Paper>
+          </Paper>
+        </Grid>
       </Grid>
-
       {/* Image carousel */}
       <ImageCarousel images={images} />
 

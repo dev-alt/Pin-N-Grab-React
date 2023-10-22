@@ -11,7 +11,7 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 const JobHeader = ({ job }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', mt: '20px' }}>
       {/* Job title */}
       <Typography
         variant={isSmallScreen ? 'h6' : 'h4'}

@@ -12,9 +12,9 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ApplyButton from './ApplyButton';
-import  { renderApplicantsList} from './Utils';
+import { renderApplicantsList } from './Utils';
 
-const ApplicationsSection = ({ job, isOwner}) => {
+const ApplicationsSection = ({ job, isOwner }) => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false); // Dialog state managed within the component
 

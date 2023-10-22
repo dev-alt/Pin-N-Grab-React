@@ -18,7 +18,8 @@ export function filterJobListings({
       !selectedLocation || selectedLocation === job.location_id;
     const matchesSearch =
       !searchQuery ||
-      job.title.toLowerCase().includes(searchQuery.toLowerCase());
+      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      job.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesLocation && matchesSearch;
   });
 }

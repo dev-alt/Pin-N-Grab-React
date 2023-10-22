@@ -158,6 +158,7 @@ export function HomePage() {
             onClose={handleJobDialogClose}
             maxWidth={isSmallScreen ? 'sm' : 'lg'}
             fullWidth
+            sx={{ mt: 5 }}
           >
             <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
           </Dialog>
