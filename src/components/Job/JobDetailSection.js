@@ -13,13 +13,16 @@ const JobDetailsSection = ({
   labelStyle,
 }) => {
   return (
-    <Grid container spacing={2} justifyContent="flex-start">
+    <Grid
+      container
+      spacing={2}
+      justifyContent="space-between"
+      sx={{ marginBottom: '20px' }}>
       <Grid item xs={12} sm={3}>
         <Typography
           variant="caption"
           color="textSecondary"
-          sx={{ marginLeft: '30px' }}
-        >
+          sx={{ marginLeft: '30px' }}>
           {daysSincePosted > 0
             ? `Posted ${daysSincePosted} days ago`
             : 'Posted today'}
@@ -31,13 +34,11 @@ const JobDetailsSection = ({
           spacing={2}
           direction={isSmallScreen ? 'column' : 'row'}
           justifyContent="flex-end"
-          sx={{ marginRight: '30px' }}
-        >
+          sx={{ marginRight: '30px' }}>
           {/* Location */}
           <Typography
             variant={isSmallScreen ? 'body2' : 'subtitle1'}
-            color="textSecondary"
-          >
+            color="textSecondary">
             <LocationOn /> {getLocationName(job.location_id)}
           </Typography>
 

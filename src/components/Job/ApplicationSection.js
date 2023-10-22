@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ApplyButton from './ApplyButton';
-import { renderApplicantsList } from './Utils';
+import { renderApplicantsList } from './ApplicationList';
 
 const ApplicationsSection = ({ job, isOwner }) => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
@@ -34,33 +34,32 @@ const ApplicationsSection = ({ job, isOwner }) => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Typography variant="overline" sx={{ marginTop: '20px' }} color="#BC4B51">
-        Number of Applicants {job.Applications?.length}
+      <Typography
+        variant="body1"
+        sx={{ marginTop: '20px', marginBottom: '10px', fontWeight: 'bold' }}
+        color="#BC4B51">
+        Number of Applicants: {job.Applications?.length}
       </Typography>
 
       {job ? (
         isOwner ? (
-          <Container>
-            <Accordion expanded={isAccordionExpanded} onChange={() => {}}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                onClick={handleShowApplicants}
-                sx={{
-                  bgcolor: 'primary.main',
-                }}
-              >
-                <Typography>Applicants</Typography>
-              </AccordionSummary>
-              <AccordionDetails
-                sx={{
-                  bgcolor: 'primary.main',
-                  fontFamily: 'Roboto',
-                }}
-              >
-                {renderApplicantsList(job)}
-              </AccordionDetails>
-            </Accordion>
-          </Container>
+          <Accordion expanded={isAccordionExpanded} onChange={() => {}}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              onClick={handleShowApplicants}
+              sx={{
+                bgcolor: 'primary.main',
+              }}>
+              <Typography>Applicants</Typography>
+            </AccordionSummary>
+            <AccordionDetails
+              sx={{
+                bgcolor: 'primary.main',
+                fontFamily: 'Roboto',
+              }}>
+              {renderApplicantsList(job)}
+            </AccordionDetails>
+          </Accordion>
         ) : (
           <ApplyButton
             job={job}

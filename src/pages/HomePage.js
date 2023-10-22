@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Paper, TextField, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Grid,
+  Paper,
+  TextField,
+  useMediaQuery,
+  Container,
+} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import JobDetails from '../components/Job/JobDetails';
 import CategoryFilter from '../components/HomePage/CategoryFilter';
@@ -11,6 +18,7 @@ import {
   filterJobListings,
   fetchJobListings,
 } from '../components/HomePage/SearchAndFilters';
+import banner from '../components/Common/banner.png';
 
 export function HomePage() {
   const [jobListings, setJobListings] = useState([]);
@@ -42,7 +50,7 @@ export function HomePage() {
   const toggleCategory = (categoryId) => {
     if (selectedCategories.includes(categoryId)) {
       setSelectedCategories(
-        selectedCategories.filter((id) => id !== categoryId)
+        selectedCategories.filter((id) => id !== categoryId),
       );
     } else {
       setSelectedCategories([...selectedCategories, categoryId]);
@@ -95,74 +103,106 @@ export function HomePage() {
 
   return (
     <Box sx={{ mt: 5 }}>
-      <Grid container justifyContent="center">
-        {/* filter box */}
-        <Grid item sm={10} md={8} lg={6} xl={4}>
-          <Paper
-            style={{
-              padding: '30px',
-              boxShadow: '0px 0px 10px 1px #a6a48b',
-              borderRadius: '50px',
-              marginTop: '50px',
-              paddingBottom: '50px',
-            }}
-          >
-            <Grid container justifyContent="center" alignItems="center">
-              {/* category filter */}
-              <Grid item sx={{ mb: 2 }}>
-                <CategoryFilter
-                  selectedCategories={selectedCategories}
-                  toggleCategory={toggleCategory}
-                  handleClearFilters={handleClearFilters}
-                />
-              </Grid>
+      {/* filter box */}
+      <Box
+        sx={{
+          // bgcolor: 'primary.main',
+          backgroundImage: `url(${banner})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          display: 'flex',
+          justifyContent: 'center',
+        }}>
+        <Box
+          sx={{
+            marginTop: 3,
+            paddingBottom: '50px',
+            width: { xs: '100vw', md: '80vw' },
+          }}>
+          <Grid container justifyContent="center" alignItems="center">
+            {/* category filter */}
+            <Grid item sx={{ mb: 2 }}>
+              <CategoryFilter
+                selectedCategories={selectedCategories}
+                toggleCategory={toggleCategory}
+                handleClearFilters={handleClearFilters}
+              />
             </Grid>
+          </Grid>
 
-            <Grid container justifyContent="center">
-              {/* search */}
-              <Grid item xs={12} sm={10} md={8} lg={6}>
-                <LocationSelect
-                  location={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                  locationsData={locationsData}
-                />
-              </Grid>
-              {/* location filter */}
-              <Grid item xs={12} sm={10} md={8} lg={6}>
-                <TextField
-                  fullWidth
-                  variant="standard"
-                  placeholder="Search by job title"
-                  label="Search a job"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-        {/* Listing Masonry */}
-        <Grid item xs={12}>
-          <Box>
-            <JobTabs
-              value={value}
-              handleChange={handleChange}
-              filteredJobListings={filteredJobListings}
-              sortedJobs={sortJobListingsByDate(jobListings)} // Use the utility function
-              handleCardClick={handleCardClick}
+          <Container
+            sx={{
+              display: 'flex',
+              alignItems: 'centre',
+              justifyContent: 'center',
+              justifyItems: 'center',
+              flexDirection: { xs: 'column', md: 'row' },
+            }}>
+            {/* search */}
+
+            <LocationSelect
+              location={selectedLocation}
+              onChange={(e) => setSelectedLocation(e.target.value)}
+              locationsData={locationsData}
             />
-            {/* Job detail dialog */}
-          </Box>
-          <Dialog
-            open={isJobDialogOpen}
-            onClose={handleJobDialogClose}
-            maxWidth={isSmallScreen ? 'sm' : 'lg'}
-            fullWidth
-            sx={{ mt: 5 }}
-          >
-            <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
-          </Dialog>
-        </Grid>
+
+            {/* location filter */}
+
+            <Paper
+              elevation={0}
+              sx={{
+                borderRadius: '10px',
+                marginLeft: { xs: 0, md: '20px' },
+                padding: '2px',
+                marginTop: { xs: '20px', md: 0 },
+                width: { xs: '80vw', md: '35vw' },
+              }}>
+              <TextField
+                fullWidth
+                variant="standard"
+                placeholder="eg.baby sitter, maintainance, painting etc."
+                label="What is your skill?"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                sx={{
+                  height: '60px',
+
+                  // marginLeft: '10px',
+                  // width: { xs: '80vw', md: '35vw' },
+                }}
+                InputLabelProps={{
+                  sx: {
+                    fontFamily: 'Montserrat',
+                    fontWeight: 'bold',
+                    color: '#7a7974',
+                    paddingLeft: '8px',
+                  },
+                }}
+              />
+            </Paper>
+          </Container>
+        </Box>
+      </Box>
+      {/* Listing Masonry */}
+      <Grid item xs={12}>
+        <Box>
+          <JobTabs
+            value={value}
+            handleChange={handleChange}
+            filteredJobListings={filteredJobListings}
+            sortedJobs={sortJobListingsByDate(jobListings)} // Use the utility function
+            handleCardClick={handleCardClick}
+          />
+          {/* Job detail dialog */}
+        </Box>
+        <Dialog
+          open={isJobDialogOpen}
+          onClose={handleJobDialogClose}
+          maxWidth={isSmallScreen ? 'sm' : 'lg'}
+          fullWidth
+          sx={{ mt: 5 }}>
+          <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
+        </Dialog>
       </Grid>
     </Box>
   );

@@ -32,8 +32,7 @@ const JobHeader = ({ job, isOwner }) => {
       <Typography
         variant={isSmallScreen ? 'h6' : 'h4'}
         color="rgba(20, 8, 14, 1)"
-        sx={{ marginLeft: '20px' }}
-      >
+        sx={{ marginLeft: '20px' }}>
         {job.title}
       </Typography>
       {isOwner && (  // Conditionally render the delete button if the user is the owner
