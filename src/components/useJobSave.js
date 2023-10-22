@@ -46,10 +46,7 @@ function useJobSave(jobId) {
          Authorization: token,
       },
     };
-
-    console.log('User ID:', profile); // Log the user ID
-    console.log('Job ID:', jobId); // Log the job ID
-
+    
     try {
       if (isSaved) {
         // Send the DELETE request to unsave
