@@ -9,6 +9,16 @@ export function getLocationName(locationId) {
   }
 }
 
+export async function fetchReviewsForUser(userId, setReviews) {
+  try {
+    const response = await fetch(`/api/review/user/${userId}`);
+    const data = await response.json();
+    setReviews(data);
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+  }
+}
+
 export function renderApplicantsList(job) {
   if (job.Applications && job.Applications.length > 0) {
     return (

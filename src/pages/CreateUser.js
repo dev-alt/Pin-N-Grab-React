@@ -31,9 +31,9 @@ export function CreateUser() {
   const handleRegister = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-  
+
     try {
-      setLoading(true);   
+      setLoading(true);
       const response = await axios.post('/api/auth/register', {
         username: data.get('username'),
         email: data.get('email'),
@@ -41,10 +41,10 @@ export function CreateUser() {
         firstName: data.get('firstName'),
         lastName: data.get('lastName'),
       });
-  
+
       const message = response.data.message;
       setRegistrationMessage(message);
-  
+
       // Navigate immediately after the response is received
       navigate('/signin');
     } catch (error) {
@@ -53,7 +53,6 @@ export function CreateUser() {
       setLoading(false); // Set loading to false after either success or failure
     }
   };
-  
 
   return (
     <ThemeProvider theme={defaultTheme}>
