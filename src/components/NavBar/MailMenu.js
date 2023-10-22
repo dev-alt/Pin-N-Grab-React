@@ -17,9 +17,15 @@ const styles = {
 
 function MailMenu() {
   const [isMessageOpen, setMessageOpen] = useState(false);
+  const [unreadMessageCount, setUnreadMessageCount] = useState(0);
+
+  const incrementUnreadCount = () => {
+    setUnreadMessageCount(unreadMessageCount + 1);
+  };
 
   const handleMailOpen = () => {
     setMessageOpen(true);
+    setUnreadMessageCount(0); 
   };
 
   const closeMessageDialog = () => {
@@ -35,7 +41,7 @@ function MailMenu() {
         onClick={handleMailOpen}
         sx={styles.badge}
       >
-        <Badge badgeContent={0} color="error">
+        <Badge badgeContent={unreadMessageCount} color="error">
           <MailIcon />
         </Badge>
       </IconButton>
