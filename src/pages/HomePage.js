@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Box,
-  Grid,
-  Paper,
-  TextField,
-  useMediaQuery,
-} from '@mui/material';
+import { Box, Grid, Paper, TextField, useMediaQuery } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import JobDetails from '../components/Job/JobDetails';
 import CategoryFilter from '../components/HomePage/CategoryFilter';
 import LocationSelect from '../components/LocationSelect';
 import locationsData from '../components/Locations';
 import { JobTabs } from '../components/HomePage/Tabs';
-import { sortJobListingsByDate, filterJobListings, fetchJobListings } from '../components/HomePage/SearchAndFilters';
+import {
+  sortJobListingsByDate,
+  filterJobListings,
+  fetchJobListings,
+} from '../components/HomePage/SearchAndFilters';
 
 export function HomePage() {
   const [jobListings, setJobListings] = useState([]);
@@ -83,14 +81,13 @@ export function HomePage() {
       });
   }, []);
 
-
   useEffect(() => {
     handleCategoryFilter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategories, selectedLocation, searchQuery]);
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  
+
   const [value, setValue] = useState('1');
   const handleChange = (event, newValue) => {
     setValue(newValue);

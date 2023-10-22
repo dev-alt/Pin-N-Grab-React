@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { CalendarMonth, Paid, LocationOn } from '@mui/icons-material';
 import useJobSave from '../useJobSave';
-import { getLocationName } from '../Job/JobDetails';
+import { getLocationName } from '../Job/Utils';
 import SaveButton from '../Job/SaveButton';
 import {
   cardStyle,

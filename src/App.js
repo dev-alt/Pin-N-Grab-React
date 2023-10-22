@@ -18,7 +18,6 @@ import Footer from './components/Common/Footer';
 import jwt_decode from 'jwt-decode';
 import LoadingScreen from '../src/components/Common/LoadingScreen';
 
-
 function App() {
   const { isLoggedIn, handleLogin, handleLogout } = useAuth();
   const theme = createTheme(themeOptions);

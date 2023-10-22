@@ -22,6 +22,7 @@ const UserReview = ({ reviewUserName, date, review, rating, userId }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   const reviewerId = userId;
+  console.log("Reviewt", review)
 
   return (
     <div key={review.id}>
@@ -41,6 +42,9 @@ const UserReview = ({ reviewUserName, date, review, rating, userId }) => {
           </Typography>
           <Typography variant="body1" color="textSecondary">
             Rating: {rating}{' '}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            {review}
           </Typography>
         </Box>
       </Box>
