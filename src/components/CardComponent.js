@@ -9,15 +9,16 @@ import {
   Divider,
   Box,
 } from '@mui/material';
-import {
-  CalendarMonth,
-  Paid,
-  LocationOn,
-} from '@mui/icons-material';
+import { CalendarMonth, Paid, LocationOn } from '@mui/icons-material';
 import useJobSave from './useJobSave';
 import { getLocationName } from '../components/Job/JobDetails';
 import SaveButton from '../components/Job/SaveButton';
-import { cardStyle, itemStyle, getIconByCategoryId, getColourByAmount } from './CardComponentStyles';
+import {
+  cardStyle,
+  itemStyle,
+  getIconByCategoryId,
+  getColourByAmount,
+} from './CardComponentStyles';
 
 const CardComponent = ({ job, onCardClick }) => {
   const iconComponent = getIconByCategoryId(job.category_id);
@@ -41,7 +42,8 @@ const CardComponent = ({ job, onCardClick }) => {
                       fontWeight: 600,
                       color: 'rgba(20, 8, 14, 1)',
                       marginLeft: '5px',
-                    }}>
+                    }}
+                  >
                     {job.title}
                   </Typography>
                 </div>
@@ -66,7 +68,8 @@ const CardComponent = ({ job, onCardClick }) => {
             alignItems: 'centre',
             marginBottom: '5px',
             marginTop: '-20px',
-          }}>
+          }}
+        >
           <Tooltip title="Deadline">
             <LocationOn style={{ marginRight: '0.5rem' }} />
           </Tooltip>
@@ -88,7 +91,8 @@ const CardComponent = ({ job, onCardClick }) => {
             display: 'flex',
             alignItems: 'centre',
             justifyContent: 'space-between',
-          }}>
+          }}
+        >
           {/* <Grid item xs={8}> */}
           <Box sx={itemStyle}>
             <Tooltip title="Will get paid">
@@ -108,7 +112,11 @@ const CardComponent = ({ job, onCardClick }) => {
 
           <Grid item xs={4}> */}
 
-          <SaveButton isSaved={isSaved} jobId={job.id} toggleSaved={toggleSaved} />
+          <SaveButton
+            isSaved={isSaved}
+            jobId={job.id}
+            toggleSaved={toggleSaved}
+          />
 
           {/* </Grid> */}
         </Box>

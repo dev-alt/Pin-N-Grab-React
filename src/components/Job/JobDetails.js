@@ -430,7 +430,7 @@ const JobDetails = ({ job, onClose }) => {
           padding: '20px',
         }}
       >
-        <EmailCompose />
+        <EmailCompose onClose={closeMessageDialog} />
       </Dialog>
     </Container>
   );
