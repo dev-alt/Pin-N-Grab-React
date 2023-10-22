@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Paper,
-  Container,
   Avatar,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Divider,
 } from '@mui/material';
 import { useAuth } from '../../AuthContext';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, IconButton, Paper, Tab, Tabs, Box } from '@mui/material';
+import { IconButton, Box, Tooltip } from '@mui/material';
 import MapsUgcIcon from '@mui/icons-material/MapsUgc';
 import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
 const EmailNavMenu = ({ onTabChange }) => {
@@ -9,18 +9,22 @@ const EmailNavMenu = ({ onTabChange }) => {
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'centre', marginLeft: '20px' }}>
-      <IconButton
-        variant="contained"
-        color="primary"
-        onClick={() => handleTabChange('compose')}>
-        <MapsUgcIcon />
-      </IconButton>
-      <IconButton
-        color="primary"
-        value={false}
-        onClick={() => handleTabChange('inbox')}>
-        <MarkAsUnreadIcon />
-      </IconButton>
+      <Tooltip title="New Message">
+        <IconButton
+          variant="contained"
+          color="primary"
+          onClick={() => handleTabChange('compose')}>
+          <MapsUgcIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Inbox">
+        <IconButton
+          color="primary"
+          value={false}
+          onClick={() => handleTabChange('inbox')}>
+          <MarkAsUnreadIcon />
+        </IconButton>
+      </Tooltip>
     </Box>
   );
 };

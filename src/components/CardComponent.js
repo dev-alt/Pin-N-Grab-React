@@ -23,7 +23,6 @@ import {
 import useJobSave from './useJobSave';
 import FormatPaintIcon from '@mui/icons-material/FormatPaint';
 import { getLocationName } from '../components/Job/JobDetails';
-import SaveButton from '../components/Job/SaveButton';
 
 const cardStyle = {
   mt: 2,

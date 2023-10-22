@@ -39,7 +39,6 @@ import {
   images,
 } from './Utils';
 import EmailCompose from '../Email/EmailCompose';
-import { color } from '@mui/system';
 
 async function fetchReviewsForUser(userId, setReviews) {
   try {
@@ -270,11 +269,10 @@ const JobDetails = ({ job, onClose }) => {
                   marginBottom: '20px',
                 }}>
                 <Typography>
-                  <StarRoundedIcon fontSize="small" />
-                  5.0
+                  <StarRoundedIcon fontSize="small" />5
                 </Typography>
                 {'|'}
-                <Typography>number Reviews</Typography>
+                <Typography>{reviews.length} Reviews</Typography>
               </Box>
 
               {/* Divider */}
@@ -367,7 +365,7 @@ const JobDetails = ({ job, onClose }) => {
           </Typography>
           {'|'}
           <Typography variant={isSmallScreen ? 'h6' : 'h5'}>
-            number Reviews
+            {reviews.length} Reviews
           </Typography>
         </Box>
 

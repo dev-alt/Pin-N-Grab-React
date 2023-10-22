@@ -73,7 +73,7 @@ const ComposeEmail = () => {
   }, []);
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="sm">
       <Paper elevation={0} sx={{ padding: '10px' }}>
         <Typography variant="h6" gutterBottom>
           New message
