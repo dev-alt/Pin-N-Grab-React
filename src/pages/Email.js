@@ -6,21 +6,25 @@ import EmailContent from '../components/Email/EmailContent';
 import EmailNavMenu from '../components/Email/EmailNavMenu';
 
 const Email = () => {
-  const [selectedTab, setSelectedTab] = useState('inbox'); // Keep track of selected tab
-  const [selectedEmail, setSelectedEmail] = useState(null); // Keep track of selected email
+  const [selectedTab, setSelectedTab] = useState('inbox');
+  const [selectedEmail, setSelectedEmail] = useState(null); 
 
   const handleTabChange = (tabName) => {
     setSelectedTab(tabName);
-    setSelectedEmail(null); // Reset selected email when changing tabs
+    setSelectedEmail(null);
   };
 
   const handleEmailClick = (email) => {
     setSelectedEmail(email);
-    setSelectedTab('emailContent'); // Change the tab to display email content
+    setSelectedTab('emailContent'); 
   };
 
   const handleComposeClose = () => {
-    setSelectedTab('inbox'); // Set the tab to 'inbox' when the compose component is closed
+    setSelectedTab('inbox'); 
+  };
+
+  const handleEmailDelete = () => {
+    setSelectedTab('inbox');
   };
 
   return (
@@ -41,11 +45,11 @@ const Email = () => {
         ) : (
           <div>
             {selectedEmail ? (
-              <EmailContent email={selectedEmail} />
+              <EmailContent email={selectedEmail} onDelete={handleTabChange} />
             ) : (
               <EmailInbox
                 onEmailClick={handleEmailClick}
-                maxHeight="400px" // Set the max height for the email list
+                maxHeight="400px"
               />
             )}
           </div>

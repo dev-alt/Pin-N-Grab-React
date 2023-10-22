@@ -94,7 +94,7 @@ const JobDetails = ({ job, onClose }) => {
         <Close />
       </IconButton>
 
-      <JobHeader job={job} />
+      <JobHeader job={job} isOwner={isOwner} />
       <Grid container spacing={2} justifyContent="flex-start">
         <Grid item xs={12} md={8}>
           {/* Job details */}
