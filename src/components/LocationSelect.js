@@ -38,4 +38,26 @@ function LocationSelect({ location, onChange, locationsData }) {
   );
 }
 
+function LocationSelectForForm({ location, onChange, locationsData }) {
+  return (
+    <FormControl fullWidth>
+      <InputLabel
+        style={{
+          color: '#7a7974',
+        }}>
+        Location
+      </InputLabel>
+      <Select value={location} onChange={onChange} variant="standard">
+        <MenuItem value="">Select a location</MenuItem>
+        {locationsData.map((location) => (
+          <MenuItem key={location.id} value={location.id}>
+            {`${location.cityName}, ${location.regionName}`}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+}
+
 export default LocationSelect;
+export { LocationSelectForForm };

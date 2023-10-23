@@ -22,7 +22,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import locationsData from '../components/Locations';
-import LocationSelect from '../components/LocationSelect';
+import { LocationSelectForForm } from '../components/LocationSelect';
 import { useAuth } from '../AuthContext';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import Cookies from 'js-cookie';
@@ -63,21 +63,25 @@ export function CreateJob({ onClose }) {
 
   const handleCreateJob = async () => {
     try {
-      const response = await axios.post('/api/jobs/create', {
-        title,
-        description,
-        details,
-        location_id: location,
-        deadline,
-        paymentAmount,
-        jobStatus,
-        category_id: selectedCategory,
-        user_id: profile.profile.UserId,
-      },{
-        headers: {
-          Authorization: token,
+      const response = await axios.post(
+        '/api/jobs/create',
+        {
+          title,
+          description,
+          details,
+          location_id: location,
+          deadline,
+          paymentAmount,
+          jobStatus,
+          category_id: selectedCategory,
+          user_id: profile.profile.UserId,
         },
-      });
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      );
       console.log(response.data);
       console.log('Selected Category ID:', selectedCategory);
 
@@ -91,7 +95,7 @@ export function CreateJob({ onClose }) {
       }
     } catch (error) {
       setErrorMessage(
-        'An error occurred while creating the job. Please try again later.'
+        'An error occurred while creating the job. Please try again later.',
       );
       openErrorDialog(); // Open the error dialog
       console.error(error);
@@ -103,8 +107,7 @@ export function CreateJob({ onClose }) {
       sx={{
         borderRadius: '8px',
         mt: '20px',
-      }}
-    >
+      }}>
       <Dialog open={errorDialogOpen} onClose={() => setErrorDialogOpen(false)}>
         <DialogTitle>Error</DialogTitle>
         <DialogContent>
@@ -120,8 +123,7 @@ export function CreateJob({ onClose }) {
         edge="end"
         color="primary"
         onClick={onClose}
-        style={{ position: 'absolute', top: '10px', right: '10px' }}
-      >
+        style={{ position: 'absolute', top: '10px', right: '10px' }}>
         <CloseIcon />
       </IconButton>
       <Grid container spacing={3}>
@@ -131,8 +133,7 @@ export function CreateJob({ onClose }) {
             ml: 2,
             backgroundColor: '#f5f5f5',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
-          }}
-        >
+          }}>
           <Typography variant="h4" textAlign="center" sx={{ mt: 5 }}>
             Pin a Job
           </Typography>
@@ -170,7 +171,7 @@ export function CreateJob({ onClose }) {
           <Grid item xs={12}>
             <Grid container spacing={3}>
               <Grid item xs={6}>
-                <LocationSelect
+                <LocationSelectForForm
                   location={location}
                   onChange={(e) => setLocation(e.target.value)}
                   locationsData={locationsData}
@@ -197,8 +198,7 @@ export function CreateJob({ onClose }) {
                 <InputLabel style={{ color: '#7a7974' }}>Category</InputLabel>
                 <Select
                   value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                >
+                  onChange={(e) => setSelectedCategory(e.target.value)}>
                   <MenuItem value="" sx={{ color: '#7a7974' }}>
                     Select a category
                   </MenuItem>
@@ -222,7 +222,7 @@ export function CreateJob({ onClose }) {
                     setPaymentAmountError('');
                   } else {
                     setPaymentAmountError(
-                      'Invalid payment amount format. Use the format: 100.00'
+                      'Invalid payment amount format. Use the format: 100.00',
                     );
                   }
                 }}
@@ -239,8 +239,7 @@ export function CreateJob({ onClose }) {
               <IconButton
                 variant="contained"
                 onClick={handleReset}
-                color="secondary"
-              >
+                color="secondary">
                 <RefreshIcon sx={{ fontSize: '2.5rem' }} />
               </IconButton>
             </Tooltip>
@@ -248,8 +247,7 @@ export function CreateJob({ onClose }) {
               <IconButton
                 variant="contained"
                 onClick={handleCreateJob}
-                color="primary"
-              >
+                color="primary">
                 <PushPinIcon sx={{ fontSize: '2.5rem' }} />
               </IconButton>
             </Tooltip>
