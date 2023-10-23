@@ -106,7 +106,6 @@ export function HomePage() {
       {/* filter box */}
       <Box
         sx={{
-          // bgcolor: 'primary.main',
           backgroundImage: `url(${banner})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
@@ -166,9 +165,6 @@ export function HomePage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 sx={{
                   height: '60px',
-
-                  // marginLeft: '10px',
-                  // width: { xs: '80vw', md: '35vw' },
                 }}
                 InputLabelProps={{
                   sx: {
@@ -190,7 +186,7 @@ export function HomePage() {
             value={value}
             handleChange={handleChange}
             filteredJobListings={filteredJobListings}
-            sortedJobs={sortJobListingsByDate(jobListings)} // Use the utility function
+            sortedJobs={sortJobListingsByDate(jobListings)}
             handleCardClick={handleCardClick}
           />
           {/* Job detail dialog */}
