@@ -29,7 +29,7 @@ export const themeOptions = {
     success: {
       main: '#1cb1b1',
     },
-    divider: 'rgba(27, 38, 59, 1)',
+    divider: '#ebba09',
   },
   typography: {
     fontFamily: 'Roboto',

@@ -17,4 +17,5 @@
 .blinking:hover {
   animation: none;
   opacity: 1;
+  border: none;
 }

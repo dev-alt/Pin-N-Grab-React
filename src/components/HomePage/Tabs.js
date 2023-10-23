@@ -19,32 +19,47 @@ export function JobTabs({
     <Box>
       <TabContext value={value}>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <TabList onChange={handleChange} aria-label="tabs">
+          <TabList
+            onChange={handleChange}
+            aria-label="tabs"
+            sx={{ mb: '-20px' }}>
             <Tab
               label="All Jobs"
               value="1"
               style={{
                 color: '#000',
               }}
-              sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
+              sx={{
+                fontSize: { xs: '0.5rem', sm: '1rem' },
+                fontWeight: 'bold',
+              }}
             />
             <Tab
               label="Most Recent Jobs"
               value="2"
               style={{ color: '#000' }}
-              sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
+              sx={{
+                fontSize: { xs: '0.5rem', sm: '1rem' },
+                fontWeight: 'bold',
+              }}
             />
             <Tab
               label="Saved Jobs"
               value="3"
               style={{ color: '#000' }}
-              sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
+              sx={{
+                fontSize: { xs: '0.5rem', sm: '1rem' },
+                fontWeight: 'bold',
+              }}
             />
             <Tab
               label="Applied Jobs"
               value="4"
               style={{ color: '#000' }}
-              sx={{ fontSize: { xs: '0.5rem', sm: '1rem' } }}
+              sx={{
+                fontSize: { xs: '0.5rem', sm: '1rem' },
+                fontWeight: 'bold',
+              }}
             />
           </TabList>
         </Box>

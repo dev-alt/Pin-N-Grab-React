@@ -7,7 +7,7 @@ import EmailNavMenu from '../components/Email/EmailNavMenu';
 
 const Email = () => {
   const [selectedTab, setSelectedTab] = useState('inbox');
-  const [selectedEmail, setSelectedEmail] = useState(null); 
+  const [selectedEmail, setSelectedEmail] = useState(null);
 
   const handleTabChange = (tabName) => {
     setSelectedTab(tabName);
@@ -16,11 +16,11 @@ const Email = () => {
 
   const handleEmailClick = (email) => {
     setSelectedEmail(email);
-    setSelectedTab('emailContent'); 
+    setSelectedTab('emailContent');
   };
 
   const handleComposeClose = () => {
-    setSelectedTab('inbox'); 
+    setSelectedTab('inbox');
   };
 
   const handleEmailDelete = () => {
@@ -30,7 +30,12 @@ const Email = () => {
   return (
     <Container sx={{ margin: 0 }}>
       <CssBaseline />
-      <Box sx={{ display: 'flex', alignItems: 'centre' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'centre',
+          justifyContent: 'space-between',
+        }}>
         <Typography variant="h5" gutterBottom sx={{ paddingTop: '20px' }}>
           Messages
         </Typography>
@@ -47,10 +52,7 @@ const Email = () => {
             {selectedEmail ? (
               <EmailContent email={selectedEmail} onDelete={handleTabChange} />
             ) : (
-              <EmailInbox
-                onEmailClick={handleEmailClick}
-                maxHeight="400px"
-              />
+              <EmailInbox onEmailClick={handleEmailClick} maxHeight="400px" />
             )}
           </div>
         )}

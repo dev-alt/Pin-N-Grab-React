@@ -16,29 +16,38 @@ const EmailContent = ({ email, onDelete }) => {
           Authorization: userToken,
         },
       })
-      .then(response => {
+      .then((response) => {
         console.log(response.data);
         onDelete('inbox');
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
 
   return (
-    <Paper elevation={3} sx={{ padding: '16px', display: 'flex', flexDirection: 'column' }}>
+    <Paper
+      elevation={1}
+      sx={{ padding: '16px', display: 'flex', flexDirection: 'column' }}>
       <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 2 }}>
         Subject: {email.subject}
       </Typography>
       <Typography variant="subtitle1" sx={{ color: 'text.secondary' }}>
         From: {email.sender.username}
       </Typography>
-      <Typography variant="subtitle2" sx={{ color: 'text.secondary', marginBottom: 2 }}>
+      <Typography
+        variant="subtitle2"
+        sx={{ color: 'text.secondary', marginBottom: 2 }}>
         Date: {new Date(email.date).toLocaleString()}
       </Typography>
       <Divider sx={{ my: 2 }} />
-      <Typography variant="body1" sx={{ wordWrap: 'break-word' }}>{email.content}</Typography>
-      <IconButton sx={{ alignSelf: 'flex-end' }} color="error" onClick={handleDelete}>
+      <Typography variant="body1" sx={{ wordWrap: 'break-word' }}>
+        {email.content}
+      </Typography>
+      <IconButton
+        sx={{ alignSelf: 'flex-end' }}
+        color="error"
+        onClick={handleDelete}>
         <DeleteIcon />
       </IconButton>
     </Paper>

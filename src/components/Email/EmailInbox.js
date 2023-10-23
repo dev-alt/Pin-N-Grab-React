@@ -5,9 +5,9 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  ListItemIcon,  
+  ListItemIcon,
 } from '@mui/material';
-import MailOutlineIcon  from '@mui/icons-material/MailOutline';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { useAuth } from '../../AuthContext';
 import CheckIcon from '@mui/icons-material/Check';
 
@@ -19,11 +19,14 @@ const EmailInbox = ({ onEmailClick }) => {
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await fetch(`/api/message/get/inbox/${profile.profile.UserId}`, {
-          headers: {
-            Authorization: userToken,
+        const response = await fetch(
+          `/api/message/get/inbox/${profile.profile.UserId}`,
+          {
+            headers: {
+              Authorization: userToken,
+            },
           },
-        });
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -62,12 +65,18 @@ const EmailInbox = ({ onEmailClick }) => {
             <ListItem
               key={email.id}
               onClick={() => handleEmailClick(email)}
-              sx={{ cursor: 'pointer', backgroundColor: email.read ? 'lightgray' : 'white' }}
-            >
+              sx={{
+                cursor: 'pointer',
+                backgroundColor: email.read ? '#f7eb3b' : '#ebba09',
+                display: 'flex',
+                borderRadius: '50px',
+                mb: 2,
+              }}>
               <ListItemAvatar>
                 <Avatar alt="Avatar" src={email.sender.senderAvatar} />
               </ListItemAvatar>
               <ListItemText
+                primaryTypographyProps={{ sx: { fontWeight: 900 } }}
                 primary={email.subject}
                 secondary={
                   <>
@@ -79,11 +88,14 @@ const EmailInbox = ({ onEmailClick }) => {
               />
               {email.read ? (
                 <ListItemIcon>
-                  <CheckIcon color="primary" />
+                  <CheckIcon sx={{ color: '#eb6009', marginLeft: '2rem' }} />
                 </ListItemIcon>
               ) : (
                 <ListItemIcon>
-                  <MailOutlineIcon color="secondary" /> 
+                  <MailOutlineIcon
+                    color="secondary"
+                    sx={{ marginLeft: '2rem' }}
+                  />
                 </ListItemIcon>
               )}
             </ListItem>

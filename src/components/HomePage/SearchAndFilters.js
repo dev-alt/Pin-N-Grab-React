@@ -1,6 +1,6 @@
 export function sortJobListingsByDate(jobListings) {
   return jobListings.sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
   );
 }
 
