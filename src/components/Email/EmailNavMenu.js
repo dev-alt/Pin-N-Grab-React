@@ -2,7 +2,6 @@ import React from 'react';
 import { IconButton, Box, Tooltip } from '@mui/material';
 import MapsUgcIcon from '@mui/icons-material/MapsUgc';
 import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
-import UndoIcon from '@mui/icons-material/Undo';
 const EmailNavMenu = ({ onTabChange }) => {
   const handleTabChange = (tabName) => {
     onTabChange(tabName);

@@ -23,10 +23,6 @@ const Email = () => {
     setSelectedTab('inbox');
   };
 
-  // const handleEmailDelete = () => {
-  //   setSelectedTab('inbox');
-  // };
-
   return (
     <Container sx={{ margin: 0 }}>
       <CssBaseline />

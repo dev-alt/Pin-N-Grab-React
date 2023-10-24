@@ -13,7 +13,6 @@ import {
   IconButton,
   Box,
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogActions,
   Button,
@@ -109,7 +108,6 @@ export function CreateJob({ onClose }) {
         mt: '20px',
       }}>
       <Dialog open={errorDialogOpen} onClose={() => setErrorDialogOpen(false)}>
-        <DialogTitle>Error</DialogTitle>
         <DialogContent>
           <Typography>{errorMessage}</Typography>
         </DialogContent>
