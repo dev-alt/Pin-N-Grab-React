@@ -9,11 +9,10 @@ const ApplyButton = ({ job, onApplicationSubmitted }) => {
   const { profile } = useAuth();
   const authToken = Cookies.get('token');
   const user_id = profile.profile.UserId;
-
+  const hasApplied = job.Applications.some(application => application.user_id === user_id);
   const handleApply = () => {
     setIsLoading(true);
-    console.log('Applying for job:', job.id);
-
+    console.log('Applying for job:', job.id);  
     axios
       .post(
         `/api/jobs/applyForJob/${job.id}`,
@@ -32,26 +31,26 @@ const ApplyButton = ({ job, onApplicationSubmitted }) => {
         setIsLoading(false);
         const data = response.data;
         console.log('Response data:', data);
-
-        if (data.error) {
-          // Handle the error, e.g., display an error message
-          console.error(data.error);
-          onApplicationSubmitted({ success: false, message: data.error });
-        } else {
-          // Application submitted successfully, you can update the UI as needed
+  
+        if (data.success) {
+          // Application submitted successfully
           console.log('Application submitted successfully:', data.application);
           onApplicationSubmitted({
             success: true,
             message: 'Application submitted successfully',
           });
           if (data.applied) {
-            // You can use data.applied to show a message or update the UI
+            // You have already applied for this job
             console.log('You have already applied for this job.');
             onApplicationSubmitted({
               success: false,
               message: 'You have already applied for this job',
             });
           }
+        } else if (data.error) {
+          // Handle other errors
+          console.error(data.error);
+          onApplicationSubmitted({ success: false, message: data.error });
         }
       })
       .catch((error) => {
@@ -59,11 +58,11 @@ const ApplyButton = ({ job, onApplicationSubmitted }) => {
         console.error('Error applying for the job:', error);
         onApplicationSubmitted({
           success: false,
-          message: 'Error applying for the job',
+          message: 'An error occurred while applying for the job',
         });
       });
   };
-
+  
   return (
     <Button
       variant="contained"
