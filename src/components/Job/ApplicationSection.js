@@ -5,18 +5,17 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Container,
   Dialog,
   DialogTitle,
   DialogContent,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ApplyButton from './ApplyButton';
-import { renderApplicantsList } from './ApplicationList';
+import { RenderApplicantsList } from './ApplicationList';
 
 const ApplicationsSection = ({ job, isOwner }) => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false); // Dialog state managed within the component
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleApplicationSubmitted = (message) => {
     setApplicationResult(message);
@@ -57,7 +56,7 @@ const ApplicationsSection = ({ job, isOwner }) => {
                 bgcolor: 'primary.main',
                 fontFamily: 'Roboto',
               }}>
-              {renderApplicantsList(job)}
+              <RenderApplicantsList job={job} />
             </AccordionDetails>
           </Accordion>
         ) : (
