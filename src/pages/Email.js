@@ -23,7 +23,6 @@ const Email = () => {
     setSelectedTab('inbox');
   };
 
-
   return (
     <Container sx={{ margin: 0 }}>
       <CssBaseline />

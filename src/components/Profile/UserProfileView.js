@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import {
   Avatar,
   Box,
@@ -11,7 +11,6 @@ import {
   Tab,
 } from '@mui/material';
 
-import HelpIcon from '@mui/icons-material/Help';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PaidIcon from '@mui/icons-material/Paid';
 import StarIcon from '@mui/icons-material/Star';
@@ -25,6 +24,8 @@ import {
 } from '@mui/icons-material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import UserReview from '../Job/UserReviews';
+import { fetchJobListings } from '../Job/Listings/GetAllJobs';
+import JobCardForProfile from '../Job/JobCardForProfile';
 
 const UserProfileView = ({ userId }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -32,42 +33,20 @@ const UserProfileView = ({ userId }) => {
   const [reviews, setReviews] = useState([]);
   const [user, setUser] = useState(null); // State to store user data
   const hasListedJob = true; // You can change this value as needed
-
-  const jobData = {
-    JobName: 'Job Name',
-    Deadline: 'deadline date',
-    Amount: '$Amount',
-  };
-  const JobCard = ({ data, iconComponent }) => {
-    return (
-      <>
-        <Card sx={{ margin: '10px' }}>
-          <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
-            {iconComponent}
-            <Typography variant="h6" sx={{ marginLeft: '20px' }}>
-              {data.JobName}
-            </Typography>
-          </CardContent>
-          <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                marginRight: '30px',
-              }}
-            >
-              <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
-              <Typography>{data.Deadline}</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <PaidIcon style={{ marginRight: '0.5rem' }} />
-              <Typography>{data.Amount}</Typography>
-            </Box>
-          </CardContent>
-        </Card>
-      </>
-    );
-  };
+  const [jobListings, setJobListings] = useState([]);
+  useEffect(() => {
+    fetchJobListings()
+      .then((data) => {
+        const filteredJobListings = data.filter(
+          (job) => job.user_id === userId,
+        );
+        setJobListings(filteredJobListings);
+        console.log(filteredJobListings);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, [useId]);
 
   useEffect(() => {
     // Fetch user profile
@@ -151,8 +130,7 @@ const UserProfileView = ({ userId }) => {
               flexDirection: 'column',
             }
           : { display: 'flex', justifyContent: 'center', padding: '2rem' }
-      }
-    >
+      }>
       <Container sx={{ margin: '20px' }}>
         <Card
           sx={
@@ -174,16 +152,14 @@ const UserProfileView = ({ userId }) => {
                   alignItems: 'center',
                   position: 'fixed',
                 }
-          }
-        >
+          }>
           <CardContent
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               flexWrap: 'wrap',
-            }}
-          >
+            }}>
             <Typography variant="h4" sx={{ marginBottom: '20px' }}>
               {user?.username}
             </Typography>
@@ -202,8 +178,7 @@ const UserProfileView = ({ userId }) => {
                   display: 'flex',
                   alignItems: 'center',
                   marginRight: isSmallScreen ? '20px' : '0',
-                }}
-              >
+                }}>
                 <StickyNote2Icon
                   sx={{ fontSize: 'medium', marginRight: '5px' }}
                 />
@@ -216,8 +191,7 @@ const UserProfileView = ({ userId }) => {
                   display: 'flex',
                   alignItems: 'center', // Align icons and text vertically
                   marginLeft: '5px',
-                }}
-              >
+                }}>
                 <StarIcon sx={{ fontSize: 'medium', marginRight: '5px' }} />
                 {reviews.reduce((total, review) => total + review.rating, 0) /
                   reviews.length}{' '}
@@ -231,13 +205,12 @@ const UserProfileView = ({ userId }) => {
                 isSmallScreen
                   ? { marginRight: '20px', whiteSpace: 'nowrap' }
                   : {}
-              }
-            >
+              }>
               {user?.profile?.createdAt
                 ? `Joined ${new Date(
-                    user.profile.createdAt
+                    user.profile.createdAt,
                   ).getDate()}${getDaySuffix(
-                    new Date(user.profile.createdAt).getDate()
+                    new Date(user.profile.createdAt).getDate(),
                   )} ${
                     months[new Date(user.profile.createdAt).getMonth()]
                   } ${new Date(user.profile.createdAt).getFullYear()}`
@@ -261,9 +234,9 @@ const UserProfileView = ({ userId }) => {
           </Typography>
           {hasListedJob ? (
             <Box sx={{ overflow: 'auto', height: '300px' }}>
-              <JobCard data={jobData} iconComponent={<HelpIcon />} />
-              <JobCard data={jobData} iconComponent={<HelpIcon />} />
-              <JobCard data={jobData} iconComponent={<HelpIcon />} />
+              {jobListings.map((job) => (
+                <JobCardForProfile key={job.id} data={job} />
+              ))}
             </Box>
           ) : (
             <Typography variant="h6">
@@ -280,36 +253,31 @@ const UserProfileView = ({ userId }) => {
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <ElectricalServices fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <LocalFlorist fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <LocalShipping fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <Palette fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}
-            >
+              sx={{ marginRight: '20px' }}>
               <Build fontSize="inherit" /> +1
             </Typography>
           </Box>
@@ -323,8 +291,7 @@ const UserProfileView = ({ userId }) => {
               <Box>
                 <TabList
                   onChange={handleChange}
-                  aria-label="lab API tabs example"
-                >
+                  aria-label="lab API tabs example">
                   <Tab label="From Clients" value="1" />
                   <Tab label="From Workers" value="2" />
                 </TabList>
