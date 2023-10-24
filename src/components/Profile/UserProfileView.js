@@ -9,10 +9,10 @@ import {
   Typography,
   useMediaQuery,
   Tab,
+  Dialog,
 } from '@mui/material';
 
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import PaidIcon from '@mui/icons-material/Paid';
+import JobDetails from '../Job/JobDetails';
 import StarIcon from '@mui/icons-material/Star';
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import {
@@ -34,6 +34,27 @@ const UserProfileView = ({ userId }) => {
   const [user, setUser] = useState(null); // State to store user data
   const hasListedJob = true; // You can change this value as needed
   const [jobListings, setJobListings] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
+
+  const handleJobDialogClose = () => {
+    setSelectedJob(null);
+    setIsJobDialogOpen(false);
+    setTimeout(() => {
+      console.log('Selected Job when closing dialog:', selectedJob);
+    }, 100);
+  };
+
+  const handleCardClick = (job) => {
+    try {
+      console.log('Selected Job when clicking a card:', job);
+      setSelectedJob(job);
+      setIsJobDialogOpen(true);
+    } catch (error) {
+      console.error('Error when clicking a card:', error);
+    }
+  };
+
   useEffect(() => {
     fetchJobListings()
       .then((data) => {
@@ -235,7 +256,11 @@ const UserProfileView = ({ userId }) => {
           {hasListedJob ? (
             <Box sx={{ overflow: 'auto', height: '300px' }}>
               {jobListings.map((job) => (
-                <JobCardForProfile key={job.id} data={job} />
+                <JobCardForProfile
+                  key={job.id}
+                  data={job}
+                  onCardClick={handleCardClick}
+                />
               ))}
             </Box>
           ) : (
@@ -325,6 +350,14 @@ const UserProfileView = ({ userId }) => {
               </TabPanel>
             </TabContext>
           </Box>
+          <Dialog
+            open={isJobDialogOpen}
+            onClose={handleJobDialogClose}
+            maxWidth={{ sm: 'sm', lg: 'lg' }}
+            fullWidth
+            sx={{ mt: 5 }}>
+            <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
+          </Dialog>
         </Box>
       </Container>
     </Container>

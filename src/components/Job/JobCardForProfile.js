@@ -14,8 +14,15 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { Container } from '@mui/system';
 
-const JobCardForProfile = ({ data, iconComponent, jobId, isOwner }) => {
+const JobCardForProfile = ({
+  data,
+  iconComponent,
+  jobId,
+  isOwner,
+  onCardClick,
+}) => {
   const token = Cookies.get('token');
 
   const handleDeleteJob = async () => {
@@ -37,28 +44,44 @@ const JobCardForProfile = ({ data, iconComponent, jobId, isOwner }) => {
   return (
     <>
       <Card sx={{ margin: '10px' }}>
-        <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+        <CardContent
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+          }}>
           {iconComponent}
-          <Typography variant="h6" sx={{ marginLeft: '20px' }}>
-            {data.title}
-          </Typography>
-          {jobId && (
-            <Typography variant="body1" sx={{ marginLeft: '20px' }}>
-              Job ID:{jobId}
-            </Typography>
-          )}
-          {isOwner && ( // Conditionally render the delete button if the user is the owner
-            <IconButton onClick={handleDeleteJob}>
-              <Tooltip title="Delete Job">
-                <DeleteForeverOutlinedIcon
-                  sx={{
-                    fontSize: { xs: '1rem', sm: '1.5rem' },
-                    color: 'error.main',
-                  }}
-                />
-              </Tooltip>
-            </IconButton>
-          )}
+          <Container
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography
+                variant="h6"
+                sx={{ marginLeft: '20px', cursor: 'pointer' }}
+                onClick={() => onCardClick(data)}>
+                {data.title}
+              </Typography>
+              {jobId && (
+                <Typography variant="body1" sx={{ marginLeft: '20px' }}>
+                  Job ID:{jobId}
+                </Typography>
+              )}
+            </Box>
+            {isOwner && ( // Conditionally render the delete button if the user is the owner
+              <IconButton onClick={handleDeleteJob}>
+                <Tooltip title="Delete Job">
+                  <DeleteForeverOutlinedIcon
+                    sx={{
+                      fontSize: { xs: '1rem', sm: '1.5rem' },
+                      color: 'error.main',
+                    }}
+                  />
+                </Tooltip>
+              </IconButton>
+            )}
+          </Container>
         </CardContent>
         <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
           <Box

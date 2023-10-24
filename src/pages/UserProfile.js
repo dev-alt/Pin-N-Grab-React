@@ -10,6 +10,7 @@ import {
   IconButton,
   Tooltip,
   Divider,
+  Dialog,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,6 +22,7 @@ import { useAuth } from '../AuthContext';
 import { themeOptions } from '../components/Common/Theme';
 import { Box } from '@mui/system';
 import { fetchJobListings } from '../components/HomePage/SearchAndFilters';
+import JobDetails from '../components/Job/JobDetails';
 
 import JobCardForProfile from '../components/Job/JobCardForProfile';
 const defaultTheme = createTheme(themeOptions);
@@ -34,6 +36,26 @@ export default function ProfilePage() {
   const { bio, dateOfBirth, gender } = editedProfile;
   const { user } = profile;
   const { firstName, lastName } = user;
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
+
+  const handleJobDialogClose = () => {
+    setSelectedJob(null);
+    setIsJobDialogOpen(false);
+    setTimeout(() => {
+      console.log('Selected Job when closing dialog:', selectedJob);
+    }, 100);
+  };
+
+  const handleCardClick = (job) => {
+    try {
+      console.log('Selected Job when clicking a card:', job);
+      setSelectedJob(job);
+      setIsJobDialogOpen(true);
+    } catch (error) {
+      console.error('Error when clicking a card:', error);
+    }
+  };
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -287,6 +309,7 @@ export default function ProfilePage() {
                         data={job}
                         jobId={job.id}
                         isOwner="true"
+                        onCardClick={handleCardClick}
                       />
                     ))
                   ) : (
@@ -295,6 +318,18 @@ export default function ProfilePage() {
                     </Typography>
                   )}
                 </Box>
+                <Dialog
+                  open={isJobDialogOpen}
+                  onClose={handleJobDialogClose}
+                  maxWidth={{ sm: 'sm', lg: 'lg' }}
+                  fullWidth
+                  sx={{ mt: 5 }}>
+                  <JobDetails
+                    job={selectedJob}
+                    onClose={handleJobDialogClose}
+                  />
+                </Dialog>
+                ;
               </Paper>
             </Container>
           </Box>

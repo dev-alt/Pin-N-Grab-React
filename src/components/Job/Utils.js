@@ -58,15 +58,15 @@ export const labelStyle = {
 
 export const images = [
   {
-    imgUrl: '0-5000x3333.jpg',
+    imgUrl: '/0-5000x3333.jpg',
     alt: 'Image 1 Alt Text',
   },
   {
-    imgUrl: '4-5000x3333.jpg',
+    imgUrl: '/4-5000x3333.jpg',
     alt: 'Image 2 Alt Text',
   },
   {
-    imgUrl: '8-5000x3333.jpg',
+    imgUrl: '/8-5000x3333.jpg',
     alt: 'Image 3 Alt Text',
   },
 ];
