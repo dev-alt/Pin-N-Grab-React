@@ -9,7 +9,7 @@ const ApplyButton = ({ job, onApplicationSubmitted }) => {
   const { profile } = useAuth();
   const authToken = Cookies.get('token');
   const user_id = profile.profile.UserId;
-  const hasApplied = job.Applications.some(application => application.user_id === user_id);
+  
   const handleApply = () => {
     setIsLoading(true);
     console.log('Applying for job:', job.id);  

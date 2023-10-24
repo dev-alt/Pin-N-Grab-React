@@ -2,11 +2,9 @@ import React from 'react';
 import { Paper, Typography, IconButton, Divider } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
-import { useAuth } from '../../AuthContext';
 import Cookies from 'js-cookie';
 
 const EmailContent = ({ email, onDelete }) => {
-  const { profile } = useAuth();
   const userToken = Cookies.get('token');
 
   const handleDelete = () => {

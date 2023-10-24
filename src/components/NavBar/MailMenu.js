@@ -19,9 +19,7 @@ function MailMenu() {
   const [isMessageOpen, setMessageOpen] = useState(false);
   const [unreadMessageCount, setUnreadMessageCount] = useState(0);
 
-  const incrementUnreadCount = () => {
-    setUnreadMessageCount(unreadMessageCount + 1);
-  };
+
 
   const handleMailOpen = () => {
     setMessageOpen(true);

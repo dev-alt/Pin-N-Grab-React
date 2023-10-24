@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IconButton } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import axios from 'axios';
@@ -7,25 +7,17 @@ import {
   List,
   ListItem,
   ListItemText,
-  Dialog
 } from '@mui/material';
 
 export function RenderApplicantsList({ job }) {
   const token = Cookies.get('token');
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [message, setMessage] = useState('');
 
-  const openDialog = (message) => {
-    setMessage(message);
-    setIsDialogOpen(true);
-  };
 
   const handleMarkCompleted = async (jobId, applicationId) => {
     try {
-      // Make sure to set the 'Authorization' header properly
       console.log('jobId:', job.id);
 
-      const response = await axios.post(`/api/jobs/${jobId}/markCompleted`, {
+      await axios.post(`/api/jobs/${jobId}/markCompleted`, {
         selectedUserId: applicationId, // Send the application ID
       }, {
         headers: {
@@ -38,12 +30,10 @@ export function RenderApplicantsList({ job }) {
     }
   };
 
-  console.log(job.Applications);
 
   if (job.Applications && job.Applications.length > 0) {
     console.log(job.id);
     return (
-      <div>
         <List sx={{ overflow: 'auto' }}>
           {job.Applications.map((application) => (
             <ListItem
@@ -62,12 +52,6 @@ export function RenderApplicantsList({ job }) {
             </ListItem>
           ))}
         </List>
-        <Dialog
-          open={isDialogOpen}
-          onClose={() => setIsDialogOpen(false)}
-          message={message}
-        />
-      </div>
     );
   } else {
     return <p>No applicants yet.</p>;
