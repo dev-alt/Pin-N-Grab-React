@@ -6,19 +6,18 @@ function useJobSave(jobId) {
   const { profile } = useAuth(); // Get the user's profile from the AuthContext
   const [isSaved, setIsSaved] = useState(false);
   const token = Cookies.get('token');
-  
+
   useEffect(() => {
     // Make an initial request to the server to check if the job is saved
     const checkSavedStatus = async () => {
       try {
-
         const response = await fetch(
           `/api/users/${profile.profile.UserId}/checkSavedJob/${jobId}`,
           {
-          headers: {
-            Authorization: token,
+            headers: {
+              Authorization: token,
+            },
           },
-        }
         );
         if (response.ok) {
           const data = await response.json();
@@ -29,13 +28,13 @@ function useJobSave(jobId) {
       } catch (error) {
         console.error(
           `An error occurred while checking saved status for job ${jobId}:`,
-          error
+          error,
         );
       }
     };
 
     checkSavedStatus();
-  }, [profile.profile.UserId, jobId]);
+  }, [profile.profile.UserId, jobId, token]);
 
   const toggleSaved = async () => {
     // Prepare the request data
@@ -43,16 +42,16 @@ function useJobSave(jobId) {
       method: isSaved ? 'DELETE' : 'POST', // Use DELETE to unsave and POST to save
       headers: {
         'Content-Type': 'application/json',
-         Authorization: token,
+        Authorization: token,
       },
     };
-    
+
     try {
       if (isSaved) {
         // Send the DELETE request to unsave
         const response = await fetch(
           `/api/users/${profile.profile.UserId}/unsaveJob/${jobId}`,
-          requestData
+          requestData,
         );
         if (response.ok) {
           console.log(`Job ${jobId} unsaved`);
@@ -64,7 +63,7 @@ function useJobSave(jobId) {
         // Send the POST request to save
         const response = await fetch(
           `/api/users/${profile.profile.UserId}/saveJob/${jobId}`, // Use profile.id as the userId
-          requestData
+          requestData,
         );
         if (response.ok) {
           console.log(`Job ${jobId} saved`);
@@ -76,7 +75,7 @@ function useJobSave(jobId) {
     } catch (error) {
       console.error(
         `An error occurred while ${isSaved ? 'unsaving' : 'saving'} the job:`,
-        error
+        error,
       );
     }
   };

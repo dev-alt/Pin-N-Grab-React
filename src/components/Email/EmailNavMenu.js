@@ -14,12 +14,14 @@ const EmailNavMenu = ({ onTabChange }) => {
         alignItems: 'centre',
         marginLeft: '20px',
         marginTop: '20px',
-      }}>
+      }}
+    >
       <Tooltip title="New Message">
         <IconButton
           variant="contained"
           sx={{ color: '#fccf03' }}
-          onClick={() => handleTabChange('compose')}>
+          onClick={() => handleTabChange('compose')}
+        >
           <MapsUgcIcon fontSize="large" />
         </IconButton>
       </Tooltip>
@@ -28,7 +30,8 @@ const EmailNavMenu = ({ onTabChange }) => {
           color="#fccf03"
           value={false}
           sx={{ color: '#fccf03' }}
-          onClick={() => handleTabChange('inbox')}>
+          onClick={() => handleTabChange('inbox')}
+        >
           <MarkAsUnreadIcon fontSize="large" />
         </IconButton>
       </Tooltip>

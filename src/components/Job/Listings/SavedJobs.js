@@ -32,8 +32,7 @@ export function SaveJobs({ onCardClick }) {
       }
     };
     fetchSavedJobs();
-  }, [userId]);
-  
+  }, [userId, token]);
 
   return (
     <Container

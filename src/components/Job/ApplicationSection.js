@@ -36,7 +36,8 @@ const ApplicationsSection = ({ job, isOwner }) => {
       <Typography
         variant="body1"
         sx={{ marginTop: '20px', marginBottom: '10px', fontWeight: 'bold' }}
-        color="#BC4B51">
+        color="#BC4B51"
+      >
         Number of Applicants: {job.Applications?.length}
       </Typography>
 
@@ -48,14 +49,16 @@ const ApplicationsSection = ({ job, isOwner }) => {
               onClick={handleShowApplicants}
               sx={{
                 bgcolor: 'primary.main',
-              }}>
+              }}
+            >
               <Typography>Applicants</Typography>
             </AccordionSummary>
             <AccordionDetails
               sx={{
                 bgcolor: 'primary.main',
                 fontFamily: 'Roboto',
-              }}>
+              }}
+            >
               <RenderApplicantsList job={job} />
             </AccordionDetails>
           </Accordion>

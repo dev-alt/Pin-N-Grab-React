@@ -9,10 +9,10 @@ const ApplyButton = ({ job, onApplicationSubmitted }) => {
   const { profile } = useAuth();
   const authToken = Cookies.get('token');
   const user_id = profile.profile.UserId;
-  
+
   const handleApply = () => {
     setIsLoading(true);
-    console.log('Applying for job:', job.id);  
+    console.log('Applying for job:', job.id);
     axios
       .post(
         `/api/jobs/applyForJob/${job.id}`,
@@ -25,13 +25,13 @@ const ApplyButton = ({ job, onApplicationSubmitted }) => {
             'Content-Type': 'application/json',
             Authorization: authToken,
           },
-        }
+        },
       )
       .then((response) => {
         setIsLoading(false);
         const data = response.data;
         console.log('Response data:', data);
-  
+
         if (data.success) {
           // Application submitted successfully
           console.log('Application submitted successfully:', data.application);
@@ -62,7 +62,7 @@ const ApplyButton = ({ job, onApplicationSubmitted }) => {
         });
       });
   };
-  
+
   return (
     <Button
       variant="contained"

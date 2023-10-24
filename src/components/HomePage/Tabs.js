@@ -22,7 +22,8 @@ export function JobTabs({
           <TabList
             onChange={handleChange}
             aria-label="tabs"
-            sx={{ mb: '-20px' }}>
+            sx={{ mb: '-20px' }}
+          >
             <Tab
               label="All Jobs"
               value="1"

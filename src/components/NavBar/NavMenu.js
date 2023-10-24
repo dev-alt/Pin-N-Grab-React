@@ -62,7 +62,8 @@ export function PrimarySearchAppBar() {
         }
       }}
       component={item.key !== 'signOut' ? Link : undefined}
-      to={item.key !== 'signOut' ? item.link : undefined}>
+      to={item.key !== 'signOut' ? item.link : undefined}
+    >
       {item.component || item.label}
     </MenuItem>
   ));
@@ -81,7 +82,8 @@ export function PrimarySearchAppBar() {
         horizontal: 'right',
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}>
+      onClose={handleMenuClose}
+    >
       {menuItemsJSX}
     </Menu>
   );
@@ -102,13 +104,15 @@ export function PrimarySearchAppBar() {
           display: 'flex',
           justifyContent: 'center',
           justifyItems: 'center',
-        }}>
+        }}
+      >
         <AppBar
           position="static"
           sx={{
             boxShadow: 'none',
             bgcolor: 'transparent',
-          }}>
+          }}
+        >
           <Toolbar>
             {/* Application title */}
 
@@ -118,7 +122,8 @@ export function PrimarySearchAppBar() {
                   display: 'flex',
                   alignItems: 'center',
                   marginLeft: { xs: 0, md: '10vw', xl: '25vw' },
-                }}>
+                }}
+              >
                 <Logo width="2rem" />
                 <Typography
                   variant="h4"
@@ -136,7 +141,8 @@ export function PrimarySearchAppBar() {
                       color: 'rgba(20, 8, 14, 1)', // Define color for the active state
                     },
                     paddingLeft: '5px',
-                  }}>
+                  }}
+                >
                   Pin'n Grab
                 </Typography>
               </Box>
@@ -150,7 +156,8 @@ export function PrimarySearchAppBar() {
 
                 justifyContent: 'center',
                 justifyItems: 'center',
-              }}>
+              }}
+            >
               <Tooltip title="Pin a job">
                 <Button
                   startIcon={
@@ -168,7 +175,8 @@ export function PrimarySearchAppBar() {
                   }}
                   variant="outlined"
                   className="blinking"
-                  onClick={openCreateJobDialog}>
+                  onClick={openCreateJobDialog}
+                >
                   Pin a Job
                 </Button>
               </Tooltip>
@@ -181,7 +189,8 @@ export function PrimarySearchAppBar() {
                 aria-controls={menuId}
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
-                color="inherit">
+                color="inherit"
+              >
                 <AccountCircle />
               </IconButton>
             </Box>
@@ -195,7 +204,8 @@ export function PrimarySearchAppBar() {
         TransitionComponent={Grow}
         transitionDuration={500}
         maxWidth="sm"
-        fullWidth>
+        fullWidth
+      >
         <CreateJob onClose={closeCreateJobDialog} />
       </Dialog>
     </>

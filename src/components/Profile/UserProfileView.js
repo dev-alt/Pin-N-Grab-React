@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useId } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Avatar,
   Box,
@@ -31,8 +31,8 @@ const UserProfileView = ({ userId }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const [value, setValue] = useState('1');
   const [reviews, setReviews] = useState([]);
-  const [user, setUser] = useState(null); // State to store user data
-  const hasListedJob = true; // You can change this value as needed
+  const [user, setUser] = useState(null);
+  const hasListedJob = true;
   const [jobListings, setJobListings] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
@@ -67,7 +67,7 @@ const UserProfileView = ({ userId }) => {
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, [useId]);
+  }, [userId]);
 
   useEffect(() => {
     // Fetch user profile
@@ -151,7 +151,8 @@ const UserProfileView = ({ userId }) => {
               flexDirection: 'column',
             }
           : { display: 'flex', justifyContent: 'center', padding: '2rem' }
-      }>
+      }
+    >
       <Container sx={{ margin: '20px' }}>
         <Card
           sx={
@@ -173,14 +174,16 @@ const UserProfileView = ({ userId }) => {
                   alignItems: 'center',
                   position: 'fixed',
                 }
-          }>
+          }
+        >
           <CardContent
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               flexWrap: 'wrap',
-            }}>
+            }}
+          >
             <Typography variant="h4" sx={{ marginBottom: '20px' }}>
               {user?.username}
             </Typography>
@@ -199,7 +202,8 @@ const UserProfileView = ({ userId }) => {
                   display: 'flex',
                   alignItems: 'center',
                   marginRight: isSmallScreen ? '20px' : '0',
-                }}>
+                }}
+              >
                 <StickyNote2Icon
                   sx={{ fontSize: 'medium', marginRight: '5px' }}
                 />
@@ -212,7 +216,8 @@ const UserProfileView = ({ userId }) => {
                   display: 'flex',
                   alignItems: 'center', // Align icons and text vertically
                   marginLeft: '5px',
-                }}>
+                }}
+              >
                 <StarIcon sx={{ fontSize: 'medium', marginRight: '5px' }} />
                 {reviews.reduce((total, review) => total + review.rating, 0) /
                   reviews.length}{' '}
@@ -226,7 +231,8 @@ const UserProfileView = ({ userId }) => {
                 isSmallScreen
                   ? { marginRight: '20px', whiteSpace: 'nowrap' }
                   : {}
-              }>
+              }
+            >
               {user?.profile?.createdAt
                 ? `Joined ${new Date(
                     user.profile.createdAt,
@@ -278,31 +284,36 @@ const UserProfileView = ({ userId }) => {
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <ElectricalServices fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <LocalFlorist fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <LocalShipping fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <Palette fontSize="inherit" /> +1
             </Typography>
             <Typography
               variant="h5"
               color="#433E0E"
-              sx={{ marginRight: '20px' }}>
+              sx={{ marginRight: '20px' }}
+            >
               <Build fontSize="inherit" /> +1
             </Typography>
           </Box>
@@ -316,7 +327,8 @@ const UserProfileView = ({ userId }) => {
               <Box>
                 <TabList
                   onChange={handleChange}
-                  aria-label="lab API tabs example">
+                  aria-label="lab API tabs example"
+                >
                   <Tab label="From Clients" value="1" />
                   <Tab label="From Workers" value="2" />
                 </TabList>
@@ -355,7 +367,8 @@ const UserProfileView = ({ userId }) => {
             onClose={handleJobDialogClose}
             maxWidth={{ sm: 'sm', lg: 'lg' }}
             fullWidth
-            sx={{ mt: 5 }}>
+            sx={{ mt: 5 }}
+          >
             <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
           </Dialog>
         </Box>
