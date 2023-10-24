@@ -72,7 +72,7 @@ export default function ProfilePage() {
     fetchJobListings()
       .then((data) => {
         const filteredJobListings = data.filter(
-          (job) => job.user_id === user.id,
+          (job) => job.user_id === user.id && job.jobStatus === 'Open',
         );
         setJobListings(filteredJobListings);
         console.log(filteredJobListings);
@@ -280,14 +280,20 @@ export default function ProfilePage() {
                   Recent Job Postings
                 </Typography>
                 <Box>
-                  {jobListings.map((job) => (
-                    <JobCardForProfile
-                      key={job.id}
-                      data={job}
-                      jobId={job.id}
-                      isOwner="true"
-                    />
-                  ))}
+                  {jobListings ? (
+                    jobListings.map((job) => (
+                      <JobCardForProfile
+                        key={job.id}
+                        data={job}
+                        jobId={job.id}
+                        isOwner="true"
+                      />
+                    ))
+                  ) : (
+                    <Typography variant="h5">
+                      You haven't pinned any job yet
+                    </Typography>
+                  )}
                 </Box>
               </Paper>
             </Container>

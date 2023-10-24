@@ -38,7 +38,7 @@ const UserProfileView = ({ userId }) => {
     fetchJobListings()
       .then((data) => {
         const filteredJobListings = data.filter(
-          (job) => job.user_id === userId,
+          (job) => job.user_id === userId && job.jobStatus === 'Open',
         );
         setJobListings(filteredJobListings);
         console.log(filteredJobListings);

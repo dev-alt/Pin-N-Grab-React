@@ -81,6 +81,7 @@ export function CreateJob({ onClose }) {
           },
         },
       );
+
       console.log(response.data);
       console.log('Selected Category ID:', selectedCategory);
 
