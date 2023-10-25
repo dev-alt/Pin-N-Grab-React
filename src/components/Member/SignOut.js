@@ -13,7 +13,11 @@ function SignOutButton() {
     navigate('/signin');
   };
 
-  return <Button onClick={signOut}>Sign Out</Button>;
+  return (
+    <Button onClick={signOut} sx={{ color: '#9A8311' }}>
+      Sign Out
+    </Button>
+  );
 }
 
 export default SignOutButton;
