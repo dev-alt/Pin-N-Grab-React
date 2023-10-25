@@ -308,7 +308,7 @@ export default function ProfilePage() {
                         key={job.id}
                         data={job}
                         jobId={job.id}
-                        isOwner="true"
+                        isOwner={true}
                         onCardClick={handleCardClick}
                       />
                     ))

@@ -88,6 +88,9 @@ export function CreateJob({ onClose }) {
       if (response.data && response.data.message === 'Job listing created') {
         setErrorMessage('Job pinned.');
         openErrorDialog(); // Open the error dialog;
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } else {
         setErrorMessage('Job creation failed. Please try again.');
         openErrorDialog(); // Open the error dialog
