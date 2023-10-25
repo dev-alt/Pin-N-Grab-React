@@ -23,7 +23,6 @@ export function AppliedJobs({ onCardClick }) {
         if (response.ok) {
           const data = await response.json();
           setAcceptedJobs(data);
-          console.log('accepted jobs:', data);
         } else {
           console.error('Failed to fetch accepted jobs.');
         }
@@ -45,7 +44,7 @@ export function AppliedJobs({ onCardClick }) {
       <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={0}>
         {acceptedJobs.map((job) => (
           <Box key={job.id}>
-            <CardComponent job={job.Job} onCardClick={onCardClick} />
+            <CardComponent job={job} onCardClick={onCardClick} />
           </Box>
         ))}
       </Masonry>

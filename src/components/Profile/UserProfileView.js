@@ -62,7 +62,6 @@ const UserProfileView = ({ userId }) => {
           (job) => job.user_id === userId && job.jobStatus === 'Open',
         );
         setJobListings(filteredJobListings);
-        console.log(filteredJobListings);
       })
       .catch((error) => {
         console.error('Error:', error);

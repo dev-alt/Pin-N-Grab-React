@@ -50,7 +50,6 @@ export default function ProfilePage() {
 
   const handleCardClick = (job) => {
     try {
-      console.log('Selected Job when clicking a card:', job);
       setSelectedJob(job);
       setIsJobDialogOpen(true);
     } catch (error) {
@@ -98,15 +97,13 @@ export default function ProfilePage() {
           (job) => job.user_id === user.id && job.jobStatus === 'Open',
         );
         setJobListings(filteredJobListings);
-        console.log(filteredJobListings);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, [user.id]);
 
-  console.log('Jobs', jobListings);
-  console.log('user.id', user.id);
+
   const TextBox = ({ tag, text }) => {
     return (
       <Box sx={{ marginTop: '20px', marginBottom: '30px' }}>

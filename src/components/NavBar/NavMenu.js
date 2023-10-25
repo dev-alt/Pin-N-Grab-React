@@ -124,7 +124,7 @@ export function PrimarySearchAppBar() {
                   marginLeft: { xs: 0, md: '10vw', xl: '25vw' },
                 }}
               >
-                <Logo width="2rem" />
+                <Logo width="2px" />
                 <Typography
                   variant="h4"
                   noWrap

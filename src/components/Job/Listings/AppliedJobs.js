@@ -23,7 +23,6 @@ export function AppliedJobs({ onCardClick }) {
         if (response.ok) {
           const data = await response.json();
           setAppliedJobs(data);
-          console.log('Applied jobs:', data);
         } else {
           console.error('Failed to fetch applied jobs.');
         }
@@ -34,7 +33,6 @@ export function AppliedJobs({ onCardClick }) {
     fetchAppliedJobs();
   }, [userId, token]);
 
-  console.log('Applied jobs', appliedJobs);
 
   return (
     <Container

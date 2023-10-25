@@ -23,7 +23,6 @@ export function SaveJobs({ onCardClick }) {
         if (response.ok) {
           const data = await response.json();
           setSavedJobs(data);
-          console.log('Saved jobs:', data);
         } else {
           console.error('Failed to fetch saved jobs.');
         }
