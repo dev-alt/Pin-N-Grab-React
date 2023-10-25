@@ -31,7 +31,8 @@ const Email = () => {
           display: 'flex',
           alignItems: 'centre',
           justifyContent: 'space-between',
-        }}>
+        }}
+      >
         <Typography variant="h5" gutterBottom sx={{ paddingTop: '20px' }}>
           Messages
         </Typography>

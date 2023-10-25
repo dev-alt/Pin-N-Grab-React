@@ -10,7 +10,10 @@ const CardGrid = ({ jobListings, onCardClick }) => {
 
   // Filter out job listings with "Closed" or "Deleted" jobStatus
   const filteredJobListings = jobListings.filter(
-    (job) => job.jobStatus !== 'Closed' && job.jobStatus !== 'Deleted' && job.jobStatus !== 'Completed'
+    (job) =>
+      job.jobStatus !== 'Closed' &&
+      job.jobStatus !== 'Deleted' &&
+      job.jobStatus !== 'Completed',
   );
 
   return (

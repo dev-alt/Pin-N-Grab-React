@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Avatar,
   List,
@@ -10,11 +10,13 @@ import {
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { useAuth } from '../../AuthContext';
 import CheckIcon from '@mui/icons-material/Check';
+import { UseUnreadMessages } from '../../UnreadMessagesContext';
 
 const EmailInbox = ({ onEmailClick }) => {
   const { profile } = useAuth();
   const [emails, setEmails] = useState();
   const userToken = localStorage.getItem('token');
+  const { decrementUnreadCount } = UseUnreadMessages();
 
   useEffect(() => {
     const fetchEmails = async () => {
@@ -43,18 +45,22 @@ const EmailInbox = ({ onEmailClick }) => {
   }, [profile, userToken]);
 
   const handleEmailClick = async (email) => {
-    try {
-      // Send a request to mark the email as read
-      await fetch(`/api/message/mark-as-read/${email.id}`, {
-        method: 'PATCH',
-        headers: {
-          Authorization: userToken,
-        },
-      });
-      onEmailClick(email);
-    } catch (error) {
-      console.error('Error marking email as read:', error);
+    if (!email.read) {
+      try {
+        // Send a request to mark the email as read
+        await fetch(`/api/message/mark-as-read/${email.id}`, {
+          method: 'PATCH',
+          headers: {
+            Authorization: userToken,
+          },
+        });
+        decrementUnreadCount();
+        onEmailClick(email);
+      } catch (error) {
+        console.error('Error marking email as read:', error);
+      }
     }
+    onEmailClick(email);
   };
 
   return (
@@ -71,7 +77,8 @@ const EmailInbox = ({ onEmailClick }) => {
                 display: 'flex',
                 borderRadius: '50px',
                 mb: 2,
-              }}>
+              }}
+            >
               <ListItemAvatar>
                 <Avatar alt="Avatar" src={email.sender.senderAvatar} />
               </ListItemAvatar>

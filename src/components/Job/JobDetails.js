@@ -78,7 +78,8 @@ const JobDetails = ({ job, onClose }) => {
         <Typography
           variant="h6"
           color="rgba(20, 8, 14, 1)"
-          sx={{ marginLeft: '20px' }}>
+          sx={{ marginLeft: '20px' }}
+        >
           No job details available.
         </Typography>
       </Paper>
@@ -122,7 +123,8 @@ const JobDetails = ({ job, onClose }) => {
               border: '0.5px solid #d2d2d4 ',
               borderRadius: '8px',
               justifyContent: 'center',
-            }}>
+            }}
+          >
             <Box>
               <Box
                 sx={{
@@ -130,7 +132,8 @@ const JobDetails = ({ job, onClose }) => {
                   alignItems: 'center',
                   gap: '10px',
                   marginBottom: '2px',
-                }}>
+                }}
+              >
                 <Avatar onClick={openUserProfile} sx={{ cursor: 'pointer' }} />
                 <UserProfile
                   job={job}
@@ -145,7 +148,8 @@ const JobDetails = ({ job, onClose }) => {
 
               <Typography
                 variant={isSmallScreen ? 'subtitle1' : 'h6'}
-                sx={{ marginTop: '20px' }}>
+                sx={{ marginTop: '20px' }}
+              >
                 {job.User.username} is happy to pay:{' '}
               </Typography>
               <Typography variant={isSmallScreen ? 'h5' : 'h4'}>
@@ -176,7 +180,8 @@ const JobDetails = ({ job, onClose }) => {
         sx={{
           height: '80vh',
           mt: 12,
-        }}>
+        }}
+      >
         <UserProfileView userId={job.user_id} />
       </Dialog>
       <Dialog
@@ -189,7 +194,8 @@ const JobDetails = ({ job, onClose }) => {
           margin: '0 auto',
           marginTop: '5vh',
           padding: '20px',
-        }}>
+        }}
+      >
         <EmailCompose onClose={closeMessageDialog} />
       </Dialog>
     </Container>

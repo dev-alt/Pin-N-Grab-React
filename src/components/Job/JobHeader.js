@@ -19,7 +19,11 @@ const JobHeader = ({ job, isOwner }) => {
       const config = {
         headers: { Authorization: token },
       };
-      await axios.patch(`/api/jobs/${job.id}/close`, { status: 'closed' }, config);
+      await axios.patch(
+        `/api/jobs/${job.id}/close`,
+        { status: 'closed' },
+        config,
+      );
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -32,10 +36,11 @@ const JobHeader = ({ job, isOwner }) => {
       <Typography
         variant={isSmallScreen ? 'h6' : 'h4'}
         color="rgba(20, 8, 14, 1)"
-        sx={{ marginLeft: '20px' }}>
+        sx={{ marginLeft: '20px' }}
+      >
         {job.title}
       </Typography>
-      {isOwner && (  // Conditionally render the delete button if the user is the owner
+      {isOwner && ( // Conditionally render the delete button if the user is the owner
         <IconButton onClick={handleDeleteJob}>
           <Tooltip title="Delete Job">
             <DeleteForeverOutlinedIcon

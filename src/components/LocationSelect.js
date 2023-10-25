@@ -15,14 +15,16 @@ function LocationSelect({ location, onChange, locationsData }) {
         borderRadius: '10px',
         padding: '2px',
         width: { xs: '80vw', md: '35vw' },
-      }}>
+      }}
+    >
       <FormControl fullWidth sx={{ height: '60px' }}>
         <InputLabel
           style={{
             color: '#7a7974',
             fontFamily: 'Montserrat',
             fontWeight: 'bold',
-          }}>
+          }}
+        >
           Where
         </InputLabel>
         <Select value={location} onChange={onChange} variant="standard">
@@ -44,7 +46,8 @@ function LocationSelectForForm({ location, onChange, locationsData }) {
       <InputLabel
         style={{
           color: '#7a7974',
-        }}>
+        }}
+      >
         Location
       </InputLabel>
       <Select value={location} onChange={onChange} variant="standard">

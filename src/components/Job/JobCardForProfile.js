@@ -48,19 +48,22 @@ const JobCardForProfile = ({
           sx={{
             display: 'flex',
             alignItems: 'center',
-          }}>
+          }}
+        >
           {iconComponent}
           <Container
             sx={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-            }}>
+            }}
+          >
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography
                 variant="h6"
                 sx={{ marginLeft: '20px', cursor: 'pointer' }}
-                onClick={() => onCardClick(data)}>
+                onClick={() => onCardClick(data)}
+              >
                 {data.title}
               </Typography>
               {jobId && (
@@ -89,7 +92,8 @@ const JobCardForProfile = ({
               display: 'flex',
               alignItems: 'center',
               marginRight: '30px',
-            }}>
+            }}
+          >
             <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
             <Typography>{data.deadline}</Typography>
           </Box>

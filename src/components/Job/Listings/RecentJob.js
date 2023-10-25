@@ -7,7 +7,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const RecentJob = ({ jobs, onCardClick }) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('lg'));
   const isXtraSmallScreen = useMediaQuery((theme) =>
-    theme.breakpoints.down('md')
+    theme.breakpoints.down('md'),
   );
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +20,7 @@ const RecentJob = ({ jobs, onCardClick }) => {
   }
 
   const sortedJobs = jobs.sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
   );
 
   const indexOfLastItem = currentPage * itemsPerPage;

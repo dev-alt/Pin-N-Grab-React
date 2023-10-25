@@ -24,7 +24,7 @@ export function SignIn() {
   const { handleLogin } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

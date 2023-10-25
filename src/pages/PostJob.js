@@ -110,7 +110,8 @@ export function CreateJob({ onClose }) {
       sx={{
         borderRadius: '8px',
         mt: '20px',
-      }}>
+      }}
+    >
       <Dialog open={errorDialogOpen} onClose={() => setErrorDialogOpen(false)}>
         <DialogContent>
           <Typography>{errorMessage}</Typography>
@@ -125,7 +126,8 @@ export function CreateJob({ onClose }) {
         edge="end"
         color="primary"
         onClick={onClose}
-        style={{ position: 'absolute', top: '10px', right: '10px' }}>
+        style={{ position: 'absolute', top: '10px', right: '10px' }}
+      >
         <CloseIcon />
       </IconButton>
       <Grid container spacing={3}>
@@ -135,7 +137,8 @@ export function CreateJob({ onClose }) {
             ml: 2,
             backgroundColor: '#f5f5f5',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
-          }}>
+          }}
+        >
           <Typography variant="h4" textAlign="center" sx={{ mt: 5 }}>
             Pin a Job
           </Typography>
@@ -200,7 +203,8 @@ export function CreateJob({ onClose }) {
                 <InputLabel style={{ color: '#7a7974' }}>Category</InputLabel>
                 <Select
                   value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}>
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                >
                   <MenuItem value="" sx={{ color: '#7a7974' }}>
                     Select a category
                   </MenuItem>
@@ -241,7 +245,8 @@ export function CreateJob({ onClose }) {
               <IconButton
                 variant="contained"
                 onClick={handleReset}
-                color="secondary">
+                color="secondary"
+              >
                 <RefreshIcon sx={{ fontSize: '2.5rem' }} />
               </IconButton>
             </Tooltip>
@@ -249,7 +254,8 @@ export function CreateJob({ onClose }) {
               <IconButton
                 variant="contained"
                 onClick={handleCreateJob}
-                color="primary">
+                color="primary"
+              >
                 <PushPinIcon sx={{ fontSize: '2.5rem' }} />
               </IconButton>
             </Tooltip>

@@ -26,7 +26,8 @@ const EmailContent = ({ email, onDelete }) => {
   return (
     <Paper
       elevation={1}
-      sx={{ padding: '16px', display: 'flex', flexDirection: 'column' }}>
+      sx={{ padding: '16px', display: 'flex', flexDirection: 'column' }}
+    >
       <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 2 }}>
         Subject: {email.subject}
       </Typography>
@@ -35,7 +36,8 @@ const EmailContent = ({ email, onDelete }) => {
       </Typography>
       <Typography
         variant="subtitle2"
-        sx={{ color: 'text.secondary', marginBottom: 2 }}>
+        sx={{ color: 'text.secondary', marginBottom: 2 }}
+      >
         Date: {new Date(email.date).toLocaleString()}
       </Typography>
       <Divider sx={{ my: 2 }} />
@@ -45,7 +47,8 @@ const EmailContent = ({ email, onDelete }) => {
       <IconButton
         sx={{ alignSelf: 'flex-end' }}
         color="error"
-        onClick={handleDelete}>
+        onClick={handleDelete}
+      >
         <DeleteIcon />
       </IconButton>
     </Paper>
