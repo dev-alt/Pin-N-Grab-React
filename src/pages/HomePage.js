@@ -112,15 +112,13 @@ export function HomePage() {
           display: 'flex',
           justifyContent: 'center',
           marginBottom: 4,
-        }}
-      >
+        }}>
         <Box
           sx={{
             marginTop: 3,
             paddingBottom: '50px',
             width: { xs: '100vw', md: '80vw' },
-          }}
-        >
+          }}>
           <Grid container justifyContent="center" alignItems="center">
             {/* category filter */}
             <Grid item sx={{ mb: 2 }}>
@@ -139,8 +137,7 @@ export function HomePage() {
               justifyContent: 'center',
               justifyItems: 'center',
               flexDirection: { xs: 'column', md: 'row' },
-            }}
-          >
+            }}>
             {/* search */}
 
             <LocationSelect
@@ -159,8 +156,7 @@ export function HomePage() {
                 padding: '2px',
                 marginTop: { xs: '20px', md: 0 },
                 width: { xs: '80vw', md: '35vw' },
-              }}
-            >
+              }}>
               <TextField
                 fullWidth
                 variant="standard"
@@ -201,8 +197,7 @@ export function HomePage() {
           onClose={handleJobDialogClose}
           maxWidth={isSmallScreen ? 'sm' : 'lg'}
           fullWidth
-          sx={{ mt: 5 }}
-        >
+          sx={{ mt: 5 }}>
           <JobDetails job={selectedJob} onClose={handleJobDialogClose} />
         </Dialog>
       </Grid>

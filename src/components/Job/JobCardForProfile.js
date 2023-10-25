@@ -6,6 +6,7 @@ import {
   Typography,
   IconButton,
   Tooltip,
+  Divider,
 } from '@mui/material';
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -43,27 +44,24 @@ const JobCardForProfile = ({
 
   return (
     <>
-      <Card sx={{ margin: '10px' }}>
+      <Card sx={{ margin: '10px', boxShadow: 'none' }}>
         <CardContent
           sx={{
             display: 'flex',
             alignItems: 'center',
-          }}
-        >
+          }}>
           {iconComponent}
           <Container
             sx={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-            }}
-          >
+            }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography
                 variant="h6"
                 sx={{ marginLeft: '20px', cursor: 'pointer' }}
-                onClick={() => onCardClick(data)}
-              >
+                onClick={() => onCardClick(data)}>
                 {data.title}
               </Typography>
               {jobId && (
@@ -86,14 +84,14 @@ const JobCardForProfile = ({
             )}
           </Container>
         </CardContent>
+        <Divider variant="fullwidth" light />
         <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
               marginRight: '30px',
-            }}
-          >
+            }}>
             <CalendarMonthIcon style={{ marginRight: '0.5rem' }} />
             <Typography>{data.deadline}</Typography>
           </Box>
@@ -103,6 +101,7 @@ const JobCardForProfile = ({
           </Box>
         </CardContent>
       </Card>
+      <Divider variant="fullwidth" />
     </>
   );
 };
