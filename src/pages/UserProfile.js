@@ -336,7 +336,6 @@ export default function ProfilePage() {
                 <Dialog
                   open={isJobDialogOpen}
                   onClose={handleJobDialogClose}
-                  maxWidth={{ sm: 'sm', lg: 'lg' }}
                   fullWidth
                   sx={{ mt: 5 }}
                 >
