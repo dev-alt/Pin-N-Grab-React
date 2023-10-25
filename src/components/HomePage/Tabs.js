@@ -7,6 +7,7 @@ import CardGrid from './CardGrid';
 import { Box } from '@mui/material';
 import SaveJobs from '../Job/Listings/SavedJobs';
 import AppliedJobs from '../Job/Listings/AppliedJobs';
+import AcceptedJobs from '../Job/Listings/AcceptedJobs';
 
 export function JobTabs({
   value,
@@ -62,6 +63,15 @@ export function JobTabs({
                 fontWeight: 'bold',
               }}
             />
+              <Tab
+              label="Accepted Jobs"
+              value="5"
+              style={{ color: '#000' }}
+              sx={{
+                fontSize: { xs: '0.5rem', sm: '1rem' },
+                fontWeight: 'bold',
+              }}
+            />
           </TabList>
         </Box>
 
@@ -80,6 +90,9 @@ export function JobTabs({
         </TabPanel>
         <TabPanel value="4">
           <AppliedJobs onCardClick={handleCardClick} />
+        </TabPanel>
+        <TabPanel value="5">
+          <AcceptedJobs onCardClick={handleCardClick} />
         </TabPanel>
       </TabContext>
     </Box>

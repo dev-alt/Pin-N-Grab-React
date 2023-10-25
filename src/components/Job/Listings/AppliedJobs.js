@@ -32,7 +32,7 @@ export function AppliedJobs({ onCardClick }) {
       }
     };
     fetchAppliedJobs();
-  }, [userId]);
+  }, [userId, token]);
 
   console.log('Applied jobs', appliedJobs);
 
