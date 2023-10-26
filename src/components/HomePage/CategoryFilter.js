@@ -38,14 +38,14 @@ const CategoryFilter = ({
         color={selectedCategories.includes(2) ? 'primary' : '#BFC1C4'}
         onClick={() => toggleCategory(2)}
       >
-        <LocalFlorist sx={iconStyle} />
+        <LocalShipping sx={iconStyle} />
       </IconButton>
 
       <IconButton
         color={selectedCategories.includes(3) ? 'primary' : '#BFC1C4'}
         onClick={() => toggleCategory(3)}
       >
-        <LocalShipping sx={iconStyle} />
+        <LocalFlorist sx={iconStyle} />
       </IconButton>
 
       <IconButton

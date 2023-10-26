@@ -26,9 +26,9 @@ function getIconByCategoryId(categoryId) {
     case 1:
       return <ElectricalServices fontSize={iconSize} />;
     case 2:
-      return <LocalFlorist fontSize={iconSize} />;
-    case 3:
       return <LocalShipping fontSize={iconSize} />;
+    case 3:
+      return <LocalFlorist fontSize={iconSize} />;
     case 4:
       return <FormatPaintIcon fontSize={iconSize} />;
     case 5:
