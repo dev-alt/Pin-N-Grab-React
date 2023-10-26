@@ -57,7 +57,6 @@ export function PrimarySearchAppBar() {
       key={item.key}
       onClick={() => {
         if (item.key === 'signOut') {
-          // Close the menu and handle sign-out action in the SignOutButton component
           handleMenuClose();
         }
       }}
@@ -129,11 +128,11 @@ export function PrimarySearchAppBar() {
                     fontFamily: 'Tilt Neon',
                     fontSize: { xs: '0', sm: '1.5rem', md: '2rem' },
                     '& a': {
-                      textDecoration: 'none', // Remove text decoration
-                      color: 'inherit', // Inherit the color from the parent (normal color)
+                      textDecoration: 'none', 
+                      color: 'inherit', 
                     },
                     '& a:active': {
-                      color: 'rgba(20, 8, 14, 1)', // Define color for the active state
+                      color: 'rgba(20, 8, 14, 1)',
                     },
                     paddingLeft: '5px',
                   }}>
