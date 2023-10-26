@@ -11,6 +11,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { useAuth } from '../../AuthContext';
 import CheckIcon from '@mui/icons-material/Check';
 import { UseUnreadMessages } from '../../UnreadMessagesContext';
+import axios from 'axios';
 
 const EmailInbox = ({ onEmailClick }) => {
   const { profile } = useAuth();
@@ -21,18 +22,14 @@ const EmailInbox = ({ onEmailClick }) => {
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await fetch(
-          `/api/message/get/inbox/${profile.profile.UserId}`,
-          {
-            headers: {
-              Authorization: userToken,
-            },
+        const response = await axios.get(`/api/message/get/inbox/${profile.profile.UserId}`, {
+          headers: {
+            Authorization: userToken,
           },
-        );
+        });
 
-        if (response.ok) {
-          const data = await response.json();
-          setEmails(data);
+        if (response.status === 200) {
+          setEmails(response.data);
         } else {
           console.error('Error fetching emails:', response.statusText);
         }
@@ -48,8 +45,7 @@ const EmailInbox = ({ onEmailClick }) => {
     if (!email.read) {
       try {
         // Send a request to mark the email as read
-        await fetch(`/api/message/mark-as-read/${email.id}`, {
-          method: 'PATCH',
+        await axios.patch(`/api/message/mark-as-read/${email.id}`, null, {
           headers: {
             Authorization: userToken,
           },
