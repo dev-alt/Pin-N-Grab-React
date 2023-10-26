@@ -82,7 +82,16 @@ export function HomePage() {
       .then((data) => {
         const sortedData = sortJobListingsByDate(data);
         setJobListings(sortedData);
-        setFilteredJobListings(sortedData);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchJobListings()
+      .then((data) => {
+        setFilteredJobListings(data);
       })
       .catch((error) => {
         console.error('Error:', error);

@@ -29,36 +29,31 @@ const CategoryFilter = ({
     <Box>
       <IconButton
         color={selectedCategories.includes(1) ? 'primary' : '#BFC1C4'}
-        onClick={() => toggleCategory(1)}
-      >
+        onClick={() => toggleCategory(1)}>
         <ElectricalServices sx={iconStyle} />
       </IconButton>
 
       <IconButton
-        color={selectedCategories.includes(2) ? 'primary' : '#BFC1C4'}
-        onClick={() => toggleCategory(2)}
-      >
+        color={selectedCategories.includes(3) ? 'primary' : '#BFC1C4'}
+        onClick={() => toggleCategory(3)}>
         <LocalFlorist sx={iconStyle} />
       </IconButton>
 
       <IconButton
-        color={selectedCategories.includes(3) ? 'primary' : '#BFC1C4'}
-        onClick={() => toggleCategory(3)}
-      >
+        color={selectedCategories.includes(2) ? 'primary' : '#BFC1C4'}
+        onClick={() => toggleCategory(2)}>
         <LocalShipping sx={iconStyle} />
       </IconButton>
 
       <IconButton
         color={selectedCategories.includes(4) ? 'primary' : '#BFC1C4'}
-        onClick={() => toggleCategory(4)}
-      >
+        onClick={() => toggleCategory(4)}>
         <FormatPaintIcon sx={iconStyle} />
       </IconButton>
 
       <IconButton
         color={selectedCategories.includes(5) ? 'primary' : '#BFC1C4'}
-        onClick={() => toggleCategory(5)}
-      >
+        onClick={() => toggleCategory(5)}>
         <Build sx={iconStyle} />
       </IconButton>
 

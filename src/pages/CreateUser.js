@@ -64,8 +64,7 @@ export function CreateUser() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -76,8 +75,7 @@ export function CreateUser() {
             component="form"
             noValidate
             onSubmit={handleRegister}
-            sx={{ mt: 3 }}
-          >
+            sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -148,8 +146,7 @@ export function CreateUser() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+              sx={{ mt: 3, mb: 2 }}>
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
@@ -157,8 +154,8 @@ export function CreateUser() {
                 <Button
                   onClick={() => navigate('/signin')}
                   variant="text"
-                  color="primary"
-                >
+                  color="secondary"
+                  sx={{ fontWeight: 'bold' }}>
                   Already have an account? Sign in
                 </Button>
               </Grid>
