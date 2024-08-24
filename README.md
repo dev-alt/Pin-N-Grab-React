@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# Pin'n Grab - Job Listing and Management Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pin'n Grab is a comprehensive web application for job listing and management. It allows users to post jobs, search for jobs, apply to jobs, and communicate with other users.
+
+## Features
+
+- User authentication (sign up, sign in, sign out)
+- Job posting and management
+- Job search with filtering options
+- User profiles
+- Messaging system
+- Job application system
+- Saved jobs and applied jobs tracking
+
+## Technologies Used
+
+- Frontend:
+  - React
+  - Material-UI
+  - Axios for API requests
+  - React Router for navigation
+- Backend:
+  - Express.js (inferred)
+  - MySQL or PostgreSQL database (inferred)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js and npm installed
+- Backend server running (see separate backend documentation)
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/dev-alt/pin-n-grab.git
+   ```
+
+2. Navigate to the project directory:
+   ```
+   cd pin-n-grab
+   ```
+
+3. Install dependencies:
+   ```
+   npm install
+   ```
+
+4. Create a `.env` file in the root directory and add the following:
+   ```
+   REACT_APP_PROXY_URL=http://localhost:5000
+   ```
+   Replace the URL with your backend server URL.
+
+5. Start the development server:
+   ```
+   npm start
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) to view the app in your browser.
+
+## Project Structure
+
+- `src/`: Contains the source code for the React application
+  - `components/`: Reusable React components
+  - `pages/`: Main page components
+  - `AuthContext.js`: Context for managing authentication state
+  - `UnreadMessagesContext.js`: Context for managing unread messages
 
 ## Available Scripts
 
-In the project directory, you can run:
+- `npm start`: Runs the app in development mode
+- `npm test`: Launches the test runner
+- `npm run build`: Builds the app for production
+- `npm run eject`: Ejects from Create React App configuration
 
-### `npm start`
+## Contributing
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## License
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
